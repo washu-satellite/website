@@ -55,11 +55,24 @@ export default function Home() {
           </div>
 
           <Heading>
-            Projects
+            Current Projects
           </Heading>
 
           <div className={"flex flex-col gap-[10rem]"}>
-            {Projects.map((p, i) => (
+            {Projects.filter(p => p.phase !== 'success').map((p, i) => (
+              <ProjectHighlight
+                {...p}
+                direction={i % 2 === 0 ? 'left' : 'right'}
+              />
+            ))}
+          </div>
+
+          <Heading>
+            Completed Projects
+          </Heading>
+
+          <div className={"flex flex-col gap-[10rem]"}>
+            {Projects.filter(p => p.phase === 'success').map((p, i) => (
               <ProjectHighlight
                 {...p}
                 direction={i % 2 === 0 ? 'left' : 'right'}
