@@ -16,7 +16,7 @@ export default function ProjectPage(props: PropsWithChildren<ProjectPageProps>) 
     const colors = getColors();
     
     return (
-        <div className="flex-1">
+        <div className="flex-1 overflow-x-hidden">
             <NavBar/>
             <div className={"fixed top-0 w-full h-full bg-[#1A1F27]"}/>
             <h1 className={`absolute font-mono top-[2rem] left-0 text-[18rem] text-[#c2c2c2] opacity-80`}>{props.title}</h1>
