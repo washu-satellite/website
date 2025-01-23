@@ -15,7 +15,7 @@ export default function Footer() {
     return (
         <div className={clsx(
             `bg-[#141414] border-[${colors.bgHighlight}] border-t-[1px]`,
-            "flex flex-row z-20 relative px-[4rem] py-[4rem] gap-[4rem]"
+            "flex flex-row flex-wrap z-20 relative px-[4rem] py-[4rem] gap-8 md:gap-[4rem]"
         )}>
             <div className="flex flex-col items-center gap-6">
                 <Link href={"/"} className={"font-bold text-lg"}>

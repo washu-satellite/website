@@ -5,6 +5,7 @@ import Button from "./Button";
 import Photo from "./Photo";
 import { FaArrowRightLong } from "react-icons/fa6";
 import clsx from "clsx";
+import Link from 'next/link';
 
 const getPhase = (phase: ProjectData['phase']) => {
     switch (phase) {
@@ -35,13 +36,19 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
                     `font-bold md:text-left text-2xl text-[${colors.text}]`
                 )}
             >
-                <span className={`font-mono text-2xl text-[#777777]`}>[{props.id}]</span>
+                <Link className={`rounded-full font-mono -ml-2 mr-1 px-4 py-1 hover:bg-[${colors.fgHover}] border-[${colors.bgHighlight}] border-[1px]`} href={`/projects/${props.id.replaceAll("-", "").toLowerCase()}`}>
+                    {props.id}
+                </Link>
                 &nbsp;{props.title}
             </h3>
             <p key={"description"} className={"font-sans font-medium text-lg"}>{props.description}</p>
             <div key={"buttons"} className={"flex flex-row flex-wrap gap-4 justify-between items-center"}>
-                <div className={clsx("font-mono flex flex-row items-center", `text-[#777777]`)}>
-                    {props.date} <span>&nbsp;|&nbsp;</span> {props.contributors} Contributors <span>&nbsp;|&nbsp;</span> {getPhase(props.phase)}
+                <div className={clsx("font-mono flex flex-row", `text-[#777777] relative`)}>
+                    <p>{props.date}</p>
+                    <span className={`flex-1 self-stretch h-full mx-[0.6rem] border-[#777777] border-l-[1px]`}>&#8203;</span>
+                    <p>{props.contributors} Contributors</p>
+                    <span className={`h-full mx-[0.6rem] border-l-[1px] border-[#777777]`}>&#8203;</span>
+                    <p>{getPhase(props.phase)}</p>
                 </div>
                 <div 
                     className={clsx(
@@ -52,7 +59,7 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
                         See the Poster
                     </Button>
 
-                    <Button isLink={true} href={""}>
+                    <Button isLink={true} href={`/projects/${props.id.replaceAll("-", "").toLowerCase()}`}>
                         <div className={"flex flex-row gap-2 items-center"}>
                             <p>Learn More</p>
                             <FaArrowRightLong />

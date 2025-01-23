@@ -27,10 +27,10 @@ export default function NavBar() {
     return (
         <div
             className={clsx(
-                `text-[${colors.text}] bg-[${colors.bg}] border-[#0d0c0c]`,
+                `text-[${colors.text}] bg-[${colors.bg}] border-[${colors.bgHighlight}]`,
                 scroll > 0 ? 'bg-opacity-100' : 'bg-opacity-50',
                 theme === 'light' ? (scroll > 0 ? 'shadow' : 'shadow-none') : (scroll > 0 ? 'border-b-[1px]' : 'border-none'),
-                "fixed z-20 w-full top-0 left-0 flex flex-row justify-between items-center py-4 px-8 lg:px-[4rem]"
+                "fixed z-20 w-full top-0 left-0 flex flex-row justify-between items-center py-4 px-4 xl:px-8 lg:px-[4rem]"
             )}
         >
             <div className="flex-row hidden lg:flex justify-start items-center font-semibold gap-6">
@@ -75,36 +75,44 @@ export default function NavBar() {
                     Join the Team
                 </Button>
             </div>
-            <div className={"flex-1 flex flex-row justify-end items-center gap-4 lg:hidden"}>
-                <div className={"hidden sm:block"}>
-                    <Button key={"subscribe"} isLink={true} href={"/subscribe"}>
-                        Subscribe
-                    </Button>
-                </div>
-                <div className={"hidden sm:block"}>
-                    <Button
-                        key={"apply"}
-                        style={'red'}
-                        isLink={true}
-                        href={"/apply"}
+            <div className={"flex-1 flex flex-row justify-between items-center gap-4 lg:hidden"}>
+                <Link href={"/"} className={"font-bold text-lg"}>
+                    <Image
+                        alt=""
+                        src={logo}
+                        width={80}
+                    />
+                </Link>
+                <div className="flex flex-row justify-end items-center gap-4">
+                    <div className={"hidden sm:block"}>
+                        <Button key={"subscribe"} isLink={true} href={"/subscribe"}>
+                            Subscribe
+                        </Button>
+                    </div>
+                    <div className={"block"}>
+                        <Button
+                            key={"apply"}
+                            style={'red'}
+                            isLink={true}
+                            href={"/apply"}
+                        >
+                            Join the Team
+                        </Button>
+                    </div>
+                    <Dropdown
+                        key={"hamburgerMenu"}
+                        hideArrow={true}
+                        enlarge={true}
+                        elements={[
+                            <Link href={`/projects`}>Projects</Link>,
+                            <Link href={`/contact`}>Contact</Link>,
+                            <Link href={`/team`}>Our Team</Link>,
+                            <Link className="block sm:hidden" href={`/subscribe`}>Subscribe</Link>
+                        ]}
                     >
-                        Join the Team
-                    </Button>
+                        <IoMenu className={"w-10 h-10"} />
+                    </Dropdown>
                 </div>
-                <Dropdown
-                    key={"hamburgerMenu"}
-                    hideArrow={true}
-                    enlarge={true}
-                    elements={[
-                        <Link href={`/projects`}>Projects</Link>,
-                        <Link href={`/contact`}>Contact</Link>,
-                        <Link href={`/team`}>Our Team</Link>,
-                        <Link href={`/subscribe`}>Subscribe</Link>,
-                        <Link className={"block sm:hidden"} href={`/subscribe`}>Join the Team</Link>
-                    ]}
-                >
-                    <IoMenu className={"w-10 h-10"} />
-                </Dropdown>
             </div>
         </div>
     )

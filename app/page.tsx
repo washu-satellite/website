@@ -20,7 +20,7 @@ export default function Home() {
   const colors = getColors();
 
   return (
-    <div className={"flex-1"}>
+    <div className={"flex-1 overflow-x-hidden"}>
       <NavBar/>
       <main className={`text-[${colors.textDark}]`}>
         <div className={"fixed top-0 w-full h-full bg-[#1A1F27]"}/>
@@ -42,7 +42,7 @@ export default function Home() {
             <div className={"hidden lg:block w-[12rem]"}><Divider/></div>
 
             <p className={`italic text-center font-semibold w-[60rem] text-lg`}>
-              Equipping our members with the skills and experience required to work in the professional engineering industry through real world experience working on spacecraft while pushing the envelope of space-based research with cutting-edge research.
+              Equipping our members with the skills and experience required to excell in the professional engineering industry through real world experience with cutting-edge spaceflight research and spacecraft development.
             </p>
 
             <div className={"hidden lg:block w-[12rem]"}><Divider/></div>
@@ -84,7 +84,9 @@ export default function Home() {
             Current Projects
           </Heading> */}
 
-          <h1 className={`font-mono text-3xl font-bold mt-[6rem] text-[${colors.textDark}]`}>Current Projects</h1>
+          <h1 className={`font-mono text-2xl font-bold mt-[6rem] text-[${colors.textDark}]`}>
+            Active Projects
+          </h1>
 
           <div className={"flex flex-row flex-wrap items-start gap-y-[4rem] gap-x-[2rem]"}>
             {Projects.filter(p => p.phase !== 'success').map((p, i) => (
@@ -99,7 +101,7 @@ export default function Home() {
             Completed Projects
           </Heading> */}
 
-          <h1 className={`font-mono text-3xl font-bold mt-[6rem] text-[${colors.textDark}]`}>Completed Projects</h1>
+          <h1 className={`font-mono text-2xl font-bold mt-[6rem] text-[${colors.textDark}]`}>Completed Projects</h1>
 
           <div className={"flex flex-col gap-[4rem]"}>
             {Projects.filter(p => p.phase === 'success').map((p, i) => (

@@ -46,7 +46,7 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = (props) => {
         className={clsx(
             `bg-[${colors.fg}] border-[${colors.bgHighlight}] border-[1px]`,
             props.enlarge ? "text-lg" : "text-medium",
-            "absolute right-0 w-[14rem] font-medium flex flex-col items-start w-full rounded-md rounded-tr-none py-1 drop-shadow-md", 
+            "absolute right-0 lg:left-0 min-w-[18rem] lg:min-w-[10rem] font-medium flex flex-col items-start rounded-md rounded-tr-none lg:rounded-tl-none lg:rounded-tr-md drop-shadow-md gap-y-6 py-6 md:gap-0 md:py-1", 
             expanded ? "" : "hidden"
         )}
       >
@@ -55,7 +55,7 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = (props) => {
             key={i}
             role={"menuitem"}
             tabIndex={-1}
-            className={`w-full py-[2px] hover:bg-[${colors.fgHover}]`}
+            className={`w-full py-[2px] text-xl md:text-lg hover:bg-[${colors.fgHover}]`}
             onClick={() => cf((props.callbacks??[])[i])}
           >
             {e}

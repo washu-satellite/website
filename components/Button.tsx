@@ -24,7 +24,7 @@ const getStyle = (style: ButtonProps['style'], colors: typeof darkTheme) => {
         case 'clear':
             return {
                 color: 'none',
-                hoverColor: 'none',
+                hoverColor: colors.fgHover,
                 textColor: colors.textDark,
                 borderColor: colors.textDark
             }
@@ -36,6 +36,16 @@ const getStyle = (style: ButtonProps['style'], colors: typeof darkTheme) => {
             }
     }
 };
+
+export const EmailButton = (props: { text: string, href: string }) => {
+    const colors = getColors();
+
+    return (
+        <Link className={`rounded-full font-mono px-4 py-1 hover:bg-[${colors.fgHover}] border-[${colors.bgHighlight}] border-[1px]`} href="/">
+            {props.text}
+        </Link>
+    );
+}
 
 export default function Button(props: PropsWithChildren<ButtonProps>) {
     const colors = getColors();
