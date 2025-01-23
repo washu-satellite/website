@@ -37,14 +37,14 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = (props) => {
       >
         {props.children}
         {!props.hideArrow ? expanded ? (
-            <IoIosArrowUp className={"w-5 h-5"} />
+            <IoIosArrowUp className={"w-3 h-3"} />
         ) : (
-            <IoIosArrowDown className={"w-5 h-5"} />
+            <IoIosArrowDown className={"w-3 h-3"} />
         ) : null}
       </button>
       <div
         className={clsx(
-            `bg-[${colors.fg}]`,
+            `bg-[${colors.fg}] border-[${colors.bgHighlight}] border-[1px]`,
             props.enlarge ? "text-lg" : "text-medium",
             "absolute right-0 w-[14rem] font-medium flex flex-col items-start w-full rounded-md rounded-tr-none py-1 drop-shadow-md", 
             expanded ? "" : "hidden"

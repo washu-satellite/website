@@ -4,7 +4,7 @@ import { UrlObject } from "url";
 import Link from 'next/link';
 
 type ButtonProps = {
-    style?: 'red',
+    style?: 'red' | 'clear',
     color?: string,
     hoverColor?: string,
     textColor?: string,
@@ -21,6 +21,13 @@ const getStyle = (style: ButtonProps['style'], colors: typeof darkTheme) => {
                 hoverColor: colors.accentRedHover,
                 textColor: colors.text
             }
+        case 'clear':
+            return {
+                color: 'none',
+                hoverColor: 'none',
+                textColor: colors.textDark,
+                borderColor: colors.textDark
+            }
         default:
             return {
                 color: colors.text,
@@ -33,11 +40,11 @@ const getStyle = (style: ButtonProps['style'], colors: typeof darkTheme) => {
 export default function Button(props: PropsWithChildren<ButtonProps>) {
     const colors = getColors();
 
-    const { color, hoverColor, textColor } = getStyle(props.style, colors);
+    const { color, hoverColor, textColor, borderColor } = getStyle(props.style, colors);
 
     const style = `font-sans p-1 px-4 rounded-md font-semibold
     bg-[${color}] hover:bg-[${hoverColor}]
-    text-[${textColor}]`
+    text-[${textColor}] border-[${borderColor}] ${borderColor ? "border-[1px]" : ""}`
     
     return props.isLink ? (
         <Link

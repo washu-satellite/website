@@ -5,7 +5,8 @@ const genTargets = [
     "text",
     "hover:text",
     "bg",
-    "hover:bg"
+    "hover:bg",
+    "border"
 ]
 
 const execute = () => {

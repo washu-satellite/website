@@ -6,6 +6,8 @@ import { ThemeProvider } from "next-themes";
 import { Inter, Roboto_Mono } from "next/font/google";
 import React from "react";
 import "./globals.css";
+import { getColors } from "@/const/theme";
+import Footer from "@/components/Footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -33,10 +35,11 @@ export default function RootLayout({
     <AppContextProvider>
       <html lang="en">
         <body
-          className={`${inter.variable} ${robotoMono.variable} font-sans antialiased bg-[#1C1C1C] text-[#FFFFFF]`}
+          className={`${inter.variable} ${robotoMono.variable} font-sans bg-[#181818] antialiased text-[#FFFFFF]`}
         >
           <GeneratedStyles/>
           {children}
+          <Footer/>
         </body>
       </html>
     </AppContextProvider>

@@ -23,22 +23,24 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
     console.log(props);
     
     const elements = [
-        <Photo>
+        <Photo right={props.direction === 'right'} classes={"border-b-[1px] xl:border-b-0"}>
             <p className={"p-2"}>{props.id} Image</p>
         </Photo>,
-        <div className={"font-mono flex flex-col gap-4"}>
+        <div className={clsx(
+            "font-sans flex flex-col gap-4 p-8"
+        )}>
             <h3 
                 key={"title"} 
                 className={clsx(
                     `font-bold md:text-left text-2xl text-[${colors.text}]`
                 )}
             >
-                <span className={` text-2xl text-[#777777]`}>[{props.id}]</span>
+                <span className={`font-mono text-2xl text-[#777777]`}>[{props.id}]</span>
                 &nbsp;{props.title}
             </h3>
-            <p key={"description"} className={"text-lg"}>{props.description}</p>
+            <p key={"description"} className={"font-sans font-medium text-lg"}>{props.description}</p>
             <div key={"buttons"} className={"flex flex-row flex-wrap gap-4 justify-between items-center"}>
-                <div className={clsx("flex flex-row items-center", `text-[#777777]`)}>
+                <div className={clsx("font-mono flex flex-row items-center", `text-[#777777]`)}>
                     {props.date} <span>&nbsp;|&nbsp;</span> {props.contributors} Contributors <span>&nbsp;|&nbsp;</span> {getPhase(props.phase)}
                 </div>
                 <div 
@@ -46,7 +48,7 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
                         "flex flex-row md:text-left justify-center md:justify-start gap-4 items-center"
                     )}
                 >
-                    <Button style={'red'} isLink={true} href={""}>
+                    <Button style={'clear'} isLink={true} href={""}>
                         See the Poster
                     </Button>
 
@@ -64,7 +66,8 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
     return (
         <div 
             className={clsx(
-                "flex flex-row flex-wrap xl:items-start xl:flex-nowrap gap-8 justify-between"
+                `bg-[${colors.fg}] border-[${colors.bgHighlight}] border-[1px] rounded-md`,
+                "flex-1 flex flex-row flex-wrap xl:flex-nowrap gap-8 justify-between min-w-fit md:min-w-[30rem] xl:min-w-fit"
             )}
         >
             {props.direction === 'right' &&

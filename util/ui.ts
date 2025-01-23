@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import React from 'react';
 
 export const focusHandler = (
@@ -19,3 +19,21 @@ export const focusHandler = (
     });
   }, [ref]);
 };
+
+export const useScrollPos = () => {
+    const [scrollPosition, setScrollPosition] = useState(0);
+
+    useEffect(() => {
+        const updatePos = () => {
+            setScrollPosition(window.scrollY);
+        }
+
+        window.addEventListener('scroll', updatePos);
+
+        updatePos();
+
+        return () => window.removeEventListener('scroll', updatePos);
+    });
+
+    return scrollPosition;
+}

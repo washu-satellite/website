@@ -4,10 +4,11 @@ import { AppContext } from "@/components/AppContext";
 import { useContext } from "react";
 
 export const darkTheme = {
-    bg: "#1C1C1C",
-    fg: "#181818",
+    fg: "#1C1C1C",
+    bg: "#181818",
+    bgHighlight: "#0d0c0c",
     fgHover: "#242424",
-    text: "#FFFFFF",
+    text: "#e3e3e3",
     textHover: "#E9E9E9",
     textSecondary: "#8C8C8C",
     textAlt: "#303C47",
@@ -18,10 +19,11 @@ export const darkTheme = {
 
 // TODO: Implement light theme
 export const lightTheme = {
-    bg: "#1C1C1C",
-    fg: "#181818",
+    fg: "#1C1C1C",
+    bg: "#181818",
+    bgHighlight: "#181818",
     fgHover: "#242424",
-    text: "#FFFFFF",
+    text: "#e3e3e3",
     textHover: "#E9E9E9",
     textSecondary: "#8C8C8C",
     textAlt: "#303C47",
