@@ -36,7 +36,7 @@ export default function Home() {
         </div>
         <div className={clsx(
           `bg-[${colors.bg}] border-[${colors.bgHighlight}] border-t-[1px]`,
-          "flex flex-col px-8 lg:px-24 gap-8 mt-[30rem] z-10 relative pb-[4rem]"
+          "flex flex-col px-2 md:px-8 lg:px-24 gap-8 mt-[30rem] z-10 relative pb-[4rem]"
         )}>
           <div className={"flex flex-row mt-[3rem] gap-0 md:gap-[4rem] justify-center items-center"}>
             <div className={"hidden lg:block w-[12rem]"}><Divider/></div>

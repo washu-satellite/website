@@ -61,7 +61,7 @@ export default function Apply() {
                     </div>
                     <div className={`flex flex-col items-center gap-8 justify-center bg-[${colors.fg}] border-[${colors.bgHighlight}] border-[1px] p-8 rounded-md`}>
                         <h1 className={`text-[${colors.textDark}] font-mono font-medium text-xl`}>Not ready to apply?</h1>
-                        <Button isLink style='clear' href={"/team"}>
+                        <Button isLink style='clear' href={"/subscribe"}>
                             <div className={"flex flex-row gap-2 items-center"}>
                                 <p>Join our email list</p>
                                 <FaArrowRightLong />

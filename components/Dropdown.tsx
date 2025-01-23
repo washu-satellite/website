@@ -9,6 +9,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 type DropdownProps = {
   elements: (ReactNode | string)[],
+  hoverable?: boolean,
   rounded?: boolean,
   hideArrow?: boolean,
   enlarge?: boolean,
@@ -26,13 +27,15 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = (props) => {
 
   return (
     <div
-        ref={elementRef}
-        className="relative inline-block"
+      ref={elementRef}
+      className="relative inline-block"
+      onMouseEnter={() => setExpanded(true)}
+      onMouseLeave={() => setExpanded(false)}
     >
       <button
         role={"menu"}
         tabIndex={-1}
-        className={clsx("flex flex-row justify-between items-center", `text-[${colors.text}] hover:text-[${colors.textHover}]`)}
+        className={clsx("flex flex-row justify-between items-center", `text-[${colors.text}] hover:text-[${colors.textHover}] bg-black px-4 rounded-md bg-opacity-0 hover:bg-opacity-40`)}
         onClick={() => setExpanded(e => !e)}
       >
         {props.children}

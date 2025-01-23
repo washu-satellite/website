@@ -97,8 +97,8 @@ const exec: Person[] = [
     {
         name: "Ben Cook",
         title: "President",
-        email: "bengineer@gmail.com",
-        avatar: "/ben.jpg",
+        email: "b.j.cook@wustl.edu",
+        avatar: "/headshots/ben.jpg",
         linkedin: "https://www.linkedin.com/in/benjamin-j-cook/",
         credits: ['GS', 'AIRIS']
     },
@@ -112,6 +112,8 @@ const exec: Person[] = [
     },
     {
         name: "Nate Hayman",
+        avatar: "/headshots/nate.jpg",
+        email: "nathanielhayman@gmail.com",
         linkedin: "https://www.linkedin.com/in/nathanielhayman/",
         title: "Chief Software Engineer"
     },

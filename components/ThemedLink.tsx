@@ -8,7 +8,7 @@ export default function ThemedLink(props: PropsWithChildren<{ href: string | Url
     
     return (
         <Link
-            className={`text-[${colors.text}] hover:text-[${colors.textHover}]`}
+            className={`text-[${colors.text}] hover:text-[${colors.textHover}] bg-black px-4 py-2 rounded-md bg-opacity-0 hover:bg-opacity-40`}
             href={props.href}
         >
             {props.children}
