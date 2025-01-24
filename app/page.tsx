@@ -42,7 +42,7 @@ export default function Home() {
             <div className={"hidden lg:block w-[12rem]"}><Divider/></div>
 
             <p className={`italic text-center font-semibold w-[60rem] text-lg`}>
-              Equipping our members with the skills and experience required to excell in the professional engineering industry through real world experience with cutting-edge spaceflight research and spacecraft development.
+              Equipping our members with the skills and experience required to excel in the professional engineering industry through real world experience with cutting-edge spaceflight research and spacecraft development.
             </p>
 
             <div className={"hidden lg:block w-[12rem]"}><Divider/></div>

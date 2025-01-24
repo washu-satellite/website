@@ -33,8 +33,8 @@ export default function NavBar() {
                 "fixed z-20 w-full top-0 left-0 flex flex-row justify-between items-center py-4 px-4 xl:px-8 lg:px-[4rem]"
             )}
         >
-            <div className="flex-row hidden lg:flex justify-start items-center font-semibold gap-6">
-                <Link href={"/"} className={"font-bold text-lg"}>
+            <div className="flex-row hidden lg:flex justify-start items-center font-semibold">
+                <Link href={"/"} className={"font-bold text-lg mr-2"}>
                     <Image
                         alt=""
                         src={logo}

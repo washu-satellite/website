@@ -104,6 +104,9 @@ const exec: Person[] = [
     },
     {
         name: "Geoffrey Goffman",
+        email: "geoffrey.goffman@gmail.com",
+        linkedin: "linkedin.com/in/geoffrey-goffman",
+        avatar: "/headshots/geoffrey.HEIC",
         title: "Project Manager"
     },
     {
