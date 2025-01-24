@@ -90,8 +90,8 @@ export default function Home() {
               </div>
             </div>
 
-            <Photo src={""} right>
-              <p className="p-2">Team Photo</p>
+            <Photo src={"/team_balloon.jpeg"} right>
+              <p className="p-1 px-2 m-1 bg-black bg-opacity-50 rounded-md text-sm font-semibold">SP24 Team Photo</p>
             </Photo>
           </div>
 
