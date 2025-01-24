@@ -112,10 +112,10 @@ export default function NavBar() {
                 </Button>
             </div>
             <div className={"flex-1 flex flex-row justify-between items-center gap-4 lg:hidden"}>
-                <Link href={"/"} className={"font-bold text-lg"}>
+                <Link href={"/"} className={"font-bold text-lg mr-2"}>
                     <Image
                         alt=""
-                        src={logo}
+                        src={theme === 'light' ? logoLight : logo}
                         width={80}
                     />
                 </Link>

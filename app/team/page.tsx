@@ -63,7 +63,10 @@ const TeamTile = (props: Person) => {
                     />
                 }
                 {props.email &&
-                    <div className="absolute flex items-center justify-center w-full h-full opacity-0 bg-[rgba(0,0,0,0.8)] hover:opacity-100 text-sm rounded-t-[5px]">
+                    <div className={clsx(
+                        theme === 'light' ? "bg-[rgba(255,255,255,0.9)]" : "bg-[rgba(0,0,0,0.8)]",
+                        "absolute flex items-center justify-center w-full h-full opacity-0 hover:opacity-100 text-sm rounded-t-[5px]"
+                    )}>
                         <EmailButton
                             text={props.email}
                             href={`mailto:${props.email}`}
