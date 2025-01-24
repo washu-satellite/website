@@ -10,7 +10,7 @@ type AppContextProps = {
 };
 
 const defaultContextProps: AppContextProps = {
-    theme: 'light',
+    theme: 'dark',
     setTheme: (_) => null
 }
 
