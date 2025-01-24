@@ -52,6 +52,8 @@ const TeamTile = (props: Person) => {
                     <Image
                         className="rounded-t-[5px]"
                         src={props.avatar}
+                        blurDataURL={props.avatar}
+                        placeholder="blur"
                         alt=""
                         fill
                         style={{
@@ -82,9 +84,9 @@ const TeamTile = (props: Person) => {
                         "flex flex-row items-center"
                     )}>
                         {props.linkedin && 
-                            <Link href={props.linkedin}>
+                            <a href={props.linkedin}>
                                 <FaLinkedin size={30} />
-                            </Link>
+                            </a>
                         }
                     </div>
                 </div>
@@ -105,8 +107,8 @@ const exec: Person[] = [
     {
         name: "Geoffrey Goffman",
         email: "geoffrey.goffman@gmail.com",
-        linkedin: "linkedin.com/in/geoffrey-goffman",
-        avatar: "/headshots/geoffrey.HEIC",
+        linkedin: "https://www.linkedin.com/in/geoffrey-goffman",
+        avatar: "/headshots/geoffrey.jpg",
         title: "Project Manager"
     },
     {
@@ -191,8 +193,12 @@ export default function OurTeam() {
             </div>
             <main className={`text-[${colors.textDark}] relative`}>
                 <div className="flex flex-col items-center justify-center w-full h-[26rem] pt-[8rem]">
-                    <span className={`font-bold text-[${colors.text}] bg-[${colors.accentRed}] px-4 py-2 rounded-t-xl border-[${colors.bgHighlight}] border-[1px] -mb-[2px]`}>These missions made possible by</span>
-                    <h1 className={`text-[4rem] font-semibold font-mono text-[${colors.accentRed}] bg-[${colors.bg}] border-[${colors.bgHighlight}] border-[1px] px-6 py-2 rounded-xl`}>OUR TEAM</h1>
+                    {/* <span className={`font-bold text-[${colors.text}] bg-[${colors.accentRed}] px-4 py-2 rounded-t-xl border-[${colors.bgHighlight}] border-[1px] -mb-[2px]`}>These missions made possible by</span> */}
+                    <div className={`text-[4rem] font-semibold font-mono text-[${colors.accentRed}] bg-[${colors.bg}] border-[${colors.bgHighlight}] border-[1px] py-2 rounded-xl cursor-default`}>
+                        <p className={`text-sm text-center italic px-6 text-[${colors.textSecondary}]`}>These missions made possible by</p>
+                        <div className={`bg-[${colors.bgHighlight}] w-full h-[1px] mt-2`}/>
+                        <h1 className="px-6">OUR TEAM</h1>
+                    </div>
                 </div>
                 <div className="mt-[6rem]"/>
                 <div className={'relative'}>

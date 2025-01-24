@@ -1,9 +1,9 @@
 "use client";
 
-import { Projects } from "@/const/data";
+import { ProjectData, Projects } from "@/const/data";
 import Dropdown from "./Dropdown";
 import Link from 'next/link';
-import React, { useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import ThemedLink from "./ThemedLink";
 import Button from "./Button";
 import { IoMenu } from "react-icons/io5";
@@ -15,7 +15,28 @@ import Image from 'next/image';
 
 import logo from '../app/logo.svg';
 
+const ProjectMenuItem = (props: ProjectData) => {
+    const colors = getColors();
+
+    return (
+        <Link className={clsx(
+            `text-[${colors.text}] hover:text-${colors.accentRed}`,
+            "flex flex-row items-start p-2 gap-4"
+        )} href={`/projects/${props.url}`}>
+            <div className={`flex border-[${colors.bgHighlight}] border-[1px] rounded-md w-[2.4rem] h-[2.4rem] items-center justify-center shrink-0`}>
+                {props.icon}
+            </div>
+            <div className="flex flex-col items-start text-left">
+                <h3>{props.id}</h3>
+                <p className={`text-[${colors.textDark}] text-xs`}>{props.short}</p>
+            </div>
+        </Link>
+    )
+}
+
 export default function NavBar() {
+    const [projects, setProjects] = useState<ReactNode[]>([]);
+
     console.log("render");
 
     const theme = getTheme();
@@ -23,6 +44,22 @@ export default function NavBar() {
     const colors = getColors();
 
     const scroll = useScrollPos();
+
+    useEffect(() => {
+        let p = Projects.filter(p => p.phase !== 'success').map(p => (
+            <ProjectMenuItem
+                {...p}
+            />
+        ));
+
+        p.push(<div className={`w-full h-[1px] my-2 bg-[${colors.bgHighlight}]`}/>);
+
+        setProjects(p.concat(Projects.filter(p => p.phase === 'success').map(p => (
+            <ProjectMenuItem
+                {...p}
+            />
+        ))));
+    }, []);
 
     return (
         <div
@@ -43,9 +80,7 @@ export default function NavBar() {
                 </Link>
                 <Dropdown
                     key={"projects"}
-                    elements={Projects.map(p => (
-                        <Link href={`/projects/${p.url}`}>{p.id}</Link>
-                    ))}
+                    elements={projects}
                 >
                     <span className={"p-2"}>
                         Projects

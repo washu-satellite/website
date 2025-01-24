@@ -29,11 +29,11 @@ export default function Home() {
             <source src="earth.webm" type='video/webm'/>
           </video>
         </div>
-        <div className="absolute top-[10rem] -right-[16rem]  md:-right-[8rem] xl:right-[8rem] rotate-12">
+        {/* <div className="absolute top-[10rem] -right-[16rem]  md:-right-[8rem] xl:right-[8rem] rotate-12">
           <video width={700} height={700} autoPlay muted loop>
             <source src="vector.webm" type='video/webm'/>
           </video>
-        </div>
+        </div> */}
         <div className={clsx(
           `bg-[${colors.bg}] border-[${colors.bgHighlight}] border-t-[1px]`,
           "flex flex-col px-2 md:px-8 lg:px-24 gap-8 mt-[30rem] z-10 relative pb-[4rem]"
@@ -42,7 +42,7 @@ export default function Home() {
             <div className={"hidden lg:block w-[12rem]"}><Divider/></div>
 
             <p className={`italic text-center font-semibold w-[60rem] text-lg`}>
-              Equipping our members with the skills and experience required to excel in the professional engineering industry through real world experience with cutting-edge spaceflight research and spacecraft development.
+              Equipping our members with the skills required to excel in the professional engineering industry through real world experience with cutting-edge spaceflight research and spacecraft development while providing space access for WashU research.
             </p>
 
             <div className={"hidden lg:block w-[12rem]"}><Divider/></div>

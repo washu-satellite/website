@@ -28,20 +28,22 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
             <p className={"p-2"}>{props.id} Image</p>
         </Photo>,
         <div className={clsx(
-            "font-sans flex flex-col gap-4 p-8"
+            "flex flex-col justify-between p-8"
         )}>
-            <h3 
-                key={"title"} 
-                className={clsx(
-                    `font-bold md:text-left text-2xl text-[${colors.text}]`
-                )}
-            >
-                <Link className={`rounded-full font-mono -ml-2 mr-1 px-4 py-1 hover:bg-[${colors.fgHover}] border-[${colors.bgHighlight}] border-[1px]`} href={`/projects/${props.id.replaceAll("-", "").toLowerCase()}`}>
-                    {props.id}
-                </Link>
-                &nbsp;{props.title}
-            </h3>
-            <p key={"description"} className={"font-sans font-medium text-lg"}>{props.description}</p>
+            <div className="font-sans flex flex-col gap-4">
+                <h3 
+                    key={"title"} 
+                    className={clsx(
+                        `font-bold md:text-left text-2xl text-[${colors.text}]`
+                    )}
+                >
+                    <Link className={`rounded-full font-mono -ml-2 mr-1 px-4 py-1 hover:bg-[${colors.fgHover}] border-[${colors.bgHighlight}] border-[1px]`} href={`/projects/${props.id.replaceAll("-", "").toLowerCase()}`}>
+                        {props.id}
+                    </Link>
+                    &nbsp;{props.title}
+                </h3>
+                <p key={"description"} className={"font-sans font-medium text-[1.1rem]"}>{props.description}</p>
+            </div>
             <div key={"buttons"} className={"flex flex-row flex-wrap gap-4 justify-between items-center"}>
                 <div className={clsx("font-mono flex flex-row", `text-[#777777] relative`)}>
                     <p>{props.date}</p>
@@ -74,7 +76,8 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
         <div 
             className={clsx(
                 `bg-[${colors.fg}] border-[${colors.bgHighlight}] border-[1px] rounded-md`,
-                "flex-1 flex flex-row flex-wrap xl:flex-nowrap gap-8 justify-between min-w-fit md:min-w-[30rem] xl:min-w-fit"
+                "flex-1 flex flex-row flex-wrap xl:flex-nowrap min-w-fit md:min-w-[30rem] xl:min-w-fit",
+                props.direction === 'right' ? "justify-between" : "justify-start"
             )}
         >
             {props.direction === 'right' &&

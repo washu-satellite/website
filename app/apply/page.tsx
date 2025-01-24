@@ -22,25 +22,25 @@ export default function Apply() {
                     <h1 className={`text-[${colors.accentRed}] text-center font-mono font-semibold text-4xl md:text-6xl`}>WANT TO CONTIRBUTE?</h1>
                     <p className={`font-medium text-[${colors.textDark}]`}>We are currently recruiting for the SP25 semester! Select the discipline team you would like to apply for below to see applicant requirements. You may apply to multiple teams, but you must fill out the application for each, and attend each interview.</p>
                     <div className="flex flex-row flex-wrap items-center justify-center gap-4">
-                        <Button isLink style='red' href={"/team"}>
+                        <Button isLink style='red' href={"https://docs.google.com/forms/d/e/1FAIpQLSdydIvgb-3itmRnQpUdMgsEuMHWyt44yE0YeHLsUDrWNZDzXg/viewform?usp=header"}>
                             <div className={"flex flex-row gap-2 items-center"}>
                                 <p>Software</p>
                                 <HiOutlineExternalLink />
                             </div>
                         </Button>
-                        <Button isLink style='red' href={"/team"}>
+                        <Button isLink style='red' href={"https://docs.google.com/forms/d/e/1FAIpQLSfwRUMb8xrc3STzUQqrfxHm6vLGaLVgMb5t-tjPafT9srxqBw/viewform?usp=header"}>
                             <div className={"flex flex-row gap-2 items-center"}>
                                 <p>Electrical</p>
                                 <HiOutlineExternalLink />
                             </div>
                         </Button>
-                        <Button isLink style='red' href={"/team"}>
+                        <Button isLink style='red' href={"https://docs.google.com/forms/d/e/1FAIpQLScSOZvS36khL8C79IY1Phvh4iCGRsnpbkSZLI2_hzF5bbhFGw/viewform?usp=header"}>
                             <div className={"flex flex-row gap-2 items-center"}>
                                 <p>Mechanical</p>
                                 <HiOutlineExternalLink />
                             </div>
                         </Button>
-                        <Button isLink style='red' href={"/team"}>
+                        <Button isLink style='red' href={"https://docs.google.com/forms/d/e/1FAIpQLSei4poSuWmwbXtAJiWMO17_6yGRGkn8xTpxFxno_WJgV1yzBw/viewform?usp=header"}>
                             <div className={"flex flex-row gap-2 items-center"}>
                                 <p>Physics</p>
                                 <HiOutlineExternalLink />

@@ -41,9 +41,9 @@ export const EmailButton = (props: { text: string, href: string }) => {
     const colors = getColors();
 
     return (
-        <Link className={`rounded-full font-mono px-4 py-1 hover:bg-[${colors.fgHover}] border-[${colors.bgHighlight}] border-[1px]`} href="/">
+        <a className={`rounded-full font-mono px-4 py-1 hover:bg-[${colors.fgHover}] border-[${colors.bgHighlight}] border-[1px]`} href={props.href}>
             {props.text}
-        </Link>
+        </a>
     );
 }
 
