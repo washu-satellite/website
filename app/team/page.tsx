@@ -44,7 +44,8 @@ const TeamTile = (props: Person) => {
 
     return (
         <div className={clsx(
-            theme === 'light' ? 'shadow-md' : `border-[${colors.bgHighlight}] border-[1px]`,
+            theme === 'light' ? 'shadow-sm' : "",
+            `border-[${colors.bgHighlight}] border-[1px]`,
             `flex flex-col w-full relative items-start justify-end font-mono rounded-md bg-[${colors.fg}] md:w-[16rem] h-[16rem]`
         )}>
             <div className="relative w-full h-full">
@@ -175,12 +176,17 @@ const members: Person[] = [
 export default function OurTeam() {
     const colors = getColors();
 
+    const theme = getTheme();
+
     return (
         <div className="flex-1 relative overflow-x-hidden">
             <NavBar/>
-            <div className="fixed -top-[12rem] w-full h-full -z-10">
+            <div className={clsx(
+                theme === 'light' ? "-top-[6rem]" : "-top-[12rem]",
+                "fixed w-full h-full -z-10"
+            )}>
                 <Image
-                    className="opacity-80"
+                    className={theme === 'light' ? "opacity-90" : "opacity-80"}
                     src={teamImg}
                     alt=""
                     placeholder="blur"
@@ -192,9 +198,15 @@ export default function OurTeam() {
                 />
             </div>
             <main className={`text-[${colors.textDark}] relative`}>
-                <div className="flex flex-col items-center justify-center w-full h-[26rem] pt-[8rem]">
+                <div className={clsx(
+                    theme === 'light' ? "h-[34rem]" : "h-[26rem]",
+                    "flex flex-col items-center justify-center w-full pt-[8rem]"
+                )}>
                     {/* <span className={`font-bold text-[${colors.text}] bg-[${colors.accentRed}] px-4 py-2 rounded-t-xl border-[${colors.bgHighlight}] border-[1px] -mb-[2px]`}>These missions made possible by</span> */}
-                    <div className={`text-[4rem] font-semibold font-mono text-[${colors.accentRed}] bg-[${colors.bg}] border-[${colors.bgHighlight}] border-[1px] py-2 rounded-xl cursor-default`}>
+                    <div className={clsx(
+                        theme === 'light' ? "mt-16" : "",
+                        `text-[4rem] font-semibold font-mono text-[${colors.accentRed}] bg-[${colors.bg}] border-[${colors.bgHighlight}] border-[1px] py-2 rounded-xl cursor-default`
+                    )}>
                         <p className={`text-sm text-center italic px-6 text-[${colors.textSecondary}]`}>These missions made possible by</p>
                         <div className={`bg-[${colors.bgHighlight}] w-full h-[1px] mt-2`}/>
                         <h1 className="px-6">OUR TEAM</h1>
@@ -204,7 +216,7 @@ export default function OurTeam() {
                 <div className={'relative'}>
                     <div className="absolute w-[110%] -ml-2 left-0 bottom-[98%] lg:-top-[8rem]">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 853 162" fill="none">
-                            <path d="M2.12621 1.508L1 1.36471V2.5V159.5V160.5H2H851H852V159.5V2.5V1.35719L850.867 1.50884C611.961 33.4963 226.049 29.9981 2.12621 1.508Z" fill="#181818" stroke="#37383b" strokeWidth="1"/>
+                            <path d="M2.12621 1.508L1 1.36471V2.5V159.5V160.5H2H851H852V159.5V2.5V1.35719L850.867 1.50884C611.961 33.4963 226.049 29.9981 2.12621 1.508Z" fill={colors.bg} stroke={colors.bgHighlight} strokeWidth="1"/>
                         </svg>
                     </div>
                     <div className={`z-10 relative bg-[${colors.bg}] px-[4rem] pt-4 pb-[4rem]`}>

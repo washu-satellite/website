@@ -6,7 +6,7 @@ import NavBar from "@/components/NavBar";
 import Photo from "@/components/Photo";
 import ProjectHighlight from "@/components/ProjectHighlight";
 import { Projects } from "@/const/data";
-import { getColors } from "@/const/theme";
+import { getColors, getTheme } from "@/const/theme";
 import React from "react";
 import Image from 'next/image';
 
@@ -18,6 +18,8 @@ import { FaArrowRightLong } from "react-icons/fa6";
 
 export default function Home() {
   const colors = getColors();
+
+  const theme = getTheme();
 
   return (
     <div className={"flex-1 overflow-x-hidden"}>
@@ -54,6 +56,7 @@ export default function Home() {
           </div>
 
           <div className={clsx(
+            theme === 'light' ? "shadow-md" : "",
             `rounded-md bg-[${colors.fg}] border-[${colors.bgHighlight}] border-[1px]`,
             "flex flex-row flex-wrap xl:flex-nowrap font-mono items-center gap-8 justify-between mt-[3rem]"
           )}>

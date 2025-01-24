@@ -1,4 +1,4 @@
-import { darkTheme, getColors } from "@/const/theme";
+import { darkTheme, getColors, getTheme } from "@/const/theme";
 import { PropsWithChildren } from "react"
 import { UrlObject } from "url";
 import Link from 'next/link';
@@ -14,12 +14,14 @@ type ButtonProps = {
 }
 
 const getStyle = (style: ButtonProps['style'], colors: typeof darkTheme) => {
+    const theme = getTheme();
+
     switch (style) {
         case 'red':
             return {
                 color: colors.accentRed,
                 hoverColor: colors.accentRedHover,
-                textColor: colors.text
+                textColor: "#ffffff"
             }
         case 'clear':
             return {

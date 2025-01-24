@@ -3,25 +3,34 @@ import { FaLinkedin } from "react-icons/fa";
 import { PiInstagramLogoFill } from "react-icons/pi";
 import { FaGithub } from "react-icons/fa";
 import clsx from "clsx";
-import { getColors } from "@/const/theme";
+import { getColors, getTheme } from "@/const/theme";
 import Link from 'next/link';
 import Image from 'next/image';
 
 import logo from '../app/logo.svg';
+import logoLight from '../app/logo_light.svg';
+import Toggle from "./Toggle";
+import { useContext } from "react";
+import { AppContext } from "./AppContext";
+import { Projects } from "@/const/data";
 
 export default function Footer() {
+    const ctx = useContext(AppContext);
+
     const colors = getColors();
+
+    const theme = getTheme();
 
     return (
         <div className={clsx(
-            `bg-[#141414] border-[${colors.bgHighlight}] border-t-[1px]`,
+            `bg-[${colors.footer}] border-[${colors.bgHighlight}] text-[${colors.text}] border-t-[1px]`,
             "flex flex-row flex-wrap z-20 relative px-[4rem] py-[4rem] gap-8 md:gap-[4rem]"
         )}>
             <div className="flex flex-col items-center gap-6">
                 <Link href={"/"} className={"font-bold text-lg"}>
                     <Image
                         alt=""
-                        src={logo}
+                        src={theme === 'light' ? logoLight : logo}
                         width={140}
                     />
                 </Link>
@@ -33,12 +42,9 @@ export default function Footer() {
             </div>
             <div className="flex flex-col items-start gap-2">
                 <Link href={"/"} className="font-semibold">Projects</Link>
-                <Link href={"/"} className={clsx(`text-[${colors.textDark}]`, "font-medium")}>GS-1</Link>
-                <Link href={"/"} className={clsx(`text-[${colors.textDark}]`, "font-medium")}>ADAPT</Link>
-                <Link href={"/"} className={clsx(`text-[${colors.textDark}]`, "font-medium")}>SCALAR</Link>
-                <Link href={"/"} className={clsx(`text-[${colors.textDark}]`, "font-medium")}>VECTOR</Link>
-                <Link href={"/"} className={clsx(`text-[${colors.textDark}]`, "font-medium")}>SPINOR</Link>
-                <Link href={"/"} className={clsx(`text-[${colors.textDark}]`, "font-medium")}>SB-1</Link>
+                {Projects.map(p => (
+                    <Link href={`/projects/${p.id.replaceAll("-", "").toLowerCase()}`} className={clsx(`text-[${colors.textDark}]`, "font-medium")}>{p.id}</Link>
+                ))}
             </div>
             <div className="flex flex-col items-start gap-2">
                 <Link href={"/"} className="font-semibold">Keep in Touch</Link>
@@ -51,6 +57,14 @@ export default function Footer() {
                 <Link href={"/"} className={clsx(`text-[${colors.textDark}]`, "font-medium")}>What is WashU Satellite?</Link>
                 <Link href={"/"} className={clsx(`text-[${colors.textDark}]`, "font-medium")}>Our Team</Link>
                 <Link href={"/"} className={clsx(`text-[${colors.textDark}]`, "font-medium")}>Team Management</Link>
+            </div>
+            <div className="flex flex-col items-start gap-2">
+                <h3 className="text-base font-semibold">Change site theme</h3>
+                <Toggle
+                    default={ctx.theme === 'dark' ? 0 : 1}
+                    elements={["Dark", "Light"]}
+                    setActive={(a) => ctx.setTheme(a === 0 ? 'dark' : 'light')}
+                />
             </div>
         </div>
     )

@@ -14,6 +14,7 @@ import { useScrollPos } from "@/util/ui";
 import Image from 'next/image';
 
 import logo from '../app/logo.svg';
+import logoLight from '../app/logo_light.svg';
 
 const ProjectMenuItem = (props: ProjectData) => {
     const colors = getColors();
@@ -65,7 +66,7 @@ export default function NavBar() {
         <div
             className={clsx(
                 `text-[${colors.text}] bg-[${colors.bg}] border-[${colors.bgHighlight}]`,
-                scroll > 0 ? 'bg-opacity-100' : 'bg-opacity-50',
+                scroll > 0 || theme === 'light' ? 'bg-opacity-100' : 'bg-opacity-50',
                 theme === 'light' ? (scroll > 0 ? 'shadow' : 'shadow-none') : (scroll > 0 ? 'border-b-[1px]' : 'border-none'),
                 "fixed z-20 w-full top-0 left-0 flex flex-row justify-between items-center py-4 px-4 xl:px-8 lg:px-[4rem]"
             )}
@@ -74,7 +75,7 @@ export default function NavBar() {
                 <Link href={"/"} className={"font-bold text-lg mr-2"}>
                     <Image
                         alt=""
-                        src={logo}
+                        src={theme === 'light' ? logoLight : logo}
                         width={80}
                     />
                 </Link>

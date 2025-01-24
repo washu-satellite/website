@@ -1,5 +1,5 @@
 import { ProjectData } from "@/const/data";
-import { getColors } from "@/const/theme"
+import { getColors, getTheme } from "@/const/theme"
 import React from "react";
 import Button from "./Button";
 import Photo from "./Photo";
@@ -20,6 +20,8 @@ const getPhase = (phase: ProjectData['phase']) => {
 
 export default function ProjectHighlight(props: ProjectData & { direction?: 'left' | 'right' }) {
     const colors = getColors();
+
+    const theme = getTheme();
 
     console.log(props);
     
@@ -75,9 +77,10 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
     return (
         <div 
             className={clsx(
+                theme === 'light' ? "shadow-md" : "",
                 `bg-[${colors.fg}] border-[${colors.bgHighlight}] border-[1px] rounded-md`,
                 "flex-1 flex flex-row flex-wrap xl:flex-nowrap min-w-fit md:min-w-[30rem] xl:min-w-fit",
-                props.direction === 'right' ? "justify-between" : "justify-start"
+                props.direction === 'right' ? "justify-between" : "justify-start",
             )}
         >
             {props.direction === 'right' &&
