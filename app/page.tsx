@@ -25,7 +25,7 @@ export default function Home() {
     <div className={"flex-1 overflow-x-hidden"}>
       <NavBar/>
       <main className={`text-[${colors.textDark}]`}>
-        <div className={"fixed top-0 w-full h-full bg-[#1A1F27]"}/>
+        <div className={`fixed top-0 w-full h-full bg-[${colors.blueBg}]`}/>
         <div className="absolute -top-[2rem] -left-[14rem]">
           <video width={1000} height={1000} autoPlay muted loop>
             <source src="earth.webm" type='video/webm'/>

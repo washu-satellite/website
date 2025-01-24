@@ -13,7 +13,7 @@ export default function Apply() {
     return (
         <div className="flex-1">
             <NavBar/>
-            <div className={"fixed top-0 w-full h-full bg-[#1A1F27]"}/>
+            <div className={`fixed top-0 w-full h-full bg-[${colors.blueBg}]`}/>
             <div className={clsx(
                 `bg-[${colors.bg}] border-[${colors.bgHighlight}] border-t-[1px]`,
                 "mt-[20rem] z-10 relative flex flex-col items-center justify-center gap-16 pb-[4rem] px-4"
@@ -43,6 +43,12 @@ export default function Apply() {
                         <Button isLink style='red' href={"https://docs.google.com/forms/d/e/1FAIpQLSei4poSuWmwbXtAJiWMO17_6yGRGkn8xTpxFxno_WJgV1yzBw/viewform?usp=header"}>
                             <div className={"flex flex-row gap-2 items-center"}>
                                 <p>Physics</p>
+                                <HiOutlineExternalLink />
+                            </div>
+                        </Button>
+                        <Button isLink style='red' href={"https://docs.google.com/forms/d/e/1FAIpQLSdjk0GohScdZdpPmfwck4giNIAglpX8AhN-cAd7GqzIW8cPMQ/viewform?usp=header"}>
+                            <div className={"flex flex-row gap-2 items-center"}>
+                                <p>Systems</p>
                                 <HiOutlineExternalLink />
                             </div>
                         </Button>

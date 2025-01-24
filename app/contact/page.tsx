@@ -13,7 +13,7 @@ export default function Contact() {
     return (
         <div className="flex-1">
             <NavBar/>
-            <div className={"fixed top-0 w-full h-full bg-[#1A1F27]"}/>
+            <div className={`fixed top-0 w-full h-full bg-[${colors.blueBg}]`}/>
             <div className={clsx(
                 `bg-[${colors.bg}] border-[${colors.bgHighlight}] border-t-[1px]`,
                 "mt-[20rem] z-10 relative flex flex-col items-center justify-center gap-16 pb-[4rem] px-4"
@@ -21,7 +21,7 @@ export default function Contact() {
                 <div className={`flex flex-col items-center gap-8 justify-center max-w-[40rem] bg-[${colors.bg}] border-inherit border-[1px] p-8 -mt-[10rem] rounded-md`}>
                     <h1 className={`text-[${colors.accentRed}] text-center font-mono font-semibold text-4xl md:text-6xl`}>QUESTIONS?</h1>
                     <p className={`font-medium text-[${colors.textDark}]`}>Send any inquires to &nbsp;
-                        <Link className={`rounded-full px-4 py-1 hover:bg-[${colors.fg}] border-[${colors.bgHighlight}] border-[1px]`} href="/">
+                        <Link className={`rounded-full px-4 py-1 hover:bg-[${colors.fg}] border-[${colors.bgHighlight}] text-center border-[1px] text-[1rem]/[3rem]`} href="/">
                             washusatellite@gmail.com
                         </Link>
                     </p>
