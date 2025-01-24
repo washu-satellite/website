@@ -44,7 +44,7 @@ export default function Home() {
             <div className={"hidden lg:block w-[12rem]"}><Divider/></div>
 
             <p className={`italic text-center font-semibold w-[60rem] text-lg`}>
-              Equipping our members with the skills required to excel in the professional engineering industry through real world experience with cutting-edge spaceflight research and spacecraft development while providing space access for WashU research.
+              Equipping our members with the skills required to excel in the professional engineering industry through real world experience with cutting-edge spaceflight research and spacecraft development
             </p>
 
             <div className={"hidden lg:block w-[12rem]"}><Divider/></div>
