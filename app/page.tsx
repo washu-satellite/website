@@ -12,6 +12,7 @@ import Image from 'next/image';
 
 // @ts-ignore
 import cubeSat from "./cube.svg";
+import bgSat from "./satellite.png";
 import clsx from "clsx";
 import Button from "@/components/Button";
 import { FaArrowRightLong } from "react-icons/fa6";
@@ -26,11 +27,22 @@ export default function Home() {
       <NavBar/>
       <main className={`text-[${colors.textDark}]`}>
         <div className={`fixed top-0 w-full h-full bg-[${colors.blueBg}]`}/>
-        <div className="absolute -top-[2rem] -left-[14rem]">
+        <div className="fixed w-full h-[30rem] top-0">
+          <Image
+            className="w-full h-[44rem] xl:h-[60rem]"
+            alt=""
+            src={bgSat}
+            placeholder='blur'
+            style={{
+              objectFit: 'cover'
+            }}
+          />
+        </div>
+        {/* <div className="absolute -top-[2rem] -left-[14rem]">
           <video width={1000} height={1000} autoPlay muted loop>
             <source src="earth.webm" type='video/webm'/>
           </video>
-        </div>
+        </div> */}
         {/* <div className="absolute top-[10rem] -right-[16rem]  md:-right-[8rem] xl:right-[8rem] rotate-12">
           <video width={700} height={700} autoPlay muted loop>
             <source src="vector.webm" type='video/webm'/>
