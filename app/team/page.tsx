@@ -60,7 +60,7 @@ const TeamTile = (props: Person) => {
                     />
                 }
                 {props.email &&
-                    <div className="absolute flex items-center justify-center w-full h-full opacity-0 bg-[rgba(0,0,0,0.8)] hover:opacity-100 text-sm rounded-t-[5px] max-w-[16rem]">
+                    <div className="absolute flex items-center justify-center w-full h-full opacity-0 bg-[rgba(0,0,0,0.8)] hover:opacity-100 text-sm rounded-t-[5px]">
                         <EmailButton
                             text={props.email}
                             href={`mailto:${props.email}`}
