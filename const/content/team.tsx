@@ -39,6 +39,10 @@ export const ExecMembers: Person[] = [
         name: "Jack Galloway",
         title: "Chief Mechanical Engineer"
     },
+    {
+        name: "Avery Cohen",
+        title: "Treasurer"
+    }
 ];
 
 export const Members: Person[] = [
@@ -48,9 +52,7 @@ export const Members: Person[] = [
     { name: "Lilian Lu", title: "Electrical Engineering" },
     { name: "Nathaniel Bowman", title: "Electrical Engineering" },
     { name: "Siri Rodin", title: "Electrical Engineering" },
-    { name: "Andrew Press", title: "Mechanical Engineering" },
     { name: "Eduardo Teixeira", title: "Mechanical Engineering" },
-    { name: "Evan Hanning", title: "Mechanical Engineering" },
     { name: "Giselle Groff", title: "Mechanical Engineering" },
     { name: "Michael Safier", title: "Mechanical Engineering" },
     { name: "Oliver Yeaman", title: "Mechanical Engineering" },
@@ -71,7 +73,6 @@ export const Members: Person[] = [
     { name: "Isabella Shultz", title: "Physics" },
     { name: "Connor Miller", title: "Systems Engineering" },
     { name: "Kelvin Han", title: "Treasury" },
-    { name: "Andrew Tang", title: "Electrical Engineering" },
     { name: "Alexis Luna", title: "Electrical Engineering" },
     { name: "Evan Hanning", title: "Mechanical Engineering" },
     { name: "Lilian Lu", title: "Electrical Engineering" }
