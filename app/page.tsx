@@ -84,7 +84,7 @@ export default function Home() {
 
               <div className={`flex flex-col gap-4 items-start font-sans pt-8 border-t-[2px] xl:border-l-[2px] xl:border-t-0 xl:pl-8 xl:pt-0 border-[${colors.textAlt}]`}>
                 <p className={"text-lg font-medium max-w-[60rem]"}>
-                  {content.missionStatement}  
+                  {content.aboutUs}  
                 </p>
                   <Button isLink={true} href={"/team"}>
                     <div className={"flex flex-row gap-2 items-center"}>

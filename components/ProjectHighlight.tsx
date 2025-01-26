@@ -6,6 +6,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import clsx from "clsx";
 import Link from 'next/link';
 import { ProjectData } from "@/types/data";
+import { HiOutlineExternalLink } from "react-icons/hi";
 
 const getPhase = (phase: ProjectData['phase']) => {
     switch (phase) {
@@ -62,16 +63,21 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
                         "flex flex-row md:text-left justify-center md:justify-start gap-4 items-center"
                     )}
                 >
-                    <Button style={'clear'} isLink={true} href={""}>
-                        See the Poster
-                    </Button>
+                    {props.posterUrl &&
+                        <Button isLink={true} style='clear' href={props.posterUrl}>
+                            <div className={"flex flex-row gap-2 items-center"}>
+                                <p>See Poster</p>
+                                <HiOutlineExternalLink />
+                            </div>
+                        </Button>
+                    }
 
-                    <Button isLink={true} href={`/projects/${props.id.replaceAll("-", "").toLowerCase()}`}>
+                    {/* <Button disabled isLink={true} href={`/projects/${props.id.replaceAll("-", "").toLowerCase()}`}>
                         <div className={"flex flex-row gap-2 items-center"}>
                             <p>Learn More</p>
                             <FaArrowRightLong />
                         </div>
-                    </Button>
+                    </Button> */}
                 </div>
             </div>
         </div>

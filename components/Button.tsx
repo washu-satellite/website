@@ -10,6 +10,7 @@ type ButtonProps = {
     textColor?: string,
     isLink?: boolean,
     href?: string | UrlObject,
+    disabled?: boolean,
     onClick?: () => void
 }
 
@@ -56,7 +57,8 @@ export default function Button(props: PropsWithChildren<ButtonProps>) {
 
     const style = `font-sans p-1 px-4 rounded-md font-semibold
     bg-[${color}] hover:bg-[${hoverColor}]
-    text-[${textColor}] border-[${borderColor}] ${borderColor ? "border-[1px]" : ""}`
+    text-[${textColor}] border-[${borderColor}] ${borderColor ? "border-[1px]" : ""}
+    ${props.disabled ? "cursor-not-allowed opacity-30" : ""}`
     
     return props.isLink ? (
         <Link
