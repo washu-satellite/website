@@ -37,6 +37,9 @@ export const ExecMembers: Person[] = [
     },
     {
         name: "Owen Cromly",
+        avatar: "/headshots/owen_c.png",
+        email: "c.owen@wustl.edu",
+        linkedin: "https://www.linkedin.com/in/owen-cromly",
         title: "Chief Electrical Engineer"
     },
     {
