@@ -42,7 +42,7 @@ export const ExecMembers: Person[] = [
     {
         name: "Avery Cohen",
         title: "Treasurer"
-    },
+    }
 ];
 
 export const Members: Person[] = [
