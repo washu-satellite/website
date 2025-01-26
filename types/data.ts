@@ -1,3 +1,4 @@
+import { ProjectPages } from "@/const/content/projects";
 import { ReactNode } from "react"
 
 export type ProjectData = {
@@ -20,4 +21,15 @@ export type ProjectPageType = {
         title: string,
         description: string
     }[]
+};
+
+export type MissionKey = string;
+
+export type Person = {
+    name: string,
+    title: string,
+    email?: string,
+    avatar?: string,
+    linkedin?: string,
+    credits?: MissionKey[]
 };

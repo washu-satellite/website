@@ -5,7 +5,7 @@ import { IoTelescope } from "react-icons/io5";
 import { MdSatelliteAlt } from "react-icons/md";
 import { BiSolidBalloon } from "react-icons/bi";
 
-export const ProjectPages: { [K in string]: ProjectPageType } = {
+export const ProjectPages: { [K in any]: ProjectPageType } = {
     gs1: {
         project: {
             id: "GS-1",
