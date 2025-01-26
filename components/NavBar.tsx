@@ -1,6 +1,5 @@
 "use client";
 
-import { ProjectData, Projects } from "@/const/data";
 import Dropdown from "./Dropdown";
 import Link from 'next/link';
 import React, { ReactNode, useEffect, useState } from "react";
@@ -15,6 +14,8 @@ import Image from 'next/image';
 
 import logo from '../app/logo.svg';
 import logoLight from '../app/logo_light.svg';
+import { ProjectData } from "@/types/data";
+import { ProjectHighlightData } from "@/const/content/projects";
 
 const ProjectMenuItem = (props: ProjectData) => {
     const colors = getColors();
@@ -47,7 +48,7 @@ export default function NavBar() {
     const scroll = useScrollPos();
 
     useEffect(() => {
-        let p = Projects.filter(p => p.phase !== 'success').map(p => (
+        let p = ProjectHighlightData.filter(p => p.phase !== 'success').map(p => (
             <ProjectMenuItem
                 {...p}
             />
@@ -55,7 +56,7 @@ export default function NavBar() {
 
         p.push(<div className={`w-full h-[1px] my-2 bg-[${colors.bgHighlight}]`}/>);
 
-        setProjects(p.concat(Projects.filter(p => p.phase === 'success').map(p => (
+        setProjects(p.concat(ProjectHighlightData.filter(p => p.phase === 'success').map(p => (
             <ProjectMenuItem
                 {...p}
             />

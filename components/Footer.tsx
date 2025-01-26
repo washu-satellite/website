@@ -12,7 +12,7 @@ import logoLight from '../app/logo_light.svg';
 import Toggle from "./Toggle";
 import { useContext } from "react";
 import { AppContext } from "./AppContext";
-import { Projects } from "@/const/data";
+import { ProjectHighlightData } from "@/const/content/projects";
 
 export default function Footer() {
     const ctx = useContext(AppContext);
@@ -42,7 +42,7 @@ export default function Footer() {
             </div>
             <div className="flex flex-col items-start gap-2">
                 <Link href={"/"} className="font-semibold">Projects</Link>
-                {Projects.map(p => (
+                {ProjectHighlightData.map(p => (
                     <Link href={`/projects/${p.id.replaceAll("-", "").toLowerCase()}`} className={clsx(`text-[${colors.textDark}]`, "font-medium")}>{p.id}</Link>
                 ))}
             </div>

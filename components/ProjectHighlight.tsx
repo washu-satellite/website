@@ -1,4 +1,3 @@
-import { ProjectData } from "@/const/data";
 import { getColors, getTheme } from "@/const/theme"
 import React from "react";
 import Button from "./Button";
@@ -6,6 +5,7 @@ import Photo from "./Photo";
 import { FaArrowRightLong } from "react-icons/fa6";
 import clsx from "clsx";
 import Link from 'next/link';
+import { ProjectData } from "@/types/data";
 
 const getPhase = (phase: ProjectData['phase']) => {
     switch (phase) {
@@ -27,7 +27,10 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
     
     const elements = [
         <Photo right={props.direction === 'right'} classes={"border-b-[1px] xl:border-b-0"}>
-            <p className={"p-2"}>{props.id} Image</p>
+            
+            <p className="p-1 px-2 m-1 bg-black bg-opacity-50 rounded-md text-sm text-[#eeeeee] font-semibold">
+                {props.id} Model
+            </p>
         </Photo>,
         <div className={clsx(
             "flex flex-col justify-between p-8"

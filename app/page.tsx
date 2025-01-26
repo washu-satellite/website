@@ -5,7 +5,6 @@ import Heading from "@/components/Heading";
 import NavBar from "@/components/NavBar";
 import Photo from "@/components/Photo";
 import ProjectHighlight from "@/components/ProjectHighlight";
-import { Projects } from "@/const/data";
 import { getColors, getTheme } from "@/const/theme";
 import React from "react";
 import Image from 'next/image';
@@ -16,11 +15,17 @@ import bgSat from "./satellite.png";
 import clsx from "clsx";
 import Button from "@/components/Button";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { HomepageContent } from "@/const/content/homepage";
+import { ProjectHighlightData } from "@/const/content/projects";
 
 export default function Home() {
   const colors = getColors();
 
   const theme = getTheme();
+
+  const content = HomepageContent;
+
+  const highlights = ProjectHighlightData;
 
   return (
     <div className={"flex-1 overflow-x-hidden"}>
@@ -56,7 +61,7 @@ export default function Home() {
             <div className={"hidden lg:block w-[12rem]"}><Divider/></div>
 
             <p className={`italic text-center font-semibold w-[60rem] text-lg`}>
-              Equipping our members with the skills required to excel in the professional engineering industry through real world experience with cutting-edge spaceflight research and spacecraft development
+              {content.missionStatement}
             </p>
 
             <div className={"hidden lg:block w-[12rem]"}><Divider/></div>
@@ -79,7 +84,7 @@ export default function Home() {
 
               <div className={`flex flex-col gap-4 items-start font-sans pt-8 border-t-[2px] xl:border-l-[2px] xl:border-t-0 xl:pl-8 xl:pt-0 border-[${colors.textAlt}]`}>
                 <p className={"text-lg font-medium max-w-[60rem]"}>
-                  Founded in December 2023, WashU Satellite, is the university's only space mission engineering team. Consisting of physics majors, electrical, systems, computer, software and mechanical engineers, we represent many disciplines in the McKelvey School of Engineering. We also present opportunities for those with non-technical specialties to participate in communications, graphic design, and more. In Fall of 2024 we successfully grew our team from 12 members to more than 40, bringing in talent from all schools and grades, including graduate students.
+                  {content.missionStatement}  
                 </p>
                   <Button isLink={true} href={"/team"}>
                     <div className={"flex flex-row gap-2 items-center"}>
@@ -91,7 +96,7 @@ export default function Home() {
             </div>
 
             <Photo src={"/team_balloon.jpeg"} right>
-              <p className="p-1 px-2 m-1 bg-black bg-opacity-50 rounded-md text-sm font-semibold">SP24 Team Photo</p>
+              <p className="p-1 px-2 m-1 bg-black bg-opacity-50 rounded-md text-sm text-[#eeeeee] font-semibold">SP24 Team Photo</p>
             </Photo>
           </div>
 
@@ -104,7 +109,7 @@ export default function Home() {
           </h1>
 
           <div className={"flex flex-row flex-wrap items-start gap-y-[4rem] gap-x-[2rem]"}>
-            {Projects.filter(p => p.phase !== 'success').map((p, i) => (
+            {highlights.filter(p => p.phase !== 'success').map((p, i) => (
               <ProjectHighlight
                 {...p}
                 direction={i % 2 === 0 ? 'left' : 'right'}
@@ -119,7 +124,7 @@ export default function Home() {
           <h1 className={`font-mono text-2xl font-bold mt-[6rem] text-[${colors.textDark}]`}>Completed Projects</h1>
 
           <div className={"flex flex-col gap-[4rem]"}>
-            {Projects.filter(p => p.phase === 'success').map((p, i) => (
+            {highlights.filter(p => p.phase === 'success').map((p, i) => (
               <ProjectHighlight
                 {...p}
                 key={p.id}
