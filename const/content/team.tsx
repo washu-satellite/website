@@ -18,6 +18,7 @@ export const ExecMembers: Person[] = [
     },
     {
         name: "Owen Nieuwenhuizen",
+        avatar: "owen_n.png",
         title: "Chief Systems Engineer"
     },
     {
@@ -29,6 +30,9 @@ export const ExecMembers: Person[] = [
     },
     {
         name: "Sophie Fendler",
+        avatar: "sophie.jpg",
+        email: "a.fendler@wustl.edu",
+        linkedin: "https://www.linkedin.com/in/sophie-fendler-sf1/",
         title: "Chief Physicist"
     },
     {
