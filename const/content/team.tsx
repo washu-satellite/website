@@ -44,7 +44,8 @@ export const ExecMembers: Person[] = [
     },
     {
         name: "Jack Galloway",
-        email: "jackdgalloway22@gmail.com",
+        avatar: "/headshots/jackheadshot.jpg",
+        email: "galloway.j@wustl.edu",
         linkedin: "https://www.linkedin.com/in/jackdgalloway22/",
         title: "Chief Mechanical Engineer"
     },
