@@ -46,7 +46,7 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
             short: "1U CubeSat integrating open-source hardware and communications software",
             description: "SCALAR will be our inaugural CubeSat mission. Leveraging strategic partnerships with other university CubeSat teams and the WashU Department of Physics, along with utilizing open-source hardware, we are on an accelerated trajectory to launch our first payload in the spring of 2025.",
             contributors: 47,
-            date: "Q1-2026",
+            date: "Q4-2026",
             icon: (<MdSatelliteAlt size={22} />),
             phase: 'design'
         },

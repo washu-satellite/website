@@ -18,6 +18,10 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { HomepageContent } from "@/const/content/homepage";
 import { ProjectHighlightData } from "@/const/content/projects";
 
+import logo from '../app/logo.svg';
+import logoLight from '../app/logo_light.svg';
+import { useScrollPos } from "@/util/ui";
+
 export default function Home() {
   const colors = getColors();
 
@@ -27,12 +31,14 @@ export default function Home() {
 
   const highlights = ProjectHighlightData;
 
+  const scroll = useScrollPos();
+
   return (
     <div className={"flex-1 overflow-x-hidden"}>
       <NavBar/>
       <main className={`text-[${colors.textDark}]`}>
         <div className={`fixed top-0 w-full h-full bg-[${colors.blueBg}]`}/>
-        <div className="fixed w-full h-[30rem] top-0">
+        {/* <div className="fixed w-full h-[30rem] top-0">
           <Image
             className="w-full h-[44rem] xl:h-[60rem]"
             alt=""
@@ -42,11 +48,44 @@ export default function Home() {
               objectFit: 'cover'
             }}
           />
-        </div>
-        {/* <div className="absolute -top-[2rem] -left-[14rem]">
-          <video width={1000} height={1000} autoPlay muted loop>
-            <source src="earth.webm" type='video/webm'/>
+        </div> */}
+        <div className="fixed top-0 hidden md:block w-full h-[48rem]">
+          <video
+            autoPlay
+            muted
+            loop
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: 'cover'
+            }}
+          >
+            <source src="sat.mp4" type='video/mp4'/>
           </video>
+        </div>
+        <div className="fixed top-0 block md:hidden w-full h-[40rem]">
+          <video
+            autoPlay
+            muted
+            loop
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: 'cover'
+            }}
+          >
+            <source src="satBlock.mp4" type='video/mp4'/>
+          </video>
+        </div>
+        {/* <div className={clsx(
+          scroll > 0 ? "absolute" : "fixed",
+          "top-[12rem] left-[8rem]"
+        )}>
+          <Image
+              alt=""
+              src={theme === 'light' ? logoLight : logo}
+              width={120}
+          />
         </div> */}
         {/* <div className="absolute top-[10rem] -right-[16rem]  md:-right-[8rem] xl:right-[8rem] rotate-12">
           <video width={700} height={700} autoPlay muted loop>
@@ -55,7 +94,7 @@ export default function Home() {
         </div> */}
         <div className={clsx(
           `bg-[${colors.bg}] border-[${colors.bgHighlight}] border-t-[1px]`,
-          "flex flex-col px-2 md:px-8 lg:px-24 gap-8 mt-[30rem] z-10 relative pb-[4rem]"
+          "flex flex-col px-2 md:px-8 lg:px-24 gap-8 mt-[36rem] md:mt-[44rem] z-10 relative pb-[4rem]"
         )}>
           <div className={"flex flex-row mt-[3rem] gap-0 md:gap-[4rem] justify-center items-center"}>
             <div className={"hidden lg:block w-[12rem]"}><Divider/></div>

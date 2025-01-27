@@ -24,7 +24,7 @@ export const ExecMembers: Person[] = [
     {
         name: "Nate Hayman",
         avatar: "/headshots/nate.jpg",
-        email: "nathanielhayman@gmail.com",
+        email: "h.nate@wustl.edu",
         linkedin: "https://www.linkedin.com/in/nathanielhayman/",
         title: "Chief Software Engineer"
     },

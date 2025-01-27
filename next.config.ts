@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         source: '/projects/:slug',
         destination: '/not-ready',
         permanent: true
+      },
+      {
+        source: '/projects',
+        destination: '/not-ready',
+        permanent: true
       }
     ]
   }
