@@ -18,7 +18,7 @@ const getStyle = (style: ButtonProps['style']) => {
         case 'red':
             return "bg-accent-red hover:bg-accent-red-hover text-white";
         case 'clear':
-            return "bg-none hover:bg-fg-hover border-text-dark border-[1px]";
+            return "bg-none hover:bg-fg-hover text-text-dark border-text-dark border-[1px]";
         default:
             return "bg-text hover:bg-text-hover text-bg border-bg ";
     }

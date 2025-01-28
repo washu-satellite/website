@@ -14,7 +14,6 @@ import clsx from "clsx";
 import { FaArrowRightLong } from "react-icons/fa6";
 import cubeSat from "./cube.svg";
 
-import { useScrollPos } from "@/util/ui";
 import { useTheme } from "next-themes";
 
 export default function Home() {
@@ -23,8 +22,6 @@ export default function Home() {
   const content = HomepageContent;
 
   const highlights = ProjectHighlightData;
-
-  const scroll = useScrollPos();
 
   return (
     <div className={"flex-1 overflow-x-hidden"}>

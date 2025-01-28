@@ -7,16 +7,25 @@ import { PiInstagramLogoFill } from "react-icons/pi";
 
 import { ProjectHighlightData } from "@/const/content/projects";
 import { useTheme } from "next-themes";
-import { useContext } from "react";
 import logo from '../app/logo.svg';
 import logoLight from '../app/logo_light.svg';
-import { AppContext } from "./AppContext";
 import Toggle from "./Toggle";
 
 export default function Footer() {
-    const ctx = useContext(AppContext);
-
     const { theme, setTheme } = useTheme();
+
+    const changeTheme = async (a: number) => {
+        const t = a === 1 ? 'light' : 'dark';
+
+        setTheme(t);
+
+        fetch('/api/theme', { 
+            method: 'POST',
+            body: JSON.stringify({
+                theme: t
+            })
+         });
+    }
 
     return (
         <div className={clsx(
@@ -27,14 +36,14 @@ export default function Footer() {
                 <Link href={"/"} className={"font-bold text-lg"}>
                     <Image
                         alt=""
-                        src={theme === 'light' ? logoLight : logo}
+                        src={(() => {console.log(theme === 'light'); return theme === 'light' ? logoLight : logo})()}
                         width={140}
                     />
                 </Link>
                 <div className="flex flex-row items-center gap-2">
-                    <FaLinkedin size={30} />
-                    <PiInstagramLogoFill size={30} />
-                    <FaGithub size={30} />
+                    <a href="https://www.linkedin.com/company/washu-satellite/posts/?feedView=all"><FaLinkedin size={30} /></a>
+                    <a href="https://www.instagram.com/washusatellite/"><PiInstagramLogoFill size={30} /></a>
+                    <a href="https://github.com/washu-satellite"><FaGithub size={30} /></a>
                 </div>
             </div>
             <div className="flex flex-col items-start gap-2">
@@ -60,7 +69,7 @@ export default function Footer() {
                 <Toggle
                     default={theme === 'light' ? 1 : 0}
                     elements={["Dark", "Light"]}
-                    setActive={(a) => setTheme(a === 1 ? 'light' : 'dark')}
+                    setActive={changeTheme}
                 />
             </div>
         </div>
