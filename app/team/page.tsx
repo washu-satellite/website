@@ -1,7 +1,6 @@
 "use client";
 
 import NavBar from "@/components/NavBar";
-import { getTheme } from "@/const/theme";
 import Image from 'next/image';
 
 // @ts-ignore
@@ -13,6 +12,7 @@ import { ExecMembers, Members } from "@/const/content/team";
 import { MissionKey, Person } from "@/types/data";
 import { alphabeticSort } from "@/util/macros";
 import clsx from "clsx";
+import { useTheme } from "next-themes";
 import { FaLinkedin, FaSatelliteDish } from "react-icons/fa6";
 import { IoTelescope } from "react-icons/io5";
 
@@ -26,7 +26,7 @@ const getCreditIcon = (c: MissionKey) => {
 }
 
 const TeamTile = (props: Person) => {
-    const theme = getTheme();
+    const {theme} = useTheme();
 
     return (
         <div className={clsx(
@@ -86,7 +86,7 @@ const TeamTile = (props: Person) => {
 };
 
 export default function OurTeam() {
-    const theme = getTheme();
+    const {theme} = useTheme();
 
     return (
         <div className="flex-1 relative overflow-x-hidden">

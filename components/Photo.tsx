@@ -1,11 +1,11 @@
-import { getTheme } from "@/const/theme";
 import clsx from "clsx";
+import { useTheme } from "next-themes";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Image from 'next/image';
 import { PropsWithChildren } from "react";
 
 export default function Photo(props: PropsWithChildren<{ src?: string | StaticImport, right?: boolean, classes?: string }>) {
-    const theme = getTheme();
+    const {theme} = useTheme();
     
     return (
         <div className={clsx(

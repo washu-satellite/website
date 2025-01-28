@@ -1,6 +1,6 @@
-import { getTheme } from "@/const/theme";
 import { ProjectData } from "@/types/data";
 import clsx from "clsx";
+import { useTheme } from "next-themes";
 import Link from 'next/link';
 import { HiOutlineExternalLink } from "react-icons/hi";
 import Button from "./Button";
@@ -18,7 +18,7 @@ const getPhase = (phase: ProjectData['phase']) => {
 }
 
 export default function ProjectHighlight(props: ProjectData & { direction?: 'left' | 'right' }) {
-    const theme = getTheme();
+    const {theme} = useTheme();
 
     console.log(props);
     

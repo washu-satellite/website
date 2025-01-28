@@ -1,6 +1,5 @@
 "use client";
 
-import { getTheme } from "@/const/theme";
 import { cf } from "@/util/macros";
 import { focusHandler } from "@/util/ui";
 import clsx from "clsx";

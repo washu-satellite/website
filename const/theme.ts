@@ -40,15 +40,3 @@ export const ThemeColors = {
     dark: darkTheme,
     light: lightTheme
 };
-
-export const getTheme = () => {
-    const ctx = useContext(AppContext);
-
-    return ctx.theme;
-}
-
-export const getColors = () => {
-    const theme = getTheme();
-
-    return ThemeColors[theme];
-}

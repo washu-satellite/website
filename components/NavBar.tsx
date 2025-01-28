@@ -1,6 +1,5 @@
 "use client";
 
-import { getTheme } from "@/const/theme";
 import { useScrollPos } from "@/util/ui";
 import clsx from "clsx";
 import Link from 'next/link';
@@ -14,10 +13,10 @@ import Image from 'next/image';
 
 import { ProjectHighlightData } from "@/const/content/projects";
 import { ProjectData } from "@/types/data";
+import { useTheme } from "next-themes";
 import { usePathname } from "next/navigation";
 import logo from '../app/logo.svg';
 import logoLight from '../app/logo_light.svg';
-import { useTheme } from "next-themes";
 
 const ProjectMenuItem = (props: ProjectData) => {
     return (
