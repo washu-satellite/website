@@ -72,9 +72,9 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
     spinor: {
         project: {
             id: "SPINOR",
-            title: "SPINOR",
+            title: "Spinning Past-Ionospheric Networked Observation of Radio",
             url: "spinor",
-            short: "Revolutionary hyperspectral capture technology demonstration",
+            short: "Opening a new part of the radio sky for astronomy",
             description: "SPINOR is a program designed to image the sub-30 MHz radio sky in fine resolution for the first time, promising discoveries across exoplanet magnetic interactions, heliophysics and space weather, and early universe 21-cm cosmology. Its hardware consists of a set of spin stabilized conductive tethers located beyond the ionosphere, acting as configurable, low-frequency resonant antennas, using interferometric super-resolution imaging.",
             contributors: 47,
             date: "?-2028",
