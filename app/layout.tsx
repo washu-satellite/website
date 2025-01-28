@@ -1,13 +1,11 @@
 import { AppContextProvider } from "@/components/AppContext";
+import Footer from "@/components/Footer";
 import GeneratedStyles from "@/components/GeneratedStyles";
-import NavBar from "@/components/NavBar";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Inter, Roboto_Mono } from "next/font/google";
 import React from "react";
 import "./globals.css";
-import { getColors } from "@/const/theme";
-import Footer from "@/components/Footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -33,13 +31,19 @@ export default function RootLayout({
 }>) {
   return (
     <AppContextProvider>
-      <html lang="en">
+      <html suppressHydrationWarning lang="en">
         <body
           className={`${inter.variable} ${robotoMono.variable} font-sans bg-[#181818] antialiased text-[#FFFFFF]`}
         >
-          <GeneratedStyles/>
-          {children}
-          <Footer/>
+          <ThemeProvider
+            attribute='class'
+            defaultTheme='dark'
+            themes={['dark', 'light']}
+          >
+            <GeneratedStyles />
+            {children}
+            <Footer />
+          </ThemeProvider>
         </body>
       </html>
     </AppContextProvider>

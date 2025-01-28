@@ -1,36 +1,36 @@
 "use client";
 
-import Dropdown from "./Dropdown";
-import Link from 'next/link';
-import React, { ReactNode, useEffect, useState } from "react";
-import ThemedLink from "./ThemedLink";
-import Button from "./Button";
-import { IoMenu } from "react-icons/io5";
-import clsx from "clsx";
-import { getColors, getTheme } from "@/const/theme";
+import { getTheme } from "@/const/theme";
 import { useScrollPos } from "@/util/ui";
+import clsx from "clsx";
+import Link from 'next/link';
+import { ReactNode, useEffect, useState } from "react";
+import { IoMenu } from "react-icons/io5";
+import Button from "./Button";
+import Dropdown from "./Dropdown";
+import ThemedLink from "./ThemedLink";
 
 import Image from 'next/image';
 
+import { ProjectHighlightData } from "@/const/content/projects";
+import { ProjectData } from "@/types/data";
+import { usePathname } from "next/navigation";
 import logo from '../app/logo.svg';
 import logoLight from '../app/logo_light.svg';
-import { ProjectData } from "@/types/data";
-import { ProjectHighlightData } from "@/const/content/projects";
+import { useTheme } from "next-themes";
 
 const ProjectMenuItem = (props: ProjectData) => {
-    const colors = getColors();
-
     return (
         <Link className={clsx(
-            `text-[${colors.text}] hover:text-${colors.accentRed}`,
+            `text-text`,
             "flex flex-row items-start p-2 gap-4"
         )} href={`/projects/${props.url}`}>
-            <div className={`flex border-[${colors.bgHighlight}] border-[1px] rounded-md w-[2.4rem] h-[2.4rem] items-center justify-center shrink-0`}>
+            <div className={`flex border-bg-highlight border-[1px] rounded-md w-[2.4rem] h-[2.4rem] items-center justify-center shrink-0`}>
                 {props.icon}
             </div>
             <div className="flex flex-col items-start text-left">
                 <h3>{props.id}</h3>
-                <p className={`text-[${colors.textDark}] text-xs`}>{props.short}</p>
+                <p className={`text-text-dark text-xs`}>{props.short}</p>
             </div>
         </Link>
     )
@@ -41,11 +41,13 @@ export default function NavBar() {
 
     console.log("render");
 
-    const theme = getTheme();
-
-    const colors = getColors();
+    const {theme} = useTheme();
 
     const scroll = useScrollPos();
+
+    const pathName = usePathname();
+
+    const HEADER_SCROLL = pathName === "/" ? 608 : 0;
 
     useEffect(() => {
         let p = ProjectHighlightData.filter(p => p.phase !== 'success').map(p => (
@@ -54,7 +56,7 @@ export default function NavBar() {
             />
         ));
 
-        p.push(<div className={`w-full h-[1px] my-2 bg-[${colors.bgHighlight}]`}/>);
+        p.push(<div className={`w-full h-[1px] my-2 bg-bg-highlight`}/>);
 
         setProjects(p.concat(ProjectHighlightData.filter(p => p.phase === 'success').map(p => (
             <ProjectMenuItem
@@ -66,17 +68,22 @@ export default function NavBar() {
     return (
         <div
             className={clsx(
-                `text-[${colors.text}] bg-[${colors.bg}] border-[${colors.bgHighlight}]`,
-                scroll > 0 || theme === 'light' ? 'bg-opacity-100' : 'bg-opacity-50',
-                theme === 'light' ? (scroll > 0 ? 'shadow' : 'shadow-none') : (scroll > 0 ? 'border-b-[1px]' : 'border-none'),
+                `text-text bg-bg border-bg-highlight`,
+                scroll <= 0 ? (pathName === "/"  ? "dark bg-opacity-0" : "bg-opacity-50") : "",
+                scroll > 0 && scroll < HEADER_SCROLL ? ( theme === 'light' ? "bg-opacity-100" : "backdrop-blur-[4px] bg-opacity-30") : "backdrop-blur-none",
+                scroll > HEADER_SCROLL ? 'bg-opacity-100' : "",
+                theme === 'light' ? (scroll > HEADER_SCROLL ? 'shadow' : 'shadow-none') : (scroll > HEADER_SCROLL ? 'border-b-[1px]' : 'md:border-none'),
                 "fixed z-20 w-full top-0 left-0 flex flex-row justify-between items-center py-4 px-4 xl:px-8 lg:px-[4rem]"
             )}
         >
             <div className="flex-row hidden lg:flex justify-start items-center font-semibold">
-                <Link href={"/"} className={"font-bold text-lg mr-2"}>
+                <Link href={"/"} className={clsx(
+                    // scroll > 0 ? "block" : "hidden",
+                    "font-bold text-lg mr-2"
+                )}>
                     <Image
                         alt=""
-                        src={theme === 'light' ? logoLight : logo}
+                        src={theme === 'light' && !(pathName === "/" && scroll === 0) ? logoLight : logo}
                         width={80}
                     />
                 </Link>

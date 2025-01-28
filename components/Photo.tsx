@@ -1,18 +1,16 @@
-import { getColors, getTheme } from "@/const/theme"
+import { getTheme } from "@/const/theme";
 import clsx from "clsx";
-import { PropsWithChildren } from "react";
-import Image from 'next/image';
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import Image from 'next/image';
+import { PropsWithChildren } from "react";
 
 export default function Photo(props: PropsWithChildren<{ src?: string | StaticImport, right?: boolean, classes?: string }>) {
-    const colors = getColors();
-
     const theme = getTheme();
     
     return (
         <div className={clsx(
             "shrink-0 relative rounded-md font-mono w-full h-[30rem] xl:w-[20rem] md:h-[20rem]",
-            `bg-[${colors.fgHover}] border-r-0 border-[${colors.bgHighlight}] ${props.right ? "xl:border-l-[1px] xl:rounded-l-none" : "xl:border-r-[1px] xl:rounded-r-none"}`,
+            `bg-fg-hover border-r-0 border-bg-highlight ${props.right ? "xl:border-l-[1px] xl:rounded-l-none" : "xl:border-r-[1px] xl:rounded-r-none"}`,
             props.classes
         )}>
             {props.src && <Image fill src={props.src} alt={""} className={clsx(

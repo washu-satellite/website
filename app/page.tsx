@@ -1,31 +1,24 @@
 "use client";
 
 import Divider from "@/components/Divider";
-import Heading from "@/components/Heading";
 import NavBar from "@/components/NavBar";
 import Photo from "@/components/Photo";
 import ProjectHighlight from "@/components/ProjectHighlight";
-import { getColors, getTheme } from "@/const/theme";
-import React from "react";
 import Image from 'next/image';
 
 // @ts-ignore
-import cubeSat from "./cube.svg";
-import bgSat from "./satellite.png";
-import clsx from "clsx";
 import Button from "@/components/Button";
-import { FaArrowRightLong } from "react-icons/fa6";
 import { HomepageContent } from "@/const/content/homepage";
 import { ProjectHighlightData } from "@/const/content/projects";
+import clsx from "clsx";
+import { FaArrowRightLong } from "react-icons/fa6";
+import cubeSat from "./cube.svg";
 
-import logo from '../app/logo.svg';
-import logoLight from '../app/logo_light.svg';
 import { useScrollPos } from "@/util/ui";
+import { useTheme } from "next-themes";
 
 export default function Home() {
-  const colors = getColors();
-
-  const theme = getTheme();
+  const { theme } = useTheme();
 
   const content = HomepageContent;
 
@@ -36,8 +29,8 @@ export default function Home() {
   return (
     <div className={"flex-1 overflow-x-hidden"}>
       <NavBar/>
-      <main className={`text-[${colors.textDark}]`}>
-        <div className={`fixed top-0 w-full h-full bg-[${colors.blueBg}]`}/>
+      <main className={`text-text-dark`}>
+        <div className={`fixed top-0 w-full h-full bg-black`}/>
         {/* <div className="fixed w-full h-[30rem] top-0">
           <Image
             className="w-full h-[44rem] xl:h-[60rem]"
@@ -49,7 +42,7 @@ export default function Home() {
             }}
           />
         </div> */}
-        <div className="fixed top-0 hidden md:block w-full h-[48rem]">
+        <div className="absolute top-0 hidden md:block w-full h-[48rem]">
           <video
             autoPlay
             muted
@@ -63,7 +56,7 @@ export default function Home() {
             <source src="sat.mp4" type='video/mp4'/>
           </video>
         </div>
-        <div className="fixed top-0 block md:hidden w-full h-[40rem]">
+        <div className="fixed top-[4rem] block md:hidden w-full h-[40rem]">
           <video
             autoPlay
             muted
@@ -78,13 +71,13 @@ export default function Home() {
           </video>
         </div>
         {/* <div className={clsx(
-          scroll > 0 ? "absolute" : "fixed",
-          "top-[12rem] left-[8rem]"
+          scroll > 0 ? "hidden" : "block",
+          "absolute top-[8rem] left-[8rem] opacity-100"
         )}>
           <Image
               alt=""
-              src={theme === 'light' ? logoLight : logo}
-              width={120}
+              src={logo}
+              width={240}
           />
         </div> */}
         {/* <div className="absolute top-[10rem] -right-[16rem]  md:-right-[8rem] xl:right-[8rem] rotate-12">
@@ -93,7 +86,7 @@ export default function Home() {
           </video>
         </div> */}
         <div className={clsx(
-          `bg-[${colors.bg}] border-[${colors.bgHighlight}] border-t-[1px]`,
+          `bg-bg border-bg-highlight border-t-[1px]`,
           "flex flex-col px-2 md:px-8 lg:px-24 gap-8 mt-[36rem] md:mt-[44rem] z-10 relative pb-[4rem]"
         )}>
           <div className={"flex flex-row mt-[3rem] gap-0 md:gap-[4rem] justify-center items-center"}>
@@ -112,8 +105,8 @@ export default function Home() {
           </div>
 
           <div className={clsx(
-            theme === 'light' ? "shadow-md" : "",
-            `rounded-md bg-[${colors.fg}] border-[${colors.bgHighlight}] border-[1px]`,
+            "shadow-md dark:shadow-none",
+            `rounded-md bg-fg border-bg-highlight border-[1px]`,
             "flex flex-row flex-wrap xl:flex-nowrap font-mono items-center gap-8 justify-between mt-[3rem]"
           )}>
             <div className={"flex flex-row flex-wrap xl:flex-nowrap gap-4 xl:gap-14 items-center p-8"}>
@@ -121,7 +114,7 @@ export default function Home() {
                 About<br className={"hidden xl:block"}/> Us
               </h2>
 
-              <div className={`flex flex-col gap-4 items-start font-sans pt-8 border-t-[2px] xl:border-l-[2px] xl:border-t-0 xl:pl-8 xl:pt-0 border-[${colors.textAlt}]`}>
+              <div className={`flex flex-col gap-4 items-start font-sans pt-8 border-t-[2px] xl:border-l-[2px] xl:border-t-0 xl:pl-8 xl:pt-0 border-text-alt`}>
                 <p className={"text-lg font-medium max-w-[60rem]"}>
                   {content.aboutUs}  
                 </p>
@@ -143,7 +136,7 @@ export default function Home() {
             Current Projects
           </Heading> */}
 
-          <h1 className={`font-mono text-2xl font-bold mt-[6rem] text-[${colors.textDark}]`}>
+          <h1 className={`font-mono text-2xl font-bold mt-[6rem] text-text-dark`}>
             Active Projects
           </h1>
 
@@ -160,7 +153,7 @@ export default function Home() {
             Completed Projects
           </Heading> */}
 
-          <h1 className={`font-mono text-2xl font-bold mt-[6rem] text-[${colors.textDark}]`}>Completed Projects</h1>
+          <h1 className={`font-mono text-2xl font-bold mt-[6rem] text-text-dark`}>Completed Projects</h1>
 
           <div className={"flex flex-col gap-[4rem]"}>
             {highlights.filter(p => p.phase === 'success').map((p, i) => (

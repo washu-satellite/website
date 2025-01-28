@@ -1,7 +1,6 @@
-import { darkTheme, getColors, getTheme } from "@/const/theme";
-import { PropsWithChildren } from "react"
-import { UrlObject } from "url";
 import Link from 'next/link';
+import { PropsWithChildren } from "react";
+import { UrlObject } from "url";
 
 type ButtonProps = {
     style?: 'red' | 'clear',
@@ -14,51 +13,29 @@ type ButtonProps = {
     onClick?: () => void
 }
 
-const getStyle = (style: ButtonProps['style'], colors: typeof darkTheme) => {
-    const theme = getTheme();
-
+const getStyle = (style: ButtonProps['style']) => {
     switch (style) {
         case 'red':
-            return {
-                color: colors.accentRed,
-                hoverColor: colors.accentRedHover,
-                textColor: "#ffffff"
-            }
+            return "bg-accent-red hover:bg-accent-red-hover text-white";
         case 'clear':
-            return {
-                color: 'none',
-                hoverColor: colors.fgHover,
-                textColor: colors.textDark,
-                borderColor: colors.textDark
-            }
+            return "bg-none hover:bg-fg-hover border-text-dark border-[1px]";
         default:
-            return {
-                color: colors.text,
-                hoverColor: colors.textHover,
-                textColor: colors.bg
-            }
+            return "bg-text hover:bg-text-hover text-bg border-bg ";
     }
 };
 
 export const EmailButton = (props: { text: string, href: string }) => {
-    const colors = getColors();
-
     return (
-        <a className={`rounded-full font-mono px-4 py-1 hover:bg-[${colors.fgHover}] text-[${colors.textDark}] border-[${colors.bgHighlight}] border-[1px]`} href={props.href}>
+        <a className={`rounded-full font-mono px-4 py-1 hover:bg-fg-hover text-text-dark border-bg-highlight border-[1px]`} href={props.href}>
             {props.text}
         </a>
     );
 }
 
 export default function Button(props: PropsWithChildren<ButtonProps>) {
-    const colors = getColors();
+    const spec = getStyle(props.style);
 
-    const { color, hoverColor, textColor, borderColor } = getStyle(props.style, colors);
-
-    const style = `font-sans p-1 px-4 rounded-md font-semibold
-    bg-[${color}] hover:bg-[${hoverColor}]
-    text-[${textColor}] border-[${borderColor}] ${borderColor ? "border-[1px]" : ""}
-    ${props.disabled ? "cursor-not-allowed opacity-30" : ""}`
+    const style = `font-sans p-1 px-4 rounded-md font-medium ${props.disabled ? "cursor-not-allowed opacity-30" : ""} ${spec}`;
     
     return props.isLink ? (
         <Link

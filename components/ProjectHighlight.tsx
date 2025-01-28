@@ -1,12 +1,10 @@
-import { getColors, getTheme } from "@/const/theme"
-import React from "react";
-import Button from "./Button";
-import Photo from "./Photo";
-import { FaArrowRightLong } from "react-icons/fa6";
+import { getTheme } from "@/const/theme";
+import { ProjectData } from "@/types/data";
 import clsx from "clsx";
 import Link from 'next/link';
-import { ProjectData } from "@/types/data";
 import { HiOutlineExternalLink } from "react-icons/hi";
+import Button from "./Button";
+import Photo from "./Photo";
 
 const getPhase = (phase: ProjectData['phase']) => {
     switch (phase) {
@@ -20,8 +18,6 @@ const getPhase = (phase: ProjectData['phase']) => {
 }
 
 export default function ProjectHighlight(props: ProjectData & { direction?: 'left' | 'right' }) {
-    const colors = getColors();
-
     const theme = getTheme();
 
     console.log(props);
@@ -40,10 +36,10 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
                 <h3 
                     key={"title"} 
                     className={clsx(
-                        `font-bold md:text-left text-2xl text-[${colors.text}]`
+                        `font-bold md:text-left text-2xl text-text`
                     )}
                 >
-                    <Link className={`rounded-full font-mono -ml-2 mr-1 px-4 py-1 hover:bg-[${colors.fgHover}] border-[${colors.bgHighlight}] border-[1px]`} href={`/projects/${props.id.replaceAll("-", "").toLowerCase()}`}>
+                    <Link className={`rounded-full font-mono -ml-2 mr-1 px-4 py-1 hover:bg-fg-hover border-bg-highlight border-[1px]`} href={`/projects/${props.id.replaceAll("-", "").toLowerCase()}`}>
                         {props.id}
                     </Link>
                     &nbsp;{props.title}
@@ -87,7 +83,7 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
         <div 
             className={clsx(
                 theme === 'light' ? "shadow-md" : "",
-                `bg-[${colors.fg}] border-[${colors.bgHighlight}] border-[1px] rounded-md`,
+                `bg-fg border-bg-highlight border-[1px] rounded-md`,
                 "flex-1 flex flex-row flex-wrap xl:flex-nowrap min-w-fit md:min-w-[30rem] xl:min-w-fit",
                 props.direction === 'right' ? "justify-between" : "justify-start",
             )}
