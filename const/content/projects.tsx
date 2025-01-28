@@ -41,7 +41,7 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
     scalar: {
         project: {
             id: "SCALAR",
-            title: "SCALAR",
+            title: "Secure Configurable Autonomous Laboratory for Algorithm Research",
             url: "scalar",
             short: "1U CubeSat integrating open-source hardware and communications software",
             description: "SCALAR will be our inaugural CubeSat mission. Leveraging strategic partnerships with other university CubeSat teams and the WashU Department of Physics, along with utilizing open-source hardware, we are on an accelerated trajectory to launch our first payload in the spring of 2026. It is designed to demonstrate on-orbit reconfigurable hybrid compute, a key technology for future, software-enabled missions.",
@@ -72,9 +72,9 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
     spinor: {
         project: {
             id: "SPINOR",
-            title: "SPINOR",
+            title: "Spinning Past-Ionospheric Networked Observation of Radio",
             url: "spinor",
-            short: "Revolutionary hyperspectral capture technology demonstration",
+            short: "Opening a new part of the radio sky for astronomy",
             description: "SPINOR is a program designed to image the sub-30 MHz radio sky in fine resolution for the first time, promising discoveries across exoplanet magnetic interactions, heliophysics and space weather, and early universe 21-cm cosmology. Its hardware consists of a set of spin stabilized conductive tethers located beyond the ionosphere, acting as configurable, low-frequency resonant antennas, using interferometric super-resolution imaging.",
             contributors: 47,
             date: "?-2028",
