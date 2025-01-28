@@ -41,7 +41,7 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
     scalar: {
         project: {
             id: "SCALAR",
-            title: "SCALAR",
+            title: "Secure Configurable Autonomous Laboratory for Algorithm Research",
             url: "scalar",
             short: "1U CubeSat integrating open-source hardware and communications software",
             description: "SCALAR will be our inaugural CubeSat mission. Leveraging strategic partnerships with other university CubeSat teams and the WashU Department of Physics, along with utilizing open-source hardware, we are on an accelerated trajectory to launch our first payload in the spring of 2026. It is designed to demonstrate on-orbit reconfigurable hybrid compute, a key technology for future, software-enabled missions.",
