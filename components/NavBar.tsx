@@ -70,7 +70,7 @@ export default function NavBar() {
             className={clsx(
                 `text-text bg-bg border-bg-highlight`,
                 scroll <= 0 ? (pathName === "/"  ? "dark bg-opacity-0" : "bg-opacity-50") : "",
-                scroll > 0 && scroll < HEADER_SCROLL ? ( theme === 'light' ? "bg-opacity-100" : "backdrop-blur-[4px] bg-opacity-30") : "backdrop-blur-none",
+                scroll > 0 && scroll < HEADER_SCROLL ? ( theme === 'light' ? "bg-opacity-100" : "backdrop-blur-[4px] bg-opacity-100 md:bg-opacity-30") : "backdrop-blur-none",
                 scroll > HEADER_SCROLL ? 'bg-opacity-100' : "",
                 theme === 'light' ? (scroll > HEADER_SCROLL ? 'shadow' : 'shadow-none') : (scroll > HEADER_SCROLL ? 'border-b-[1px]' : 'md:border-none'),
                 "fixed z-20 w-full top-0 left-0 flex flex-row justify-between items-center py-4 px-4 xl:px-8 lg:px-[4rem]"
@@ -120,10 +120,13 @@ export default function NavBar() {
                 </Button>
             </div>
             <div className={"flex-1 flex flex-row justify-between items-center gap-4 lg:hidden"}>
-                <Link href={"/"} className={"font-bold text-lg mr-2"}>
+                <Link href={"/"} className={clsx(
+                    // scroll > 0 ? "block" : "hidden",
+                    "font-bold text-lg mr-2"
+                )}>
                     <Image
                         alt=""
-                        src={theme === 'light' ? logoLight : logo}
+                        src={theme === 'light' && !(pathName === "/" && scroll === 0) ? logoLight : logo}
                         width={80}
                     />
                 </Link>
