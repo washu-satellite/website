@@ -1,4 +1,3 @@
-import { getTheme } from '@/const/theme';
 import { useScrollPos } from '@/util/ui';
 import clsx from 'clsx';
 import { useTheme } from 'next-themes';
