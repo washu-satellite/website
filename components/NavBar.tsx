@@ -36,7 +36,7 @@ const ProjectMenuItem = (props: ProjectData) => {
 }
 
 export default function NavBar() {
-    const [projects, setProjects] = useState<ReactNode[]>([]);
+    const [projects, setProjects] = useState<ReactNode[][]>([]);
 
     console.log("render");
 
@@ -49,19 +49,18 @@ export default function NavBar() {
     const HEADER_SCROLL = pathName === "/" ? 608 : 0;
 
     useEffect(() => {
-        let p = ProjectHighlightData.filter(p => p.phase !== 'success').map(p => (
-            <ProjectMenuItem
-                {...p}
-            />
-        ));
-
-        p.push(<div className={`w-full h-[1px] my-2 bg-bg-highlight`}/>);
-
-        setProjects(p.concat(ProjectHighlightData.filter(p => p.phase === 'success').map(p => (
-            <ProjectMenuItem
-                {...p}
-            />
-        ))));
+        setProjects([
+            ProjectHighlightData.filter(p => p.phase !== 'success').map(p => (
+                <ProjectMenuItem
+                    {...p}
+                />
+            )),
+            (ProjectHighlightData.filter(p => p.phase === 'success').map(p => (
+                <ProjectMenuItem
+                    {...p}
+                />
+            )))
+        ]);
     }, []);
 
     return (
@@ -105,11 +104,12 @@ export default function NavBar() {
             </div>
             <div className={"flex-row hidden lg:flex justify-end items-center font-semibold gap-6"}>
 
-                <Button key={"subscribe"} isLink={true} href={"/subscribe"}>
+                <Button raiseHover key={"subscribe"} isLink={true} href={"/subscribe"}>
                     Subscribe
                 </Button>
 
                 <Button
+                    raiseHover
                     key={"apply"}
                     style={'red'}
                     isLink={true}
@@ -131,12 +131,13 @@ export default function NavBar() {
                 </Link>
                 <div className="flex flex-row justify-end items-center gap-4">
                     <div className={"hidden sm:block"}>
-                        <Button key={"subscribe"} isLink={true} href={"/subscribe"}>
+                        <Button raiseHover key={"subscribe"} isLink={true} href={"/subscribe"}>
                             Subscribe
                         </Button>
                     </div>
                     <div className={"block"}>
                         <Button
+                            raiseHover
                             key={"apply"}
                             style={'red'}
                             isLink={true}
@@ -149,12 +150,12 @@ export default function NavBar() {
                         key={"hamburgerMenu"}
                         hideArrow={true}
                         enlarge={true}
-                        elements={[
+                        elements={[[
                             <Link href={`/projects`}>Projects</Link>,
                             <Link href={`/contact`}>Contact</Link>,
                             <Link href={`/team`}>Our Team</Link>,
                             <Link className="block sm:hidden" href={`/subscribe`}>Subscribe</Link>
-                        ]}
+                        ]]}
                     >
                         <IoMenu className={"w-10 h-10"} />
                     </Dropdown>

@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import Link from 'next/link';
 import { PropsWithChildren } from "react";
 import { UrlObject } from "url";
@@ -8,6 +9,7 @@ type ButtonProps = {
     hoverColor?: string,
     textColor?: string,
     isLink?: boolean,
+    raiseHover?: boolean,
     href?: string | UrlObject,
     disabled?: boolean,
     onClick?: () => void
@@ -35,7 +37,12 @@ export const EmailButton = (props: { text: string, href: string }) => {
 export default function Button(props: PropsWithChildren<ButtonProps>) {
     const spec = getStyle(props.style);
 
-    const style = `font-sans p-1 px-4 rounded-md font-medium ${props.disabled ? "cursor-not-allowed opacity-30" : ""} ${spec}`;
+    const style = clsx(
+        "cursor-pointer font-sans p-1 px-4 rounded-md font-medium",
+        props.raiseHover ? "transition delay-50 duration-300 ease-in-out hover:scale-110" : "",
+        props.disabled ? "cursor-not-allowed opacity-30" : "",
+        spec
+    );
     
     return props.isLink ? (
         <Link
