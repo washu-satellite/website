@@ -15,8 +15,8 @@ export default function Contact() {
                 "mt-[20rem] z-10 relative flex flex-col items-center justify-center gap-16 pb-[4rem] px-4"
             )}>
                 <div className={`flex flex-col items-center gap-8 justify-center max-w-[40rem] bg-bg border-inherit border-[1px] p-8 -mt-[10rem] rounded-md`}>
-                    <h1 className={`text-accent-red text-center font-mono font-semibold text-4xl md:text-6xl`}>QUESTIONS?</h1>
-                    <p className={`font-medium text-text-dark`}>Send any inquires to &nbsp;
+                    <h1 className={`text-accent-red text-center font-mono font-semibold text-5xl md:text-6xl`}>QUESTIONS?</h1>
+                    <p className={`font-medium text-text-dark text-center md:text-left`}>Send any inquires to &nbsp;
                         <Link className={`rounded-full px-4 py-1 hover:bg-fg border-bg-highlight text-center border-[1px] text-[1rem]/[3rem]`} href="/">
                             washusatellite@gmail.com
                         </Link>

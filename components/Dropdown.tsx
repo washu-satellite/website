@@ -45,13 +45,15 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = (props) => {
         onClick={() => setExpanded(e => !e)}
       >
         {props.children}
-        <motion.div
-          transition={{ duration: 0.2 }}
-          initial={{ rotate: 0 }}
-          animate={{ rotate: expanded ? 180 : 0 }}
-        >
-          <IoIosArrowUp className={"w-3 h-3"} />
-        </motion.div>
+        {!props.hideArrow &&
+          <motion.div
+            transition={{ duration: 0.2 }}
+            initial={{ rotate: 0 }}
+            animate={{ rotate: expanded ? 180 : 0 }}
+          >
+            <IoIosArrowUp className={"w-3 h-3"} />
+          </motion.div>
+        }
       </button>
       {expanded && 
         <motion.div

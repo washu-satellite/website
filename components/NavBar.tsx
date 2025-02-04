@@ -164,7 +164,7 @@ export default function NavBar() {
                     </div>
                     <Dropdown
                         key={"hamburgerMenu"}
-                        hideArrow={true}
+                        hideArrow
                         enlarge={true}
                         elements={[[
                             <Link href={`/projects`}>Projects</Link>,

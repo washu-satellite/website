@@ -15,7 +15,7 @@ export default function Apply() {
                 "mt-[20rem] z-10 relative flex flex-col items-center justify-center gap-16 pb-[4rem] px-4"
             )}>
                 <div className={`flex flex-col items-center gap-8 justify-center max-w-[40rem] bg-bg border-inherit border-[1px] p-8 -mt-[10rem] rounded-md`}>
-                    <h1 className={`text-accent-red text-center font-mono font-semibold text-4xl md:text-6xl`}>WANT TO CONTIRBUTE?</h1>
+                    <h1 className={`text-accent-red text-center font-mono font-semibold text-5xl md:text-6xl`}>WANT TO CONTIRBUTE?</h1>
                     <p className={`font-medium text-text-dark`}>We are currently recruiting for the SP25 semester! Select the discipline team you would like to apply for below to see applicant requirements. You may apply to multiple teams, but you must fill out the application for each, and attend each interview.</p>
                     <div className="flex flex-row flex-wrap items-center justify-center gap-4">
                         <Button isLink style='red' href={"https://docs.google.com/forms/d/e/1FAIpQLSdydIvgb-3itmRnQpUdMgsEuMHWyt44yE0YeHLsUDrWNZDzXg/viewform?usp=header"}>
