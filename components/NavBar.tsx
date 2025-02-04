@@ -18,6 +18,8 @@ import { usePathname } from "next/navigation";
 import logo from '../app/logo.svg';
 import logoLight from '../app/logo_light.svg';
 
+import { motion } from 'motion/react';
+
 const ProjectMenuItem = (props: ProjectData) => {
     return (
         <Link className={clsx(
@@ -46,7 +48,11 @@ export default function NavBar() {
 
     const pathName = usePathname();
 
-    const HEADER_SCROLL = pathName === "/" ? 608 : 0;
+    const SCROLL_MIN = pathName === "/" ? 0 : -1;
+
+    const SCROLL_MAX = pathName === "/" ? 608 : 0;
+
+    const BORDER_MIN = pathName === "/" ? SCROLL_MAX : 300;
 
     useEffect(() => {
         setProjects([
@@ -64,13 +70,23 @@ export default function NavBar() {
     }, []);
 
     return (
-        <div
+        <motion.div
+            initial={{ 
+                backgroundColor: scroll > SCROLL_MAX ? "rgba(from var(--bg) r g b / 1)" : (
+                    scroll > SCROLL_MIN ? (theme === 'light' ? "rgba(from var(--bg) r g b / 1)" : "rgba(from var(--bg) r g b / 0.3)") : "rgba(from var(--bg) r g b / 0)"
+                ),
+                borderBottomWidth: scroll > BORDER_MIN ? 1 : 0
+            }}
+            animate={{ 
+                backgroundColor: scroll > SCROLL_MAX ? "rgba(from var(--bg) r g b / 1)" : (
+                    scroll > SCROLL_MIN ? (theme === 'light' ? "rgba(from var(--bg) r g b / 1)" : "rgba(from var(--bg) r g b / 0.3)") : "rgba(from var(--bg) r g b / 0)"
+                ),
+                borderBottomWidth: scroll > BORDER_MIN ? 1 : 0
+            }}
             className={clsx(
                 `text-text bg-bg border-bg-highlight`,
-                scroll <= 0 ? (pathName === "/"  ? "dark bg-opacity-0" : "bg-opacity-50") : "",
-                scroll > 0 && scroll < HEADER_SCROLL ? ( theme === 'light' ? "bg-opacity-100" : "backdrop-blur-[4px] bg-opacity-100 md:bg-opacity-30") : "backdrop-blur-none",
-                scroll > HEADER_SCROLL ? 'bg-opacity-100' : "",
-                theme === 'light' ? (scroll > HEADER_SCROLL ? 'shadow' : 'shadow-none') : (scroll > HEADER_SCROLL ? 'border-b-[1px]' : 'md:border-none'),
+                scroll > 0 && pathName === "/" ? "backdrop-blur-[4px]" : "",
+                theme === 'light' && scroll > SCROLL_MAX ? 'shadow' : 'shadow-none',
                 "fixed z-20 w-full top-0 left-0 flex flex-row justify-between items-center py-4 px-4 xl:px-8 lg:px-[4rem]"
             )}
         >
@@ -161,6 +177,6 @@ export default function NavBar() {
                     </Dropdown>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }

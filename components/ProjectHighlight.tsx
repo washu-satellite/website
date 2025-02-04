@@ -6,6 +6,8 @@ import { HiOutlineExternalLink } from "react-icons/hi";
 import Button from "./Button";
 import Photo from "./Photo";
 
+import { motion } from 'motion/react';
+
 const getPhase = (phase: ProjectData['phase']) => {
     switch (phase) {
         case 'assembly':
@@ -80,7 +82,13 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
     ];
 
     return (
-        <div 
+        <motion.div
+            transition={{ delay: 0.3, duration: 0.3 }}
+            initial={{ opacity: 0, x: props.direction === 'right' ? -30 : 30 }}
+            whileInView={'visible'}
+            variants={{
+                visible: { opacity: 1, x: 0 }
+            }}
             className={clsx(
                 theme === 'light' ? "shadow-md" : "",
                 `bg-fg border-bg-highlight border-[1px] rounded-md`,
@@ -104,6 +112,6 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
                     {elements[1]}
                 </>
             )}
-        </div>
+        </motion.div>
     )
 }

@@ -16,6 +16,8 @@ import cubeSat from "./cube.svg";
 
 import { useTheme } from "next-themes";
 
+import { motion } from 'motion/react';
+
 export default function Home() {
   const { theme } = useTheme();
 
@@ -101,11 +103,19 @@ export default function Home() {
             <div className={"w-full lg:w-[12rem]"}><Divider/></div>
           </div>
 
-          <div className={clsx(
-            "shadow-md dark:shadow-none",
-            `rounded-md bg-fg border-bg-highlight border-[1px]`,
-            "flex flex-row flex-wrap xl:flex-nowrap font-mono items-center gap-8 justify-between mt-[3rem]"
-          )}>
+          <motion.div
+            transition={{ delay: 0.3, duration: 0.3 }}
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={'visible'}
+            variants={{
+                visible: { opacity: 1, x: 0 }
+            }}
+            className={clsx(
+              "shadow-md dark:shadow-none",
+              `rounded-md bg-fg border-bg-highlight border-[1px]`,
+              "flex flex-row flex-wrap xl:flex-nowrap font-mono items-center gap-8 justify-between mt-[3rem]"
+            )}
+          >
             <div className={"flex flex-row flex-wrap xl:flex-nowrap gap-4 xl:gap-14 items-center p-8"}>
               <h2 className={"font-bold text-3xl text-center xl:text-left"}>
                 About<br className={"hidden xl:block"}/> Us
@@ -127,7 +137,7 @@ export default function Home() {
             <Photo src={"/team_balloon.jpeg"} right>
               <p className="p-1 px-2 m-1 bg-black bg-opacity-50 rounded-md text-sm text-[#eeeeee] font-semibold">SP24 Team Photo</p>
             </Photo>
-          </div>
+          </motion.div>
 
           {/* <Heading>
             Current Projects

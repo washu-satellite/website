@@ -16,6 +16,8 @@ import { useTheme } from "next-themes";
 import { FaLinkedin, FaSatelliteDish } from "react-icons/fa6";
 import { IoTelescope } from "react-icons/io5";
 
+import { motion } from 'motion/react';
+
 const getCreditIcon = (c: MissionKey) => {
     switch (c) {
         case 'GS':
@@ -29,11 +31,14 @@ const TeamTile = (props: Person) => {
     const {theme} = useTheme();
 
     return (
-        <div className={clsx(
-            theme === 'light' ? 'shadow-sm' : "",
-            `border-bg-highlight border-[1px]`,
-            `flex flex-col w-full relative items-start justify-end font-mono rounded-md bg-fg md:w-[16rem] h-[16rem]`
-        )}>
+        <motion.div
+            whileHover={{ scale: 1.05 }}
+            className={clsx(
+                theme === 'light' ? 'shadow-sm' : "",
+                `border-bg-highlight border-[1px]`,
+                `flex flex-col w-full relative items-start justify-end font-mono rounded-md bg-fg md:w-[16rem] h-[16rem]`
+            )}
+        >
             <div className="relative w-full h-full">
                 {props.avatar &&
                     <Image
@@ -49,15 +54,19 @@ const TeamTile = (props: Person) => {
                     />
                 }
                 {props.email &&
-                    <div className={clsx(
-                        theme === 'light' ? "bg-[rgba(255,255,255,0.9)]" : "bg-[rgba(0,0,0,0.8)]",
-                        "absolute flex items-center justify-center w-full h-full opacity-0 hover:opacity-100 text-sm rounded-t-[5px]"
-                    )}>
+                    <motion.a
+                        whileHover={{ opacity: 1 }}
+                        className={clsx(
+                            theme === 'light' ? "bg-[rgba(255,255,255,0.9)]" : "bg-[rgba(0,0,0,0.8)]",
+                            "absolute flex items-center justify-center w-full h-full opacity-0 text-sm rounded-t-[5px]"
+                        )}
+                        href={`mailto:${props.email}`}
+                    >
                         <EmailButton
                             text={props.email}
                             href={`mailto:${props.email}`}
                         />
-                    </div>
+                    </motion.a>
                 }
             </div>
             <div className={clsx(
@@ -81,7 +90,7 @@ const TeamTile = (props: Person) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

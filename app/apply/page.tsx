@@ -49,7 +49,7 @@ export default function Apply() {
                             </div>
                         </Button>
                     </div>
-                    <h2 className={`font-mono text-text-dark`}>Applications close: <span className="font-semibold">1/31/2025</span></h2>
+                    <h2 className={`font-mono text-text-dark`}>Applications close: <span className="font-semibold">2/7/2025</span></h2>
                 </div>
                 <div className="flex flex-row flex-wrap items-center justify-center w-full gap-8">
                     <div className={`flex flex-col items-center gap-8 justify-center bg-fg border-bg-highlight border-[1px] p-8 rounded-md`}>

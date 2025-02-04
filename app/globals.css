@@ -15,8 +15,8 @@
     --text-secondary: #3b3b3b;
     --text-alt: #475a6b;
     --text-dark: #5c5c5c;
-    --accent-red: #ad2323;
-    --accent-red-hover: #9A2727
+    --accent-red: #b43d3d;
+    --accent-red-hover: #9a2727;
   }
 
   .dark {
@@ -31,8 +31,8 @@
     --text-secondary: #8C8C8C;
     --text-alt: #303C47;
     --text-dark: #B6B6B6;
-    --accent-red: #ad2323;
-    --accent-red-hover: #9A2727
+    --accent-red: #b43d3d;
+    --accent-red-hover: #9a2727;
   }
 }
 

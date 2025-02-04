@@ -30,7 +30,7 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = (props) => {
   return (
     <div
       ref={elementRef}
-      className="relative inline-block"
+      className="relative group inline-block"
       onMouseEnter={() => setExpanded(true)}
       onMouseLeave={() => setExpanded(false)}
     >
@@ -40,7 +40,7 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = (props) => {
         className={clsx(
           theme === 'light' ? "bg-[#dddddd]" : "bg-black",
           "flex flex-row justify-between items-center",
-          `text-text hover:text-text-hover px-4 rounded-md rounded-b-none bg-opacity-0 hover:bg-opacity-40`
+          `text-text group-hover:text-text-hover px-4 rounded-md rounded-b-none bg-opacity-0 group-hover:bg-opacity-40`
         )}
         onClick={() => setExpanded(e => !e)}
       >
