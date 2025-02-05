@@ -92,7 +92,6 @@ export default function NavBar() {
         >
             <div className="flex-row hidden lg:flex justify-start items-center font-semibold">
                 <Link href={"/"} className={clsx(
-                    // scroll > 0 ? "block" : "hidden",
                     "font-bold text-lg mr-2"
                 )}>
                     <Image

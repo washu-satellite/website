@@ -14,9 +14,15 @@ import clsx from "clsx";
 import { FaArrowRightLong } from "react-icons/fa6";
 import cubeSat from "./cube.svg";
 
+import logo from "./logo.svg";
+
 import { useTheme } from "next-themes";
 
-import { motion } from 'motion/react';
+import { motion, MotionValue, useScroll, useTransform } from 'motion/react';
+
+function useParallax(value: MotionValue<number>, distance: number) {
+  return useTransform(value, [0, 0.78, 1], [0, -distance, -distance])
+}
 
 export default function Home() {
   const { theme } = useTheme();
@@ -24,6 +30,10 @@ export default function Home() {
   const content = HomepageContent;
 
   const highlights = ProjectHighlightData;
+
+  const { scrollYProgress } = useScroll();
+
+  const y = useParallax(scrollYProgress, 300);
 
   return (
     <div className={"flex-1 overflow-x-hidden"}>
@@ -41,7 +51,10 @@ export default function Home() {
             }}
           />
         </div> */}
-        <div className="absolute top-0 hidden md:block w-full h-[48rem]">
+        <motion.div
+          style={{ y }}
+          className="absolute top-0 hidden md:block w-full h-[48rem]"
+        >
           <video
             autoPlay
             muted
@@ -54,7 +67,7 @@ export default function Home() {
           >
             <source src="sat.mp4" type='video/mp4'/>
           </video>
-        </div>
+        </motion.div>
         <div className="fixed top-[4rem] block md:hidden w-full h-[40rem]">
           <video
             autoPlay
@@ -69,16 +82,9 @@ export default function Home() {
             <source src="satBlock.mp4" type='video/mp4'/>
           </video>
         </div>
-        {/* <div className={clsx(
-          scroll > 0 ? "hidden" : "block",
-          "absolute top-[8rem] left-[8rem] opacity-100"
-        )}>
-          <Image
-              alt=""
-              src={logo}
-              width={240}
-          />
-        </div> */}
+        {/* <h1 className="absolute bottom-[12rem] left-[2rem] font-medium font-mono text-8xl opacity-90 bg-gradient-to-tr from-accent-red to-accent-red-hover text-transparent bg-clip-text">
+          WASHU SATELLITE
+        </h1> */}
         {/* <div className="absolute top-[10rem] -right-[16rem]  md:-right-[8rem] xl:right-[8rem] rotate-12">
           <video width={700} height={700} autoPlay muted loop>
             <source src="vector.webm" type='video/webm'/>
