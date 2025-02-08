@@ -103,17 +103,18 @@ export default function NavBar() {
                 <Dropdown
                     key={"projects"}
                     elements={projects}
+                    className={scroll <= 0 && pathName === "/" ? "text-white hover:text-gray-300" : ""}
                 >
                     <span className={"p-2"}>
                         Projects
                     </span>
                 </Dropdown>
 
-                <ThemedLink key={"contact"} href={"/contact"}>
+                <ThemedLink key={"contact"} href={"/contact"} className={scroll <= 0 && pathName === "/" ? "text-white hover:text-gray-300" : ""}>
                     Contact
                 </ThemedLink>
 
-                <ThemedLink key={"team"} href={"/team"}>
+                <ThemedLink key={"team"} href={"/team"} className={scroll <= 0 && pathName === "/" ? "text-white hover:text-gray-300" : ""}>
                     Our Team
                 </ThemedLink>
             </div>

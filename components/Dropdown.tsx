@@ -15,6 +15,7 @@ type DropdownProps = {
   rounded?: boolean,
   hideArrow?: boolean,
   enlarge?: boolean,
+  className?: string,
   callbacks?: (() => void)[]
 };
 
@@ -40,7 +41,8 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = (props) => {
         className={clsx(
           theme === 'light' ? "bg-[#dddddd]" : "bg-black",
           "flex flex-row justify-between items-center",
-          `text-text group-hover:text-text-hover px-4 rounded-md rounded-b-none bg-opacity-0 group-hover:bg-opacity-40`
+          `text-text group-hover:text-text-hover px-4 rounded-md rounded-b-none bg-opacity-0 group-hover:bg-opacity-40`,
+          props.className
         )}
         onClick={() => setExpanded(e => !e)}
       >
