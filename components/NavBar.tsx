@@ -145,7 +145,7 @@ export default function NavBar() {
                         width={80}
                     />
                 </Link>
-                <div className="flex flex-row justify-end items-center gap-4">
+                <div className={"flex flex-row justify-end items-center gap-4"}>
                     <div className={"hidden sm:block"}>
                         <Button raiseHover key={"subscribe"} isLink={true} href={"/subscribe"}>
                             Subscribe
@@ -172,6 +172,7 @@ export default function NavBar() {
                             <Link href={`/team`}>Our Team</Link>,
                             <Link className="block sm:hidden" href={`/subscribe`}>Subscribe</Link>
                         ]]}
+                        className={pathName === "/" && scroll <= 0 ? "text-white" : ""}
                     >
                         <IoMenu className={"w-10 h-10"} />
                     </Dropdown>
