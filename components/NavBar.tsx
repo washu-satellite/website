@@ -110,11 +110,11 @@ export default function NavBar() {
                     </span>
                 </Dropdown>
 
-                <ThemedLink key={"contact"} href={"/contact"} className={scroll <= 0 && pathName === "/" ? "text-white hover:text-gray-300" : ""}>
+                <ThemedLink headerLink key={"contact"} href={"/contact"} className={scroll <= 0 && pathName === "/" ? "text-white hover:text-gray-300" : ""}>
                     Contact
                 </ThemedLink>
 
-                <ThemedLink key={"team"} href={"/team"} className={scroll <= 0 && pathName === "/" ? "text-white hover:text-gray-300" : ""}>
+                <ThemedLink headerLink key={"team"} href={"/team"} className={scroll <= 0 && pathName === "/" ? "text-white hover:text-gray-300" : ""}>
                     Our Team
                 </ThemedLink>
             </div>
