@@ -14,6 +14,8 @@ import clsx from "clsx";
 import { FaArrowRightLong } from "react-icons/fa6";
 import cubeSat from "./cube.svg";
 
+import { FaVideo } from "react-icons/fa6";
+
 import logo from "./logo.svg";
 
 import { useTheme } from "next-themes";
@@ -94,6 +96,17 @@ export default function Home() {
           `bg-bg border-bg-highlight border-t-[1px]`,
           "flex flex-col px-2 md:px-8 lg:px-24 gap-8 mt-[36rem] md:mt-[44rem] z-10 relative pb-[4rem]"
         )}>
+          <motion.div
+            className="flex flex-row gap-2 items-center absolute font-mono -top-[4rem] left-24 p-1 px-2 m-1 bg-black bg-opacity-50 opacity-90 rounded-md text-sm text-[#eeeeee] font-semibold"
+            initial={{ opacity: 1, y: 0 }}
+            style={{
+              opacity: useTransform(scrollYProgress, [0, 0.1, 1], [1, 0, 0]),
+              y: useTransform(scrollYProgress, [0, 0.1, 1], [0, -50, -50])
+            }}
+          >
+              <FaVideo />
+              <span>VECTOR Payload Render</span>
+          </motion.div>
           <div className={"flex flex-row mt-[3rem] gap-0 md:gap-[4rem] justify-center items-center"}>
             <div className={"hidden lg:block w-[12rem]"}><Divider/></div>
 

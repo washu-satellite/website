@@ -26,7 +26,6 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
     
     const elements = [
         <Photo right={props.direction === 'right'} classes={"border-b-[1px] xl:border-b-0"}>
-            
             <p className="p-1 px-2 m-1 bg-black bg-opacity-50 rounded-md text-sm text-[#eeeeee] font-semibold">
                 {props.id} Model
             </p>
