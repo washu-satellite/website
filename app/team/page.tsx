@@ -16,7 +16,7 @@ import { useTheme } from "next-themes";
 import { FaLinkedin, FaSatelliteDish } from "react-icons/fa6";
 import { IoTelescope } from "react-icons/io5";
 
-import { motion } from 'motion/react';
+import { motion, useScroll, useTransform } from 'motion/react';
 
 const getCreditIcon = (c: MissionKey) => {
     switch (c) {
@@ -97,13 +97,20 @@ const TeamTile = (props: Person) => {
 export default function OurTeam() {
     const {theme} = useTheme();
 
+    const { scrollYProgress } = useScroll();
+
     return (
         <div className="flex-1 relative overflow-x-hidden">
             <NavBar/>
-            <div className={clsx(
-                theme === 'light' ? "-top-[6rem]" : "-top-[12rem]",
-                "fixed w-full h-full -z-10"
-            )}>
+            <motion.div
+                style={{
+                    y: useTransform(scrollYProgress, [0, 0.78, 1], [0, -400, -400])
+                }}
+                className={clsx(
+                    theme === 'light' ? "-top-[6rem]" : "-top-[12rem]",
+                    "fixed w-full h-full -z-10"
+                )}
+            >
                 <Image
                     className={theme === 'light' ? "opacity-90" : "opacity-80"}
                     src={teamImg}
@@ -115,7 +122,7 @@ export default function OurTeam() {
                         objectFit: 'cover'
                     }}
                 />
-            </div>
+            </motion.div>
             <main className={`text-text-dark relative`}>
                 <div className={clsx(
                     theme === 'light' ? "h-[34rem]" : "h-[26rem]",
