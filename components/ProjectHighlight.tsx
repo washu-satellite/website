@@ -11,9 +11,13 @@ import { motion } from 'motion/react';
 const getPhase = (phase: ProjectData['phase']) => {
     switch (phase) {
         case 'assembly':
-            return <span className={"text-[#E6C300]"}>Assembly Phase</span>;
+            return <span className={"text-[#00dbe6]"}>Assembly Phase</span>;
         case 'design':
             return <span className={"text-[#F4761B]"}>Design Phase</span>;
+        case 'prototyping':
+            return <span className={"text-[#576bd1]"}>Prototyping Phase</span>;
+        case 'proposal':
+            return <span className={"text-[#cd57d1]"}>Proposal Phase</span>;
         case 'success':
             return <span className={"text-[#4CB75A]"}>Mission Success</span>;
     }

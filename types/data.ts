@@ -8,7 +8,7 @@ export type ProjectData = {
     description: string,
     contributors: number,
     date: string,
-    phase: 'success' | 'assembly' | 'design',
+    phase: 'success' | 'assembly' | 'design' | 'prototyping' | 'proposal',
     icon?: ReactNode,
     short?: string,
     posterUrl?: string

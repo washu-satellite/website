@@ -32,7 +32,7 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
             contributors: 47,
             date: "Q2-2027",
             icon: (<IoTelescope size={24} />),
-            phase: 'assembly',
+            phase: 'prototyping',
             posterUrl: "https://bpb-us-w2.wpmucdn.com/sites.wustl.edu/dist/d/4409/files/2024/12/AIRIS-High-Precision-Optical-Follow-Up-Telescope-for-Gamma-Ray-Burst-Detection-with-ADAPT.pdf"
         },
         overview: "",
@@ -48,7 +48,7 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
             contributors: 47,
             date: "Q4-2026",
             icon: (<MdSatelliteAlt size={22} />),
-            phase: 'design'
+            phase: 'proposal'
         },
         overview: "",
         disciplineOverviews: []
@@ -63,7 +63,7 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
             contributors: 47,
             date: "?-2028",
             icon: (<MdSatelliteAlt size={22} />),
-            phase: 'design',
+            phase: 'proposal',
             posterUrl: "https://bpb-us-w2.wpmucdn.com/sites.wustl.edu/dist/d/4409/files/2024/12/VECTOR-A-3U-CubeSat-for-Educational-and-Algorithmic-Development-in-Space-Based-Optical-Imaging.pdf"
         },
         overview: "",
@@ -79,7 +79,7 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
             contributors: 47,
             date: "?-2028",
             icon: (<MdSatelliteAlt size={22} />),
-            phase: 'design',
+            phase: 'proposal',
             posterUrl: "https://bpb-us-w2.wpmucdn.com/sites.wustl.edu/dist/d/4409/files/2024/12/AIRIS-High-Precision-Optical-Follow-Up-Telescope-for-Gamma-Ray-Burst-Detection-with-ADAPT.pdf"
         },
         overview: "",
