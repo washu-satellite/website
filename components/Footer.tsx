@@ -65,14 +65,14 @@ export default function Footer() {
                 <ThemedLink arrowLink href={"/team"} className={clsx(`text-text-dark`, "font-medium")}>Our Team</ThemedLink>
                 <ThemedLink arrowLink href={"/not-ready"} className={clsx(`text-text-dark`, "font-medium")}>Team Management</ThemedLink>
             </div>
-            <div className="flex flex-col items-start gap-2">
+            {/* <div className="flex flex-col items-start gap-2">
                 <h3 className="text-base font-semibold">Change site theme</h3>
                 <Toggle
                     default={theme === 'light' ? 1 : 0}
                     elements={["Dark", "Light"]}
                     setActive={changeTheme}
                 />
-            </div>
+            </div> */}
         </div>
     )
 }

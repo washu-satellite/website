@@ -11,13 +11,13 @@ import { motion } from 'motion/react';
 const getPhase = (phase: ProjectData['phase']) => {
     switch (phase) {
         case 'assembly':
-            return <span className={"text-[#00dbe6]"}>Assembly Phase</span>;
+            return <span className={"text-[#e6d300]"}>Assembly Phase</span>;
         case 'design':
-            return <span className={"text-[#F4761B]"}>Design Phase</span>;
+            return <span className={"text-[#e61f00]"}>Design Phase</span>;
         case 'prototyping':
-            return <span className={"text-[#576bd1]"}>Prototyping Phase</span>;
+            return <span className={"text-[#df9731]"}>Prototyping Phase</span>;
         case 'proposal':
-            return <span className={"text-[#cd57d1]"}>Proposal Phase</span>;
+            return <span className={"text-[#a32020]"}>Proposal Phase</span>;
         case 'success':
             return <span className={"text-[#4CB75A]"}>Mission Success</span>;
     }
@@ -35,7 +35,7 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
             </p>
         </Photo>,
         <div className={clsx(
-            "flex flex-col justify-between p-8"
+            "relative flex flex-col justify-between p-8"
         )}>
             <div className="font-sans flex flex-col gap-4">
                 <h3 
@@ -88,10 +88,7 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
         <motion.div
             transition={{ delay: 0.3, duration: 0.3 }}
             initial={{ opacity: 0, x: props.direction === 'right' ? -30 : 30 }}
-            whileInView={'visible'}
-            variants={{
-                visible: { opacity: 1, x: 0 }
-            }}
+            whileInView={{ opacity: 1, x: 0 }}
             className={clsx(
                 theme === 'light' ? "shadow-md" : "",
                 `bg-fg border-bg-highlight border-[1px] rounded-md`,
