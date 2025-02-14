@@ -21,9 +21,10 @@ import logo from "./logo.svg";
 import { useTheme } from "next-themes";
 
 import { motion, MotionValue, useScroll, useTransform } from 'motion/react';
+import { IoIosArrowDown } from "react-icons/io";
 
 function useParallax(value: MotionValue<number>, distance: number) {
-  return useTransform(value, [0, 0.78, 1], [0, -distance, -distance])
+  return useTransform(value, [0, 0.8, 1], [0, -distance, -distance])
 }
 
 export default function Home() {
@@ -39,9 +40,9 @@ export default function Home() {
 
   return (
     <div className={"flex-1 overflow-x-hidden"}>
-      <NavBar/>
+      <NavBar />
       <main className={`text-text-dark`}>
-        <div className={`fixed top-0 w-full h-full bg-black`}/>
+        <div className={`fixed top-0 w-full h-full bg-black`} />
         {/* <div className="fixed w-full h-[30rem] top-0">
           <Image
             className="w-full h-[44rem] xl:h-[60rem]"
@@ -67,7 +68,7 @@ export default function Home() {
               objectFit: 'cover'
             }}
           >
-            <source src="sat.mp4" type='video/mp4'/>
+            <source src="sat.mp4" type='video/mp4' />
           </video>
         </motion.div>
         <div className="fixed top-[4rem] block md:hidden w-full h-[40rem]">
@@ -81,7 +82,7 @@ export default function Home() {
               objectFit: 'cover'
             }}
           >
-            <source src="satBlock.mp4" type='video/mp4'/>
+            <source src="satBlock.mp4" type='video/mp4' />
           </video>
         </div>
         {/* <h1 className="absolute bottom-[12rem] left-[2rem] font-medium font-mono text-8xl opacity-90 bg-gradient-to-tr from-accent-red to-accent-red-hover text-transparent bg-clip-text">
@@ -93,9 +94,13 @@ export default function Home() {
           </video>
         </div> */}
         <div className={clsx(
-          `bg-bg border-bg-highlight border-t-[1px]`,
+          `relative bg-bg border-bg-highlight border-t-[1px]`,
           "flex flex-col px-2 md:px-8 lg:px-24 gap-8 mt-[36rem] md:mt-[44rem] z-10 relative pb-[4rem]"
         )}>
+          <div
+            style={{ backgroundImage: `url("/dots.svg")`, backgroundSize: "100px", backgroundPositionX: 0 }}
+            className="absolute left-0 top-0 w-[10rem] opacity-60 h-full bg-repeat-y"
+          />
           <motion.div
             className="flex flex-row gap-2 items-center absolute font-mono -top-[4rem] left-24 p-1 px-2 m-1 bg-black bg-opacity-50 opacity-90 rounded-md text-sm text-[#eeeeee] font-semibold"
             initial={{ opacity: 1, y: 0 }}
@@ -104,22 +109,25 @@ export default function Home() {
               y: useTransform(scrollYProgress, [0, 0.1, 1], [0, -50, -50])
             }}
           >
-              <FaVideo />
-              <span>VECTOR Payload Render</span>
+            <FaVideo />
+            <span>VECTOR Payload Render</span>
           </motion.div>
           <div className={"flex flex-row mt-[3rem] gap-0 md:gap-[4rem] justify-center items-center"}>
-            <div className={"hidden lg:block w-[12rem]"}><Divider/></div>
+            {/* <div className={"hidden lg:block w-[12rem]"}><Divider/></div> */}
 
-            <p className={`italic text-center font-semibold w-[60rem] text-lg`}>
+            <p className={`italic text-center font-semibold text-bg-highlight w-[60rem] text-xl`}>
               {content.missionStatement}
             </p>
 
-            <div className={"hidden lg:block w-[12rem]"}><Divider/></div>
+            {/* <div style={{ backgroundImage: "url(/tagline.svg)", backgroundSize: "70rem" }} className="w-[70rem] h-[6rem] bg-no-repeat"/> */}
+
+
+            {/* <div className={"hidden lg:block w-[12rem]"}><Divider/></div> */}
           </div>
           <div className={"flex flex-row justify-center lg:hidden gap-4 items-center"}>
-            <div className={"w-full lg:w-[12rem]"}><Divider/></div>
-            <Image src={cubeSat.src} alt={""} width={30} height={30}/>
-            <div className={"w-full lg:w-[12rem]"}><Divider/></div>
+            <div className={"w-full lg:w-[12rem]"}><Divider /></div>
+            <Image src={cubeSat.src} alt={""} width={30} height={30} />
+            <div className={"w-full lg:w-[12rem]"}><Divider /></div>
           </div>
 
           <motion.div
@@ -127,29 +135,29 @@ export default function Home() {
             initial={{ opacity: 0, x: -30 }}
             whileInView={'visible'}
             variants={{
-                visible: { opacity: 1, x: 0 }
+              visible: { opacity: 1, x: 0 }
             }}
             className={clsx(
               "shadow-md dark:shadow-none",
               `rounded-md bg-fg border-bg-highlight border-[1px]`,
-              "flex flex-row flex-wrap xl:flex-nowrap font-mono items-center gap-8 justify-between mt-[3rem]"
+              "relative flex flex-row flex-wrap xl:flex-nowrap font-mono items-center gap-8 justify-between mt-[3rem]"
             )}
           >
             <div className={"flex flex-row flex-wrap xl:flex-nowrap gap-4 xl:gap-14 items-center p-8"}>
               <h2 className={"font-bold text-3xl text-center xl:text-left"}>
-                About<br className={"hidden xl:block"}/> Us
+                About<br className={"hidden xl:block"} /> Us
               </h2>
 
               <div className={`flex flex-col gap-4 items-start font-sans pt-8 border-t-[2px] xl:border-l-[2px] xl:border-t-0 xl:pl-8 xl:pt-0 border-text-alt`}>
                 <p className={"text-lg font-medium max-w-[60rem]"}>
-                  {content.aboutUs}  
+                  {content.aboutUs}
                 </p>
-                  <Button isLink={true} href={"/team"}>
-                    <div className={"flex flex-row gap-2 items-center"}>
-                        <p>Our Team</p>
-                        <FaArrowRightLong />
-                    </div>
-                  </Button>
+                <Button isLink={true} href={"/team"}>
+                  <div className={"flex flex-row gap-2 items-center"}>
+                    <p>Our Team</p>
+                    <FaArrowRightLong />
+                  </div>
+                </Button>
               </div>
             </div>
 
