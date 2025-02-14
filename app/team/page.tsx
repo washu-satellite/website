@@ -157,7 +157,7 @@ export default function OurTeam() {
                         </div>
                         <h2 className="font-mono text-lg font-semibold my-8 mt-16">Members</h2>
                         <div className="flex flex-row flex-wrap justify-start gap-6">
-                            {Members.sort((a, b) => alphabeticSort(a.title, b.title)).map(m => (
+                            {Members.sort((a, b) => a.avatar ? -1 : 1).map(m => (
                                 <TeamTile
                                     key={m.name}
                                     {...m}

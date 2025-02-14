@@ -58,19 +58,19 @@ export const ExecMembers: Person[] = [
 
 export const Members: Person[] = [
     { name: "Mawin Suphanthapreecha ", title: "Designer" },
-    { name: "Andrew Tang", title: "Electrical Engineering" },
+    { name: "Andrew Tang", title: "Electrical Engineering", avatar: "/headshots/andy.JPG" },
     { name: "Gabe Herman", title: "Electrical Engineering" },
     { name: "Lilian Lu", title: "Electrical Engineering" },
     { name: "Nathaniel Bowman", title: "Electrical Engineering" },
-    { name: "Siri Rodin", title: "Electrical Engineering" },
-    { name: "Eduardo Teixeira", title: "Mechanical Engineering" },
+    { name: "Siri Rodin", title: "Electrical Engineering", avatar: "/headshots/siri.jpeg" },
+    { name: "Eduardo Teixeira", title: "Mechanical Engineering", avatar: "/headshots/eduardo.jpg" },
     { name: "Giselle Groff", title: "Mechanical Engineering" },
     { name: "Michael Safier", title: "Mechanical Engineering" },
     { name: "Oliver Yeaman", title: "Mechanical Engineering" },
     { name: "Peter Essa", title: "Mechanical Engineering" },
     { name: "Sam Kendall", title: "Mechanical Engineering" },
-    { name: "Wilson Gao", title: "Mechanical Engineering" },
-    { name: "Aavik Wadivkar", title: "Physics" },
+    { name: "Wilson Gao", title: "Mechanical Engineering", avatar: "/headshots/wilson.jpg" },
+    { name: "Aavik Wadivkar", title: "Physics", avatar: "/headshots/aavik.jpg" },
     { name: "Bilgee Batsaikhan", title: "Software Engineering" },
     { name: "Drew Butzel", title: "Software Engineering" },
     { name: "Eric Todd", title: "Software Engineering" },
@@ -85,6 +85,5 @@ export const Members: Person[] = [
     { name: "Connor Miller", title: "Systems Engineering" },
     { name: "Kelvin Han", title: "Treasury" },
     { name: "Alexis Luna", title: "Electrical Engineering" },
-    { name: "Evan Hanning", title: "Mechanical Engineering" },
-    { name: "Lilian Lu", title: "Electrical Engineering" }
+    { name: "Evan Hanning", title: "Mechanical Engineering", avatar: "/headshots/evanh.jpg" },
 ];
