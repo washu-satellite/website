@@ -7,7 +7,7 @@ import ProjectHighlight from "@/components/ProjectHighlight";
 import Image from 'next/image';
 
 // @ts-ignore
-import Button from "@/components/Button";
+import Button, { ArrowButton } from "@/components/Button";
 import { HomepageContent } from "@/const/content/homepage";
 import { ProjectHighlightData } from "@/const/content/projects";
 import clsx from "clsx";
@@ -22,6 +22,7 @@ import { useTheme } from "next-themes";
 
 import { motion, MotionValue, useScroll, useTransform } from 'motion/react';
 import { IoIosArrowDown } from "react-icons/io";
+import Projects, { AboutUs, PastProjects } from "@/components/Projects";
 
 function useParallax(value: MotionValue<number>, distance: number) {
   return useTransform(value, [0, 0.8, 1], [0, -distance, -distance])
@@ -94,113 +95,123 @@ export default function Home() {
           </video>
         </div> */}
         <div className={clsx(
-          `relative bg-bg border-bg-highlight border-t-[1px]`,
-          "flex flex-col px-2 md:px-8 lg:px-24 gap-8 mt-[36rem] md:mt-[44rem] z-10 relative pb-[4rem]"
+          `relative bg-bg border-bg-highlight border-t-[1px] mt-[36rem] md:mt-[44rem]`,
+          
         )}>
           <div
-            style={{ backgroundImage: `url("/dots.svg")`, backgroundSize: "100px", backgroundPositionX: 0 }}
-            className="absolute z-0 left-0 top-0 w-[10rem] opacity-60 h-full bg-repeat-y"
-          />
-          <motion.div
-            className="flex flex-row gap-2 items-center absolute font-mono -top-[4rem] left-24 p-1 px-2 m-1 bg-black bg-opacity-50 opacity-90 rounded-md text-sm text-[#eeeeee] font-semibold"
-            initial={{ opacity: 1, y: 0 }}
-            style={{
-              opacity: useTransform(scrollYProgress, [0, 0.1, 1], [1, 0, 0]),
-              y: useTransform(scrollYProgress, [0, 0.1, 1], [0, -50, -50])
-            }}
+            className="flex flex-col px-2 md:px-8 lg:px-24 gap-8 relative pb-[4rem]"
           >
-            <FaVideo />
-            <span>VECTOR Payload Render</span>
-          </motion.div>
-          <div className="flex-1 flex flex-col gap-8">
-            <div className={"flex flex-row mt-[3rem] gap-0 md:gap-[4rem] justify-center items-center"}>
-              {/* <div className={"hidden lg:block w-[12rem]"}><Divider/></div> */}
-
-              <p className={`italic text-center font-semibold text-bg-highlight w-[60rem] text-xl`}>
-                {content.missionStatement}
-              </p>
-
-              {/* <div style={{ backgroundImage: "url(/tagline.svg)", backgroundSize: "70rem" }} className="w-[70rem] h-[6rem] bg-no-repeat"/> */}
-
-
-              {/* <div className={"hidden lg:block w-[12rem]"}><Divider/></div> */}
-            </div>
-            <div className={"flex flex-row justify-center lg:hidden gap-4 items-center"}>
-              <div className={"w-full lg:w-[12rem]"}><Divider /></div>
-              <Image src={cubeSat.src} alt={""} width={30} height={30} />
-              <div className={"w-full lg:w-[12rem]"}><Divider /></div>
-            </div>
-
             <motion.div
-              transition={{ delay: 0.3, duration: 0.3 }}
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={'visible'}
-              variants={{
-                visible: { opacity: 1, x: 0 }
+              className="flex flex-row gap-2 items-center absolute font-mono -top-[4rem] left-24 p-1 px-2 m-1 bg-black bg-opacity-50 opacity-90 rounded-md text-sm text-[#eeeeee] font-semibold"
+              initial={{ opacity: 1, y: 0 }}
+              style={{
+                opacity: useTransform(scrollYProgress, [0, 0.1, 1], [1, 0, 0]),
+                y: useTransform(scrollYProgress, [0, 0.1, 1], [0, -50, -50])
               }}
-              className={clsx(
-                "shadow-md dark:shadow-none",
-                `rounded-md bg-fg border-bg-highlight border-[1px]`,
-                "relative flex flex-row flex-wrap xl:flex-nowrap font-mono items-center gap-8 justify-between mt-[3rem]"
-              )}
             >
-              <div className={"flex flex-row flex-wrap xl:flex-nowrap gap-4 xl:gap-14 items-center p-8"}>
-                <h2 className={"font-bold text-3xl text-center xl:text-left"}>
-                  About<br className={"hidden xl:block"} /> Us
-                </h2>
+              <FaVideo />
+              <span>VECTOR Payload Render</span>
+            </motion.div>
+            <div className="flex-1 flex flex-col">
+              <div className={"flex flex-row mt-[3rem] gap-0 md:gap-[4rem] justify-center items-center"}>
+                {/* <div className={"hidden lg:block w-[12rem]"}><Divider/></div> */}
 
-                <div className={`flex flex-col gap-4 items-start font-sans pt-8 border-t-[2px] xl:border-l-[2px] xl:border-t-0 xl:pl-8 xl:pt-0 border-text-alt`}>
+                <p className={`italic text-center font-medium bg-gradient-to-bl from-[#5f5e5e] to-[#494848] w-[60rem] bg-clip-text text-transparent text-xl`}>
+                  {content.missionStatement}
+                </p>
+
+                {/* <div style={{ backgroundImage: "url(/tagline.svg)", backgroundSize: "70rem" }} className="w-[70rem] h-[6rem] bg-no-repeat"/> */}
+
+
+                {/* <div className={"hidden lg:block w-[12rem]"}><Divider/></div> */}
+              </div>
+              <div className={"flex flex-row justify-center lg:hidden gap-4 items-center mt-4"}>
+                <div className={"w-full lg:w-[12rem]"}><Divider /></div>
+                <Image src={cubeSat.src} alt={""} width={30} height={30} />
+                <div className={"w-full lg:w-[12rem]"}><Divider /></div>
+              </div>
+
+              <div className="mt-[4rem] flex flex-row justify-center md:justify-start">
+                <AboutUs/>
+              </div>
+
+              <motion.div
+                transition={{ delay: 0.3, duration: 0.3 }}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={'visible'}
+                variants={{
+                  visible: { opacity: 1, x: 0 }
+                }}
+                className={clsx(
+                  "shadow-md dark:shadow-none",
+                  `rounded-md bg-fg border-bg-highlight border-[1px]`,
+                  "relative flex flex-row flex-wrap xl:flex-nowrap font-mono items-start gap-8 justify-between mt-[3rem]"
+                )}
+              >
+                <div className={`flex flex-col gap-4 items-start justify-between font-sans p-8`}>
                   <p className={"text-lg font-medium max-w-[60rem]"}>
                     {content.aboutUs}
                   </p>
-                  <Button isLink={true} href={"/team"}>
-                    <div className={"flex flex-row gap-2 items-center"}>
-                      <p>Our Team</p>
-                      <FaArrowRightLong />
-                    </div>
-                  </Button>
+                  <ArrowButton
+                    href="/team"
+                    text="Our Team"
+                  />
                 </div>
+
+                <Photo src={"/team_balloon.jpeg"} right>
+                  <p className="p-1 px-2 m-1 bg-black bg-opacity-50 rounded-md text-sm text-[#eeeeee] font-semibold">SP24 Team Photo</p>
+                </Photo>
+              </motion.div>
+
+              {/* <Heading>
+                Current Projects
+              </Heading> */}
+
+              {/* <h1 className={`font-mono text-2xl font-bold mt-[6rem] text-text-dark`}>
+                Active Projects
+              </h1> */}
+              
+              {/* <Image src={"/projects.svg"} width={500} height={200} alt={""}/> */}
+
+              <div className="flex flex-row justify-center md:justify-start mt-[8rem] mb-8 gap-4">
+                <Projects/>
               </div>
 
-              <Photo src={"/team_balloon.jpeg"} right>
-                <p className="p-1 px-2 m-1 bg-black bg-opacity-50 rounded-md text-sm text-[#eeeeee] font-semibold">SP24 Team Photo</p>
-              </Photo>
-            </motion.div>
+              <div className={"flex flex-row flex-wrap items-start gap-y-[4rem] gap-x-[2rem]"}>
+                {highlights.filter(p => p.phase !== 'success').map((p, i) => (
+                  <ProjectHighlight
+                    {...p}
+                    direction={i % 2 === 0 ? 'right' : 'left'}
+                  />
+                ))}
+              </div>
 
-            {/* <Heading>
-              Current Projects
-            </Heading> */}
+              {/* <Heading>
+                Completed Projects
+              </Heading> */}
 
-            <h1 className={`font-mono text-2xl font-bold mt-[6rem] text-text-dark`}>
-              Active Projects
-            </h1>
+              {/* <h1 className={`font-mono text-2xl font-bold mt-[6rem] text-text-dark`}>Completed Projects</h1> */}
 
-            <div className={"flex flex-row flex-wrap items-start gap-y-[4rem] gap-x-[2rem]"}>
-              {highlights.filter(p => p.phase !== 'success').map((p, i) => (
-                <ProjectHighlight
-                  {...p}
-                  direction={i % 2 === 0 ? 'left' : 'right'}
-                />
-              ))}
+              <div className="mt-[4rem] mb-8 flex flex-row justify-center md:justify-start px-1">
+                <PastProjects/>
+              </div>
+
+              <div className={"flex flex-col gap-[4rem]"}>
+                {highlights.filter(p => p.phase === 'success').map((p, i) => (
+                  <ProjectHighlight
+                    {...p}
+                    key={p.id}
+                    direction={i % 2 === 0 ? 'right' : 'left'}
+                  />
+                ))}
+              </div>
             </div>
-
-            {/* <Heading>
-              Completed Projects
-            </Heading> */}
-
-            <h1 className={`font-mono text-2xl font-bold mt-[6rem] text-text-dark`}>Completed Projects</h1>
-
-            <div className={"flex flex-col gap-[4rem]"}>
-              {highlights.filter(p => p.phase === 'success').map((p, i) => (
-                <ProjectHighlight
-                  {...p}
-                  key={p.id}
-                  direction={i % 2 === 0 ? 'left' : 'right'}
-                />
-              ))}
             </div>
+            <div
+              style={{ backgroundImage: `url("/dots.svg")`, backgroundSize: "100px", backgroundPositionX: 0 }}
+              className="absolute z-0 left-0 top-0 w-[10rem] opacity-60 h-full bg-repeat-y"
+            />
           </div>
-        </div>
       </main>
     </div>
   );

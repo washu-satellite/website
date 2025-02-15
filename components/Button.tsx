@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 import { PropsWithChildren } from "react";
+import { FaArrowRightLong } from 'react-icons/fa6';
 import { UrlObject } from "url";
 
 type ButtonProps = {
@@ -38,7 +39,7 @@ export default function Button(props: PropsWithChildren<ButtonProps>) {
     const spec = getStyle(props.style);
 
     const style = clsx(
-        "cursor-pointer font-sans p-1 px-4 rounded-md font-medium",
+        "group cursor-pointer font-sans p-1 px-4 rounded-md font-medium",
         props.raiseHover ? "transition delay-50 duration-300 ease-in-out hover:scale-110" : "",
         props.disabled ? "cursor-not-allowed opacity-30" : "",
         spec
@@ -60,3 +61,23 @@ export default function Button(props: PropsWithChildren<ButtonProps>) {
         </button>
     );
 };
+
+type ArrowButtonProps = {
+    href: string
+    text: string
+}
+
+export function ArrowButton(props: ArrowButtonProps) {
+    return (
+        <Button
+            isLink={true}
+            style='clear'
+            href={props.href}
+        >
+            <div className="flex flex-row gap-2 items-center">
+                <p>{props.text}</p>
+                <FaArrowRightLong className="group-hover:translate-x-[6px] transition-transform duration-300"/>
+            </div>
+        </Button>
+    )
+}

@@ -12,12 +12,13 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
             title: "Ground Station 1",
             url: "gs1",
             short: "A UHF ground station to communicate with deployed payloads",
-            description: "Ground Station 1 (GS-1) will be the communication link for our satellite operations, a system designed for communication with orbiting spacecraft and high altitude balloons. A high-gain in-house engineered Yagi antenna is attached to a commercial rotator and our roof mount, with data processed through an SDR.",
+            description: "Ground Station 1 (GS-1) will be the communication link for our satellite operations, supporting critical coordination with orbiting spacecraft and high altitude balloons. The system features a high-gain, in-house engineered Yagi antenna, commerical rotator, custom roof mount, and data processing through an SDR.",
             contributors: 47,
             date: "Q2-2025",
             icon: (<FaSatelliteDish size={22} />),
             phase: 'assembly',
-            posterUrl: "https://bpb-us-w2.wpmucdn.com/sites.wustl.edu/dist/d/4409/files/2024/12/GS-1-Poster.pdf"
+            posterUrl: "https://bpb-us-w2.wpmucdn.com/sites.wustl.edu/dist/d/4409/files/2024/12/GS-1-Poster.pdf",
+            image: "/gs1_sample.png"
         },
         overview: "",
         disciplineOverviews: []

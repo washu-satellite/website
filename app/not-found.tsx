@@ -1,8 +1,7 @@
-"use client";
 import NavBar from "@/components/NavBar";
 import clsx from "clsx";
 
-export default function NotReady() {
+export default function NotFound() {
     return (
         <div className="flex-1">
             <NavBar/>
@@ -14,9 +13,9 @@ export default function NotReady() {
                     `bg-bg border-bg-highlight border-[1px]`,
                     "font-mono shadow-md rounded-md flex flex-col items-center justify-center"
                 )}>
-                    <h1 className={`font-bold text-text p-4 text-6xl`}>(╯°□°）╯︵ ┻━┻</h1>
+                    <h1 className={`font-bold text-text p-4 text-6xl`}>(ಥ⌣ಥ)</h1>
                     <div className={`bg-bg-highlight w-full h-[1px] mt-4`}/>
-                    <p className={`font-medium text-sm italic text-text p-4`}>This page isn't ready for you to see yet! Check back again soon</p>
+                    <p className={`font-medium text-sm italic text-text p-4`}>We couldn't find the page you're looking for! (404)</p>
                 </div>
             </div>
         </div>

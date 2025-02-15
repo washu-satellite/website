@@ -11,7 +11,8 @@ export type ProjectData = {
     phase: 'success' | 'assembly' | 'design' | 'prototyping' | 'proposal',
     icon?: ReactNode,
     short?: string,
-    posterUrl?: string
+    posterUrl?: string,
+    image?: string
 };
 
 export type ProjectPageType = {
