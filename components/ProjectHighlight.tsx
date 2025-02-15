@@ -32,16 +32,30 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
             props.image ? "min-h-[700px]" : "",
             "flex flex-col items-center justify-center relative"
         )}>
-            {props.image ? <Image 
-                src={props.image}
-                alt="/"
-                width={700}
-                height={700}
-                className={clsx(
-                    "relative md:absolute z-0 mr-0 ml-0",
-                    props.direction === 'left' ? "left-0" : "right-0",
-                )}
-            /> : undefined}
+            {props.image ? (
+                <>
+                    <div
+                        style={{
+                            backgroundImage: `url(/background.png)`,
+                            backgroundSize: "700px"
+                        }}
+                        className={clsx(
+                            "absolute z-0 w-[700px] h-[40rem] bottom-[14rem] md:-bottom-[7rem]",
+                            props.direction === 'left' ? "left-0" : "right-0"
+                        )}
+                    />
+                    <Image 
+                        src={props.image}
+                        alt="/"
+                        width={700}
+                        height={700}
+                        className={clsx(
+                            "relative md:absolute z-0 mr-0 ml-0",
+                            props.direction === 'left' ? "left-0" : "right-0"
+                        )}
+                    />
+                </> 
+            ) : undefined}
             <motion.div
                 transition={{ delay: 0.3, duration: 0.5 }}
                 initial={{ opacity: 0, x: props.direction === 'right' ? -60 : 60 }}
