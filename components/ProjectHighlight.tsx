@@ -57,7 +57,7 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
                 </> 
             ) : undefined}
             <motion.div
-                transition={{ delay: 0.3, duration: 0.5 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
                 initial={{ opacity: 0, x: props.direction === 'right' ? -60 : 60 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 className={clsx(
