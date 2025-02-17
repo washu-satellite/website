@@ -37,10 +37,11 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
                     <div
                         style={{
                             backgroundImage: `url(/background.png)`,
-                            backgroundSize: "700px"
+                            backgroundSize: "700px",
+                            bottom: `${-(props.gridHeight??112)}px`
                         }}
                         className={clsx(
-                            "absolute z-0 w-[700px] h-[40rem] bottom-[14rem] md:-bottom-[7rem]",
+                            "absolute z-0 w-[700px] h-[40rem]",
                             props.direction === 'left' ? "left-0" : "right-0"
                         )}
                     />

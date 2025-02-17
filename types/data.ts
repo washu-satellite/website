@@ -12,7 +12,8 @@ export type ProjectData = {
     icon?: ReactNode,
     short?: string,
     posterUrl?: string,
-    image?: string
+    image?: string,
+    gridHeight?: number
 };
 
 export type ProjectPageType = {
