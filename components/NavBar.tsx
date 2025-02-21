@@ -87,7 +87,7 @@ export default function NavBar() {
                 `text-text bg-bg border-bg-highlight`,
                 scroll > 0 && pathName === "/" ? "backdrop-blur-[4px]" : "",
                 theme === 'light' && scroll > SCROLL_MAX ? 'shadow' : 'shadow-none',
-                "fixed z-20 w-full top-0 left-0 flex flex-row justify-between items-center py-4 px-4 xl:px-8 lg:px-[4rem]"
+                "fixed z-50 w-full top-0 left-0 flex flex-row justify-between items-center py-4 px-4 xl:px-8 lg:px-[4rem]"
             )}
         >
             <div className="flex-row hidden lg:flex justify-start items-center font-semibold">
