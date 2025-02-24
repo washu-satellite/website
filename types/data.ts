@@ -1,5 +1,5 @@
 import { ProjectPages } from "@/const/content/projects";
-import { ReactNode } from "react"
+import { CSSProperties, ReactNode } from "react"
 
 export type ProjectData = {
     id: string,
@@ -13,7 +13,8 @@ export type ProjectData = {
     short?: string,
     posterUrl?: string,
     image?: string,
-    gridHeight?: number
+    gridImage?: string,
+    gridProps?: CSSProperties
 };
 
 export type ProjectPageType = {

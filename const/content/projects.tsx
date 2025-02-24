@@ -18,7 +18,10 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
             icon: (<FaSatelliteDish size={22} />),
             phase: 'assembly',
             posterUrl: "https://bpb-us-w2.wpmucdn.com/sites.wustl.edu/dist/d/4409/files/2024/12/GS-1-Poster.pdf",
-            image: "/gs1_sample.png"
+            image: "/gs1_sample.png",
+            gridProps: {
+                bottom: -112
+            }
         },
         overview: "",
         disciplineOverviews: []
@@ -34,7 +37,14 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
             date: "Q2-2027",
             icon: (<IoTelescope size={24} />),
             phase: 'prototyping',
-            posterUrl: "https://bpb-us-w2.wpmucdn.com/sites.wustl.edu/dist/d/4409/files/2024/12/AIRIS-High-Precision-Optical-Follow-Up-Telescope-for-Gamma-Ray-Burst-Detection-with-ADAPT.pdf"
+            posterUrl: "https://bpb-us-w2.wpmucdn.com/sites.wustl.edu/dist/d/4409/files/2024/12/AIRIS-High-Precision-Optical-Follow-Up-Telescope-for-Gamma-Ray-Burst-Detection-with-ADAPT.pdf",
+            image: "/airis.png",
+            gridImage: "/background2.png",
+            gridProps: {
+                bottom: "1rem",
+                left: "-6rem",
+                scale: 1.4
+            }
         },
         overview: "",
         disciplineOverviews: []
@@ -66,8 +76,13 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
             icon: (<MdSatelliteAlt size={22} />),
             phase: 'proposal',
             posterUrl: "https://bpb-us-w2.wpmucdn.com/sites.wustl.edu/dist/d/4409/files/2024/12/VECTOR-A-3U-CubeSat-for-Educational-and-Algorithmic-Development-in-Space-Based-Optical-Imaging.pdf",
+            gridImage: "/background1.png",
             image: "/vector.png",
-            gridHeight: 0
+            gridProps: {
+                bottom: "4rem",
+                left: "-4.6rem",
+                scale: 1.2
+            }
         },
         overview: "",
         disciplineOverviews: []

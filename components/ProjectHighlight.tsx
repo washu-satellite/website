@@ -36,13 +36,14 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
                 <>
                     <div
                         style={{
-                            backgroundImage: `url(/background.png)`,
+                            backgroundImage: `url(${props.gridImage ? props.gridImage : "/background.png"})`,
                             backgroundSize: "700px",
-                            bottom: `${-(props.gridHeight??112)}px`
+                            bottom: `112px`,
+                            ...props.gridProps
                         }}
                         className={clsx(
                             "absolute z-0 w-[700px] h-[40rem]",
-                            props.direction === 'left' ? "left-0" : "right-0"
+                            props.direction === 'left' ? "-left-[4rem]" : "right-0"
                         )}
                     />
                     <Image 
@@ -52,7 +53,7 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
                         height={700}
                         className={clsx(
                             "relative md:absolute z-0 mr-0 ml-0",
-                            props.direction === 'left' ? "left-0" : "right-0"
+                            props.direction === 'left' ? "-left-[4rem]" : "right-0"
                         )}
                     />
                 </> 
