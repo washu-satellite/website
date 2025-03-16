@@ -52,6 +52,7 @@ export const ExecMembers: Person[] = [
     {
         name: "Avery Cohen",
         avatar: "/headshots/avery.jpg",
+        linkedin: "https://www.linkedin.com/in/avery-cohen-b3524520b/",
         title: "Treasurer"
     }
 ];
