@@ -38,7 +38,7 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
             icon: (<IoTelescope size={24} />),
             phase: 'prototyping',
             posterUrl: "https://bpb-us-w2.wpmucdn.com/sites.wustl.edu/dist/d/4409/files/2024/12/AIRIS-High-Precision-Optical-Follow-Up-Telescope-for-Gamma-Ray-Burst-Detection-with-ADAPT.pdf",
-            image: "/projects/airis.png",
+            image: "/airis.png",
             imageSize: 1000
         },
         overview: "",
@@ -71,7 +71,7 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
             icon: (<MdSatelliteAlt size={22} />),
             phase: 'proposal',
             posterUrl: "https://bpb-us-w2.wpmucdn.com/sites.wustl.edu/dist/d/4409/files/2024/12/VECTOR-A-3U-CubeSat-for-Educational-and-Algorithmic-Development-in-Space-Based-Optical-Imaging.pdf",
-            image: "/projects/vector.png",
+            image: "/vector.png",
             imageSize: 1000
         },
         overview: "",
