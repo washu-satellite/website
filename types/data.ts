@@ -13,6 +13,7 @@ export type ProjectData = {
     short?: string,
     posterUrl?: string,
     image?: string,
+    imageSize?: number,
     gridImage?: string,
     gridProps?: CSSProperties
 };

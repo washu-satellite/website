@@ -50,7 +50,7 @@ export default function Footer() {
             <div className="flex flex-col items-start gap-2">
                 <ThemedLink href={"/"} className="font-semibold">Projects</ThemedLink>
                 {ProjectHighlightData.map(p => (
-                    <ThemedLink arrowLink href={`/projects/${p.id.replaceAll("-", "").toLowerCase()}`} className={clsx(`text-text-dark`, "font-medium")}>{p.id}</ThemedLink>
+                    <ThemedLink arrowLink href={p.posterUrl ? p.posterUrl : `/projects/${p.id.replaceAll("-", "").toLowerCase()}`} className={clsx(`text-text-dark`, "font-medium")}>{p.id}</ThemedLink>
                 ))}
             </div>
             <div className="flex flex-col items-start gap-2">

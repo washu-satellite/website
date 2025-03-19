@@ -25,7 +25,7 @@ const ProjectMenuItem = (props: ProjectData) => {
         <Link className={clsx(
             `text-text`,
             "flex flex-row items-start p-2 gap-4"
-        )} href={`/projects/${props.url}`}>
+        )} href={props.posterUrl ? props.posterUrl : `/projects/${props.url}`}>
             <div className={`flex border-bg-highlight border-[1px] rounded-md w-[2.4rem] h-[2.4rem] items-center justify-center shrink-0`}>
                 {props.icon}
             </div>
