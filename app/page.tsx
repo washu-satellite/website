@@ -101,6 +101,10 @@ export default function Home() {
           <div
             className="flex flex-col px-2 md:px-8 lg:px-24 gap-8 relative pb-[4rem]"
           >
+            <div
+              style={{ backgroundImage: `url("/dots.svg")`, backgroundSize: "100px", backgroundPositionX: 0 }}
+              className="absolute z-0 left-0 top-0 w-[10rem] opacity-60 h-full bg-repeat-y"
+            />
             <motion.div
               className="flex flex-row gap-2 items-center absolute font-mono -top-[4rem] left-24 p-1 px-2 m-1 bg-black bg-opacity-50 opacity-90 rounded-md text-sm text-[#eeeeee] font-semibold"
               initial={{ opacity: 1, y: 0 }}
@@ -177,7 +181,7 @@ export default function Home() {
                 <Projects/>
               </div>
 
-              <div className={"flex flex-row flex-wrap items-start gap-y-[4rem] gap-x-[2rem]"}>
+              <div className={"flex flex-row flex-wrap items-center gap-y-[4rem] gap-x-[2rem]"}>
                 {highlights.filter(p => p.phase !== 'success').map((p, i) => (
                   <ProjectHighlight
                     {...p}
@@ -192,7 +196,7 @@ export default function Home() {
 
               {/* <h1 className={`font-mono text-2xl font-bold mt-[6rem] text-text-dark`}>Completed Projects</h1> */}
 
-              <div className="mt-[4rem] mb-8 flex flex-row justify-center md:justify-start px-1">
+              <div className="mt-[8rem] mb-8 flex flex-row justify-center md:justify-start px-1">
                 <PastProjects/>
               </div>
 
@@ -207,10 +211,6 @@ export default function Home() {
               </div>
             </div>
             </div>
-            <div
-              style={{ backgroundImage: `url("/dots.svg")`, backgroundSize: "100px", backgroundPositionX: 0 }}
-              className="absolute z-0 left-0 top-0 w-[10rem] opacity-60 h-full bg-repeat-y"
-            />
           </div>
       </main>
     </div>

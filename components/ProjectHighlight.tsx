@@ -32,9 +32,19 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
             props.image ? "min-h-[700px]" : "",
             "flex flex-col items-center justify-center relative"
         )}>
-            {props.image ? (
-                <>
-                    {props.gridProps &&
+            {props.image &&
+                <div
+                    style={{
+                        width: "100%",
+                        maxWidth: props.imageSize??"50rem",
+                        height: props.imageSize??"46rem"
+                    }}
+                    className={clsx(
+                        "relative md:absolute z-0 mr-0 ml-0 select-none -mt-[4rem] -mb-[12rem] w-full overflow-hidden",
+                        props.direction === 'left' ? "left-0 md:-left-[12rem]" : "right-0 md:-right-[4rem]"
+                    )}
+                >
+                    {/* {props.gridProps &&
                         <div
                             style={{
                                 backgroundImage: `url(${props.gridImage ? props.gridImage : "/background.png"})`,
@@ -47,19 +57,16 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
                                 props.direction === 'left' ? "-left-[4rem]" : "right-0"
                             )}
                         />
-                    }
+                    } */}
                     <Image 
                         src={props.image}
-                        alt="/"
-                        width={props.imageSize??700}
-                        height={props.imageSize??700}
-                        className={clsx(
-                            "relative md:absolute z-0 mr-0 ml-0",
-                            props.direction === 'left' ? "-left-[12rem]" : "right-0"
-                        )}
+                        alt=""
+                        fill
+                        objectFit="cover"
+                        objectPosition="50% 50%"
                     />
-                </> 
-            ) : undefined}
+                </div>
+            }
             <motion.div
                 transition={{ delay: 0.2, duration: 0.5 }}
                 initial={{ opacity: 0, x: props.direction === 'right' ? -60 : 60 }}
@@ -92,7 +99,7 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
                         <p key={"description"} className={"font-sans font-medium text-[1.1rem]"}>{props.description}</p>
                     </div>
                     <div key={"buttons"} className={"flex flex-row flex-wrap gap-4 justify-between items-center"}>
-                        <div className={clsx("font-mono flex flex-row", `text-[#777777] relative`)}>
+                        <div className={clsx("font-mono flex flex-row mt-4", `text-[#777777] relative`)}>
                             <p>{props.date}</p>
                             <span className={`flex-1 self-stretch h-full mx-[0.6rem] border-[#777777] border-l-[1px]`}>&#8203;</span>
                             <p>{props.contributors} Contributors</p>
