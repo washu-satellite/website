@@ -86,7 +86,7 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
             date: "?-2028",
             icon: (<MdSatelliteAlt size={22} />),
             phase: 'proposal',
-            posterUrl: "https://bpb-us-w2.wpmucdn.com/sites.wustl.edu/dist/d/4409/files/2024/12/AIRIS-High-Precision-Optical-Follow-Up-Telescope-for-Gamma-Ray-Burst-Detection-with-ADAPT.pdf"
+            posterUrl: "/spinor_poster.pdf"
         },
         overview: "",
         disciplineOverviews: []

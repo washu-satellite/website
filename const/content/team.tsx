@@ -36,19 +36,13 @@ export const ExecMembers: Person[] = [
         title: "Chief Physicist"
     },
     {
-        name: "Owen Cromly",
-        avatar: "/headshots/owen_c.jpg",
-        email: "c.owen@wustl.edu",
-        linkedin: "https://www.linkedin.com/in/owen-cromly",
-        title: "Chief Electrical Engineer"
-    },
-    {
         name: "Jack Galloway",
         avatar: "/headshots/jackheadshot.jpg",
         email: "galloway.j@wustl.edu",
         linkedin: "https://www.linkedin.com/in/jackdgalloway22/",
         title: "Chief Mechanical Engineer"
     },
+    { name: "Nathaniel Bowman", title: "Chief Electrical Engineer" },
     {
         name: "Avery Cohen",
         avatar: "/headshots/avery.jpg",
@@ -58,11 +52,17 @@ export const ExecMembers: Person[] = [
 ];
 
 export const Members: Person[] = [
+    {
+        name: "Owen Cromly",
+        avatar: "/headshots/owen_c.jpg",
+        email: "c.owen@wustl.edu",
+        linkedin: "https://www.linkedin.com/in/owen-cromly",
+        title: "Electrical Engineering"
+    },
     { name: "Mawin Suphanthapreecha ", title: "Designer" },
     { name: "Andrew Tang", title: "Electrical Engineering", avatar: "/headshots/andy.JPG" },
     { name: "Gabe Herman", title: "Electrical Engineering" },
     { name: "Lilian Lu", title: "Electrical Engineering" },
-    { name: "Nathaniel Bowman", title: "Electrical Engineering" },
     { name: "Siri Rodin", title: "Electrical Engineering", avatar: "/headshots/siri.jpeg" },
     { name: "Eduardo Teixeira", title: "Mechanical Engineering", avatar: "/headshots/eduardo.jpg" },
     { name: "Giselle Groff", title: "Mechanical Engineering" },

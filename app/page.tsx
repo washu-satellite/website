@@ -114,7 +114,7 @@ export default function Home() {
               }}
             >
               <FaVideo />
-              <span>VECTOR Payload Render</span>
+              <span>VECTOR Model Render</span>
             </motion.div>
             <div className="flex-1 flex flex-col">
               <div className={"flex flex-row mt-[3rem] gap-0 md:gap-[4rem] justify-center items-center"}>

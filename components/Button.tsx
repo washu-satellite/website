@@ -41,21 +41,22 @@ export default function Button(props: PropsWithChildren<ButtonProps>) {
     const style = clsx(
         "group cursor-pointer font-sans p-1 px-4 rounded-md font-medium",
         props.raiseHover ? "transition delay-50 duration-300 ease-in-out hover:scale-110" : "",
-        props.disabled ? "cursor-not-allowed opacity-30" : "",
+        props.disabled ? "cursor-not-allowed opacity-30 disabled" : "",
         spec
     );
     
     return props.isLink ? (
         <Link
             className={style}
-            href={props.href??""}
+            href={props.disabled ? "" : props.href??""}
         >
             {props.children}
         </Link>
     ) : (
         <button
             className={style}
-            onClick={props.onClick}
+            onClick={props.disabled ? () => null : props.onClick}
+            disabled={props.disabled}
         >
             {props.children}
         </button>

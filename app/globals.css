@@ -20,10 +20,10 @@
   }
 
   .dark {
-    --fg: #1C1C1C;
-    --bg: #181818;
+    --fg: #19191a;
+    --bg: #18181a;
     --footer: #141414;
-    --bg-highlight: #37383b;
+    --bg-highlight: #2f2f32;
     --fg-hover: #242424;
     --bg-blue: #1A1F27;
     --text: #e3e3e3;
