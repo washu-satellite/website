@@ -2,7 +2,7 @@ import { useScrollPos } from '@/util/ui';
 import clsx from 'clsx';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
-import { PropsWithChildren } from 'react';
+import { AnchorHTMLAttributes, DetailedHTMLProps, PropsWithChildren } from 'react';
 import { FaArrowRightLong } from 'react-icons/fa6';
 import { UrlObject } from 'url';
 
@@ -11,6 +11,12 @@ type ThemedLinkProps = {
     className?: string,
     arrowLink?: boolean,
     headerLink?: boolean
+}
+
+export function TextLink(props: React.ComponentProps<typeof Link> & { linkVariant?: 'accent' | 'regular' }) {
+    return (
+        <Link className={`${props.linkVariant === 'regular' ? "text-text-secondary" : "text-accent-red hover:text-accent-red-hover"} hover:underline`} {...props}>{props.children}</Link>
+    );
 }
 
 export default function ThemedLink(props: PropsWithChildren<ThemedLinkProps>) {

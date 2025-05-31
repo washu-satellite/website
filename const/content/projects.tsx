@@ -65,7 +65,7 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
             short: "3U CubeSat for astronomical transient imaging; spaceflight search algorithm testbed",
             description: "VECTOR is a 3U CubeSat designed as a reconfigurable educational platform and on-orbit search and control laboratory for multi-messenger astronomy developed primarily by undergraduate students. Its design invites broad participation, allowing students and the public to engage with and contribute to the mission through algorithm development and testing, building on the success of the ESA’s OPS-SAT. VECTOR combines optical astronomy with a modular in-house developed bus architecture, serving as an accessible in-space testbed and transient event observer.",
             contributors: 47,
-            date: "?-2028",
+            date: "2028",
             icon: (<MdSatelliteAlt size={22} />),
             phase: 'proposal',
             posterUrl: "https://bpb-us-w2.wpmucdn.com/sites.wustl.edu/dist/d/4409/files/2024/12/VECTOR-A-3U-CubeSat-for-Educational-and-Algorithmic-Development-in-Space-Based-Optical-Imaging.pdf",
@@ -83,7 +83,7 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
             short: "Opening a new frequency window of the radio sky for astronomy",
             description: "SPINOR is a program designed to image the sub-30 MHz radio sky in fine resolution for the first time, promising discoveries across exoplanet magnetic interactions, heliophysics and space weather, and early universe 21-cm cosmology. Its hardware consists of a set of spin stabilized conductive tethers located beyond the ionosphere, acting as configurable, low-frequency resonant antennas, using interferometric super-resolution imaging.",
             contributors: 47,
-            date: "?-2028",
+            date: "Phase I: Q2-2026",
             icon: (<MdSatelliteAlt size={22} />),
             phase: 'proposal',
             posterUrl: "/spinor_poster.pdf"

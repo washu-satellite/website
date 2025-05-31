@@ -42,7 +42,11 @@ export const ExecMembers: Person[] = [
         linkedin: "https://www.linkedin.com/in/jackdgalloway22/",
         title: "Chief Mechanical Engineer"
     },
-    { name: "Nathaniel Bowman", title: "Chief Electrical Engineer" },
+    { 
+        name: "Nathaniel Bowman",
+        avatar: "/headshots/nathaniel.jpg",
+        title: "Chief Electrical Engineer",
+    },
     {
         name: "Avery Cohen",
         avatar: "/headshots/avery.jpg",
