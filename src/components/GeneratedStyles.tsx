@@ -1,0 +1,1 @@
+export default function GeneratedStyles() { return (<div className={""}></div>) }

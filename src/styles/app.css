@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+:root {
+    --fg: #f7f7f7;
+    --bg: #ffffff;
+    --footer: #ffffff;
+    --bg-highlight: #cfcfcf;
+    --fg-hover: #e2e2e2;
+    --bg-blue: #1A1F27;
+    --text: #212121;
+    --text-hover: #333333;
+    --text-secondary: #3b3b3b;
+    --text-alt: #1a1b1d;
+    --text-dark: #5c5c5c;
+    --accent-red: #b43d3d;
+    --accent-red-hover: #9a2727;
+}
+
+:root[class~="dark"] {
+    --fg: #0d0d0e;
+    --bg: #0b0b0b;
+    --footer: #0d0d0e;
+    --bg-highlight: #262626;
+    --fg-hover: #1e1e1e;
+    --bg-blue: #1A1F27;
+    --text: #e3e3e3;
+    --text-hover: #d2d2d2;
+    --text-secondary: #8C8C8C;
+    --text-alt: #303C47;
+    --text-dark: #B6B6B6;
+    --accent-red: #b43d3d;
+    --accent-red-hover: #9a2727;
+}
+
+@theme inline {
+    --color-fg: rgb(from var(--fg) r g b);
+    --color-bg: rgb(from var(--bg) r g b);
+    --color-footer: rgb(from var(--footer) r g b);
+    --color-bg-highlight: rgb(from var(--bg-highlight) r g b);
+    --color-fg-hover: rgb(from var(--fg-hover) r g b);
+    --color-bg-blue: rgb(from var(--bg-blue) r g b);
+    --color-text: rgb(from var(--text) r g b);
+    --color-text-hover: rgb(from var(--text-hover) r g b);
+    --color-text-secondary: rgb(from var(--text-secondary) r g b);
+    --color-text-alt: rgb(from var(--text-alt) r g b);
+    --color-text-dark: rgb(from var(--text-dark) r g b);
+    --color-accent-red: rgb(from var(--accent-red) r g b);
+    --color-accent-red-hover: rgb(from var(--accent-red-hover) r g b);
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif,
+}
