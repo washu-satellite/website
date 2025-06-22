@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     port: 8080,
   },
-  plugins: [tsConfigPaths(), tanstackStart()],
+  plugins: [tsConfigPaths(), tanstackStart({ target: 'vercel' })],
   resolve: {
     alias: {
       '@': '/src',
