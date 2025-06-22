@@ -89,7 +89,7 @@ export default function NavBar() {
         >
             <div className="flex-row hidden lg:flex justify-start items-center font-normal">
                 <a href={"/"} className={clsx(
-                    "font-bold text-lg mr-4"
+                    "font-bold text-base mr-4"
                 )}>
                     <img
                         alt=""

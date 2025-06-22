@@ -87,14 +87,14 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
                                 `font-bold md:text-left text-2xl/10 text-text`
                             )}
                         >
-                            {/* <Link className={`rounded-full font-mono -ml-2 mr-1 px-4 py-1 hover:bg-fg-hover border-bg-highlight border-[1px]`} to={`/projects/${props.id.replaceAll("-", "").toLowerCase()}`}>
+                            <Link className={`rounded-full font-semibold text-xl font-mono -ml-2 mr-1 px-4 py-1 hover:bg-fg-hover border-bg-highlight border-[1px]`} to={`/not_ready`}>
                                 {props.id}
-                            </Link> */}
+                            </Link>
                             &nbsp;{props.title}
                         </h3>
                         <p key={"description"} className={"font-sans font-normal text-[1.1rem]"}>{props.description}</p>
                     </div>
-                    <div key={"buttons"} className={"flex flex-row flex-wrap gap-4 justify-between items-center"}>
+                    <div key={"buttons"} className={"flex flex-row text-base font-medium flex-wrap gap-4 justify-between items-center"}>
                         <div className={clsx("font-mono flex flex-row", `text-[#777777] relative`)}>
                             <p>{props.date}</p>
                             <span className={`flex-1 self-stretch h-full mx-[0.6rem]`}>//</span>
