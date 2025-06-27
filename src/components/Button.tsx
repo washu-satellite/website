@@ -17,11 +17,11 @@ type ButtonProps = {
 const getStyle = (style: ButtonProps['style']) => {
     switch (style) {
         case 'red':
-            return "bg-accent-red-hover hover:bg-accent-red-hover text-white border-accent-red border-[1px]";
+            return "bg-accent-red hover:bg-accent-red-hover text-white";
         case 'clear':
             return "bg-none hover:bg-text text-text-dark border-text-dark hover:text-bg hover:border-bg border-[1px]";
         default:
-            return "bg-text-hover hover:bg-text-text text-bg border-text border-[1px]";
+            return "bg-text hover:bg-text-secondary text-bg";
     }
 };
 

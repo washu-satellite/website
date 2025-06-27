@@ -14,6 +14,7 @@
     --text-dark: #5c5c5c;
     --accent-red: #b43d3d;
     --accent-red-hover: #9a2727;
+    --accent-red-2: #de4747;
 }
 
 :root[class~="dark"] {
@@ -30,6 +31,7 @@
     --text-dark: #B6B6B6;
     --accent-red: #b43d3d;
     --accent-red-hover: #9a2727;
+    --accent-red-2: #de4747;
 }
 
 @theme inline {
@@ -46,6 +48,7 @@
     --color-text-dark: rgb(from var(--text-dark) r g b);
     --color-accent-red: rgb(from var(--accent-red) r g b);
     --color-accent-red-hover: rgb(from var(--accent-red-hover) r g b);
+    --color-accent-red-2: rgb(from var(--accent-red-2) r g b);
 }
 
 body {
