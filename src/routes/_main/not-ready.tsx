@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import NavBar from '@/components/NavBar'
 import clsx from 'clsx'
 
-export const Route = createFileRoute('/_main/not_ready')({
+export const Route = createFileRoute('/_main/not-ready')({
   component: NotReadyPage,
 })
 

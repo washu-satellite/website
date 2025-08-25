@@ -25,7 +25,7 @@ const MenuItem = (props: NavElement) => {
                 {props.icon}
             </div>
             <div className="flex flex-col items-start text-left">
-                <h3 className="text-[1.1rem]">{props.id}</h3>
+                <h3 className="text-[1rem]">{props.id}</h3>
                 <p className={`text-text-dark text-xs`}>{props.short}</p>
             </div>
         </a>
@@ -107,7 +107,7 @@ export default function NavBar() {
                     </span>
                 </Dropdown>
 
-                <Dropdown
+                {/* <Dropdown
                     key={"projects"}
                     elements={[PublicationsNavigation.map(p => (
                         <MenuItem
@@ -119,7 +119,7 @@ export default function NavBar() {
                     <span className={"p-2"}>
                         Publications
                     </span>
-                </Dropdown>
+                </Dropdown> */}
 
                 <Dropdown
                     key={"projects"}
@@ -146,7 +146,7 @@ export default function NavBar() {
             <div className={"flex-row hidden lg:flex justify-end items-center font-semibold gap-6"}>
 
                 <Button key={"subscribe"} isLink={true} href={"/subscribe"}>
-                    Subscribe
+                    Interest Form
                 </Button>
 
                 <Button
@@ -172,7 +172,7 @@ export default function NavBar() {
                 <div className={"flex flex-row justify-end items-center gap-4"}>
                     <div className={"hidden sm:block"}>
                         <Button key={"subscribe"} isLink={true} href={"/subscribe"}>
-                            Subscribe
+                            Interest Form
                         </Button>
                     </div>
                     <div className={"block"}>

@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import NavBar from '@/components/NavBar'
 import clsx from 'clsx'
+import Footer from '@/components/Footer'
 
 export const Route = createFileRoute('/error')({
   component: ErrorPage,
@@ -23,6 +24,7 @@ export function ErrorPage() {
           <p className={`font-medium text-sm italic text-text p-4`}>We couldn't find the page you're looking for! (404)</p>
         </div>
       </div>
+      <Footer/>
     </div>
   )
 }

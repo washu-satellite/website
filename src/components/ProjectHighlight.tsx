@@ -31,6 +31,9 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
             props.image ? "min-h-[700px]" : "",
             "flex flex-col items-center justify-center relative"
         )}>
+            {/* <span className="font-mono">
+                {props.id}
+            </span> */}
             {props.image &&
                 <div
                     style={{
@@ -87,10 +90,10 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
                                 `font-bold md:text-left text-2xl/10 text-text`
                             )}
                         >
-                            <Link className={`rounded-full font-semibold text-xl font-mono -ml-2 mr-1 px-4 py-1 hover:bg-fg-hover border-bg-highlight border-[1px]`} to={`/not_ready`}>
+                            {/* <Link className={`rounded-full font-medium text-xl font-mono -ml-2 mr-1 px-4 py-1 hover:bg-fg-hover border-bg-highlight border-[1px] text-text-secondary`} to={`/not-ready`}>
                                 {props.id}
-                            </Link>
-                            &nbsp;{props.title}
+                            </Link> */}
+                            {`${props.title} (${props.id})`}
                         </h3>
                         <p key={"description"} className={"font-sans font-normal text-[1.1rem]"}>{props.description}</p>
                     </div>

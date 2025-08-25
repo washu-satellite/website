@@ -30,8 +30,11 @@ function ApplyPage() {
                 />
                 <div className={`flex z-10 flex-col items-center gap-8 justify-center max-w-[40rem] bg-bg border-inherit border-[1px] p-8 -mt-[10rem] rounded-md`}>
                     <h1 className={`text-accent-red text-center font-mono font-semibold text-5xl md:text-6xl`}>WANT TO CONTRIBUTE?</h1>
-                    <p className={`font-medium text-text-dark`}>All WashU students are welcome to join and participate in our organization.</p>
-                    <p className={`font-medium text-text-dark`}>We are not yet recruiting for the FL25 season. Please continue to check this page or <TextLink href="/subscribe">subscribe to the newsletter</TextLink> for updates</p>
+                    <div>
+                        <p className={`font-medium text-text-dark`}>All WashU students are welcome to join and participate in our organization.</p>
+                        <br />
+                        <p className={`font-medium text-text-dark`}>Applications have not opened for the FL25 season. Please continue to check this page or <TextLink href="/subscribe">fill out the interest form</TextLink> for updates</p>
+                    </div>
                     <div className="flex flex-row flex-wrap items-center justify-center gap-4">
                         <Button disabled isLink style='red' href={"https://docs.google.com/forms/d/e/1FAIpQLSdydIvgb-3itmRnQpUdMgsEuMHWyt44yE0YeHLsUDrWNZDzXg/viewform?usp=header"}>
                             <div className={"flex flex-row gap-2 items-center"}>
@@ -72,9 +75,9 @@ function ApplyPage() {
                         buttonText={"Meet the team"}
                     />
                     <RedirectCard
-                        title="Not ready to apply?"
+                        title="Want updates?"
                         href={"/subscribe"}
-                        buttonText={"Join our email list"}
+                        buttonText={"Fill out the interest form"}
                     />
                 </div>
             </div>

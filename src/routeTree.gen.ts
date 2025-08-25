@@ -14,7 +14,7 @@ import { Route as MainRouteImport } from './routes/_main'
 import { Route as MainIndexRouteImport } from './routes/_main/index'
 import { Route as MainTeamRouteImport } from './routes/_main/team'
 import { Route as MainSubscribeRouteImport } from './routes/_main/subscribe'
-import { Route as MainNot_readyRouteImport } from './routes/_main/not_ready'
+import { Route as MainNotReadyRouteImport } from './routes/_main/not-ready'
 import { Route as MainContactRouteImport } from './routes/_main/contact'
 import { Route as MainApplyRouteImport } from './routes/_main/apply'
 
@@ -42,9 +42,9 @@ const MainSubscribeRoute = MainSubscribeRouteImport.update({
   path: '/subscribe',
   getParentRoute: () => MainRoute,
 } as any)
-const MainNot_readyRoute = MainNot_readyRouteImport.update({
-  id: '/not_ready',
-  path: '/not_ready',
+const MainNotReadyRoute = MainNotReadyRouteImport.update({
+  id: '/not-ready',
+  path: '/not-ready',
   getParentRoute: () => MainRoute,
 } as any)
 const MainContactRoute = MainContactRouteImport.update({
@@ -62,7 +62,7 @@ export interface FileRoutesByFullPath {
   '/error': typeof ErrorRoute
   '/apply': typeof MainApplyRoute
   '/contact': typeof MainContactRoute
-  '/not_ready': typeof MainNot_readyRoute
+  '/not-ready': typeof MainNotReadyRoute
   '/subscribe': typeof MainSubscribeRoute
   '/team': typeof MainTeamRoute
   '/': typeof MainIndexRoute
@@ -71,7 +71,7 @@ export interface FileRoutesByTo {
   '/error': typeof ErrorRoute
   '/apply': typeof MainApplyRoute
   '/contact': typeof MainContactRoute
-  '/not_ready': typeof MainNot_readyRoute
+  '/not-ready': typeof MainNotReadyRoute
   '/subscribe': typeof MainSubscribeRoute
   '/team': typeof MainTeamRoute
   '/': typeof MainIndexRoute
@@ -82,7 +82,7 @@ export interface FileRoutesById {
   '/error': typeof ErrorRoute
   '/_main/apply': typeof MainApplyRoute
   '/_main/contact': typeof MainContactRoute
-  '/_main/not_ready': typeof MainNot_readyRoute
+  '/_main/not-ready': typeof MainNotReadyRoute
   '/_main/subscribe': typeof MainSubscribeRoute
   '/_main/team': typeof MainTeamRoute
   '/_main/': typeof MainIndexRoute
@@ -93,7 +93,7 @@ export interface FileRouteTypes {
     | '/error'
     | '/apply'
     | '/contact'
-    | '/not_ready'
+    | '/not-ready'
     | '/subscribe'
     | '/team'
     | '/'
@@ -102,7 +102,7 @@ export interface FileRouteTypes {
     | '/error'
     | '/apply'
     | '/contact'
-    | '/not_ready'
+    | '/not-ready'
     | '/subscribe'
     | '/team'
     | '/'
@@ -112,7 +112,7 @@ export interface FileRouteTypes {
     | '/error'
     | '/_main/apply'
     | '/_main/contact'
-    | '/_main/not_ready'
+    | '/_main/not-ready'
     | '/_main/subscribe'
     | '/_main/team'
     | '/_main/'
@@ -160,11 +160,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MainSubscribeRouteImport
       parentRoute: typeof MainRoute
     }
-    '/_main/not_ready': {
-      id: '/_main/not_ready'
-      path: '/not_ready'
-      fullPath: '/not_ready'
-      preLoaderRoute: typeof MainNot_readyRouteImport
+    '/_main/not-ready': {
+      id: '/_main/not-ready'
+      path: '/not-ready'
+      fullPath: '/not-ready'
+      preLoaderRoute: typeof MainNotReadyRouteImport
       parentRoute: typeof MainRoute
     }
     '/_main/contact': {
@@ -187,7 +187,7 @@ declare module '@tanstack/react-router' {
 interface MainRouteChildren {
   MainApplyRoute: typeof MainApplyRoute
   MainContactRoute: typeof MainContactRoute
-  MainNot_readyRoute: typeof MainNot_readyRoute
+  MainNotReadyRoute: typeof MainNotReadyRoute
   MainSubscribeRoute: typeof MainSubscribeRoute
   MainTeamRoute: typeof MainTeamRoute
   MainIndexRoute: typeof MainIndexRoute
@@ -196,7 +196,7 @@ interface MainRouteChildren {
 const MainRouteChildren: MainRouteChildren = {
   MainApplyRoute: MainApplyRoute,
   MainContactRoute: MainContactRoute,
-  MainNot_readyRoute: MainNot_readyRoute,
+  MainNotReadyRoute: MainNotReadyRoute,
   MainSubscribeRoute: MainSubscribeRoute,
   MainTeamRoute: MainTeamRoute,
   MainIndexRoute: MainIndexRoute,

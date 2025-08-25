@@ -76,7 +76,7 @@ const Dropdown: React.FC<React.PropsWithChildren<DropdownProps>> = (props) => {
                     key={i}
                     role={"menuitem"}
                     tabIndex={-1}
-                    className={`w-full cursor-pointer py-[2px] text-xl md:text-lg hover:bg-fg dark:hover:bg-fg-hover rounded-md`}
+                    className={`w-full cursor-pointer py-[2px] text-lg md:text-base hover:bg-fg dark:hover:bg-fg-hover rounded-md`}
                     onClick={() => cf((props.callbacks??[])[i])}
                   >
                     {ee}
