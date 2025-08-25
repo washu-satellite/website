@@ -67,7 +67,7 @@ function HomePage() {
               objectFit: 'cover'
             }}
           >
-            <source src="sat.mp4" type='video/mp4' />
+            <source rel="preload" src="/sat.mp4" type='video/mp4' />
           </video>
         </div>
         <div className="fixed top-[4rem] block md:hidden w-full h-[40rem] overflow-hidden">
