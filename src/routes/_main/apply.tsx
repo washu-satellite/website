@@ -36,7 +36,7 @@ function ApplyPage() {
                         <p className={`font-medium text-text-dark`}>The following applications are available (based on field/discipline). If you are interested in multiple positions in different disciplines, please apply to each discipline individually.</p>
                     </div>
                     <div className="flex flex-row flex-wrap items-center justify-center gap-4">
-                        <Button isLink style='red' href={"https://forms.gle/wj9zvRS4tBzJHi6L8"}>
+                        <Button isLink style='red' href={"https://forms.gle/dQywNpvD87buAGkn8"}>
                             <div className={"flex flex-row gap-2 items-center"}>
                                 <p>Software</p>
                                 <HiOutlineExternalLink />
