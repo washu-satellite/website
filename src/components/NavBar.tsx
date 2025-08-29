@@ -145,9 +145,9 @@ export default function NavBar() {
             </div>
             <div className={"flex-row hidden lg:flex justify-end items-center font-semibold gap-6"}>
 
-                <Button key={"subscribe"} isLink={true} href={"/subscribe"}>
+                {/* <Button key={"subscribe"} isLink={true} href={"/subscribe"}>
                     Interest Form
-                </Button>
+                </Button> */}
 
                 <Button
                     key={"apply"}
@@ -170,11 +170,11 @@ export default function NavBar() {
                     />
                 </a>
                 <div className={"flex flex-row justify-end items-center gap-4"}>
-                    <div className={"hidden sm:block"}>
+                    {/* <div className={"hidden sm:block"}>
                         <Button key={"subscribe"} isLink={true} href={"/subscribe"}>
                             Interest Form
                         </Button>
-                    </div>
+                    </div> */}
                     <div className={"block"}>
                         <Button
                             key={"apply"}

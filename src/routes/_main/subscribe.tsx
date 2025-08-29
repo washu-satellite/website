@@ -50,10 +50,10 @@ export default function SubscribePage() {
                         href={"/team"}
                         buttonText={"Meet the team"}
                     />
-                    <div className="opacity-50 pointer-events-none">
+                    <div>
                         <RedirectCard
                             title="Ready to contribute?"
-                            href={"#"}
+                            href={"/apply"}
                             buttonText={"Apply for a position"}
                         />
                     </div>

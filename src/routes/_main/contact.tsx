@@ -40,11 +40,13 @@ function ContactPage() {
                         href={"/apply"}
                         buttonText={"See applications"}
                     />
-                    <RedirectCard
-                        title="Not ready to apply?"
-                        href={"/subscribe"}
-                        buttonText={"Join our email list"}
-                    />
+                    <div className="opacity-50 pointer-events-none">
+                        <RedirectCard
+                            title="Not ready to apply?"
+                            href={"/subscribe"}
+                            buttonText={"Fill out the interest form"}
+                        />
+                    </div>
                 </div>
             </div>
         </div>

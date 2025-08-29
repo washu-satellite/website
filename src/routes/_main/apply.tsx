@@ -86,11 +86,13 @@ function ApplyPage() {
                         href={"/team"}
                         buttonText={"Meet the team"}
                     />
-                    <RedirectCard
-                        title="Want updates?"
-                        href={"/subscribe"}
-                        buttonText={"Fill out the interest form"}
-                    />
+                    <div className="opacity-50 pointer-events-none">
+                        <RedirectCard
+                            title="Want updates?"
+                            href={"/subscribe"}
+                            buttonText={"Fill out the interest form"}
+                        />
+                    </div>
                 </div>
             </div>
         </div>
