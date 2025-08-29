@@ -45,6 +45,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
     <html className='dark'>
       <head>
         <HeadContent />
+        <link rel="icon" type="image/png" href="/favicon.ico" />
       </head>
       <body>
         {children}
