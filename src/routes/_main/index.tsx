@@ -55,7 +55,7 @@ function HomePage() {
           />
         </div> */}
         <div
-          className="absolute top-0 hidden md:block w-full h-[56rem] overflow-hidden"
+          className="absolute top-0 hidden md:block w-full h-screen overflow-hidden"
         >
           <video
             autoPlay
@@ -70,7 +70,7 @@ function HomePage() {
             <source rel="preload" src="/sat.mp4" type='video/mp4' />
           </video>
         </div>
-        <div className="fixed top-[4rem] block md:hidden w-full h-[40rem] overflow-hidden">
+        <div className="fixed top-[4rem] block md:hidden w-full h-screen overflow-hidden">
           <video
             autoPlay
             muted
@@ -84,6 +84,7 @@ function HomePage() {
             <source src="satBlock.mp4" type='video/mp4' />
           </video>
         </div>
+        <div className="h-screen"/>
         <div className="absolute w-full top-[8rem] lg:top-[12rem]">
           <div className="flex flex-col pl-0 lg:pl-[4rem] w-full items-center lg:items-start text-center md:text-left">
             <h2 className="font-semibold font-mono text-dark text-3xl text-[#d1d1d1]">
@@ -100,7 +101,7 @@ function HomePage() {
           </video>
         </div> */}
         <div className={clsx(
-          `relative bg-bg border-bg-highlight border-t-[1px] mt-[36rem] md:mt-[54rem]`
+          `relative bg-bg border-bg-highlight border-t-[1px]`
         )}>
           <div
             className="flex flex-col px-2 md:px-8 lg:px-24 gap-8 relative pb-[4rem]"

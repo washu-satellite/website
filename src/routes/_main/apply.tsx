@@ -36,33 +36,45 @@ function ApplyPage() {
                         <p className={`font-medium text-text-dark`}>Applications have not opened for the FL25 season. Please continue to check this page or <TextLink href="/subscribe">fill out the interest form</TextLink> for updates</p>
                     </div>
                     <div className="flex flex-row flex-wrap items-center justify-center gap-4">
-                        <Button disabled isLink style='red' href={"https://docs.google.com/forms/d/e/1FAIpQLSdydIvgb-3itmRnQpUdMgsEuMHWyt44yE0YeHLsUDrWNZDzXg/viewform?usp=header"}>
+                        <Button isLink style='red' href={"https://forms.gle/wj9zvRS4tBzJHi6L8"}>
                             <div className={"flex flex-row gap-2 items-center"}>
                                 <p>Software</p>
                                 <HiOutlineExternalLink />
                             </div>
                         </Button>
-                        <Button disabled isLink style='red' href={"https://docs.google.com/forms/d/e/1FAIpQLSfwRUMb8xrc3STzUQqrfxHm6vLGaLVgMb5t-tjPafT9srxqBw/viewform?usp=header"}>
+                        <Button isLink style='red' href={"https://forms.gle/e84NVrf3NyPSxF6R7"}>
                             <div className={"flex flex-row gap-2 items-center"}>
                                 <p>Electrical</p>
                                 <HiOutlineExternalLink />
                             </div>
                         </Button>
-                        <Button disabled isLink style='red' href={"https://docs.google.com/forms/d/e/1FAIpQLScSOZvS36khL8C79IY1Phvh4iCGRsnpbkSZLI2_hzF5bbhFGw/viewform?usp=header"}>
+                        <Button isLink style='red' href={"https://forms.gle/Df6wBZSsToFcFRye6"}>
                             <div className={"flex flex-row gap-2 items-center"}>
                                 <p>Mechanical</p>
                                 <HiOutlineExternalLink />
                             </div>
                         </Button>
-                        <Button disabled isLink style='red' href={"https://docs.google.com/forms/d/e/1FAIpQLSei4poSuWmwbXtAJiWMO17_6yGRGkn8xTpxFxno_WJgV1yzBw/viewform?usp=header"}>
+                        <Button isLink style='red' href={"https://forms.gle/rrSxAfGfarHw9JLp6"}>
                             <div className={"flex flex-row gap-2 items-center"}>
                                 <p>Physics</p>
                                 <HiOutlineExternalLink />
                             </div>
                         </Button>
-                        <Button disabled isLink style='red' href={"https://docs.google.com/forms/d/e/1FAIpQLSdjk0GohScdZdpPmfwck4giNIAglpX8AhN-cAd7GqzIW8cPMQ/viewform?usp=header"}>
+                        <Button isLink style='red' href={"https://forms.gle/6wnESBBVSfEs9M9m9"}>
                             <div className={"flex flex-row gap-2 items-center"}>
                                 <p>Systems</p>
+                                <HiOutlineExternalLink />
+                            </div>
+                        </Button>
+                        <Button isLink style='red' href={"https://forms.gle/eR33VMNj3nzxGNEAA"}>
+                            <div className={"flex flex-row gap-2 items-center"}>
+                                <p>MOAR</p>
+                                <HiOutlineExternalLink />
+                            </div>
+                        </Button>
+                        <Button isLink style='red' href={"https://forms.gle/R8ES5ZazVCw9rDX49"}>
+                            <div className={"flex flex-row gap-2 items-center"}>
+                                <p>Other Fields</p>
                                 <HiOutlineExternalLink />
                             </div>
                         </Button>
