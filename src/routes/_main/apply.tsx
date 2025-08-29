@@ -33,7 +33,7 @@ function ApplyPage() {
                     <div>
                         <p className={`font-medium text-text-dark`}>All WashU students are welcome to join and participate in our organization.</p>
                         <br />
-                        <p className={`font-medium text-text-dark`}>Applications have not opened for the FL25 season. Please continue to check this page or <TextLink href="/subscribe">fill out the interest form</TextLink> for updates</p>
+                        <p className={`font-medium text-text-dark`}>The following applications are available (based on field/discipline). If you are interested in multiple positions in different disciplines, please apply to each discipline individually.</p>
                     </div>
                     <div className="flex flex-row flex-wrap items-center justify-center gap-4">
                         <Button isLink style='red' href={"https://forms.gle/wj9zvRS4tBzJHi6L8"}>
