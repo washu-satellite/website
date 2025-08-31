@@ -72,13 +72,13 @@ function ApplyPage() {
                                 <HiOutlineExternalLink />
                             </div>
                         </Button>
-                        <Button isLink style='red' href={"https://forms.gle/R8ES5ZazVCw9rDX49"}>
+                        <Button isLink style='red' href={"https://forms.gle/ziQMuTwwj3S18rKGA"}>
                             <div className={"flex flex-row gap-2 items-center"}>
                                 <p>Business</p>
                                 <HiOutlineExternalLink />
                             </div>
                         </Button>
-                        <Button isLink style='red' href={"https://forms.gle/ziQMuTwwj3S18rKGA"}>
+                        <Button isLink style='red' href={"https://forms.gle/R8ES5ZazVCw9rDX49"}>
                             <div className={"flex flex-row gap-2 items-center"}>
                                 <p>Other Fields</p>
                                 <HiOutlineExternalLink />
