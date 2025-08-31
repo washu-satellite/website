@@ -68,7 +68,7 @@ function ApplyPage() {
                         </Button>
                         <Button isLink style='red' href={"https://forms.gle/eR33VMNj3nzxGNEAA"}>
                             <div className={"flex flex-row gap-2 items-center"}>
-                                <p>MOAR</p>
+                                <p>Mission Ops</p>
                                 <HiOutlineExternalLink />
                             </div>
                         </Button>
