@@ -33,52 +33,52 @@ function ApplyPage() {
                     <div>
                         <p className={`font-medium text-text-dark`}>All WashU students are welcome to join and participate in our organization.</p>
                         <br />
-                        <p className={`font-medium text-text-dark`}>The following applications are available (based on field/discipline). If you are interested in multiple positions in different disciplines, please apply to each discipline individually. <b>Applications are due on 9/5/25</b>.</p>
+                        <p className={`font-medium text-text-dark`}>Applications for the FL25 season closed on 9/5/25. If you weren't able to apply this semester, continue to check our pages for updates and we welcome your application in SP26.</p>
                     </div>
                     <div className="flex flex-row flex-wrap items-center justify-center gap-4">
-                        <Button isLink style='red' href={"https://forms.gle/dQywNpvD87buAGkn8"}>
+                        <Button disabled isLink style='red' href={"https://forms.gle/dQywNpvD87buAGkn8"}>
                             <div className={"flex flex-row gap-2 items-center"}>
                                 <p>Software</p>
                                 <HiOutlineExternalLink />
                             </div>
                         </Button>
-                        <Button isLink style='red' href={"https://forms.gle/e84NVrf3NyPSxF6R7"}>
+                        <Button disabled isLink style='red' href={"https://forms.gle/e84NVrf3NyPSxF6R7"}>
                             <div className={"flex flex-row gap-2 items-center"}>
                                 <p>Electrical</p>
                                 <HiOutlineExternalLink />
                             </div>
                         </Button>
-                        <Button isLink style='red' href={"https://forms.gle/Df6wBZSsToFcFRye6"}>
+                        <Button disabled isLink style='red' href={"https://forms.gle/Df6wBZSsToFcFRye6"}>
                             <div className={"flex flex-row gap-2 items-center"}>
                                 <p>Mechanical</p>
                                 <HiOutlineExternalLink />
                             </div>
                         </Button>
-                        <Button isLink style='red' href={"https://forms.gle/rrSxAfGfarHw9JLp6"}>
+                        <Button disabled isLink style='red' href={"https://forms.gle/rrSxAfGfarHw9JLp6"}>
                             <div className={"flex flex-row gap-2 items-center"}>
                                 <p>Physics</p>
                                 <HiOutlineExternalLink />
                             </div>
                         </Button>
-                        <Button isLink style='red' href={"https://forms.gle/6wnESBBVSfEs9M9m9"}>
+                        <Button disabled isLink style='red' href={"https://forms.gle/6wnESBBVSfEs9M9m9"}>
                             <div className={"flex flex-row gap-2 items-center"}>
                                 <p>Systems</p>
                                 <HiOutlineExternalLink />
                             </div>
                         </Button>
-                        <Button isLink style='red' href={"https://forms.gle/eR33VMNj3nzxGNEAA"}>
+                        <Button disabled isLink style='red' href={"https://forms.gle/eR33VMNj3nzxGNEAA"}>
                             <div className={"flex flex-row gap-2 items-center"}>
                                 <p>Mission Ops</p>
                                 <HiOutlineExternalLink />
                             </div>
                         </Button>
-                        <Button isLink style='red' href={"https://forms.gle/ziQMuTwwj3S18rKGA"}>
+                        <Button disabled isLink style='red' href={"https://forms.gle/ziQMuTwwj3S18rKGA"}>
                             <div className={"flex flex-row gap-2 items-center"}>
                                 <p>Business</p>
                                 <HiOutlineExternalLink />
                             </div>
                         </Button>
-                        <Button isLink style='red' href={"https://forms.gle/R8ES5ZazVCw9rDX49"}>
+                        <Button disabled isLink style='red' href={"https://forms.gle/R8ES5ZazVCw9rDX49"}>
                             <div className={"flex flex-row gap-2 items-center"}>
                                 <p>Other Fields</p>
                                 <HiOutlineExternalLink />
