@@ -16,7 +16,7 @@ export type ProjectData = NavElement & {
 export type NavElement = {
     id: string,
     title: string,
-    url: string,
+    url?: string,
     icon?: ReactNode,
     short?: string
 };

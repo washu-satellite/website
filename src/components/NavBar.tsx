@@ -19,7 +19,8 @@ const MenuItem = (props: NavElement) => {
     return (
         <a className={clsx(
             `text-text`,
-            "flex flex-row items-start p-2 gap-4"
+            "flex flex-row items-start p-2 gap-4",
+            props.url === undefined || props.url === "" ? "cursor-not-allowed" : ""
         )} href={props.url}>
             <div className={`flex border-bg-highlight border-[1px] rounded-md w-[2.4rem] h-[2.4rem] items-center justify-center shrink-0`}>
                 {props.icon}
