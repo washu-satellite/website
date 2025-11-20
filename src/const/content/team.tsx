@@ -1,25 +1,13 @@
 import { Person } from "@/types/data";
 
 export const ExecMembers: Person[] = [
-    {
-        name: "Ben Cook",
-        title: "President",
-        email: "b.j.cook@wustl.edu",
-        avatar: "/headshots/ben.jpg",
-        linkedin: "https://www.linkedin.com/in/benjamin-j-cook/",
-        credits: ['GS', 'AIRIS']
-    },
+    { name: "Aavik Wadivkar", title: "President", avatar: "/headshots/aavik.jpg" },
     {
         name: "Geoffrey Goffman",
         email: "geoffrey.goffman@gmail.com",
         linkedin: "https://www.linkedin.com/in/geoffrey-goffman",
         avatar: "/headshots/geoffrey.jpg",
         title: "Project Manager"
-    },
-    {
-        name: "Owen Nieuwenhuizen",
-        avatar: "/headshots/owen_n.png",
-        title: "Chief Systems Engineer"
     },
     {
         name: "Nate Hayman",
@@ -52,16 +40,33 @@ export const ExecMembers: Person[] = [
         avatar: "/headshots/avery.jpg",
         linkedin: "https://www.linkedin.com/in/avery-cohen-b3524520b/",
         title: "Treasurer"
-    }
+    },
+    {
+        name: "Jesse Myoung",
+        title: "Chief Systems Engineer"
+    },
 ];
 
 export const Members: Person[] = [
+    // {
+    //     name: "Owen Cromly",
+    //     avatar: "/headshots/owen_c.jpg",
+    //     email: "c.owen@wustl.edu",
+    //     linkedin: "https://www.linkedin.com/in/owen-cromly",
+    //     title: "Electrical Engineering"
+    // },
     {
-        name: "Owen Cromly",
-        avatar: "/headshots/owen_c.jpg",
-        email: "c.owen@wustl.edu",
-        linkedin: "https://www.linkedin.com/in/owen-cromly",
-        title: "Electrical Engineering"
+        name: "Owen Nieuwenhuizen",
+        avatar: "/headshots/owen_n.png",
+        title: "Systems Engineer"
+    },
+    {
+        name: "Ben Cook",
+        title: "ex-President",
+        email: "b.j.cook@wustl.edu",
+        avatar: "/headshots/ben.jpg",
+        linkedin: "https://www.linkedin.com/in/benjamin-j-cook/",
+        credits: ['GS', 'AIRIS']
     },
     { name: "Mawin Suphanthapreecha ", title: "Designer" },
     { name: "Andrew Tang", title: "Electrical Engineering", avatar: "/headshots/andy.JPG" },
@@ -75,7 +80,6 @@ export const Members: Person[] = [
     { name: "Peter Essa", title: "Mechanical Engineering" },
     { name: "Sam Kendall", title: "Mechanical Engineering" },
     { name: "Wilson Gao", title: "Mechanical Engineering", avatar: "/headshots/wilson.jpg" },
-    { name: "Aavik Wadivkar", title: "Physics", avatar: "/headshots/aavik.jpg" },
     { name: "Bilgee Batsaikhan", title: "Software Engineering" },
     { name: "Drew Butzel", title: "Software Engineering" },
     { name: "Eric Todd", title: "Software Engineering" },
