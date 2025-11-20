@@ -46,11 +46,11 @@ export default function NavBar() {
 
     // const pathName = usePathname();
 
-    const SCROLL_MIN = pathName === "/" ? 0 : -1;
+    const isHome = pathName === "/";
 
-    const SCROLL_MAX = pathName === "/" ? 608 : 0;
+    const SCROLL_MIN = 0;
 
-    const BORDER_MIN = pathName === "/" ? SCROLL_MAX : 300;
+    const SCROLL_MAX = 608;
 
     useEffect(() => {
         setProjects([
@@ -69,21 +69,22 @@ export default function NavBar() {
 
     return (
         <motion.div
-            initial={{ 
+            initial={isHome ? { 
                 backgroundColor: scroll > SCROLL_MAX ? "rgba(from var(--bg) r g b / 1)" : (
                     scroll > SCROLL_MIN ? (theme === 'light' ? "rgba(from var(--bg) r g b / 1)" : "rgba(from var(--bg) r g b / 0.3)") : "rgba(from var(--bg) r g b / 0)"
                 ),
-                borderBottomWidth: scroll > BORDER_MIN ? 1 : 0
+                borderBottomWidth: scroll > SCROLL_MAX ? 1 : 0
+            } : {
+                borderBottomWidth: 1
             }}
-            animate={{ 
+            animate={isHome ? { 
                 backgroundColor: scroll > SCROLL_MAX ? "rgba(from var(--bg) r g b / 1)" : (
                     scroll > SCROLL_MIN ? (theme === 'light' ? "rgba(from var(--bg) r g b / 1)" : "rgba(from var(--bg) r g b / 0.3)") : "rgba(from var(--bg) r g b / 0)"
                 ),
-                borderBottomWidth: scroll > BORDER_MIN ? 1 : 0
-            }}
+                borderBottomWidth: scroll > SCROLL_MAX ? 1 : 0
+            } : {}}
             className={clsx(
-                `text-text bg-bg border-bg-highlight`,
-                // scroll > 0 && pathName === "/" ? "backdrop-blur-[4px]" : "",
+                `text-text bg-bg border-bg-highlight border-b`,
                 theme === 'light' && scroll > SCROLL_MAX ? 'shadow' : 'shadow-none',
                 "fixed z-50 w-full top-0 left-0 flex flex-row justify-between items-center py-4 px-4 xl:px-8 lg:px-[4rem]"
             )}
