@@ -87,7 +87,7 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
                         <h3 
                             key={"title"} 
                             className={clsx(
-                                `font-bold md:text-left text-2xl/10 text-text`
+                                `font-bold md:text-left text-2xl text-text`
                             )}
                         >
                             {/* <Link className={`rounded-full font-medium text-xl font-mono -ml-2 mr-1 px-4 py-1 hover:bg-fg-hover border-bg-highlight border-[1px] text-text-secondary`} to={`/not-ready`}>

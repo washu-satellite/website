@@ -61,20 +61,23 @@ function HomePage() {
             autoPlay
             muted
             loop
+            preload="none"
+            poster="/sat.webp"
             style={{
               width: "100%",
               height: "100%",
               objectFit: 'cover'
             }}
           >
-            <source rel="preload" src="/sat.mp4" type='video/mp4' />
+            <source src="/sat.mp4" type='video/mp4' />
           </video>
         </div>
-        <div className="fixed top-[4rem] block md:hidden w-full h-screen overflow-hidden">
+        {/* <div className="fixed top-[4rem] block md:hidden w-full h-screen overflow-hidden">
           <video
             autoPlay
             muted
             loop
+            preload="none"
             style={{
               width: "100%",
               height: "100%",
@@ -83,18 +86,34 @@ function HomePage() {
           >
             <source src="satBlock.mp4" type='video/mp4' />
           </video>
-        </div>
-        <div className="h-screen"/>
-        <div className="absolute w-full top-[8rem] lg:top-[12rem]">
-          <div className="flex flex-col pl-0 lg:pl-[4rem] w-full items-center lg:items-start text-center md:text-left">
-            <h2 className="font-semibold font-mono text-dark text-3xl text-[#d1d1d1]">
+        </div> */}
+        <div className="h-full md:h-screen"/>
+        <div className="block p-8 md:p-0 md:absolute w-full top-[8rem] lg:top-[12rem]">
+          <div className="flex flex-col lg:pl-[4rem] w-full items-center lg:items-start text-center md:text-left">
+            <img
+              src="/logo.svg"
+              alt=""
+              className="w-32 z-10 pb-10 block md:hidden"
+            />
+            <h2 className="font-semibold font-mono text-3xl text-[#d1d1d1] z-10">
               STUDENT-DEVELOPED
             </h2>
-            <h1 className="font-bold font-sans text-6xl md:text-8xl bg-gradient-to-bl from-[#e33737] to-[#d34343] bg-clip-text text-transparent">
+            <h1 className="font-bold font-sans text-6xl md:text-8xl bg-gradient-to-bl from-[#e33737] to-[#d34343] bg-clip-text text-transparent z-10">
               SATELLITES
             </h1>
           </div>
         </div>
+         <motion.div
+            className="flex flex-row gap-2 text-[#e9e9e9] items-center absolute bottom-4 left-24 p-1 px-2 m-1 font-mono bg-black rounded-md text-sm font-normal"
+            initial={{ opacity: 1, y: 0 }}
+            style={{
+              opacity: useTransform(scrollYProgress, [0, 0.1, 1], [1, 0, 0]),
+              y: useTransform(scrollYProgress, [0, 0.1, 1], [0, -50, -50])
+            }}
+          >
+            <FaVideo />
+            <span>VECTOR Model Render</span>
+          </motion.div>
         {/* <div className="absolute top-[10rem] -right-[16rem]  md:-right-[8rem] xl:right-[8rem] rotate-12">
           <video width={700} height={700} autoPlay muted loop>
             <source src="vector.webm" type='video/webm'/>
@@ -110,17 +129,6 @@ function HomePage() {
               style={{ backgroundImage: `url("/dots.svg")`, backgroundSize: "100px", backgroundPositionX: 0 }}
               className="absolute z-0 left-0 top-0 w-[10rem] opacity-60 h-full bg-repeat-y"
             />
-            <motion.div
-              className="flex flex-row gap-2 text-[#e9e9e9] items-center absolute -top-[4rem] left-24 p-1 px-2 m-1 font-mono bg-black rounded-md text-sm font-normal"
-              initial={{ opacity: 1, y: 0 }}
-              style={{
-                opacity: useTransform(scrollYProgress, [0, 0.1, 1], [1, 0, 0]),
-                y: useTransform(scrollYProgress, [0, 0.1, 1], [0, -50, -50])
-              }}
-            >
-              <FaVideo />
-              <span>VECTOR Model Render</span>
-            </motion.div>
             <div className="flex-1 flex flex-col">
               <div className={"flex flex-row mt-[3rem] gap-0 md:gap-[4rem] justify-center items-center"}>
                 <p className={`italic text-center font-medium bg-gradient-to-bl from-[#e1e0e0] to-[#9a9999] w-[60rem] my-[2rem] bg-clip-text text-transparent text-xl`}>
@@ -152,8 +160,8 @@ function HomePage() {
                   />
                 </div>
 
-                <Photo src={"/balloon.png"} right>
-                  <p className="p-1 px-2 m-1 bg-black bg-opacity-50 rounded-md text-sm text-[#eeeeee] font-semibold">SP24 Team Photo</p>
+                <Photo src={"/balloon.png"} className="w-full h-auto object-cover clip-path-[polygon(0_0,_100%_0,_100%_100%,_0_calc(100%-50px))]" right>
+                  <p className="p-1 px-2 m-1 bg-black bg-opacity-50 rounded-md text-sm text-[#eeeeee] font-medium">SP24 Team Photo</p>
                 </Photo>
               </motion.div>
 

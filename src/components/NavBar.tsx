@@ -50,7 +50,7 @@ export default function NavBar() {
 
     const SCROLL_MIN = 0;
 
-    const SCROLL_MAX = 608;
+    const SCROLL_MAX = window.innerHeight;
 
     useEffect(() => {
         setProjects([
@@ -84,14 +84,15 @@ export default function NavBar() {
                 borderBottomWidth: scroll > SCROLL_MAX ? 1 : 0
             } : {}}
             className={clsx(
+                scroll > 0 ? "backdrop-blur-none md:backdrop-blur-md" : "",
                 `text-text bg-bg border-bg-highlight border-b`,
                 theme === 'light' && scroll > SCROLL_MAX ? 'shadow' : 'shadow-none',
                 "fixed z-50 w-full top-0 left-0 flex flex-row justify-between items-center py-4 px-4 xl:px-8 lg:px-[4rem]"
             )}
         >
-            <div className="flex-row hidden lg:flex justify-start items-center font-normal">
+            <div className="flex-row hidden lg:flex justify-start items-center font-normal relative">
                 <a href={"/"} className={clsx(
-                    "font-bold text-base mr-4"
+                    "font-bold text-base mr-4",
                 )}>
                     <img
                         alt=""
@@ -163,7 +164,8 @@ export default function NavBar() {
             <div className={"flex-1 flex flex-row justify-between items-center gap-4 lg:hidden"}>
                 <a href={"/"} className={clsx(
                     // scroll > 0 ? "block" : "hidden",
-                    "font-bold text-lg mr-2"
+                    "font-bold text-lg mr-2",
+                    scroll > 0 ? "" : "opacity-0 md:opacity-100"
                 )}>
                     <img
                         alt=""
@@ -171,22 +173,12 @@ export default function NavBar() {
                         width={80}
                     />
                 </a>
-                <div className={"flex flex-row justify-end items-center gap-4"}>
+                <div className={"flex-1 flex flex-row justify-end items-center gap-4"}>
                     {/* <div className={"hidden sm:block"}>
                         <Button key={"subscribe"} isLink={true} href={"/subscribe"}>
                             Interest Form
                         </Button>
                     </div> */}
-                    <div className={"block"}>
-                        <Button
-                            key={"apply"}
-                            style={'red'}
-                            isLink={true}
-                            href={"/apply"}
-                        >
-                            Apply
-                        </Button>
-                    </div>
                     <Dropdown
                         key={"hamburgerMenu"}
                         hideArrow

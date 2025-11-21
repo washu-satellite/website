@@ -5,7 +5,7 @@ import { IoTelescope } from "react-icons/io5"
 import { MdSatelliteAlt } from "react-icons/md"
 
 export const HomepageContent = {
-    missionStatement: "Equipping our members with the skills required to excel in the professional engineering industry through real world experience with cutting-edge spaceflight research and spacecraft development",
+    missionStatement: "We equip our members with the skills required to excel in the professional engineering industry through real world experience with cutting-edge spaceflight research and spacecraft development",
 
     tagline: "Design. Develop. Educate.",
 
