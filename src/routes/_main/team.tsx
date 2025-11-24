@@ -32,11 +32,10 @@ const TeamTile = (props: Person) => {
     const { theme } = { theme: 'dark' };
 
     return (
-        <motion.div
-            whileHover={{ scale: 1.05 }}
+        <div
             className={clsx(
                 theme === 'light' ? 'shadow-sm' : "",
-                `border-bg-highlight border-[1px]`,
+                `border-bg-highlight border-[1px] scale-100 hover:scale-105 transition duration-300 ease-in-out`,
                 `flex flex-col font-mono justify-end rounded-md bg-fg w-[16rem] h-[16rem] min-h-0`
             )}
         >
@@ -82,7 +81,7 @@ const TeamTile = (props: Person) => {
                     </div>
                 </div>
             </div>
-        </motion.div>
+        </div>
     );
 };
 
