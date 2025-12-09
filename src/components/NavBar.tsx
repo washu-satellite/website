@@ -101,12 +101,12 @@ export default function NavBar() {
                     />
                 </a>
                 <Dropdown
-                    key={"projects"}
+                    key={"missions"}
                     elements={projects}
                     className={scroll <= 0 && pathName === "/" ? "text-white hover:text-gray-300" : ""}
                 >
                     <span className={"p-2"}>
-                        Projects
+                        Missions
                     </span>
                 </Dropdown>
 
