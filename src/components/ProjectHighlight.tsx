@@ -72,7 +72,7 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
                 whileInView={{ opacity: 1, x: 0 }}
                 className={clsx(
                     theme === 'light' ? "shadow-md" : "",
-                    `bg-fg border-bg-highlight border-[1px] rounded-md z-10 mr-0 ml-0`,
+                    `bg-gradient-to-br from-bg-highlight to-bg-highlight/70 p-[1px] rounded-md z-10 mr-0 ml-0`,
                     "flex flex-row flex-wrap xl:flex-nowrap min-w-full md:min-w-[30rem] min-h-0 md:min-h-[24rem]",
                     props.direction === 'right' ? "justify-between" : "justify-start",
                     props.image ? (
@@ -81,7 +81,7 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
                 )}
             >
                 <div className={clsx(
-                    "relative flex flex-col justify-between p-8 gap-8"
+                    "relative bg-gradient-to-br from-fg/70 to-fg rounded-md flex flex-col justify-between p-8 gap-8"
                 )}>
                     <div className="font-sans flex flex-col gap-4">
                         <h3 

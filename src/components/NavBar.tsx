@@ -87,7 +87,7 @@ export default function NavBar() {
                 scroll > 0 ? "backdrop-blur-none md:backdrop-blur-md" : "",
                 `text-text bg-bg border-bg-highlight border-b`,
                 theme === 'light' && scroll > SCROLL_MAX ? 'shadow' : 'shadow-none',
-                "fixed z-50 w-full top-0 left-0 flex flex-row justify-between items-center py-4 px-4 xl:px-8 lg:px-[4rem]"
+                "fixed z-50 w-full top-0 left-0 flex flex-row justify-between items-center py-3 px-4 xl:px-8 lg:px-[4rem]"
             )}
         >
             <div className="flex-row hidden lg:flex justify-start items-center font-normal relative">
@@ -97,7 +97,7 @@ export default function NavBar() {
                     <img
                         alt=""
                         src={theme === 'light' && !(pathName === "/" && scroll === 0) ? "/logo_light.svg" : "/logo.svg"}
-                        width={80}
+                        className="h-8"
                     />
                 </a>
                 <Dropdown

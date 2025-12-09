@@ -18,6 +18,7 @@ import { motion, MotionValue, useScroll, useTransform } from 'motion/react';
 import { IoIosArrowDown } from "react-icons/io";
 import Projects, { AboutUs, CubeSat, PastProjects } from "@/components/Projects";
 import { createFileRoute } from "@tanstack/react-router";
+import React from "react";
 
 export const Route = createFileRoute('/_main/')({
   component: HomePage,
@@ -25,6 +26,14 @@ export const Route = createFileRoute('/_main/')({
 
 function useParallax(value: MotionValue<number>, distance: number) {
   return useTransform(value, [0, 0.8, 1], [0, -distance, -distance])
+}
+
+function DividerHeading(props: React.PropsWithChildren<{}>) {
+  return (
+    <h2 className="font-semibold text-5xl font-mono text-center mt my-[6rem] bg-gradient-to-bl from-[#e1e0e0] to-[#9a9999] bg-clip-text text-transparent uppercase">
+      {props.children}
+    </h2>
+  );
 }
 
 function HomePage() {
@@ -145,29 +154,32 @@ function HomePage() {
                 }}
                 className={clsx(
                   "shadow-md dark:shadow-none",
-                  `rounded-md bg-fg border-bg-highlight border-[1px]`,
-                  "relative flex flex-row flex-wrap xl:flex-nowrap font-mono items-start justify-between mt-[3rem]"
+                  `rounded-md bg-gradient-to-br from-bg-highlight to-bg-highlight/70 p-[1px] mt-[3rem]`,
                 )}
               >
-                <div className={`flex flex-col items-start justify-between font-sans p-8 gap-2`}>
-                  <h2 className="font-semibold font-mono text-text-hover text-3xl">THE TEAM</h2>
-                  <p className={"text-lg font-normal max-w-[60rem] mb-2"}>
-                    {content.aboutUs}
-                  </p>
-                  <ArrowButton
-                    href="/team"
-                    text="Meet the team"
-                  />
-                </div>
+                <div className="relative flex flex-row flex-wrap xl:flex-nowrap font-mono items-start justify-between bg-gradient-to-br from-fg to-fg/70 rounded-md">
+                  <div className={`flex flex-col items-start justify-between font-sans p-8 gap-2`}>
+                    <h2 className="font-semibold font-mono text-text-hover text-3xl">THE TEAM</h2>
+                    <p className={"text-lg font-normal max-w-[60rem] mb-2"}>
+                      {content.aboutUs}
+                    </p>
+                    <ArrowButton
+                      href="/team"
+                      text="Meet the team"
+                    />
+                  </div>
 
-                <Photo src={"/balloon.png"} className="w-full h-auto object-cover clip-path-[polygon(0_0,_100%_0,_100%_100%,_0_calc(100%-50px))]" right>
-                  <p className="p-1 px-2 m-1 bg-black bg-opacity-50 rounded-md text-sm text-[#eeeeee] font-medium">SP24 Team Photo</p>
-                </Photo>
+                  <Photo src={"/balloon.png"} className="w-full h-auto object-cover clip-path-[polygon(0_0,_100%_0,_100%_100%,_0_calc(100%-50px))]" right>
+                    <p className="p-1 px-2 m-1 bg-black bg-opacity-50 rounded-md text-sm text-[#eeeeee] font-medium">SP24 Team Photo</p>
+                  </Photo>
+                </div>
               </motion.div>
 
-              <h2 className="font-semibold text-5xl text-text font-mono text-center mt-[6rem]">PROJECTS</h2>
+              <DividerHeading>
+                Projects
+              </DividerHeading>
 
-              <div className={"flex flex-row flex-wrap items-center gap-y-[4rem] gap-x-[2rem]"}>
+              <div className={"flex flex-row flex-wrap items-center gap-y-[4rem] gap-x-[2rem] -mt-32"}>
                 {highlights.filter(p => p.phase !== 'success').map((p, i) => (
                   <ProjectHighlight
                     {...p}
@@ -176,7 +188,9 @@ function HomePage() {
                 ))}
               </div>
 
-              <h2 className="font-semibold text-5xl text-text font-mono text-center mt my-[6rem]">PAST PROJECTS</h2>
+              <DividerHeading>
+                Past Projects
+              </DividerHeading>
 
               <div className={"flex flex-col gap-[4rem]"}>
                 {highlights.filter(p => p.phase === 'success').map((p, i) => (

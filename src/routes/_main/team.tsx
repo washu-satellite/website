@@ -92,7 +92,7 @@ function TeamPage() {
 
     return (
         <div className="flex-1 relative overflow-x-hidden">
-            <motion.div
+            {/* <motion.div
                 style={{
                     y: useTransform(scrollYProgress, [0, 0.78, 1], [0, -400, -400])
                 }}
@@ -109,20 +109,20 @@ function TeamPage() {
                     alt=""
                     sizes="100vw"
                 />
-            </motion.div>
+            </motion.div> */}
             <main className={`text-text-dark relative`}>
                 <div className={clsx(
                     theme === 'light' ? "h-[40rem]" : "h-[32rem]",
-                    "relative flex flex-col items-center justify-center w-full"
+                    "relative flex flex-col items-center justify-center w-full bg-[url(/team2.png)] bg-cover"
                 )}>
                     {/* <span className={`font-bold text-[${colors.text}] bg-accent-red px-4 py-2 rounded-t-xl border-bg-highlight border-[1px] -mb-[2px]`}>These missions made possible by</span> */}
                     <div className={clsx(
                         theme === 'light' ? "mt-16" : "",
-                        `text-[4rem] -mt-[4rem] font-semibold font-mono text-accent-red bg-bg border-bg-highlight border-[1px] py-2 rounded-xl cursor-default`
+                        `text-[4rem] -mt-[4rem] font-semibold font-mono bg-bg border-bg-highlight border-[1px] py-2 rounded-xl cursor-default`
                     )}>
-                        <p className={`text-sm text-center italic px-6 text-text-secondary`}>These missions made possible by</p>
+                        <p className={`text-sm text-center italic px-6 text-text-secondary font-medium`}>These missions made possible by</p>
                         <div className={`bg-bg-highlight backdrop-opacity-50 w-full h-[1px] mt-2`} />
-                        <h1 className="px-6">OUR TEAM</h1>
+                        <h1 className="px-6 text-accent-red">OUR TEAM</h1>
                     </div>
                     <div
                         className="absolute -bottom-2 w-[110%] h-[8rem] bg-repeat-x"

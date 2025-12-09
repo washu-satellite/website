@@ -19,7 +19,7 @@ const getStyle = (style: ButtonProps['style']) => {
         case 'red':
             return "bg-accent-red hover:bg-accent-red-hover text-white";
         case 'clear':
-            return "bg-none hover:bg-text text-text-dark border-text-dark hover:text-bg hover:border-bg border-[1px]";
+            return "bg-none hover:bg-text text-text-dark border-text-dark hover:text-bg hover:border-bg border";
         default:
             return "bg-text hover:bg-text-secondary text-bg";
     }
@@ -27,7 +27,7 @@ const getStyle = (style: ButtonProps['style']) => {
 
 export const EmailButton = (props: { text: string, href: string }) => {
     return (
-        <a className={`rounded-full font-mono px-4 py-1 hover:bg-fg-hover text-text-dark border-bg-highlight border-[1px]`} href={props.href}>
+        <a className={`rounded-full font-mono px-4 py-1 hover:bg-fg-hover text-text-dark border-bg-highlight border`} href={props.href}>
             {props.text}
         </a>
     );
