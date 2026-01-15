@@ -19,14 +19,19 @@ export const getUserSession = createServerFn({ method: "GET" }).handler(
 
     const userSession = await auth.api.getSession({ headers: request.headers });
 
+    if (!userSession) return null;
+
+    const profile = (await db
+      .select()
+      .from(schema.profile)
+      .where(eq(schema.profile.userId, userSession.user.id)))[0];
+
     console.log("Got user session");
     console.log(userSession);
 
-    if (!userSession) return null;
-
     console.log("Returning user session");
 
-    return { user: userSession.user, session: userSession.session };
+    return { user: userSession.user, session: userSession.session, profile };
   }
 );
 

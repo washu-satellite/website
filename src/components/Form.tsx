@@ -63,10 +63,18 @@ export function ExtendedLabel(
     name: string;
     badge?: ReactNode;
     locked?: boolean;
+    horizontal?: boolean;
   }>
 ) {
   return (
-    <div className="flex flex-row items-center gap-2 mb-1">
+    <div
+      className={cn(
+        "flex flex-row items-center gap-2",
+        {
+          "mb-1": !props.horizontal
+        }
+      )}
+    >
       {props.locked && <LockIcon className="w-3 text-foreground/60" />}
       <FieldLabel htmlFor={props.name}>
         <p className="font-mono text-xs uppercase text-foreground/60">
@@ -116,6 +124,7 @@ export function UsernameField(
   props: {
     form: any;
     locked?: boolean;
+    horizontal?: boolean;
   } & React.ComponentProps<"div">
 ) {
   const [nameTaken, setNameTaken] = useState<"not_checked" | "free" | "taken">(
@@ -148,10 +157,11 @@ export function UsernameField(
         return (
           <Field
             data-invalid={isInvalid || nameTaken === "taken"}
-            className={cn("gap-1", props.className)}
+            className={cn("gap-1", props.className, { "-mt-1": props.horizontal })}
           >
             <ExtendedLabel
               name={field.name}
+              horizontal={props.horizontal}
               badge={
                 <Tooltip>
                   <TooltipTrigger>

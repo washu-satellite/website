@@ -235,6 +235,7 @@ function RouteComponent() {
 
                       {editMode ? (
                         <UsernameField
+                          horizontal
                           form={form}
                         />
                       ) : (

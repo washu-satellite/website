@@ -89,7 +89,7 @@ function UserRowActions(props: {
                 <DropdownMenuItem
                     asChild
                 >
-                    <Link to={`/team/${props.userData.username}`} className="flex flex-row items-center">
+                    <Link to={"/team/$user_slug"} params={{ user_slug: props.userData.username }} className="flex flex-row items-center">
                         <ExternalLink />
                         View profile
                     </Link>
