@@ -42,6 +42,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTrigger } from "@/components/ui/alert-dialog"
 import { FieldGroup } from "@/components/ui/field"
 import LoadingPage from "@/components/LoadingPage"
+import { DeleteUser } from "@/components/Form"
 
 export const Route = createFileRoute('/admin/users')({
     beforeLoad: async ({ context }) => {
@@ -65,19 +66,6 @@ type Column = Awaited<ReturnType<typeof listUsersAdmin>>[number];
 function UserRowActions(props: {
     userData: Column
 }) {
-    const queryClient = useQueryClient();
-
-    const deleteUserMutation = useMutation({
-        mutationKey: ["user", "delete-user"],
-        mutationFn: deleteUser,
-        onSuccess: (res) => {
-          queryClient.invalidateQueries({ queryKey: ['user'] });
-          console.log("successfully deleted user!");
-        }
-      });
-    
-    const [deleteAlert, setDeleteAlert] = React.useState(false);
-    
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -106,38 +94,14 @@ function UserRowActions(props: {
                         View profile
                     </Link>
                 </DropdownMenuItem>
-                <AlertDialog open={deleteAlert} onOpenChange={setDeleteAlert}>
-                    <AlertDialogTrigger asChild>
-                        <DropdownMenuItem
-                            className="flex flex-row items-center text-destructive"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setDeleteAlert(true);
-                            }}
-                        >
-                            <TrashIcon className="text-destructive"/>
-                            Delete user
-                        </DropdownMenuItem>
-                    </AlertDialogTrigger>
-                    <AlertDialogContent className="border-border">
-                        <AlertDialogHeader>
-                            Are you sure?
-                        </AlertDialogHeader>
-                        <AlertDialogDescription>
-                            You are about to permanently remove a user. This action cannot be undone.
-                        </AlertDialogDescription>
-                        <AlertDialogFooter>
-                            <AlertDialogCancel>Cancel</AlertDialogCancel>
-                            <AlertDialogAction
-                                onClick={async () => {
-                                    await deleteUserMutation.mutateAsync({ data: { username: props.userData.username } });
-                                }}
-                            >
-                                Continue
-                            </AlertDialogAction>
-                        </AlertDialogFooter>
-                    </AlertDialogContent>
-                </AlertDialog>
+                <DeleteUser username={props.userData.username}>
+                    <DropdownMenuItem
+                        className="flex flex-row items-center text-destructive"
+                    >
+                        <TrashIcon className="text-destructive"/>
+                        Delete user
+                    </DropdownMenuItem>
+                </DeleteUser>
             </DropdownMenuContent>
         </DropdownMenu>
     );

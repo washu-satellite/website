@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { ExecMembers } from '@/const/content/team';
 import { cn } from '@/lib/utils';
 import { createFileRoute, Link, redirect } from '@tanstack/react-router';
-import { BookUp, Check, ChevronDown, House, Pencil, Rocket, Trash, X } from 'lucide-react';
+import { BookUp, Check, ChevronDown, House, Pencil, Rocket, Trash, User, X } from 'lucide-react';
 import React, { useState } from 'react';
 import { useForm } from '@tanstack/react-form';
 import { FieldGroup } from '@/components/ui/field';
@@ -20,7 +20,8 @@ import {
 } from "@tanstack/react-query";
 import { DisplayUser, DisplayUserSchema } from '@/services/user.schema';
 import { Spinner } from '@/components/ui/spinner';
-import { DateSelection, ExtendedField, ExtendedLabel, UsernameField } from '@/components/Form';
+import { DateSelection, DeleteUser, ExtendedField, ExtendedLabel, UsernameField } from '@/components/Form';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 type LoaderData = {
   profile: Awaited<ReturnType<typeof getFullProfile>>
@@ -149,7 +150,12 @@ function RouteComponent() {
               />
               <div className="w-full block md:flex flex-row border-t border-border">
                 <div className="w-full md:w-1/3 xl:w-1/6 relative border-r border-border flex flex-col items-center justify-center bg-[repeating-linear-gradient(45deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:10px_10px] bg-fixed [--pattern-fg:theme(colors.secondary)]">
-                  <img src={user.avatar} className="w-48 py-4 md:py-0"/>
+                  <Avatar className="rounded-none bg-transparent w-48 h-48 py-4 md:py-0">
+                      <AvatarImage src={undefined} alt="u" />
+                      <AvatarFallback className="rounded-none bg-transparent">
+                          <User className="w-16 h-16 text-foreground/80"/>
+                      </AvatarFallback>
+                  </Avatar>
                   <p className="absolute bottom-2 right-2 font-mono text-xs uppercase text-foreground/60">Photo</p>
                 </div>
                 <div className="w-full md:w-2/3 xl:w-5/6 text-foreground/90">
@@ -455,17 +461,15 @@ function RouteComponent() {
                         </Button>
                       )}
                       {session?.user.role === "admin" &&
-                        <Button
-                          variant='destructive'
-                          className="flex flex-row items-center !bg-red-500/50 !hover:bg-red-500"
-                          onClick={async (e) => {
-                            e.preventDefault();
-                            await deleteUserMutation.mutateAsync({ data: { username: profile.username } });
-                          }}
-                        >
-                          <Trash className="w-4 h-4"/>
-                          Delete user
-                        </Button>
+                        <DeleteUser username={profile.username}>
+                          <Button
+                            variant='destructive'
+                            className="flex flex-row items-center !bg-red-500/50 !hover:bg-red-500"
+                          >
+                            <Trash className="w-4 h-4"/>
+                            Delete user
+                          </Button>
+                        </DeleteUser>
                       }
                     </div>
                   }

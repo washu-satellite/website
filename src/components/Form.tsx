@@ -1,15 +1,36 @@
 import { cn } from "@/lib/utils";
-import { ReactNode, useState } from "react";
+import React, { ReactNode, useState } from "react";
 import { Field, FieldError, FieldLabel } from "./ui/field";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Button } from "./ui/button";
 import { Calendar } from "./ui/calendar";
-import { AtSign, CheckIcon, ChevronDownIcon, CircleQuestionMarkIcon, LockIcon, XIcon } from "lucide-react";
+import {
+  AtSign,
+  CheckIcon,
+  ChevronDownIcon,
+  CircleQuestionMarkIcon,
+  LockIcon,
+  XIcon,
+} from "lucide-react";
 import { InputGroup, InputGroupInput, InputGroupAddon } from "./ui/input-group";
 import { checkUsernameTaken } from "@/services/user.api";
 import { Spinner } from "./ui/spinner";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { useAuthenticatedUser } from "@/lib/auth/client";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTrigger,
+} from "./ui/alert-dialog";
+
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+import { deleteUser } from "@/services/user.api";
 
 export function ExtendedField(
   props: React.PropsWithChildren<
@@ -46,9 +67,7 @@ export function ExtendedLabel(
 ) {
   return (
     <div className="flex flex-row items-center gap-2 mb-1">
-      {props.locked &&
-        <LockIcon className="w-3 text-foreground/60"/>
-      }
+      {props.locked && <LockIcon className="w-3 text-foreground/60" />}
       <FieldLabel htmlFor={props.name}>
         <p className="font-mono text-xs uppercase text-foreground/60">
           {props.children}
@@ -95,8 +114,8 @@ export function DateSelection(props: { field: any }) {
 
 export function UsernameField(
   props: {
-    form: any,
-    locked?: boolean
+    form: any;
+    locked?: boolean;
   } & React.ComponentProps<"div">
 ) {
   const [nameTaken, setNameTaken] = useState<"not_checked" | "free" | "taken">(
@@ -131,16 +150,22 @@ export function UsernameField(
             data-invalid={isInvalid || nameTaken === "taken"}
             className={cn("gap-1", props.className)}
           >
-            <ExtendedLabel name={field.name} badge={
-              <Tooltip>
-                <TooltipTrigger>
-                  <CircleQuestionMarkIcon className="w-3.5 text-foreground/60" />
-                </TooltipTrigger>
-                <TooltipContent>
-                  Username acts as a unique identifier of this user
-                </TooltipContent>
-              </Tooltip>
-            } locked={props.locked}>Username</ExtendedLabel>
+            <ExtendedLabel
+              name={field.name}
+              badge={
+                <Tooltip>
+                  <TooltipTrigger>
+                    <CircleQuestionMarkIcon className="w-3.5 text-foreground/60" />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    Username acts as a unique identifier of this user
+                  </TooltipContent>
+                </Tooltip>
+              }
+              locked={props.locked}
+            >
+              Username
+            </ExtendedLabel>
             <InputGroup>
               <InputGroupInput
                 id={field.name}
@@ -180,5 +205,57 @@ export function UsernameField(
         );
       }}
     />
+  );
+}
+
+export function DeleteUser(
+  props: React.PropsWithChildren<{
+    username: string;
+  }>
+) {
+  const queryClient = useQueryClient();
+
+  const deleteUserMutation = useMutation({
+    mutationKey: ["user", "delete-user"],
+    mutationFn: deleteUser,
+    onSuccess: (res) => {
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+      console.log("successfully deleted user!");
+    },
+  });
+
+  const [deleteAlert, setDeleteAlert] = React.useState(false);
+
+  return (
+    <AlertDialog open={deleteAlert} onOpenChange={setDeleteAlert}>
+      <AlertDialogTrigger
+        asChild
+        onClick={(e) => {
+          e.preventDefault();
+          setDeleteAlert(true);
+        }}
+      >
+        {props.children}
+      </AlertDialogTrigger>
+      <AlertDialogContent className="border-border">
+        <AlertDialogHeader>Are you sure?</AlertDialogHeader>
+        <AlertDialogDescription>
+          You are about to permanently remove a user. This action cannot be
+          undone.
+        </AlertDialogDescription>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction
+            onClick={async () => {
+              await deleteUserMutation.mutateAsync({
+                data: { username: props.username },
+              });
+            }}
+          >
+            Continue
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }
