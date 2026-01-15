@@ -130,7 +130,7 @@ function RouteComponent() {
   return (
     <div className={"flex-1 overflow-x-hidden z-10"}>
       <main>
-        <div className="w-full h-[10rem] md:h-[20rem] overflow-hidden">
+        <div className="w-full h-[10rem] md:h-[12rem] overflow-hidden">
           <img
             src="/space_bg.png"
             className="size-full object-cover"
@@ -140,7 +140,7 @@ function RouteComponent() {
           `relative border-t border-border bg-deep-background`
         )}>
           <div
-            className="flex flex-col px-2 md:px-4 lg:px-[4rem] gap-8 relative"
+            className="flex flex-col px-2 md:px-4 lg:px-[4rem] gap-8 relative border-b"
           >
             <div className="border-border md:border-x">
               <div
@@ -471,7 +471,7 @@ function RouteComponent() {
                   }
                 </div>
               </div>
-              <DividerHeading index={1}>
+              {/* <DividerHeading index={1}>
                 History
               </DividerHeading>
               
@@ -560,7 +560,7 @@ function RouteComponent() {
                     <p className="text-sm text-foreground/80">Nate joined the team as a Software Engineer</p>
                   </TimelineContent>
                 </TimelineEntry>
-              </Timeline>
+              </Timeline> */}
 
               {/* <DividerHeading index={1}>
                 Positions
