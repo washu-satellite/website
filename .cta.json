@@ -1,5 +1,5 @@
 {
-  "projectName": "shadcn",
+  "projectName": "washu-satellite",
   "mode": "file-router",
   "typescript": true,
   "tailwind": true,
