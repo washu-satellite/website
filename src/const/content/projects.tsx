@@ -1,5 +1,5 @@
 import { NavElement, ProjectPageType } from "@/types/data";
-import { Balloon, Boxes, Megaphone, Newspaper, Satellite, SatelliteDish, Telescope, Users } from "lucide-react";
+import { Balloon, Megaphone, Newspaper, Satellite, SatelliteDish, Telescope, Users } from "lucide-react";
 
 export const ProjectPages: { [K in any]: ProjectPageType } = {
     gs1: {

@@ -1,4 +1,4 @@
-import { reset, seed } from 'drizzle-seed'
+import { reset } from 'drizzle-seed';
 import { db } from '.';
 import * as schema from "./schema";
 

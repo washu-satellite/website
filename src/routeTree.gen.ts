@@ -9,10 +9,10 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SubscribeRouteImport } from './routes/subscribe'
 import { Route as SignUpRouteImport } from './routes/sign-up'
 import { Route as SignInRouteImport } from './routes/sign-in'
 import { Route as NotReadyRouteImport } from './routes/not-ready'
+import { Route as ErrorRouteImport } from './routes/error'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ApplyRouteImport } from './routes/apply'
 import { Route as IndexRouteImport } from './routes/index'
@@ -22,11 +22,6 @@ import { Route as AdminUsersRouteImport } from './routes/admin/users'
 import { Route as AdminNewUserRouteImport } from './routes/admin/new-user'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
-const SubscribeRoute = SubscribeRouteImport.update({
-  id: '/subscribe',
-  path: '/subscribe',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SignUpRoute = SignUpRouteImport.update({
   id: '/sign-up',
   path: '/sign-up',
@@ -40,6 +35,11 @@ const SignInRoute = SignInRouteImport.update({
 const NotReadyRoute = NotReadyRouteImport.update({
   id: '/not-ready',
   path: '/not-ready',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ErrorRoute = ErrorRouteImport.update({
+  id: '/error',
+  path: '/error',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -87,10 +87,10 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/apply': typeof ApplyRoute
   '/contact': typeof ContactRoute
+  '/error': typeof ErrorRoute
   '/not-ready': typeof NotReadyRoute
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
-  '/subscribe': typeof SubscribeRoute
   '/admin/new-user': typeof AdminNewUserRoute
   '/admin/users': typeof AdminUsersRoute
   '/team/$user_slug': typeof TeamUser_slugRoute
@@ -101,10 +101,10 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/apply': typeof ApplyRoute
   '/contact': typeof ContactRoute
+  '/error': typeof ErrorRoute
   '/not-ready': typeof NotReadyRoute
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
-  '/subscribe': typeof SubscribeRoute
   '/admin/new-user': typeof AdminNewUserRoute
   '/admin/users': typeof AdminUsersRoute
   '/team/$user_slug': typeof TeamUser_slugRoute
@@ -116,10 +116,10 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/apply': typeof ApplyRoute
   '/contact': typeof ContactRoute
+  '/error': typeof ErrorRoute
   '/not-ready': typeof NotReadyRoute
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
-  '/subscribe': typeof SubscribeRoute
   '/admin/new-user': typeof AdminNewUserRoute
   '/admin/users': typeof AdminUsersRoute
   '/team/$user_slug': typeof TeamUser_slugRoute
@@ -132,10 +132,10 @@ export interface FileRouteTypes {
     | '/'
     | '/apply'
     | '/contact'
+    | '/error'
     | '/not-ready'
     | '/sign-in'
     | '/sign-up'
-    | '/subscribe'
     | '/admin/new-user'
     | '/admin/users'
     | '/team/$user_slug'
@@ -146,10 +146,10 @@ export interface FileRouteTypes {
     | '/'
     | '/apply'
     | '/contact'
+    | '/error'
     | '/not-ready'
     | '/sign-in'
     | '/sign-up'
-    | '/subscribe'
     | '/admin/new-user'
     | '/admin/users'
     | '/team/$user_slug'
@@ -160,10 +160,10 @@ export interface FileRouteTypes {
     | '/'
     | '/apply'
     | '/contact'
+    | '/error'
     | '/not-ready'
     | '/sign-in'
     | '/sign-up'
-    | '/subscribe'
     | '/admin/new-user'
     | '/admin/users'
     | '/team/$user_slug'
@@ -175,10 +175,10 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApplyRoute: typeof ApplyRoute
   ContactRoute: typeof ContactRoute
+  ErrorRoute: typeof ErrorRoute
   NotReadyRoute: typeof NotReadyRoute
   SignInRoute: typeof SignInRoute
   SignUpRoute: typeof SignUpRoute
-  SubscribeRoute: typeof SubscribeRoute
   AdminNewUserRoute: typeof AdminNewUserRoute
   AdminUsersRoute: typeof AdminUsersRoute
   TeamUser_slugRoute: typeof TeamUser_slugRoute
@@ -188,13 +188,6 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/subscribe': {
-      id: '/subscribe'
-      path: '/subscribe'
-      fullPath: '/subscribe'
-      preLoaderRoute: typeof SubscribeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/sign-up': {
       id: '/sign-up'
       path: '/sign-up'
@@ -214,6 +207,13 @@ declare module '@tanstack/react-router' {
       path: '/not-ready'
       fullPath: '/not-ready'
       preLoaderRoute: typeof NotReadyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/error': {
+      id: '/error'
+      path: '/error'
+      fullPath: '/error'
+      preLoaderRoute: typeof ErrorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -279,10 +279,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApplyRoute: ApplyRoute,
   ContactRoute: ContactRoute,
+  ErrorRoute: ErrorRoute,
   NotReadyRoute: NotReadyRoute,
   SignInRoute: SignInRoute,
   SignUpRoute: SignUpRoute,
-  SubscribeRoute: SubscribeRoute,
   AdminNewUserRoute: AdminNewUserRoute,
   AdminUsersRoute: AdminUsersRoute,
   TeamUser_slugRoute: TeamUser_slugRoute,

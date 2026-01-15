@@ -1,5 +1,4 @@
-import { ProjectPages } from "@/const/content/projects";
-import { CSSProperties, ReactNode } from "react"
+import { CSSProperties, ReactNode } from "react";
 
 export type ProjectData = NavElement & {
     description: string,

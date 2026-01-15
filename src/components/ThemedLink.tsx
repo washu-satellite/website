@@ -1,9 +1,5 @@
-import { useScrollPos } from '@/util/ui';
-import clsx from 'clsx';
-import useTheme from "@/hooks/useTheme";
-import { AnchorHTMLAttributes, DetailedHTMLProps, PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import { FaArrowRightLong } from 'react-icons/fa6';
-import { UrlObject } from 'url';
 import { Link } from '@tanstack/react-router';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';

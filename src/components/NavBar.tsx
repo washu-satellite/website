@@ -8,7 +8,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { ProjectHighlightData } from "@/const/content/projects";
 import type { NavElement } from "@/types/data";
 
-import { ChevronDown, Computer, Eye, LogOut, Moon, Plus, Sun, User, Users } from "lucide-react";
+import { ChevronDown, Eye, LogOut, Plus, User, Users } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
@@ -17,7 +17,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import NotSignedIn from "./auth/NotSignedIn";
 import SignedIn from "./auth/SignedIn";
 import { signOut, useAuthenticatedUser } from "@/lib/auth/client";
-import { Badge } from "./ui/badge";
 
 const MenuItem = (props: NavElement) => {
     return (

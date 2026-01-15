@@ -1,23 +1,10 @@
 "use client";
 import NavBar from "@/components/NavBar";
-import clsx from "clsx";
-import { PropsWithChildren, ReactNode } from "react";
+import { PropsWithChildren } from "react";
 import { ProjectPages } from "../const/content/projects";
 
 type ProjectPageProps = {
     project: keyof typeof ProjectPages
-}
-
-const Tile = (props: {
-    title: string,
-    phase: string
-}) => {
-    return (
-        <div className="flex flex-col items-center gap-4 rounded-md bg-fg border-text-dark border-[1px] pb-8 w-[14rem] pt-4">
-            <p className="font-mono text-base font-semibold text-text-dark">{props.phase}</p>
-            <h3 className="font-mono text-xl font-semibold text-text">{props.title}</h3>
-        </div>
-    )
 }
 
 export default function ProjectPage(props: PropsWithChildren<ProjectPageProps>) {

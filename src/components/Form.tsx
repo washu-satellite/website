@@ -1,11 +1,10 @@
 import { cn } from "@/lib/utils";
 import { ReactNode, useState } from "react";
 import { Field, FieldError, FieldLabel } from "./ui/field";
-import { FieldApi } from "@tanstack/react-form";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Button } from "./ui/button";
 import { Calendar } from "./ui/calendar";
-import { AtSign, Badge, BadgeIcon, CheckIcon, ChevronDownIcon, CircleQuestionMark, CircleQuestionMarkIcon, LockIcon, XIcon } from "lucide-react";
+import { AtSign, CheckIcon, ChevronDownIcon, CircleQuestionMarkIcon, LockIcon, XIcon } from "lucide-react";
 import { InputGroup, InputGroupInput, InputGroupAddon } from "./ui/input-group";
 import { checkUsernameTaken } from "@/services/user.api";
 import { Spinner } from "./ui/spinner";

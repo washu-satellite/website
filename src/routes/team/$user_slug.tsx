@@ -1,32 +1,26 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { ExecMembers } from '@/const/content/team'
-import { cn } from '@/lib/utils'
-import { createFileRoute, Link, redirect, useParams } from '@tanstack/react-router'
-import { AtSign, BookUp, Check, ChevronDown, CircleQuestionMark, House, Medal, Pencil, Rocket, RotateCw, Star, Trash, X } from 'lucide-react';
-import React, { ReactNode, useEffect, useState } from 'react';
-import { ReactFormExtendedApi, useForm } from '@tanstack/react-form';
-import * as z from 'zod';
-import { toast } from 'sonner';
-import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
+import { ExecMembers } from '@/const/content/team';
+import { cn } from '@/lib/utils';
+import { createFileRoute, Link, redirect } from '@tanstack/react-router';
+import { BookUp, Check, ChevronDown, House, Pencil, Rocket, Trash, X } from 'lucide-react';
+import React, { useState } from 'react';
+import { useForm } from '@tanstack/react-form';
+import { FieldGroup } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText, InputGroupTextarea } from '@/components/ui/input-group';
+import { InputGroup, InputGroupAddon, InputGroupText, InputGroupTextarea } from '@/components/ui/input-group';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Timeline, TimelineDate, TimelineIcon, TimelineContent, TimelineEntry } from '@/components/Timeline';
-import { MEMBERSHIP_STATUS_OPTIONS, Profile, ProfileSchema } from '@/services/auth.schema';
-import { useServerFn } from '@tanstack/react-start';
-import { checkUsernameTaken, deleteUser, getFullProfile, updateProfile } from '@/services/user.api';
+import { MEMBERSHIP_STATUS_OPTIONS } from '@/services/auth.schema';
+import { deleteUser, getFullProfile, updateProfile } from '@/services/user.api';
 import { useAuthenticatedUser } from '@/lib/auth/client';
 import {
-  useIsMutating,
   useMutation,
-  useQueryClient,
+  useQueryClient
 } from "@tanstack/react-query";
 import { DisplayUser, DisplayUserSchema } from '@/services/user.schema';
 import { Spinner } from '@/components/ui/spinner';
 import { DateSelection, ExtendedField, ExtendedLabel, UsernameField } from '@/components/Form';
-import { param } from 'drizzle-orm';
 
 type LoaderData = {
   profile: Awaited<ReturnType<typeof getFullProfile>>

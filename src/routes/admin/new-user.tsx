@@ -1,35 +1,21 @@
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { ExecMembers } from '@/const/content/team'
-import { cn } from '@/lib/utils'
-import { createFileRoute, Link, useNavigate, useParams } from '@tanstack/react-router'
-import { AtSign, BookUp, Check, ChevronDown, ChevronDownIcon, CircleQuestionMark, Dice1Icon, Dice5Icon, House, Medal, Pencil, Rocket, RotateCw, ShuffleIcon, Star, Trash, X } from 'lucide-react';
-import React, { ReactNode, useEffect, useState } from 'react';
-import { ReactFormExtendedApi, useForm } from '@tanstack/react-form';
-import * as z from 'zod';
-import { toast } from 'sonner';
-import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
+import { cn } from '@/lib/utils';
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import { ChevronDown, ShuffleIcon } from 'lucide-react';
+import { useState } from 'react';
+import { useForm } from '@tanstack/react-form';
+import { FieldGroup } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText, InputGroupTextarea } from '@/components/ui/input-group';
+import { InputGroup, InputGroupAddon, InputGroupText, InputGroupTextarea } from '@/components/ui/input-group';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Timeline, TimelineDate, TimelineIcon, TimelineContent, TimelineEntry } from '@/components/Timeline';
 import { MEMBERSHIP_STATUS_OPTIONS, Profile, ProfileSchema } from '@/services/auth.schema';
-import { useServerFn } from '@tanstack/react-start';
-import { getFullProfile, updateProfile } from '@/services/user.api';
-import { admin, useAuthenticatedUser } from '@/lib/auth/client';
 import {
-  useIsMutating,
   useMutation,
-  useQueryClient,
+  useQueryClient
 } from "@tanstack/react-query";
-import { DisplayUser, DisplayUserSchema } from '@/services/user.schema';
 import { Spinner } from '@/components/ui/spinner';
-import { createProfile, createProfileAdmin } from '@/services/auth.api';
+import { createProfileAdmin } from '@/services/auth.api';
 import { DateSelection, ExtendedField, ExtendedLabel, UsernameField } from '@/components/Form';
-import { user, session } from '../../../auth-schema';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Calendar } from '@/components/ui/calendar';
 import { faker } from "@faker-js/faker";
 
 

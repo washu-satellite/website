@@ -2,23 +2,16 @@
 
 // @ts-ignore
 
-import { EmailButton } from "@/components/Button";
-import { ExecMembers, Members } from "@/const/content/team";
-import type { MissionKey, Person } from "@/types/data";
 import clsx from "clsx";
 import { FaLinkedin } from "react-icons/fa6";
 
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { Curve } from "@/components/Projects";
-import { ArrowRight, ChevronRight, Linkedin, Satellite, Telescope } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import GenericPage from "@/components/GenericPage";
-import { Chevron } from "react-day-picker";
 import { Badge } from "@/components/ui/badge";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { userQueries } from "@/services/queries";
 import { DisplayUserShort } from "@/services/user.schema";
-import { Spinner } from "@/components/ui/spinner";
 import LoadingPage from "@/components/LoadingPage";
 
 export const Route = createFileRoute('/team/')({
@@ -54,7 +47,7 @@ const TeamTile = (props: DisplayUserShort) => {
                     </Badge>
                 }
                 <Link
-                    to={`/team/${props.id}`}
+                    to={`/team/${props.username}`}
                     className="absolute top-0 left-0 flex flex-col items-center justify-center w-full h-full opacity-0 transition-all duration-500 group-hover:opacity-100"
                 >
                     <ArrowRight className="-rotate-45 w-24 h-24 transition-all duration-500 mt-6 mr-6 group-hover:mt-0 group-hover:mr-0"/>

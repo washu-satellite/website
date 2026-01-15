@@ -1,7 +1,6 @@
 import { ProjectData } from "@/types/data";
 import clsx from "clsx";
 
-import useTheme from "@/hooks/useTheme";
 import { ExternalLink } from "lucide-react";
 import { Button } from "./ui/button";
 import { Link } from "@tanstack/react-router";
@@ -22,8 +21,6 @@ const getPhase = (phase: ProjectData['phase']) => {
 }
 
 export default function ProjectHighlight(props: ProjectData & { direction?: 'left' | 'right' }) {
-    const {theme} = useTheme();
-
     return (
         <div className={clsx(
             props.image ? "min-h-[700px]" : "",
@@ -52,8 +49,7 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
             }
             <div
                 className={clsx(
-                    theme === 'light' ? "shadow-md" : "",
-                    `rounded-md z-10 mr-0 ml-0`,
+                    `rounded-md z-10 mr-0 ml-0 shadow-md dark:shadow-none`,
                     "flex flex-row flex-wrap xl:flex-nowrap min-w-full md:min-w-[30rem] min-h-0 md:min-h-[24rem]",
                     props.direction === 'right' ? "justify-between" : "justify-start",
                     props.image ? (

@@ -4,10 +4,8 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { PiInstagramLogoFill } from "react-icons/pi";
 
 import { ProjectHighlightData } from "@/const/content/projects";
-import Toggle from "./Toggle";
 import ThemedLink from "./ThemedLink";
-import useTheme from "@/hooks/useTheme";
-import { Sun, Moon, Computer, Monitor } from "lucide-react";
+import { Sun, Moon, Monitor } from "lucide-react";
 import { Button } from "./ui/button";
 import { bStore } from "@/hooks/useAppStore";
 import { cn } from "@/lib/utils";
