@@ -1,5 +1,3 @@
-"use client";
-
 import clsx from "clsx";
 import React, { type ReactNode, useEffect, useState } from "react";
 import ThemedLink from "./ThemedLink";
@@ -8,7 +6,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { ProjectHighlightData } from "@/const/content/projects";
 import type { NavElement } from "@/types/data";
 
-import { ChevronDown, Eye, LogOut, Plus, User, Users } from "lucide-react";
+import { ChevronDown, Eye, Gauge, LogOut, Plus, User, Users } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
@@ -17,6 +15,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import NotSignedIn from "./auth/NotSignedIn";
 import SignedIn from "./auth/SignedIn";
 import { signOut, useAuthenticatedUser } from "@/lib/auth/client";
+import { UserMenu } from "./UserMenu";
 
 const MenuItem = (props: NavElement) => {
     return (
@@ -101,7 +100,7 @@ function NavbarMenu(props: React.PropsWithChildren<{
     )
 }
 
-const targetDate = new Date("1/15/26").getTime();
+const targetDate = new Date("1/23/26").getTime();
 
 function Countdown() {
     const [countdownTime, setCountdownTime] = useState(targetDate - new Date().getTime());
@@ -119,7 +118,7 @@ function Countdown() {
     }, []);
     
     return (
-        <Link to="/" className="font-mono font-light text-sm text-foreground/80">
+        <Link to="/" className="font-mono font-light text-sm text-foreground/80 mr-2">
             T-
             {String(Math.floor(countdownTime / (1000 * 60 * 60 * 24))).padStart(3, "0")}D +&nbsp;
             {String(Math.floor(countdownTime % (1000 * 60 * 60 * 24) / (1000 * 60 * 60))).padStart(2, "0")}:
@@ -133,17 +132,7 @@ export default function NavBar() {
     const [projects, setProjects] = useState<ReactNode[][]>([]);
     const [scrolled, setScrolled] = useState(false);
 
-    const queryClient = useQueryClient();
-
-    const router = useRouter();
-
     const auth = useAuthenticatedUser();
-
-    const handleSignOut = async () => {
-        await signOut();
-        await queryClient.invalidateQueries();
-        router.invalidate();
-    }
 
     useEffect(() => {
         setProjects([
@@ -238,15 +227,18 @@ export default function NavBar() {
                             <DropdownMenuItem>
                                 <NavbarMenuItem title="Create a user" icon={<Plus/>} href={"/admin/new-user"}/>
                             </DropdownMenuItem>
+                            <DropdownMenuItem>
+                                <NavbarMenuItem title="Dashboard" icon={<Gauge/>} href={"/dashboard"}/>
+                            </DropdownMenuItem>
                         </DropdownMenuGroup>
                     </NavbarMenu>
                 }
             </div>
 
-            <div className={"flex-row hidden lg:flex justify-end items-center font-semibold gap-2"}>
-                
+            <div className={"flex-row hidden lg:flex justify-end items-center font-semibold gap-4"}>
+                <Countdown />
 
-                <ThemedLink headerLink key={"contact"} href={"/contact"}>
+                <ThemedLink headerLink key={"contact"} href={"/contact"} className="-mx-2">
                     Contact
                 </ThemedLink>
                 
@@ -260,14 +252,14 @@ export default function NavBar() {
                 </SignedIn>
 
                 <NotSignedIn>
-                    <ThemedLink headerLink key={"apply"} href={"/apply"}>
+                    <ThemedLink headerLink key={"apply"} href={"/apply"} className="-mx-2">
                         Apply
                     </ThemedLink>
                 </NotSignedIn>
                 
 
                 <NotSignedIn>
-                    <Button asChild variant='outline' className="ml-1">
+                    <Button asChild variant='outline'>
                         <Link to="/sign-in">
                             Sign in
                         </Link>
@@ -276,28 +268,7 @@ export default function NavBar() {
 
                 {/* <div className="w-[2px] h-4 bg-foreground/80 mx-2"/> */}
 
-                <SignedIn>
-                    <DropdownMenu>
-                        <DropdownMenuTrigger>
-                            <Avatar className="ml-2">
-                                <AvatarImage src={undefined} alt="u" />
-                                <AvatarFallback>
-                                    <User className="w-4 h-4"/>
-                                </AvatarFallback>
-                            </Avatar>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent className="border-border">
-                            <DropdownMenuGroup>
-                                <DropdownMenuItem
-                                    onSelect={() => handleSignOut()}
-                                >
-                                    <LogOut className="w-4 h-4"/>
-                                    Sign out
-                                </DropdownMenuItem>
-                            </DropdownMenuGroup>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
-                </SignedIn>
+                <UserMenu />
             </div>
         </div>
     )

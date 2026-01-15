@@ -1,14 +1,12 @@
-import { HeadContent, Scripts, createRootRoute, createRootRouteWithContext } from '@tanstack/react-router'
+import { HeadContent, Scripts, createRootRouteWithContext, useLocation } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 
-import Header from '../components/Header'
 
 import appCss from '../styles.css?url'
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { useEffect } from 'react'
 import { bStore } from '@/hooks/useAppStore'
 import { cn } from '@/lib/utils'
 import { authQueries } from '@/services/queries'
@@ -52,6 +50,10 @@ export const Route = createRootRouteWithContext<{
 function RootDocument({ children }: { children: React.ReactNode }) {
   const _theme = bStore.use.theme();
 
+  const location = useLocation();
+
+  const dashboardActive = ["/dashboard"].some(r => location.pathname.startsWith(r));
+
   return (
     <QueryClientProvider client={queryClient}>
       <html lang="en">
@@ -63,9 +65,13 @@ function RootDocument({ children }: { children: React.ReactNode }) {
           _theme !== 'light' ? "dark" : ""
         )}>
           {/* <Header /> */}
-          <NavBar />
+          {!dashboardActive &&
+            <NavBar />
+          }
           {children}
-          <Footer />
+          {!dashboardActive &&
+            <Footer />
+          }
           <TanStackDevtools
             config={{
               position: 'bottom-right',

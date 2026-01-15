@@ -1,4 +1,3 @@
-"use client";
 import clsx from "clsx";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { PiInstagramLogoFill } from "react-icons/pi";
