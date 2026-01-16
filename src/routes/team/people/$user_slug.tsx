@@ -11,23 +11,22 @@ import { Input } from '@/components/ui/input';
 import { InputGroup, InputGroupAddon, InputGroupText, InputGroupTextarea } from '@/components/ui/input-group';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Timeline, TimelineDate, TimelineIcon, TimelineContent, TimelineEntry } from '@/components/Timeline';
-import { MEMBERSHIP_STATUS_OPTIONS } from '@/services/auth.schema';
+import { MEMBERSHIP_STATUS_OPTIONS, Profile, ProfileSchema } from '@/services/auth.schema';
 import { deleteUser, getFullProfile, updateProfile } from '@/services/user.api';
 import { useAuthenticatedUser } from '@/lib/auth/client';
 import {
   useMutation,
   useQueryClient
 } from "@tanstack/react-query";
-import { DisplayUser, DisplayUserSchema } from '@/services/user.schema';
 import { Spinner } from '@/components/ui/spinner';
-import { DateSelection, DeleteUser, ExtendedField, ExtendedLabel, LinkedInField, UsernameField } from '@/components/Form';
+import { DateSelection, DeleteUser, ExtendedField, ExtendedLabel, LinkedInField, TeamSelection, UsernameField } from '@/components/Form';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 type LoaderData = {
   profile: Awaited<ReturnType<typeof getFullProfile>>
 }
 
-export const Route = createFileRoute('/team/$user_slug')({
+export const Route = createFileRoute('/team/people/$user_slug')({
   loader: async ({ params }) => {
     const profile = await getFullProfile({
       data: {
@@ -85,9 +84,10 @@ function RouteComponent() {
       linkedIn: profile?.linkedIn,
       fccCallsign: profile?.fcc_callsign,
       bio: profile?.bio??"",
-    } as DisplayUser,
+      teamId: profile?.teamId
+    } as Profile,
     validators: {
-      onSubmit: DisplayUserSchema
+      onSubmit: ProfileSchema
     },
     onSubmit: async ({ value }) => {
       setWaiting(true);
@@ -245,6 +245,28 @@ function RouteComponent() {
                       )}
 
                       <form.Field
+                        name="teamId"
+                        children={(field) => {  
+                          const isInvalid = editMode && field.state.meta.isTouched && !field.state.meta.isValid;
+
+                          return (
+                            <ExtendedField isInvalid={isInvalid} field={field}>
+                              <ExtendedLabel
+                                name={field.name}
+                              >
+                                Subteam
+                              </ExtendedLabel>
+                              {editMode && isAdmin ? (
+                                <TeamSelection field={field} isInvalid={isInvalid}/>
+                              ) : (
+                                <p>{field.state.value}</p>
+                              )}
+                            </ExtendedField>
+                          )
+                        }}
+                      />
+
+                      <form.Field
                         name="memberSince"
                         children={(field) => {  
                           const isInvalid = editMode && field.state.meta.isTouched && !field.state.meta.isValid;
@@ -363,7 +385,7 @@ function RouteComponent() {
                                   <InputGroupTextarea
                                     id={field.name}
                                     name={field.name}
-                                    value={field.state.value}
+                                    value={field.state.value??""}
                                     onBlur={field.handleBlur}
                                     onChange={(e) => field.handleChange(e.target.value)}
                                     aria-invalid={isInvalid}

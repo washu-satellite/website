@@ -6,6 +6,7 @@ import {
 
 import { getUserSession } from "./auth.api"
 import { checkUsernameTaken, getFullProfile, listUsers, listUsersAdmin } from "./user.api";
+import { listTeams } from "./team.api";
 
 export const authQueries = {
   all: ["auth"],
@@ -34,6 +35,16 @@ export const userQueries = {
     queryOptions({
       queryKey: [...userQueries.all, "list-admin"],
       queryFn: () => listUsersAdmin(),
+      staleTime: 5000,
+    }),
+}
+
+export const teamQueries = {
+  all: ["team"],
+  list: () =>
+    queryOptions({
+      queryKey: [...teamQueries.all, "list"],
+      queryFn: () => listTeams(),
       staleTime: 5000,
     }),
 }

@@ -1,13 +1,13 @@
 import clsx from "clsx";
 import React, { type ReactNode, useEffect, useState } from "react";
 import ThemedLink from "./ThemedLink";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { ProjectHighlightData } from "@/const/content/projects";
 import type { NavElement } from "@/types/data";
 
-import { ChevronDown, Eye, Gauge, LogOut, Plus, User, Users } from "lucide-react";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import { ChevronDown, Eye, Gauge, LogOut, Plus, User, Users, Waypoints } from "lucide-react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { Link, useRouter } from "@tanstack/react-router";
@@ -16,6 +16,7 @@ import NotSignedIn from "./auth/NotSignedIn";
 import SignedIn from "./auth/SignedIn";
 import { signOut, useAuthenticatedUser } from "@/lib/auth/client";
 import { UserMenu } from "./UserMenu";
+import { teamQueries } from "@/services/queries";
 
 const MenuItem = (props: NavElement) => {
     return (
@@ -45,7 +46,7 @@ function NavbarMenuItem(props: {
         <Link
             to={props.href}
             className={cn(
-                "flex flex-row items-start p gap-2",
+                "flex flex-row items-start p gap-2 w-full",
                 {
                     "items-start": props.description !== undefined,
                     "items-center": !props.description
@@ -153,6 +154,8 @@ export default function NavBar() {
         });
     }, []);
 
+    const { data, isPending, error } = useQuery(teamQueries.list());
+
     return (
         <div
             // initial={isHome ? { 
@@ -216,10 +219,27 @@ export default function NavBar() {
                             <NavbarMenuItem title="Members & Alumni" description="The people who make it all possible" icon={<Users/>} href={"/team"}/>
                         </DropdownMenuItem>
                     </DropdownMenuGroup>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuGroup>
+                        <DropdownMenuLabel>
+                            Subteams
+                        </DropdownMenuLabel>
+                            {data?.map(t => (
+                                <DropdownMenuItem>
+                                    <NavbarMenuItem title={t.name} icon={<Waypoints/>} href={`/team/subteams/${t.name}`}/>
+                                </DropdownMenuItem>
+                            ))}
+                    </DropdownMenuGroup>
                 </NavbarMenu>
 
                 {auth?.user.role === "admin" &&
                     <NavbarMenu title="Admin">
+                        <DropdownMenuGroup>
+                            <DropdownMenuItem>
+                                <NavbarMenuItem title="Dashboard" icon={<Gauge/>} href={"/dashboard"}/>
+                            </DropdownMenuItem>
+                        </DropdownMenuGroup>
+                        <DropdownMenuSeparator />
                         <DropdownMenuGroup>
                             <DropdownMenuItem>
                                 <NavbarMenuItem title="User overview" icon={<Eye/>} href={"/admin/users"}/>
@@ -228,7 +248,10 @@ export default function NavBar() {
                                 <NavbarMenuItem title="Create a user" icon={<Plus/>} href={"/admin/new-user"}/>
                             </DropdownMenuItem>
                             <DropdownMenuItem>
-                                <NavbarMenuItem title="Dashboard" icon={<Gauge/>} href={"/dashboard"}/>
+                                <NavbarMenuItem title="Create a subteam" icon={<Plus/>} href={"/admin/new-team"}/>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>
+                                <NavbarMenuItem title="Create a role" icon={<Plus/>} href={"/admin/new-role"}/>
                             </DropdownMenuItem>
                         </DropdownMenuGroup>
                     </NavbarMenu>

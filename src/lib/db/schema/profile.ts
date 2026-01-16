@@ -14,5 +14,5 @@ export const profile = pgTable("profile", {
   email: text("email").notNull(),
   name: text("name").notNull(),
   memberSince: date("member_since").notNull(),
-  teamId: text("team_id").references(() => team.id, { onDelete: "no action" })
+  teamId: text("team_id").references(() => team.name, { onDelete: "no action" })
 });

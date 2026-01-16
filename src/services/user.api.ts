@@ -1,9 +1,9 @@
 import { db } from "@/lib/db";
 import { createServerFn } from "@tanstack/react-start";
 import * as schema from "@/lib/db/schema";
-import { and, eq, isNull, ne, sql } from "drizzle-orm";
+import { and, eq, isNull } from "drizzle-orm";
 import z from "zod";
-import { DisplayUserShortSchema, DisplayUserShort, DisplayUser, DisplayUserSchema } from "./user.schema";
+import { DisplayUserShortSchema } from "./user.schema";
 import { userRequiredMiddleware } from "./auth.api";
 import { Profile, ProfileSchema } from "./auth.schema";
 import { isAdmin } from "@/util/auth";
@@ -51,7 +51,6 @@ export const getFullProfile = createServerFn({ method: "GET" })
     const value = (await db
       .select()
       .from(schema.profile)
-      .leftJoin(schema.user, eq(schema.profile.userId, schema.user.id))
       .where(eq(schema.profile.username, data.username))
       .limit(1)
     )[0];
@@ -64,40 +63,35 @@ export const getFullProfile = createServerFn({ method: "GET" })
         return undefined;
 
     return {
-        ...value.profile,
-        ...value.user,
-        memberSince: new Date(value.profile?.memberSince??Date.now())
-    } as DisplayUser;
+        ...value,
+        memberSince: new Date(value.memberSince??Date.now())
+    } as Profile;
   });
 
 export const updateProfile = createServerFn({ method: "POST" })
-  .inputValidator(DisplayUserSchema)
+  .inputValidator(ProfileSchema)
   .middleware([userRequiredMiddleware])
   .handler(async ({ data, context }) => {
     const user = context.userSession.user;
     
-    if (user.id !== data.id && user.role !== "admin") {
+    if (user.id !== data.userId && user.role !== "admin") {
       throw new Error("You do not have permission to edit this user's profile!");
     }
 
-    const res1 = await db
-      .update(schema.user)
-      .set(data)
-      .where(eq(schema.user.id, data.id));
-    
-    console.log(res1.rowCount);
+    if (data.userId) {
+      await db
+        .update(schema.user)
+        .set(data)
+        .where(eq(schema.user.id, data.userId));
+    }
 
-    const res2 = await db
+    await db
       .update(schema.profile)
       .set({
         ...data,
         memberSince: data.memberSince.toISOString().slice(0, 10)
       })
       .where(eq(schema.profile.username, data.username));
-    
-    console.log(res2.rowCount);
-
-    return { success: true, id: Date.now() };
   });
 
 export const checkUsernameTaken = createServerFn({ method: "GET" })

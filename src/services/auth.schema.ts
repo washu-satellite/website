@@ -48,7 +48,8 @@ export const ProfileSchema = z.object({
     .trim()
     .optional().nullable(),
   bio: z.string().optional().nullable(),
-  imageUrl: z.string().trim().optional().nullable()
+  imageUrl: z.string().trim().optional().nullable(),
+  teamId: z.string().optional().nullable()
 });
 
 export type Profile = z.infer<typeof ProfileSchema>;

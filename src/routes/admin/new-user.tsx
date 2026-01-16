@@ -160,37 +160,6 @@ function RouteComponent() {
                 form={form}
               />
 
-              {/* <form.Field
-                name="username"
-                children={(field) => {  
-                  const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
-
-                  return (
-                    <ExtendedField isInvalid={isInvalid} field={field}>
-                      <ExtendedLabel
-                        name={field.name}
-                      >
-                        Username
-                      </ExtendedLabel>
-                        <InputGroup>
-                        <InputGroupInput
-                          id={field.name}
-                          name={field.name}
-                          value={field.state.value}
-                          onBlur={field.handleBlur}
-                          onChange={(e) => field.handleChange(e.target.value)}
-                          aria-invalid={isInvalid}
-                          placeholder={"j_smith"}
-                        />
-                        <InputGroupAddon>
-                          <AtSign />
-                        </InputGroupAddon>
-                      </InputGroup>
-                    </ExtendedField>
-                  )
-                }}
-              /> */}
-
               <form.Field
                 name="memberSince"
                 children={(field) => {  

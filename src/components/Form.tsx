@@ -7,6 +7,7 @@ import { Calendar } from "./ui/calendar";
 import {
   AtSign,
   CheckIcon,
+  ChevronDown,
   ChevronDownIcon,
   CircleQuestionMarkIcon,
   LockIcon,
@@ -28,9 +29,11 @@ import {
   AlertDialogTrigger,
 } from "./ui/alert-dialog";
 
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { deleteUser } from "@/services/user.api";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import { teamQueries } from "@/services/queries";
 
 export function ExtendedField(
   props: React.PropsWithChildren<
@@ -117,6 +120,37 @@ export function DateSelection(props: { field: any }) {
   );
 }
 
+export function TeamSelection(
+  props: {
+    field: any;
+    isInvalid?: boolean;
+  } & React.ComponentProps<"div">
+) {
+  const { data } = useQuery(teamQueries.list());
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant='outline' className="w-full justify-between">
+          {props.field.state.value??"None"}
+          <ChevronDown />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuGroup>
+          {data?.map(t => (
+            <DropdownMenuItem
+              onClick={() => props.field.handleChange(t.name)}
+            >
+              {t.name}
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
 export function LinkedInField(
   props: {
     field: any;
@@ -128,7 +162,7 @@ export function LinkedInField(
       <InputGroupInput
         id={props.field.name}
         name={props.field.name}
-        value={props.field.state.value}
+        value={props.field.state.value??""}
         onBlur={props.field.handleBlur}
         onChange={(e) => props.field.handleChange(e.target.value)}
         aria-invalid={props.isInvalid}

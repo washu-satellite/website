@@ -39,7 +39,7 @@ export function UserMenu() {
                         <DropdownMenuItem
                             asChild
                         >
-                            <Link to="/team/$user_slug" params={{ user_slug: userData.profile.username }}>
+                            <Link to="/team/people/$user_slug" params={{ user_slug: userData.profile.username }}>
                                 <ExternalLink className="w-4 h-4"/>
                                 Profile
                             </Link>

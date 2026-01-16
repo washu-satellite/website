@@ -44,7 +44,7 @@ const TeamTile = (props: DisplayUserShort) => {
                     </Badge>
                 }
                 <Link
-                    to={"/team/$user_slug"}
+                    to={"/team/people/$user_slug"}
                     params={{ user_slug: props.username }}
                     className="absolute top-0 left-0 flex flex-col items-center justify-center w-full h-full opacity-0 transition-all duration-500 group-hover:opacity-100"
                 >
