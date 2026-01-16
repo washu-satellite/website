@@ -259,7 +259,9 @@ function RouteComponent() {
                               {editMode && isAdmin ? (
                                 <TeamSelection field={field} isInvalid={isInvalid}/>
                               ) : (
-                                <p>{field.state.value}</p>
+                                <Link to="/team/subteams/$team_slug" params={{ team_slug: field.state.value }} className="hover:underline underline-offset-2">
+                                  {field.state.value}
+                                </Link>
                               )}
                             </ExtendedField>
                           )
