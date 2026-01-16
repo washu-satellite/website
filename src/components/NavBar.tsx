@@ -177,7 +177,7 @@ export default function NavBar() {
                 `text-text bg-bg border-bg-highlight transition-all duration-300 border-border`,
                 // theme === 'light' && scroll > SCROLL_MAX ? 'shadow' : 'shadow-none',
                 {
-                    "bg-background dark:bg-background/50 dark:backdrop-blur-lg border-b": scrolled,
+                    "bg-background dark:bg-background/50 dark:backdrop-blur-lg border-b inset-shadow-current/15 inset-shadow-sm": scrolled,
                     "bg-none backdrop-blur-none border-b-0": !scrolled
                 },
                 "fixed z-50 w-full top-0 left-0 flex flex-row justify-between items-center py-3 px-4 xl:px-8 lg:px-[4rem]"

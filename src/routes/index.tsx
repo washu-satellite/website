@@ -83,7 +83,7 @@ function Banner() {
       <div className="h-full md:h-screen"/>
       <div className="block md:p-0 md:absolute w-full top-[8rem] lg:top-[12rem]">
         <div className="flex flex-col lg:pl-[4rem] mt-16 md:mt-0 mb-8 md:mb-0 w-full items-center lg:items-start text-center md:text-left">
-          <h2 className="font-light font-mono lowercase text-lg md:text-xl text-white/60 z-10 bg-background/50 backdrop-blur-md border border-border rounded-sm px-2 py-1">
+          <h2 className="font-light font-mono lowercase text-lg md:text-xl text-white/40 z-10 bg-[#111]/50 inset-shadow-current/15 inset-shadow-sm backdrop-blur-3xl border border-[#222] rounded-xl px-4 py-1">
             Student-developed
           </h2>
           <div
