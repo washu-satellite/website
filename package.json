@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev --port 3000",
-    "build": "npm install --save-dev @bufbuild/buf && buf generate buf.build/ws-buf/internal && drizzle-kit push && vite build",
+    "build": "npm install --save-dev @bufbuild/buf && buf generate buf.build/ws-buf/internal && drizzle-kit push --force && vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "seed": "npx tsx ./src/lib/db/seed.ts",
