@@ -24,6 +24,7 @@ import { useForm } from "@tanstack/react-form";
 import { Field, FieldGroup, FieldLabel, FieldError } from "@/components/ui/field";
 import { InputGroup, InputGroupInput, InputGroupAddon } from "@/components/ui/input-group";
 import { AtSign } from "lucide-react";
+import { ExtendedField, ExtendedLabel } from "@/components/Form";
 
 const signInSearchSchema = z.object({
   redirect: z.string().default('/')
@@ -108,8 +109,8 @@ function RouteComponent() {
                 const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
                 
                 return (
-                  <Field>
-                    <FieldLabel htmlFor={field.name}>Email</FieldLabel>
+                  <ExtendedField field={field} isInvalid={isInvalid}>
+                    <ExtendedLabel name={field.name}>Email</ExtendedLabel>
                     <Input
                       id={field.name}
                       name={field.name}
@@ -122,10 +123,7 @@ function RouteComponent() {
                       type="email"
                       placeholder={"j.smith@wustl.edu"}
                     />
-                    {isInvalid &&
-                      <FieldError errors={field.state.meta.errors}/>
-                    }
-                  </Field>
+                  </ExtendedField>
                 )
               }}
             />
@@ -136,8 +134,8 @@ function RouteComponent() {
                 const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
                 
                 return (
-                  <Field>
-                    <FieldLabel htmlFor={field.name}>Password</FieldLabel>
+                  <ExtendedField field={field} isInvalid={isInvalid}>
+                    <ExtendedLabel name={field.name}>Password</ExtendedLabel>
                     <Input
                       id={field.name}
                       name={field.name}
@@ -152,7 +150,7 @@ function RouteComponent() {
                     {isInvalid &&
                       <FieldError errors={field.state.meta.errors}/>
                     }
-                  </Field>
+                  </ExtendedField>
                 )
               }}
             />
