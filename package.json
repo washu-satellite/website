@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev --port 3000",
-    "build": "buf generate buf.build/ws-buf/internal && drizzle-kit push && vite build",
+    "build": "npm install --save-dev @bufbuild/buf && buf generate buf.build/ws-buf/internal && drizzle-kit push && vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "seed": "npx tsx ./src/lib/db/seed.ts",
@@ -90,6 +90,7 @@
     "zustand": "^5.0.9"
   },
   "devDependencies": {
+    "@bufbuild/buf": "^1.63.0",
     "@faker-js/faker": "^10.2.0",
     "@tanstack/devtools-vite": "^0.3.11",
     "@testing-library/dom": "^10.4.0",
