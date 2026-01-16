@@ -31,7 +31,7 @@ import {
 import {
     useMutation,
     useQuery,
-    useQueryClient
+    useQueryClient,
 } from "@tanstack/react-query"
 
 import { deleteUser, listUsersAdmin } from "@/services/user.api"
@@ -39,21 +39,24 @@ import { authQueries, userQueries } from "@/services/queries"
 import { isAdmin } from "@/util/auth"
 import { cn } from "@/lib/utils"
 import { Checkbox } from "@/components/ui/checkbox"
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTrigger } from "@/components/ui/alert-dialog"
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog"
 import { FieldGroup } from "@/components/ui/field"
 import LoadingPage from "@/components/LoadingPage"
 import { DeleteUser } from "@/components/Form"
+import Papa, { ParseResult } from "papaparse";
+import { Spinner } from "@/components/ui/spinner"
+import { batchCreateProfile } from "@/services/auth.api"
+import z, { email, success, ZodError } from "zod"
+import { MEMBERSHIP_STATUS_OPTIONS, NewProfileSchema, Profile, ProfileSchema } from "@/services/auth.schema"
 
 export const Route = createFileRoute('/admin/users')({
     beforeLoad: async ({ context }) => {
-        const userSession = await context.queryClient.ensureQueryData(
-            authQueries.user()
-        );
+        const { userSession } = context;
 
         if (!isAdmin(userSession))
             throw redirect({
             to: '/sign-in',
-        })
+        });
     },
     loader: ({ params, context }) => {
         return context.queryClient.ensureQueryData(userQueries.listAdmin());
@@ -222,7 +225,7 @@ export const columns: ColumnDef<Column>[] = [
     },
     {
         accessorKey: "userId",
-        header: "id",
+        header: "account id",
         cell: ({ row }) => (
             <p
                 className="line-clamp-1"
@@ -247,6 +250,63 @@ export const columns: ColumnDef<Column>[] = [
 
 function FileUpload() {
     const [open, setOpen] = React.useState(false);
+    const [file, setFile] = React.useState<File | null>(null);
+    const [waiting, setWaiting] = React.useState(false);
+    const [errorMessages, setErrorMessages] = React.useState<string[]>([]);
+
+    const queryClient = useQueryClient();
+
+    const publishUsersMutation = useMutation({
+        mutationKey: ["auth", "sign-up"],
+        mutationFn: batchCreateProfile,
+        onSuccess: (res) => {
+          queryClient.invalidateQueries({ queryKey: ["user"] });
+        },
+        onError: (err) => {
+          setErrorMessages([err.message]);
+    
+          setWaiting(false);
+        }
+      });
+
+    const publishData = async (f: File) => {
+        const results = await new Promise((complete, error) => {
+                Papa.parse(f, {
+                    complete,
+                    error,
+                    header: true
+                });
+        }) as { data: any, errors: string[] };
+
+        if (results.errors.length > 0) {
+            setErrorMessages(results.errors);
+            return false;
+        }
+
+        const filtered = results.data.map((d: any) => {
+            return {
+                ...d,
+                username: ((d.name??"") as string).toLowerCase().replaceAll(" ", "_").replaceAll("-", "_").replaceAll(".", "_").slice(0, 16),
+                memberSince: new Date(),
+                membershipStatus: d.membershipStatus??MEMBERSHIP_STATUS_OPTIONS[0]
+            };
+        });
+
+        const val = ProfileSchema.safeParse(filtered[0]);
+        if (val.error) {
+            setErrorMessages(val.error.issues.map(i => `"${i.path[i.path.length-1].toString()}": ${i.message}`));
+            return false;
+        }
+
+        const safeVals = filtered
+            .map((row: any) => ProfileSchema.safeParse(row))
+            .filter((row: any) => row.success)
+            .map((row: any) => row.data);
+
+        await publishUsersMutation.mutateAsync({ data: { profiles: safeVals } });
+
+        return true;
+    };
 
     return (
         <AlertDialog open={open} onOpenChange={setOpen}>
@@ -258,15 +318,33 @@ function FileUpload() {
             </AlertDialogTrigger>
             <AlertDialogContent className="border-border">
                 <AlertDialogHeader>
-                    Upload a user CSV
+                    <AlertDialogTitle>
+                        Upload a user CSV
+                    </AlertDialogTitle>
                 </AlertDialogHeader>
                 <AlertDialogDescription>
                     Converts the uploaded CSV rows into new (unclaimed) user profile entries. Must contain at least the columns <span className="font-mono">name</span> and <span className="font-mono">email</span>. Other columns may be provided, but will be nulled or automatically created based on the name/email. Duplicate users (by email) are ignored.
                 </AlertDialogDescription>
                 <form
                     id="csv-upload-form"
-                    onSubmit={(e) => {
+                    onSubmit={async (e) => {
                         e.preventDefault();
+
+                        setErrorMessages([]);
+
+                        if (!file)
+                            return;
+                        
+                        setWaiting(true);
+
+                        const success = await publishData(file);
+
+                        setWaiting(false);
+
+                        if (errorMessages.length === 0 && success) {
+                            console.log("no error message");
+                            setOpen(false);
+                        }
                     }}
                 >
                     <FieldGroup>
@@ -275,16 +353,28 @@ function FileUpload() {
                             type="file"
                             accept=".csv"
                             className="text-base text-foreground/80"
+                            onChange={(e) => setFile(e.target.files?.[0]??null)}
                         />
                     </FieldGroup>
+                    {errorMessages.length > 0 &&
+                        <ul className="text-destructive text-sm pt-2">
+                            {errorMessages.map(m => (
+                                <li className="flex flex-row items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-destructive"/>{m}</li>
+                            ))}
+                        </ul>
+                    }
                 </form>
                 <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction asChild>
-                        <Button>
-                            Submit
-                        </Button>
-                    </AlertDialogAction>
+                    <Button
+                        type="submit"
+                        form="csv-upload-form"
+                    >
+                        {waiting &&
+                            <Spinner />
+                        }
+                        Submit
+                    </Button>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>
@@ -302,10 +392,8 @@ function RouteComponent() {
 
     const { data: users } = useQuery(userQueries.listAdmin());
 
-    if (!users) return <LoadingPage />;
-
     const table = useReactTable({
-        data: users,
+        data: users??[],
         columns,
         onSortingChange: setSorting,
         onColumnFiltersChange: setColumnFilters,
@@ -328,6 +416,8 @@ function RouteComponent() {
             rowSelection,
         },
     });
+
+    if (!users) return <LoadingPage />;
 
     return (
         <div className="flex-1 w-full mt-20 px-8">

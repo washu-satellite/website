@@ -5,21 +5,18 @@ import { cn } from "@/lib/utils";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuLabel, DropdownMenuCheckboxItem } from "@/components/ui/dropdown-menu";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
-import { ArrowLeftFromLineIcon, ArrowUp, Bell, Check, ChevronDown, Command, Cross, Database, ExternalLink, GamepadDirectional, Moon, PanelRightClose, PanelRightOpen, PanelTopClose, Plus, Pyramid, RadioTower, RefreshCcw, Settings, SidebarClose, SidebarOpen, SquareTerminal, Sun, Triangle, TriangleAlert, X } from "lucide-react";
-import { ReactNode, useEffect, useState } from "react";
+import { ArrowLeftFromLineIcon, Bell, Check, ChevronDown, Database, ExternalLink, GamepadDirectional, Moon, PanelTopClose, Plus, Pyramid, RadioTower, RefreshCcw, Settings, SidebarClose, SidebarOpen, SquareTerminal, Sun, TriangleAlert } from "lucide-react";
+import { ReactNode, useState } from "react";
 import ControlsView from "@/components/views/controls-view";
 import { Spinner } from "@/components/ui/spinner";
 import { StatField } from "@/components/stat-field";
-import CDHView from "@/components/views/cdh-view";
 import DataView from "@/components/views/data-view";
-import { SidebarContent, SidebarFooter, SidebarGroup, SidebarHeader, SidebarProvider } from "@/components/ui/sidebar";
 
 
-import { createFileRoute, Link, redirect, useLocation } from '@tanstack/react-router'
+import { createFileRoute, Link, redirect } from '@tanstack/react-router';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import { Separator } from "@/components/ui/separator";
 import { UserMenu } from "@/components/UserMenu";
-import { authQueries } from "@/services/queries";
 import { isAdmin } from "@/util/auth";
 
 export const Route = createFileRoute('/dashboard/')({
@@ -122,83 +119,6 @@ function NavTile(props: NavTileType & { selected?: boolean, onClick: () => void,
             }
         </Tooltip>
     )
-}
-
-function UserTile() {
-    const _user = bStore.use.user();
-
-    return (
-        <div className="flex flex-row justify-between border-t p-4 flex-wrap gap-2">
-            <div className="flex flex-row gap-2 flex-wrap">
-                {_user &&
-                    <Avatar className="w-16 h-16">
-                        <AvatarImage
-                            src={_user?.avatar}
-                            alt={`@${_user?.username}`}
-                        />
-                        <AvatarFallback>
-                            {_user?.username[0]}
-                        </AvatarFallback>
-                    </Avatar>
-                }
-                <div>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <h3 className="font-semibold">Nate Hayman</h3>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                            @{_user?.username}
-                        </TooltipContent>
-                    </Tooltip>
-                    <p className="text-xs text-muted-foreground">Software Engineering</p>
-                    {true ? (
-                        <div className="flex flex-row items-center gap-1 hover:underline text-amber-500">
-                            <TriangleAlert className="w-3"/>
-                            <a href="" className="font-mono text-[0.7rem] pt-[0.05rem] font-medium">UNLICENSED</a>
-                        </div>
-                    ) : (
-                        <div className="flex flex-row items-center gap-1 hover:underline text-muted-foreground">
-                            <a href="" className="font-mono text-[0.7rem]">KF0TSQ</a>
-                            <Check className="w-3"/>
-                        </div>
-                    )}
-                </div>
-            </div>
-            <Button
-                variant="secondary"
-                size="sm"
-                className="cursor-pointer"
-                // onClick={async () => {
-                //     await authClient.signOut({
-                //         fetchOptions: {
-                //             onSuccess: () => redirect("/sign-in")
-                //         }
-                //     })
-                // }}
-            >
-                Sign out
-            </Button>
-        </div>
-    );
-}
-
-function UserTileMinimal() {
-    const _user = bStore.use.user();
-
-    return _user ? (
-        <Button variant="ghost" className="w-8 h-8 relative">
-            <Avatar className="w-8 h-8 rounded-md">
-                <AvatarImage
-                    src={_user?.avatar}
-                    alt={`@${_user?.username}`}
-                />
-                <AvatarFallback>
-                    {_user?.username[0]}
-                </AvatarFallback>
-            </Avatar>
-            <div className="absolute -top-1 -right-1 bg-amber-500 rounded-full w-3 h-3 p-px border-2 border-secondary" />
-        </Button>
-    ) : (<></>);
 }
 
 function ViewHeader(props: {
@@ -554,18 +474,6 @@ function Sidebar(props: {
 }
 function RouteComponent() {
   const [view, setView] = useState<string | null>("command");
-
-    const [expanded, setExpanded] = useState(false);
-
-    const _user = bStore.use.user();
-
-    console.log(_user);
-
-    // useEffect(() => {
-    //     params.then(p => {
-    //         setView(p.view);
-    //     });
-    // }, []);
 
     return view ? (
         <div className="flex-1 flex flex-row bg-secondary dark:bg-secondary/50">

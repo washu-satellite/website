@@ -68,12 +68,9 @@ export function ExtendedLabel(
 ) {
   return (
     <div
-      className={cn(
-        "flex flex-row items-center gap-2",
-        {
-          "mb-1": !props.horizontal
-        }
-      )}
+      className={cn("flex flex-row items-center gap-2", {
+        "mb-1": !props.horizontal,
+      })}
     >
       {props.locked && <LockIcon className="w-3 text-foreground/60" />}
       <FieldLabel htmlFor={props.name}>
@@ -120,6 +117,30 @@ export function DateSelection(props: { field: any }) {
   );
 }
 
+export function LinkedInField(
+  props: {
+    field: any;
+    isInvalid?: boolean;
+  } & React.ComponentProps<"div">
+) {
+  return (
+    <InputGroup>
+      <InputGroupInput
+        id={props.field.name}
+        name={props.field.name}
+        value={props.field.state.value}
+        onBlur={props.field.handleBlur}
+        onChange={(e) => props.field.handleChange(e.target.value)}
+        aria-invalid={props.isInvalid}
+        placeholder={"j_smith"}
+      />
+      <InputGroupAddon>
+        <p>https://www.linkedin.com/in/</p>
+      </InputGroupAddon>
+    </InputGroup>
+  );
+}
+
 export function UsernameField(
   props: {
     form: any;
@@ -133,6 +154,10 @@ export function UsernameField(
   const [waiting, setWaiting] = useState(false);
 
   const user = useAuthenticatedUser();
+
+  const nameInvalid = (username: string) => {
+    return nameTaken === "taken" && user?.profile.username !== username;
+  }
 
   return (
     <props.form.Field
@@ -156,8 +181,10 @@ export function UsernameField(
 
         return (
           <Field
-            data-invalid={isInvalid || nameTaken === "taken"}
-            className={cn("gap-1", props.className, { "-mt-1": props.horizontal })}
+            data-invalid={isInvalid || nameInvalid(field.state.value)}
+            className={cn("gap-1", props.className, {
+              "-mt-1": props.horizontal,
+            })}
           >
             <ExtendedLabel
               name={field.name}
@@ -183,7 +210,7 @@ export function UsernameField(
                 value={field.state.value}
                 onBlur={field.handleBlur}
                 onChange={(e) => field.handleChange(e.target.value)}
-                aria-invalid={isInvalid || nameTaken === "taken"}
+                aria-invalid={isInvalid || nameInvalid(field.state.value)}
                 aria-disabled={props.locked}
                 disabled={props.locked}
                 placeholder={"j_smith"}
@@ -199,7 +226,7 @@ export function UsernameField(
               />
             ) : (
               nameTaken !== "not_checked" &&
-              (nameTaken === "free" ? (
+              (!nameInvalid(field.state.value) ? (
                 <p className="text-green-500 flex flex-row items-center text-xs gap-1">
                   <CheckIcon className="w-4" />
                   Name is available

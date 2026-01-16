@@ -20,7 +20,7 @@ import {
 } from "@tanstack/react-query";
 import { DisplayUser, DisplayUserSchema } from '@/services/user.schema';
 import { Spinner } from '@/components/ui/spinner';
-import { DateSelection, DeleteUser, ExtendedField, ExtendedLabel, UsernameField } from '@/components/Form';
+import { DateSelection, DeleteUser, ExtendedField, ExtendedLabel, LinkedInField, UsernameField } from '@/components/Form';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 type LoaderData = {
@@ -53,8 +53,6 @@ function DividerHeading(props: React.PropsWithChildren<{
 }
 
 function RouteComponent() {
-  const user = ExecMembers[2];
-
   const session = useAuthenticatedUser();
 
   const queryClient = useQueryClient();
@@ -76,18 +74,6 @@ function RouteComponent() {
     }
   });
 
-  const deleteUserMutation = useMutation({
-    mutationKey: ["user", "update-profile"],
-    mutationFn: deleteUser,
-    onSuccess: (res) => {
-      queryClient.invalidateQueries({ queryKey: ['user'] });
-      redirect({
-        to: "/"
-      });
-      console.log("successfully updated user!");
-    }
-  });
-
   const form = useForm({
     defaultValues: {
       id: profile?.id,
@@ -96,7 +82,7 @@ function RouteComponent() {
       memberSince: profile?.memberSince,
       membershipStatus: profile?.membershipStatus,
       email: profile?.email,
-      linkedin: profile?.linkedin,
+      linkedIn: profile?.linkedIn,
       fccCallsign: profile?.fcc_callsign,
       bio: profile?.bio??"",
     } as DisplayUser,
@@ -331,7 +317,7 @@ function RouteComponent() {
                       />
 
                       <form.Field
-                        name="linkedin"
+                        name="linkedIn"
                         children={(field) => {  
                           const isInvalid = editMode && field.state.meta.isTouched && !field.state.meta.isValid;
 
@@ -343,20 +329,16 @@ function RouteComponent() {
                                 LinkedIn
                               </ExtendedLabel>
                               {editMode ? (
-                                <Input
-                                  id={field.name}
-                                  name={field.name}
-                                  value={field.state.value}
-                                  onBlur={field.handleBlur}
-                                  onChange={(e) => field.handleChange(e.target.value)}
-                                  aria-invalid={isInvalid}
+                                <LinkedInField
+                                  field={field}
+                                  isInvalid={isInvalid}
                                 />
                               ) : (
                                 <a
-                                  href={`https://www.${field.state.value}`}
+                                  href={`https://www.linkedin.com/in/${field.state.value}`}
                                   className="hover:underline underline-offset-2"
                                 >
-                                  {field.state.value}
+                                  linkedin.com/in/{field.state.value}
                                 </a>
                               )}
                             </ExtendedField>
@@ -417,7 +399,7 @@ function RouteComponent() {
                       <p className="hover:underline underline-offset-2">{user.email}</p>
                     </div>
                   </div> */}
-                  {(session?.user.id === params.user_slug || session?.user.role === "admin") &&
+                  {(session?.profile.username === params.user_slug || session?.user.role === "admin") &&
                     <div className="col-span-full flex flex-row items-center gap-2 border-t border-border p-4">
                       {editMode ? (
                         <>

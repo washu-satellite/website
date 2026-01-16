@@ -56,6 +56,19 @@ export const userRequiredMiddleware = createMiddleware({ type: "function" })
     return next({ context: { userSession: context.userSession } });
   });
 
+export const batchCreateProfile = createServerFn({ method: "POST" })
+  .inputValidator(z.object({
+    profiles: z.array(ProfileSchema)
+  }))
+  .middleware([userRequiredMiddleware])
+  .handler(async ({ data, context }) => {
+    if (!isAdmin(context.userSession)) {
+      throw new Error("Illegal user creation request");
+    }
+
+    await Promise.all(data.profiles.map(p => createProfileAdmin({ data: p })));
+  });
+
 export const createProfile = createServerFn({ method: "POST" })
   .inputValidator(NewProfileSchema)
   .middleware([userRequiredMiddleware])
@@ -95,8 +108,7 @@ export const createProfileAdmin = createServerFn({ method: "POST" })
       .insert(schema.profile)
       .values({
         ...data,
-        memberSince: new Date().toISOString().slice(0, 10),
-        membershipStatus: "Unknown"
+        memberSince: new Date().toISOString().slice(0, 10)
       });
 
     console.log("new profile added!");

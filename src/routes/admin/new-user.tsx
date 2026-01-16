@@ -15,7 +15,7 @@ import {
 } from "@tanstack/react-query";
 import { Spinner } from '@/components/ui/spinner';
 import { createProfileAdmin } from '@/services/auth.api';
-import { DateSelection, ExtendedField, ExtendedLabel, UsernameField } from '@/components/Form';
+import { DateSelection, ExtendedField, ExtendedLabel, LinkedInField, UsernameField } from '@/components/Form';
 import { faker } from "@faker-js/faker";
 
 
@@ -80,10 +80,12 @@ function RouteComponent() {
           variant='outline'
           className="absolute top-3 right-3"
           onClick={() => {
-            form.setFieldValue("email", faker.internet.email());
-            form.setFieldValue("name", faker.person.fullName());
-            form.setFieldValue("username", faker.internet.username());
-            form.setFieldValue("linkedin", faker.internet.url());
+            const name = faker.person.fullName();
+
+            form.setFieldValue("email", name.toLowerCase().replaceAll(".", "").replaceAll(" ", ".") + "@gmail.com");
+            form.setFieldValue("name", name);
+            form.setFieldValue("username", name.toLowerCase().replaceAll(".", "").replaceAll(" ", "_"));
+            form.setFieldValue("linkedIn", name.toLowerCase().replaceAll(".", "").replaceAll(" ", "-"));
           }}
         >
           <ShuffleIcon />
@@ -154,6 +156,7 @@ function RouteComponent() {
               />
 
               <UsernameField
+                horizontal
                 form={form}
               />
 
@@ -253,7 +256,7 @@ function RouteComponent() {
               />
 
               <form.Field
-                name="linkedin"
+                name="linkedIn"
                 children={(field) => {  
                   const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
 
@@ -264,14 +267,7 @@ function RouteComponent() {
                       >
                         LinkedIn
                       </ExtendedLabel>
-                      <Input
-                        id={field.name}
-                        name={field.name}
-                        value={field.state.value}
-                        onBlur={field.handleBlur}
-                        onChange={(e) => field.handleChange(e.target.value)}
-                        aria-invalid={isInvalid}
-                      />
+                      <LinkedInField field={field} isInvalid={isInvalid}/>
                     </ExtendedField>
                   );
                 }}

@@ -17,18 +17,15 @@ import LoadingPage from "@/components/LoadingPage";
 export const Route = createFileRoute('/team/')({
     loader: async ({ context }) => {
         await context.queryClient.ensureQueryData(userQueries.list());
-      },
+    },
     component: TeamPage,
 });
 
 const TeamTile = (props: DisplayUserShort) => {
-    const { theme } = { theme: 'dark' };
-
     return (
         <div
             className={clsx(
-                theme === 'light' ? 'shadow-sm' : "",
-                `border-border border group`,
+                `border-border border group shadow-sm dark:shadow-none`,
                 `flex flex-col font-mono justify-end rounded-md bg-background w-[16rem] h-[16rem] min-h-0`
             )}
         >
@@ -47,7 +44,8 @@ const TeamTile = (props: DisplayUserShort) => {
                     </Badge>
                 }
                 <Link
-                    to={`/team/${props.username}`}
+                    to={"/team/$user_slug"}
+                    params={{ user_slug: props.username }}
                     className="absolute top-0 left-0 flex flex-col items-center justify-center w-full h-full opacity-0 transition-all duration-500 group-hover:opacity-100"
                 >
                     <ArrowRight className="-rotate-45 w-24 h-24 transition-all duration-500 mt-6 mr-6 group-hover:mt-0 group-hover:mr-0"/>
@@ -66,8 +64,8 @@ const TeamTile = (props: DisplayUserShort) => {
                         <p className="text-sm font-sans text-foreground/80"></p>
                     </div>
                     <div className="hover:text-secondary-foreground flex flex-row items-center">
-                        {props.linkedin && (
-                            <a href={props.linkedin}>
+                        {props.linkedIn && (
+                            <a href={`https://www.linkedin.com/in/${props.linkedIn}`}>
                                 <FaLinkedin size={30} />
                             </a>
                         )}

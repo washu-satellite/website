@@ -23,7 +23,7 @@ export const NewProfileSchema = z.object({
 export type NewProfile = z.infer<typeof NewProfileSchema>;
 
 export const ProfileSchema = z.object({
-  userId: z.string().trim().optional(),
+  userId: z.string().trim().optional().nullable(),
   name: z
     .string()
     .min(5, "Name must be at least five characters")
@@ -38,17 +38,17 @@ export const ProfileSchema = z.object({
     .trim()
     .trim(),
   memberSince: z.date(),
-  membershipStatus: z.enum(MEMBERSHIP_STATUS_OPTIONS).optional(),
+  membershipStatus: z.enum(MEMBERSHIP_STATUS_OPTIONS),
   email: z.email().trim(),
-  linkedin: z.url().trim().optional(),
+  linkedIn: z.string().trim().optional().nullable(),
   fccCallsign: z
     .string()
     .min(5, "Callsign must be at least 5 characters")
     .max(7, "Callsign may not be more than seven characters!")
     .trim()
-    .optional(),
-  bio: z.string().optional(),
-  imageUrl: z.string().trim().optional()
+    .optional().nullable(),
+  bio: z.string().optional().nullable(),
+  imageUrl: z.string().trim().optional().nullable()
 });
 
 export type Profile = z.infer<typeof ProfileSchema>;

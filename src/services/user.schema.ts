@@ -17,16 +17,17 @@ export const DisplayUserShortSchema = z.object({
     .trim()
     .trim(),
     memberSince: z.date(),
-    membershipStatus: z.enum(MEMBERSHIP_STATUS_OPTIONS).optional(),
+    membershipStatus: z.enum(MEMBERSHIP_STATUS_OPTIONS),
     email: z.email().trim(),
-    linkedin: z.url().trim().optional(),
+    linkedIn: z.string().trim().optional().nullable(),
     fcc_callsign: z
     .string()
     .min(5, "Callsign must be at least 5 characters")
     .max(7, "Callsign may not be more than seven characters!")
     .trim()
-    .optional(),
-    imageUrl: z.string().trim().optional()
+    .optional()
+    .nullable(),
+    imageUrl: z.string().trim().optional().nullable()
 });
 
 export type DisplayUserShort = z.infer<typeof DisplayUserShortSchema>;
@@ -47,17 +48,17 @@ export const DisplayUserSchema = z.object({
     .trim()
     .trim(),
     memberSince: z.date(),
-    membershipStatus: z.enum(MEMBERSHIP_STATUS_OPTIONS).optional(),
+    membershipStatus: z.enum(MEMBERSHIP_STATUS_OPTIONS),
     email: z.email().trim(),
-    linkedin: z.url().trim().optional(),
+    linkedIn: z.string().trim().optional().nullable(),
     fcc_callsign: z
     .string()
     .min(5, "Callsign must be at least 5 characters")
     .max(7, "Callsign may not be more than seven characters!")
     .trim()
-    .optional(),
-    bio: z.string().optional(),
-    imageUrl: z.string().trim().optional()
+    .optional().nullable(),
+    bio: z.string().optional().nullable(),
+    imageUrl: z.string().trim().optional().nullable()
 });
 
 export type DisplayUser = z.infer<typeof DisplayUserSchema>;

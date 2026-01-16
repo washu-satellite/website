@@ -11,17 +11,12 @@ import { ilike } from "drizzle-orm";
 
 export const listUsers = createServerFn({ method: "GET" })
     .handler(async () => {
-        const users = await db.select().from(schema.user).leftJoin(schema.profile, eq(schema.user.id, schema.profile.userId));
+        const profiles = await db.select().from(schema.profile);
 
-        const filtered = users.filter(u => u.profile);
-        
-        console.log(filtered[0]);
-
-        const arr = z.array(DisplayUserShortSchema).parse(filtered.map(f => ({
-            ...f.profile,
-            ...f.user,
-            memberSince: new Date(f.profile?.memberSince??Date.now())
-        } as DisplayUserShort)));
+        const arr = z.array(DisplayUserShortSchema).parse(profiles.map(p => ({
+            ...p,
+            memberSince: new Date(p?.memberSince??Date.now())
+        })));
 
         return arr;
     });
@@ -98,7 +93,7 @@ export const updateProfile = createServerFn({ method: "POST" })
         ...data,
         memberSince: data.memberSince.toISOString().slice(0, 10)
       })
-      .where(eq(schema.profile.userId, data.id));
+      .where(eq(schema.profile.username, data.username));
     
     console.log(res2.rowCount);
 
