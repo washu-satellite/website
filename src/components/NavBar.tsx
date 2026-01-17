@@ -73,8 +73,8 @@ function NavbarMenu(props: React.PropsWithChildren<{
 
     return (
         <div
-            // onMouseEnter={() => setOpen(true)}
-            // onMouseLeave={() => setOpen(false)}
+            onMouseEnter={() => setOpen(true)}
+            onMouseLeave={() => setOpen(false)}
         >
             <DropdownMenu key={props.title} open={open} onOpenChange={setOpen}>
                 <DropdownMenuTrigger
@@ -93,7 +93,7 @@ function NavbarMenu(props: React.PropsWithChildren<{
                         )}
                     />
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="border-border max-w-[20rem]">
+                <DropdownMenuContent className="border-border max-w-[20rem] -mt-1 pt-1">
                     {props.children}
                 </DropdownMenuContent>
             </DropdownMenu>
