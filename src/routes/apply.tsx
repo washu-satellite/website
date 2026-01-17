@@ -44,7 +44,7 @@ function ApplyPage() {
                         />
                         <RedirectButton
                             text="Mechanical"
-                            href=""
+                            href="https://docs.google.com/forms/d/e/1FAIpQLSd-TYI6hK5fArY20bOJsPXlzgIxXlWp3oD7AqKZgeNQ5T1Uqg/viewform?usp=dialog"
                         />
                         <RedirectButton
                             text="Physics"
