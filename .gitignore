@@ -16,3 +16,6 @@ todos.json
 
 gen
 .output
+
+ca.crt
+ca.crt.b64
