@@ -37,7 +37,7 @@ function DividerHeading(props: React.PropsWithChildren<{
 
 const bannerTextLoop = ["satellites", "science balloons", "interfaces", "earth stations"];
 
-function Banner() {
+function BannerText() {
   const [bannerTextIndex, setBannerTextIndex] = useState(0);
   const [animate, setAnimate] = useState(false);
 
@@ -61,27 +61,7 @@ function Banner() {
   }, []);
 
   return (
-    <>
-      <div
-        className="absolute top-0 hidden md:block w-full h-screen overflow-hidden"
-      >
-        <video
-          autoPlay
-          muted
-          loop
-          preload="none"
-          poster="/sat.webp"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: 'cover'
-          }}
-        >
-          <source src="/sat.mp4" type='video/mp4' />
-        </video>
-      </div>
-      <div className="h-full md:h-screen"/>
-      <div className="block md:p-0 md:absolute w-full top-[8rem] lg:top-[12rem]">
+    <div className="block md:p-0 md:absolute w-full top-[8rem] lg:top-[12rem]">
         <div className="flex flex-col lg:pl-[4rem] mt-16 md:mt-0 mb-8 md:mb-0 w-full items-center lg:items-start text-center md:text-left">
           <h2 className="font-light font-mono lowercase text-lg md:text-xl text-white/40 z-10 bg-[#111]/50 inset-shadow-current/15 inset-shadow-sm backdrop-blur-3xl border border-[#222] rounded-xl px-4 py-1">
             Student-developed
@@ -104,6 +84,32 @@ function Banner() {
           </div>
         </div>
       </div>
+  )
+}
+
+function Banner() {
+  return (
+    <>
+      {/* <div
+        className="absolute top-0 hidden md:block w-full h-screen overflow-hidden"
+      >
+        <video
+          autoPlay
+          muted
+          loop
+          preload="none"
+          poster="/sat.webp"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: 'cover'
+          }}
+        >
+          <source src="/sat.mp4" type='video/mp4' />
+        </video>
+      </div> */}
+      <div className="h-full md:h-screen"/>
+      <BannerText />
       <div
         className="flex flex-row gap-2 text-[#e9e9e9] items-center absolute bottom-4 left-[4rem] p-1 px-2 m-1 font-mono bg-black/50 backdrop-blur-md rounded-sm text-sm font-normal border border-border"
       >
@@ -153,6 +159,8 @@ function TeamIntro() {
 }
 
 function HomePage() {
+  console.log("index rerender");
+
   return (
     <div className={"flex-1 overflow-x-hidden"}>
       <main>
@@ -233,6 +241,7 @@ function HomePage() {
                 <div className={"flex flex-row flex-wrap items-center gap-y-[4rem] gap-x-[2rem] -mt-32 p-8"}>
                   {ProjectHighlightData.filter(p => p.phase !== 'success').map((p, i) => (
                     <ProjectHighlight
+                      key={i}
                       {...p}
                       direction={i % 2 === 0 ? 'right' : 'left'}
                     />

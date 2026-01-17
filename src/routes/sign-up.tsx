@@ -183,7 +183,6 @@ function RouteComponent() {
                   <ExtendedField isInvalid={isInvalid} field={field} locked={profileClaimed}>
                     <ExtendedLabel name={field.name} locked={profileClaimed}>Full name (first and last)</ExtendedLabel>
                     <Input
-                      {...field.form}
                       id={field.name}
                       name={field.name}
                       value={field.state.value}

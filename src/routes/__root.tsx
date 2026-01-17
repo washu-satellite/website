@@ -16,6 +16,8 @@ export const Route = createRootRouteWithContext<{
   queryClient: QueryClient
 }>()({
   beforeLoad: async ({ context }) => {
+    console.log("root beforeLoad triggered");
+
     const userSession = await context.queryClient.fetchQuery(
       authQueries.user()
     );
@@ -48,11 +50,11 @@ export const Route = createRootRouteWithContext<{
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-  const _theme = bStore.use.theme();
+  // const location = useLocation();
 
-  const location = useLocation();
+  // const dashboardActive = ["/dashboard"].some(r => location.pathname.startsWith(r));
 
-  const dashboardActive = ["/dashboard"].some(r => location.pathname.startsWith(r));
+  console.log("root rerender");
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -60,18 +62,17 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <head>
           <HeadContent />
         </head>
-        <body className={cn(
-          "bg-deep-background flex flex-col min-h-screen",
-          _theme !== 'light' ? "dark" : ""
-        )}>
+        <body
+          suppressHydrationWarning
+          className={cn(
+            "bg-deep-background flex flex-col min-h-screen",
+            "dark"
+          )}
+        >
           {/* <Header /> */}
-          {!dashboardActive &&
-            <NavBar />
-          }
-          {children}
-          {!dashboardActive &&
-            <Footer />
-          }
+          <NavBar />
+          {/* {children} */}
+          <Footer />
           <TanStackDevtools
             config={{
               position: 'bottom-right',

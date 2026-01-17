@@ -17,7 +17,6 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ApplyRouteImport } from './routes/apply'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TeamIndexRouteImport } from './routes/team/index'
-import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as AdminUsersRouteImport } from './routes/admin/users'
 import { Route as AdminNewUserRouteImport } from './routes/admin/new-user'
 import { Route as AdminNewTeamRouteImport } from './routes/admin/new-team'
@@ -64,11 +63,6 @@ const IndexRoute = IndexRouteImport.update({
 const TeamIndexRoute = TeamIndexRouteImport.update({
   id: '/team/',
   path: '/team/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DashboardIndexRoute = DashboardIndexRouteImport.update({
-  id: '/dashboard/',
-  path: '/dashboard/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminUsersRoute = AdminUsersRouteImport.update({
@@ -119,7 +113,6 @@ export interface FileRoutesByFullPath {
   '/admin/new-team': typeof AdminNewTeamRoute
   '/admin/new-user': typeof AdminNewUserRoute
   '/admin/users': typeof AdminUsersRoute
-  '/dashboard': typeof DashboardIndexRoute
   '/team': typeof TeamIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/team/people/$user_slug': typeof TeamPeopleUser_slugRoute
@@ -137,7 +130,6 @@ export interface FileRoutesByTo {
   '/admin/new-team': typeof AdminNewTeamRoute
   '/admin/new-user': typeof AdminNewUserRoute
   '/admin/users': typeof AdminUsersRoute
-  '/dashboard': typeof DashboardIndexRoute
   '/team': typeof TeamIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/team/people/$user_slug': typeof TeamPeopleUser_slugRoute
@@ -156,7 +148,6 @@ export interface FileRoutesById {
   '/admin/new-team': typeof AdminNewTeamRoute
   '/admin/new-user': typeof AdminNewUserRoute
   '/admin/users': typeof AdminUsersRoute
-  '/dashboard/': typeof DashboardIndexRoute
   '/team/': typeof TeamIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/team/people/$user_slug': typeof TeamPeopleUser_slugRoute
@@ -176,7 +167,6 @@ export interface FileRouteTypes {
     | '/admin/new-team'
     | '/admin/new-user'
     | '/admin/users'
-    | '/dashboard'
     | '/team'
     | '/api/auth/$'
     | '/team/people/$user_slug'
@@ -194,7 +184,6 @@ export interface FileRouteTypes {
     | '/admin/new-team'
     | '/admin/new-user'
     | '/admin/users'
-    | '/dashboard'
     | '/team'
     | '/api/auth/$'
     | '/team/people/$user_slug'
@@ -212,7 +201,6 @@ export interface FileRouteTypes {
     | '/admin/new-team'
     | '/admin/new-user'
     | '/admin/users'
-    | '/dashboard/'
     | '/team/'
     | '/api/auth/$'
     | '/team/people/$user_slug'
@@ -231,7 +219,6 @@ export interface RootRouteChildren {
   AdminNewTeamRoute: typeof AdminNewTeamRoute
   AdminNewUserRoute: typeof AdminNewUserRoute
   AdminUsersRoute: typeof AdminUsersRoute
-  DashboardIndexRoute: typeof DashboardIndexRoute
   TeamIndexRoute: typeof TeamIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   TeamPeopleUser_slugRoute: typeof TeamPeopleUser_slugRoute
@@ -294,13 +281,6 @@ declare module '@tanstack/react-router' {
       path: '/team'
       fullPath: '/team'
       preLoaderRoute: typeof TeamIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/dashboard/': {
-      id: '/dashboard/'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/users': {
@@ -367,7 +347,6 @@ const rootRouteChildren: RootRouteChildren = {
   AdminNewTeamRoute: AdminNewTeamRoute,
   AdminNewUserRoute: AdminNewUserRoute,
   AdminUsersRoute: AdminUsersRoute,
-  DashboardIndexRoute: DashboardIndexRoute,
   TeamIndexRoute: TeamIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   TeamPeopleUser_slugRoute: TeamPeopleUser_slugRoute,

@@ -81,21 +81,21 @@ export default function Footer() {
             </div>
             <div className="flex-1 flex flex-col items-start gap-1 border-l-0 border-b-0 md:border-l md:border-b border-border p-2">
                 <ThemedLink href={"/"}><p className="-ml-1">Missions</p></ThemedLink>
-                {ProjectHighlightData.map(p => (
-                    <ThemedLink arrowLink href={p.posterUrl ? p.posterUrl : `/missions/${p.id.replaceAll("-", "").toLowerCase()}`} className={clsx(`text-foreground/80`, "font-normal")}>{p.id}</ThemedLink>
+                {ProjectHighlightData.map((p, i) => (
+                    <ThemedLink key={i} arrowLink href={p.posterUrl ? p.posterUrl : `/missions/${p.id.replaceAll("-", "").toLowerCase()}`} className={clsx(`text-foreground/80`, "font-normal")}>{p.id}</ThemedLink>
                 ))}
             </div>
             <div className="flex-1 flex flex-col items-start gap-1 border-l-0 border-b-0 md:border-l md:border-b border-border p-2">
-                <ThemedLink href={"/"}><p className="-ml-1">Keep in Touch</p></ThemedLink>
-                <ThemedLink arrowLink href={"/contact"} className={clsx(`text-foreground/80`, "font-normal")}>Contact us</ThemedLink>
-                <ThemedLink arrowLink href={"/subscribe"} className={clsx(`text-foreground/80`, "font-normal")}>Interest form</ThemedLink>
-                <ThemedLink arrowLink href={"/apply"} className={clsx(`text-foreground/80`, "font-normal")}>Join the team</ThemedLink>
+                <ThemedLink key={"keep-in-touch"} href={"/"}><p className="-ml-1">Keep in Touch</p></ThemedLink>
+                <ThemedLink key={"contact-us"} arrowLink href={"/contact"} className={clsx(`text-foreground/80`, "font-normal")}>Contact us</ThemedLink>
+                <ThemedLink key={"interest-form"} arrowLink href={"/subscribe"} className={clsx(`text-foreground/80`, "font-normal")}>Interest form</ThemedLink>
+                <ThemedLink key={"join-the-team"} arrowLink href={"/apply"} className={clsx(`text-foreground/80`, "font-normal")}>Join the team</ThemedLink>
             </div>
             <div className="flex-1 flex flex-col items-start gap-1 border-l-0 border-b-0 md:border-l md:border-b border-border p-2">
-                <ThemedLink href={"/"}><p className="-ml-1">More Information</p></ThemedLink>
-                <ThemedLink arrowLink href={"/not-ready"} className={clsx(`text-foreground/80`, "font-normal")}>What is WashU Satellite?</ThemedLink>
-                <ThemedLink arrowLink href={"/team"} className={clsx(`text-foreground/80`, "font-normal")}>Our Team</ThemedLink>
-                <ThemedLink arrowLink href={"/not-ready"} className={clsx(`text-foreground/80`, "font-normal")}>Team Management</ThemedLink>
+                <ThemedLink key={"more-info"} href={"/"}><p className="-ml-1">More Information</p></ThemedLink>
+                <ThemedLink key={"who-are-we"} arrowLink href={"/not-ready"} className={clsx(`text-foreground/80`, "font-normal")}>What is WashU Satellite?</ThemedLink>
+                <ThemedLink key={"team"} arrowLink href={"/team"} className={clsx(`text-foreground/80`, "font-normal")}>Our Team</ThemedLink>
+                <ThemedLink key={"team-management"} arrowLink href={"/not-ready"} className={clsx(`text-foreground/80`, "font-normal")}>Team Management</ThemedLink>
             </div>
             <div className="flex-1 flex flex-col items-start gap-1 border-l-0 border-b-0 md:border-l md:border-b border-border p-4">
                 <h3 className="text-sm">Site theme</h3>

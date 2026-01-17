@@ -72,39 +72,34 @@ function NavbarMenu(props: React.PropsWithChildren<{
     const [open, setOpen] = useState(false);
 
     return (
-        <div
-            onMouseEnter={() => setOpen(true)}
-            onMouseLeave={() => setOpen(false)}
-        >
-            <DropdownMenu key={props.title} open={open} onOpenChange={setOpen}>
-                <DropdownMenuTrigger
-                    className="flex flex-row items-center overflow-hidden"
-                >
-                    <span className={"p-1 px-2 rounded-md font-normal text-sm/6"}>
-                        {props.title}
-                    </span>
-                    <ChevronDown
-                        className={cn(
-                            "-ml-1 w-4 h-4 transition-all duration-300",
-                            {
-                                "rotate-0": !open,
-                                "rotate-180": open
-                            }
-                        )}
-                    />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="border-border max-w-[20rem] -mt-1 pt-1">
-                    {props.children}
-                </DropdownMenuContent>
-            </DropdownMenu>
-        </div>
+        <DropdownMenu key={props.title} open={open} onOpenChange={setOpen}>
+            <DropdownMenuTrigger
+                className="flex flex-row items-center overflow-hidden"
+            >
+                <span className={"p-1 px-2 rounded-md font-normal text-sm/6"}>
+                    {props.title}
+                </span>
+                <ChevronDown
+                    className={cn(
+                        "-ml-1 w-4 h-4 transition-all duration-300",
+                        {
+                            "rotate-0": !open,
+                            "rotate-180": open
+                        }
+                    )}
+                />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="border-border max-w-[20rem] -mt-1 pt-1">
+                {props.children}
+            </DropdownMenuContent>
+        </DropdownMenu>
     )
 }
 
 const targetDate = new Date("1/23/26").getTime();
 
 function Countdown() {
-    const [countdownTime, setCountdownTime] = useState(targetDate - new Date().getTime());
+    const [countdownTime, setCountdownTime] = useState<number | null>(null);
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -119,12 +114,22 @@ function Countdown() {
     }, []);
     
     return (
-        <Link to="/" className="font-mono font-light text-sm text-foreground/80 mr-2">
-            T-
-            {String(Math.floor(countdownTime / (1000 * 60 * 60 * 24))).padStart(3, "0")}D +&nbsp;
-            {String(Math.floor(countdownTime % (1000 * 60 * 60 * 24) / (1000 * 60 * 60))).padStart(2, "0")}:
-            {String(Math.floor(countdownTime % (1000 * 60 * 60) / (1000 * 60))).padStart(2, "0")}:
-            {String(Math.floor(countdownTime % (1000 * 60) / (1000))).padStart(2, "0")}
+        <Link to="/" className={cn(
+            "font-mono font-light text-sm transition-all duration-500 text-foreground/80 mr-2 line-clamp-1",
+            {
+                "opacity-100 w-full": countdownTime,
+                "opacity-0 w-0": !countdownTime
+            }
+        )}>
+            {countdownTime &&
+                <>
+                    T-
+                    {String(Math.floor(countdownTime / (1000 * 60 * 60 * 24))).padStart(3, "0")}D +&nbsp;
+                    {String(Math.floor(countdownTime % (1000 * 60 * 60 * 24) / (1000 * 60 * 60))).padStart(2, "0")}:
+                    {String(Math.floor(countdownTime % (1000 * 60 * 60) / (1000 * 60))).padStart(2, "0")}:
+                    {String(Math.floor(countdownTime % (1000 * 60) / (1000))).padStart(2, "0")}
+                </>
+            }
         </Link>
     );
 }
@@ -158,24 +163,8 @@ export default function NavBar() {
 
     return (
         <div
-            // initial={isHome ? { 
-            //     backgroundColor: scroll > SCROLL_MAX ? "rgba(from var(--bg) r g b / 1)" : (
-            //         scroll > SCROLL_MIN ? (theme === 'light' ? "rgba(from var(--bg) r g b / 1)" : "rgba(from var(--bg) r g b / 0.3)") : "rgba(from var(--bg) r g b / 0)"
-            //     ),
-            //     borderBottomWidth: scroll > SCROLL_MAX ? 1 : 0
-            // } : {
-            //     borderBottomWidth: 1
-            // }}
-            // animate={isHome ? { 
-            //     backgroundColor: scroll > SCROLL_MAX ? "rgba(from var(--bg) r g b / 1)" : (
-            //         scroll > SCROLL_MIN ? (theme === 'light' ? "rgba(from var(--bg) r g b / 1)" : "rgba(from var(--bg) r g b / 0.3)") : "rgba(from var(--bg) r g b / 0)"
-            //     ),
-            //     borderBottomWidth: scroll > SCROLL_MAX ? 1 : 0
-            // } : {}}
             className={cn(
-                // scroll > 0 ? "backdrop-blur-none md:backdrop-blur-md" : "",
-                `text-text bg-bg border-bg-highlight transition-all duration-300 border-border`,
-                // theme === 'light' && scroll > SCROLL_MAX ? 'shadow' : 'shadow-none',
+                `text-text transition-all duration-300 border-border`,
                 {
                     "bg-background dark:bg-background/50 dark:backdrop-blur-lg border-b inset-shadow-current/15 inset-shadow-sm": scrolled,
                     "bg-none backdrop-blur-none border-b-0": !scrolled
@@ -184,16 +173,19 @@ export default function NavBar() {
             )}
         >
             <div className="flex flex-row justify-start items-center font-normal relative gap-2">
-                <a href={"/"} className={clsx(
-                    "font-bold text-base",
-                )}>
+                <Link
+                    to="/"
+                    className={clsx(
+                        "font-bold text-base",
+                    )}
+                >
                     <img
                         alt=""
                         src="/logo.svg"
                         // src={theme === 'light' && !(pathName === "/" && scroll === 0) ? "/logo_light.svg" : "/logo.svg"}
                         className="h-8 mr-4"
                     />
-                </a>
+                </Link>
 
                 <NavbarMenu title="Missions">
                     <DropdownMenuGroup>
@@ -288,8 +280,6 @@ export default function NavBar() {
                         </Link>
                     </Button>
                 </NotSignedIn>
-
-                {/* <div className="w-[2px] h-4 bg-foreground/80 mx-2"/> */}
 
                 <UserMenu />
             </div>

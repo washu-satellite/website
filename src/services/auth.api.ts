@@ -11,6 +11,8 @@ import { isAdmin } from "@/util/auth";
 
 export const getUserSession = createServerFn({ method: "GET" }).handler(
   async () => {
+    console.log("CALLING SESSION FN");
+
     const request = getRequest();
 
     if (!request?.headers) {
