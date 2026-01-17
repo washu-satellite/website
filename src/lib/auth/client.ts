@@ -7,7 +7,7 @@ export const { signIn, signUp, signOut, useSession, admin } = createAuthClient({
     plugins: [
         adminClient()
     ],
-    baseURL: process.env.VERCEL_URL ? ("https://www." + process.env.VERCEL_URL) : undefined
+    // baseURL: process.env.VERCEL_URL ? ("https://www." + process.env.VERCEL_URL) : undefined
 });
 
 export const useAuthentication = () => {
