@@ -2,8 +2,7 @@ import { MessageEnvelope } from '@/gen/messages/transport/v1/transport_pb';
 import { Message } from '@bufbuild/protobuf';
 import { Centrifuge, Subscription } from 'centrifuge/build/protobuf';
 import { StateCreator, StoreApi, UseBoundStore } from 'zustand';
-import { create } from 'zustand/react';
-import { subscribeWithSelector } from 'zustand/middleware';
+import { create } from 'zustand';
 import { Profile } from '@/services/auth.schema';
 
 export type MessageDetails = {
@@ -83,10 +82,10 @@ const createUserStore: StateCreator<UserStore, [], []> = (set) => ({
 // Put all the stores together
 export const useBoundedStore = create<SocketStore & UserStore>()(
   // Add subscription middleware
-  subscribeWithSelector((...a) => ({
+  (...a) => ({
       ...createSocketStore(...a),
       ...createUserStore(...a)
-  }))
+  })
 );
 
 // Helpful Typescript selectors for Zustand
