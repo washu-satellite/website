@@ -8,10 +8,10 @@ async function triggerSeed() {
 
 triggerSeed()
   .then(() => {
-    console.log("Seeded database")
-    process.exit(0)
+    console.log("Seeded database");
+    process.exit(0);
   })
   .catch((error) => {
-    console.error("Failed to seed database:", error)
-    process.exit(1)
+    console.error("Failed to seed database:", error);
+    process.exit(1);
   });

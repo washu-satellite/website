@@ -48,6 +48,7 @@ async function triggerSignUp(inputData: SignUp) {
     });
 
   if (error) {
+    console.log(error.message);
     throw new Error(error.message);
   }
 
@@ -193,8 +194,6 @@ function RouteComponent() {
                           return;
 
                         const profile = await checkSimilarName({ data: { name: field.state.value } });
-
-                        console.log(profile);
 
                         if (profile) {
                           setSimilarProfile({ ...profile, memberSince: new Date(profile.memberSince??"") } as Profile);

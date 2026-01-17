@@ -8,10 +8,10 @@ async function triggerReset() {
 
 triggerReset()
   .then(() => {
-    console.log("Reset database")
-    process.exit(0)
+    console.log("Reset database");
+    process.exit(0);
   })
   .catch((error) => {
-    console.error("Failed to reset database:", error)
-    process.exit(1)
+    console.error("Failed to reset database:", error);
+    process.exit(1);
   });

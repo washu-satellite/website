@@ -13,8 +13,6 @@ export const { signIn, signUp, signOut, useSession, admin } = createAuthClient({
 export const useAuthentication = () => {
     const { data } = useSuspenseQuery(authQueries.user());
 
-    console.log("returning from useAuthentication");
-
     return { userSession: data, isAuthenticated: !!data };
 }
 

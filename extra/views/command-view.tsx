@@ -121,10 +121,6 @@ const CommandPrompt = (props: {
 
         if (!_client)
             return;
-        
-        _client.send(bytes).catch(e => {
-            console.log(e);
-        });
     }
     
     return (

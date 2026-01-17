@@ -30,17 +30,11 @@ export const listUsersAdmin = createServerFn({ method: "GET" })
 
         const users = await db.select().from(schema.profile).leftJoin(schema.user, eq(schema.profile.userId, schema.user.id));
 
-        console.log("DB RESULT");
-        console.log(users);
-
         const filtered = users.map(p => ({
           ...p.user,
           ...p.profile,
           memberSince: new Date(p.profile.memberSince)
         }));
-
-        console.log("PARSED RESULT");
-        console.log(filtered);
 
         return filtered;
     });
@@ -54,10 +48,6 @@ export const getFullProfile = createServerFn({ method: "GET" })
       .where(eq(schema.profile.username, data.username))
       .limit(1)
     )[0];
-
-    console.log("GETTING USER PROFILE");
-
-    console.log(value);
 
     if (!value)
         return undefined;

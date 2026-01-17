@@ -86,8 +86,6 @@ export const cmdInternalMessage: CommandDetails<typeof cmdFmtInternalMessage> = 
 
     zodObj: cmdFmtInternalMessage,
     zodToMessage: (data) => {
-        console.log(`Got data: ${data.heading}, ${data.message}`);
-
         return create(MessageSchema, {
             heading: data.heading,
             message: data.message

@@ -44,11 +44,7 @@ function RouteComponent() {
       onSubmit: TeamSchema,
     },
     onSubmit: async ({ value }) => {
-      console.log("submitting...");
-
       setWaiting(true);
-
-      console.log(value);
 
       await createTeamMutation.mutateAsync({ data: value });
 

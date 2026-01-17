@@ -342,7 +342,6 @@ function FileUpload() {
                         setWaiting(false);
 
                         if (errorMessages.length === 0 && success) {
-                            console.log("no error message");
                             setOpen(false);
                         }
                     }}

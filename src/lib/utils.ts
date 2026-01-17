@@ -22,8 +22,6 @@ export function buildEnvelope<T extends MessageEnvelope["messageBody"]>(
     } as T
   });
 
-  console.log(envelope);
-
   return toBinary(MessageEnvelopeSchema, envelope);
 }
 

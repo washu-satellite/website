@@ -43,6 +43,7 @@ async function triggerSignIn({ email, password }: SignIn) {
     });
 
     if (error) {
+      console.log(error.message);
       throw new Error(error.message);
     }
 

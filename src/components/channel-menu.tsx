@@ -125,8 +125,6 @@ export default function ChannelMenu(props: {
                                 _removeChannel(val);
                             }
 
-                            console.log(bStore.getState().openChannels);
-
                             setValues(v => v.map((v1, j) => (
                                 i == j ? ({ value: v1.value, isChecked: checked.valueOf() !== false }) : v1
                             )))

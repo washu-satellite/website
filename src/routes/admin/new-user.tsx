@@ -47,8 +47,6 @@ function RouteComponent() {
       onSubmit: ProfileSchema,
     },
     onSubmit: async ({ value }) => {
-      console.log("submitting...");
-
       setWaiting(true);
 
       await createProfileMutation.mutateAsync(value);
@@ -68,7 +66,6 @@ function RouteComponent() {
     mutationFn: triggerCreateProfile,
     onSuccess: (res) => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
-      console.log("successfully updated user!");
       navigate({ to: redirectTo || "/admin/users" });
     },
   });

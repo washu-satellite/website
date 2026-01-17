@@ -1,12 +1,6 @@
 import 'dotenv/config';
 import { defineConfig } from 'drizzle-kit';
 
-const ca = process.env.POSTGRES_CA
-  ? Buffer.from(process.env.POSTGRES_CA, 'base64').toString('utf8')
-  : undefined;
-
-console.log(ca);
-
 export default defineConfig({
   out: './src/lib/db/migrations',
   schema: './src/lib/db/schema',

@@ -17,8 +17,6 @@ export const Route = createRootRouteWithContext<{
   queryClient: QueryClient
 }>()({
   beforeLoad: async ({ context }) => {
-    console.log("root beforeLoad triggered");
-
     const userSession = await context.queryClient.fetchQuery(
       authQueries.user()
     );
@@ -56,8 +54,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   // const dashboardActive = ["/dashboard"].some(r => location.pathname.startsWith(r))
 
   const _theme = bStore.use.theme();
-
-  console.log("root rerender");
 
   return (
     <QueryClientProvider client={queryClient}>

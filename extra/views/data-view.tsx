@@ -205,11 +205,7 @@ export const columns: ColumnDef<MessageDetails>[] = [
 function getValues(messages: MessageDetails[], tId: string, tData: MessageDetails["data"], field: string) {
     // const index = messages.findIndex(m => m.id === messageId);
 
-    console.log(tData);
-
     const time = getTimeVal(tData["lastUplink" as keyof typeof tData]);
-
-    console.log(time);
 
     const dataValues = messages.filter(
         (m) => (m.id === tId) && (getTimeVal(m.data["lastUplink" as keyof typeof m.data]) <= time)
@@ -217,14 +213,6 @@ function getValues(messages: MessageDetails[], tId: string, tData: MessageDetail
         x: i,
         y: m.data[field as keyof typeof m.data]
     }));
-
-    console.log("VALUES");
-    console.log([
-        {
-            "id": "power",
-            "data": dataValues
-        }
-    ]);
 
     return [
         {
@@ -414,8 +402,6 @@ export default function DataView() {
 
         return unsub; 
     }, [navigating]);
-
-    console.log("Data view rerender");
 
     const table = useReactTable({
         data,

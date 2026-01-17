@@ -11,8 +11,6 @@ import { isAdmin } from "@/util/auth";
 
 export const getUserSession = createServerFn({ method: "GET" }).handler(
   async () => {
-    console.log("CALLING SESSION FN");
-
     const request = getRequest();
 
     if (!request?.headers) {
@@ -27,11 +25,6 @@ export const getUserSession = createServerFn({ method: "GET" }).handler(
       .select()
       .from(schema.profile)
       .where(eq(schema.profile.userId, userSession.user.id)))[0];
-
-    console.log("Got user session");
-    console.log(userSession);
-
-    console.log("Returning user session");
 
     return { user: userSession.user, session: userSession.session, profile };
   }
@@ -94,8 +87,6 @@ export const createProfile = createServerFn({ method: "POST" })
           membershipStatus: "Unknown"
         }
       });
-
-    console.log("new profile added!");
   });
 
 export const createProfileAdmin = createServerFn({ method: "POST" })
@@ -112,6 +103,4 @@ export const createProfileAdmin = createServerFn({ method: "POST" })
         ...data,
         memberSince: new Date().toISOString().slice(0, 10)
       });
-
-    console.log("new profile added!");
   });

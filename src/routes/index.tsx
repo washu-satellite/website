@@ -42,8 +42,6 @@ function BannerText() {
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
-    console.log("triggering useEffect");
-
     let subtimer: NodeJS.Timeout | undefined = undefined;
 
     const timer = setInterval(() => {
@@ -159,8 +157,6 @@ function TeamIntro() {
 }
 
 function HomePage() {
-  console.log("index rerender");
-
   return (
     <div className={"flex-1 overflow-x-hidden"}>
       <main>

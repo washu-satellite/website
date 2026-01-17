@@ -198,8 +198,6 @@ export function UsernameField(
       name="username"
       validators={{
         onBlurAsync: async ({ value }: { value: string }) => {
-          console.log("onBlur triggered!");
-
           setWaiting(true);
 
           const taken = await checkUsernameTaken({ data: { username: value } });
@@ -291,7 +289,6 @@ export function DeleteUser(
     mutationFn: deleteUser,
     onSuccess: (res) => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
-      console.log("successfully deleted user!");
     },
   });
 

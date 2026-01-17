@@ -69,7 +69,6 @@ function RouteComponent() {
     mutationFn: updateProfile,
     onSuccess: (res) => {
       queryClient.invalidateQueries({ queryKey: ['user'] });
-      console.log("successfully updated user!");
     }
   });
 

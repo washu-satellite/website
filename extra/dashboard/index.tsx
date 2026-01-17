@@ -32,12 +32,6 @@ export const Route = createFileRoute('/dashboard/')({
       });
     }
 
-    console.log(userSession);
-
-    console.log("hello???");
-
-    console.log(isAdmin(userSession));
-
     if (!isAdmin(userSession)) {
       throw redirect({
         to: "/"
