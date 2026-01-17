@@ -11,6 +11,7 @@ import { bStore } from '@/hooks/useAppStore'
 import { cn } from '@/lib/utils'
 import { authQueries } from '@/services/queries'
 import { queryClient } from '@/queryClient'
+import { useEffect } from 'react'
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient
@@ -52,7 +53,9 @@ export const Route = createRootRouteWithContext<{
 function RootDocument({ children }: { children: React.ReactNode }) {
   // const location = useLocation();
 
-  // const dashboardActive = ["/dashboard"].some(r => location.pathname.startsWith(r));
+  // const dashboardActive = ["/dashboard"].some(r => location.pathname.startsWith(r))
+
+  const _theme = bStore.use.theme();
 
   console.log("root rerender");
 
@@ -66,12 +69,14 @@ function RootDocument({ children }: { children: React.ReactNode }) {
           suppressHydrationWarning
           className={cn(
             "bg-deep-background flex flex-col min-h-screen",
-            "dark"
+            {
+              "dark": _theme !== "light"
+            }
           )}
         >
           {/* <Header /> */}
           <NavBar />
-          {/* {children} */}
+          {children}
           <Footer />
           <TanStackDevtools
             config={{

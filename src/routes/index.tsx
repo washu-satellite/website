@@ -90,7 +90,7 @@ function BannerText() {
 function Banner() {
   return (
     <>
-      {/* <div
+      <div
         className="absolute top-0 hidden md:block w-full h-screen overflow-hidden"
       >
         <video
@@ -107,7 +107,7 @@ function Banner() {
         >
           <source src="/sat.mp4" type='video/mp4' />
         </video>
-      </div> */}
+      </div>
       <div className="h-full md:h-screen"/>
       <BannerText />
       <div
