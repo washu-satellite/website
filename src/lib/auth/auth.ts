@@ -6,6 +6,8 @@ import * as schema from '../db/schema';
 import { admin } from 'better-auth/plugins';
 
 export const auth = betterAuth({
+    secret: process.env.BETTER_AUTH_SECRET!,
+    basePath: process.env.VERCEL_URL??undefined,
     database: drizzleAdapter(db, {
         provider: "pg",
         schema: schema

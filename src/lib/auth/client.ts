@@ -6,7 +6,8 @@ import { adminClient } from "better-auth/client/plugins";
 export const { signIn, signUp, signOut, useSession, admin } = createAuthClient({
     plugins: [
         adminClient()
-    ]
+    ],
+    baseURL: process.env.VERCEL_URL??""
 });
 
 export const useAuthentication = () => {
