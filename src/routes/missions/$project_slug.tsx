@@ -1,6 +1,6 @@
 import GenericPage from '@/components/GenericPage'
-import { createFileRoute, Link } from '@tanstack/react-router'
-import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
+import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { teamQueries } from '@/services/queries';
 import { TeamTile } from '../team';
 import { ReactFlow, applyNodeChanges, applyEdgeChanges, addEdge, Background, ReactFlowProps, Handle, Position, Node, MiniMap, Edge } from '@xyflow/react';
@@ -13,6 +13,9 @@ import { useAuthenticatedUser } from '@/lib/auth/client';
 import { Button } from '@/components/ui/button';
 import { ArrowDown, ExternalLink, Pencil, Trash, X } from 'lucide-react';
 import { isAdmin } from '@/util/auth';
+import { DeleteButton } from '@/components/Form';
+import { team } from '@/lib/db/schema';
+import { deleteProject, deleteRole, deleteTeam } from '@/services/team.api';
 
 export const Route = createFileRoute('/missions/$project_slug')({
   loader: async ({ params, context }) => {
@@ -32,6 +35,16 @@ export function RoleNode(props: { data: {
   id: string
 } }) {
   const userData = useAuthenticatedUser();
+
+  const queryClient = useQueryClient();
+
+  const deleteRoleMutation = useMutation({
+    mutationKey: ["team", "role", "delete"],
+    mutationFn: deleteRole,
+    onSuccess: (res) => {
+      queryClient.invalidateQueries({ queryKey: ["team", "role", "get", props.data.id] });
+    },
+  });
 
   return (
     <div className="custom-node">
@@ -55,10 +68,9 @@ export function RoleNode(props: { data: {
                   Edit
                 </Button>
               </Link>
-              <Button variant='outline' className="!border-destructive text-destructive hover:!bg-destructive/30 hover:!text-foreground">
-                <Trash />
-                Delete
-              </Button>
+              <DeleteButton
+                onClick={() => deleteRoleMutation.mutateAsync({ data: { id: props.data.id } })}
+              />
             </>
           ) : (
             <Button variant='outline'>
@@ -144,8 +156,8 @@ function RouteComponent() {
           position: { x: i * 200, y: 160 * level },
           data: { name: r.name, top: level === 0, id: r.id },
           type: "role-node",
-          parentId: "imaging-module",
-          extent: "parent"
+          // parentId: "imaging-module",
+          // extent: "parent"
         });
       });
 
@@ -174,7 +186,7 @@ function RouteComponent() {
 
     setNodes([
       ...(levelNodes.flat()),
-      { id: 'imaging-module', position: { x: 0, y: 0 }, data: { name: "Imaging Module", size: maxLevelLength }, type: "module-group" }
+      // { id: 'imaging-module', position: { x: 0, y: 0 }, data: { name: "Imaging Module", size: maxLevelLength }, type: "module-group" }
     ]);
 
     setEdges([
@@ -183,6 +195,21 @@ function RouteComponent() {
   }, []);
 
   const userData = useAuthenticatedUser();
+
+  const navigate = useNavigate();
+      
+  const { redirect: redirectTo } = Route.useSearch();
+
+  const queryClient = useQueryClient();
+
+  const deleteProjectMutation = useMutation({
+    mutationKey: ["team", "project", "delete"],
+    mutationFn: deleteProject,
+    onSuccess: (res) => {
+      queryClient.invalidateQueries({ queryKey: ["team"] });
+      navigate({ to: redirectTo || "/team" });
+    },
+  });
 
   return (
     <GenericPage
@@ -203,44 +230,48 @@ function RouteComponent() {
                   Edit
                 </Button>
               </Link>
+              <DeleteButton
+                onClick={() => deleteProjectMutation.mutateAsync({ data: { acronym: project.data.acronym } })}
+              />
             </div>
           }
         </div>
       )}
     >
-      <div
-        className={cn(
-          "relative w-full transition-all duration-500 border border-border rounded-md",
-          {
-            "h-[5rem]": !graphOpen,
-            "h-[30rem]": graphOpen
-          }
-        )}
-      >
-        <ReactFlow
-          nodes={nodes}
-          edges={edges}
-          nodeTypes={{
-            "role-node": RoleNode,
-            "module-group": ModuleGroup
-          }}
-          proOptions={{ hideAttribution: true }}
-          // fitView
+      {nodes.length > 0 &&
+        <div
+          className={cn(
+            "relative w-full transition-all duration-500 border border-border rounded-md",
+            {
+              "h-[5rem]": !graphOpen,
+              "h-[30rem]": graphOpen
+            }
+          )}
         >
-          <Background color={_theme !== "light" ? "var(--secondary)" : "#ccc"}/>
-        </ReactFlow>
-        <p className="absolute bottom-2 right-2 font-mono uppercase text-foreground/80 text-xs">Leadership structure</p>
-      </div>
-      <div className="absolute top-2 right-2 flex flex-row items-center">
-          <Button variant='ghost' onClick={() => setGraphOpen(g => !g)}>
-            {graphOpen ? (
-              <X/>
-            ) : (
-              <ArrowDown />
-            )}
-          </Button>
-      </div>
-      <h2 className="mb-4">Roles</h2>
+          <ReactFlow
+            nodes={nodes}
+            edges={edges}
+            nodeTypes={{
+              "role-node": RoleNode,
+              "module-group": ModuleGroup
+            }}
+            proOptions={{ hideAttribution: true }}
+            // fitView
+          >
+            <Background color={_theme !== "light" ? "var(--secondary)" : "#ccc"}/>
+          </ReactFlow>
+          <p className="absolute bottom-2 right-2 font-mono uppercase text-foreground/80 text-xs">Leadership structure</p>
+          <div className="absolute top-2 right-2 flex flex-row items-center">
+              <Button variant='ghost' onClick={() => setGraphOpen(g => !g)}>
+                {graphOpen ? (
+                  <X/>
+                ) : (
+                  <ArrowDown />
+                )}
+              </Button>
+          </div>
+        </div>
+      }
       {/* {roles.data?.map(r => (
         r.name
       ))} */}

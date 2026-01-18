@@ -1,12 +1,14 @@
 import GenericPage from '@/components/GenericPage'
-import { createFileRoute, Link } from '@tanstack/react-router'
-import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
+import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { teamQueries } from '@/services/queries';
 import { TeamTile } from '..';
 import { useAuthenticatedUser } from '@/lib/auth/client';
 import { Button } from '@/components/ui/button';
 import { Pencil } from 'lucide-react';
 import { MemberList } from '@/components/MemberList';
+import { deleteTeam } from '@/services/team.api';
+import { DeleteButton } from '@/components/Form';
 
 export const Route = createFileRoute('/team/subteams/$team_slug')({
   loader: async ({ params, context }) => {
@@ -27,6 +29,21 @@ function RouteComponent() {
 
   const userData = useAuthenticatedUser();
 
+  const navigate = useNavigate();
+    
+  const { redirect: redirectTo } = Route.useSearch();
+
+  const queryClient = useQueryClient();
+
+  const deleteTeamMutation = useMutation({
+    mutationKey: ["team", "delete"],
+    mutationFn: deleteTeam,
+    onSuccess: (res) => {
+      queryClient.invalidateQueries({ queryKey: ["team"] });
+      navigate({ to: redirectTo || "/team" });
+    },
+  });
+
   return (
     <GenericPage
       title={`${params.team_slug} Subteam`}
@@ -43,6 +60,9 @@ function RouteComponent() {
                   Edit
                 </Button>
               </Link>
+              <DeleteButton
+                onClick={() => deleteTeamMutation.mutateAsync({ data: { name: team.data.name } })}
+              />
             </div>
           }
         </div>

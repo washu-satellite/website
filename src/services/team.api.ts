@@ -150,3 +150,42 @@ export const getRole = createServerFn({ method: "GET" })
 
         return RoleSchema.parse(role);
     });
+
+export const deleteRole = createServerFn({ method: "POST" })
+    .inputValidator(z.object({
+        id: z.string()
+    }))
+    .middleware([userRequiredMiddleware])
+    .handler(async ({ data, context }) => {
+        if (context.userSession.user.role !== "admin") {
+          throw new Error("You do not have permission to perform this action!");
+        }
+
+        await db.delete(schema.role).where(eq(schema.role.id, data.id));
+    });
+
+export const deleteTeam = createServerFn({ method: "POST" })
+    .inputValidator(z.object({
+        name: z.string()
+    }))
+    .middleware([userRequiredMiddleware])
+    .handler(async ({ data, context }) => {
+        if (context.userSession.user.role !== "admin") {
+          throw new Error("You do not have permission to perform this action!");
+        }
+        
+        await db.delete(schema.team).where(eq(schema.team.name, data.name));
+    });
+
+export const deleteProject = createServerFn({ method: "POST" })
+    .inputValidator(z.object({
+        acronym: z.string()
+    }))
+    .middleware([userRequiredMiddleware])
+    .handler(async ({ data, context }) => {
+        if (context.userSession.user.role !== "admin") {
+          throw new Error("You do not have permission to perform this action!");
+        }
+
+        await db.delete(schema.project).where(eq(schema.project.acronym, data.acronym));
+    });

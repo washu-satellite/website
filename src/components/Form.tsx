@@ -14,6 +14,7 @@ import {
   LockIcon,
   Satellite,
   Telescope,
+  Trash,
   XIcon,
 } from "lucide-react";
 import { InputGroup, InputGroupInput, InputGroupAddon } from "./ui/input-group";
@@ -535,4 +536,44 @@ export function DeleteUser(
       </AlertDialogContent>
     </AlertDialog>
   );
+}
+
+export function DeleteButton(props: {
+  onClick: () => void
+}) {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <AlertDialog open={open} onOpenChange={setOpen}>
+      <AlertDialogTrigger
+        asChild
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen(true);
+        }}
+      >
+        <Button variant='outline' className="text-destructive !border-destructive hover:!bg-destructive/30 hover:!text-foreground">
+          <Trash />
+          Delete
+        </Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent className="border-border">
+        <AlertDialogHeader>Are you sure?</AlertDialogHeader>
+        <AlertDialogDescription>
+          You are about to permanently delete an entry. This action cannot be
+          undone.
+        </AlertDialogDescription>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction
+            onClick={async () => {
+              props.onClick();
+            }}
+          >
+            Continue
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
 }
