@@ -136,6 +136,14 @@ export const getRolesByProject = createServerFn({ method: "GET" })
         return await db.select().from(schema.role).where(eq(schema.role.projectId, data.id));
     });
 
+export const getRolesByUser = createServerFn({ method: "GET" })
+    .inputValidator(z.object({
+        id: z.string()
+    }))
+    .handler(async ({ data }) => {
+        return await db.select().from(schema.role).where(eq(schema.role.userId, data.id));
+    });
+
 export const listRoles = createServerFn({ method: "GET" })
     .handler(async () => {
         return await db.select().from(schema.role);

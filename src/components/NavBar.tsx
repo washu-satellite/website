@@ -269,7 +269,7 @@ export default function NavBar() {
             </div>
 
             <div className={"flex-row hidden lg:flex justify-end items-center font-semibold gap-4"}>
-                <Countdown />
+                {/* <Countdown /> */}
 
                 <ThemedLink headerLink key={"contact"} href={"/contact"} className="-mx-2">
                     Contact

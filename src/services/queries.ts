@@ -6,7 +6,7 @@ import {
 
 import { getUserSession } from "./auth.api"
 import { checkUsernameTaken, getFullProfile, listUsers, listUsersAdmin } from "./user.api";
-import { getMembersByTeam, getProject, getRole, getRolesByProject, getTeam, listProjects, listRoles, listTeams } from "./team.api";
+import { getMembersByTeam, getProject, getRole, getRolesByProject, getRolesByUser, getTeam, listProjects, listRoles, listTeams } from "./team.api";
 
 export const authQueries = {
   all: ["auth"],
@@ -75,6 +75,12 @@ export const teamQueries = {
     queryOptions({
       queryKey: [...teamQueries.all, "roles-by-project", "get", id],
       queryFn: () => getRolesByProject({ data: { id } }),
+      staleTime: 5000,
+    }),
+  getRolesByUser: (id: string) =>
+    queryOptions({
+      queryKey: [...teamQueries.all, "roles-by-user", "get", id],
+      queryFn: () => getRolesByUser({ data: { id } }),
       staleTime: 5000,
     }),
   getRole: (id: string) =>

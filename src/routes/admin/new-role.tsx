@@ -190,17 +190,17 @@ function RouteComponent() {
       <RoleForm
         title="New Role"
         onSubmit={async ({ value }) => {
-          if (value.userId) {
+          if (value.username) {
             console.log(value.userId);
 
-            const profile = await getFullProfile({ data: { username: value.userId } })
+            const profile = await getFullProfile({ data: { username: value.username } })
 
             console.log(profile);
 
             value.userId = profile?.userId;
           }
 
-          console.log(value.userId);
+          console.log(value);
     
           await createRoleMutation.mutateAsync({ data: value });
         }}

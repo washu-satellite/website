@@ -16,23 +16,28 @@ import { deleteUser, getFullProfile, updateProfile } from '@/services/user.api';
 import { useAuthenticatedUser } from '@/lib/auth/client';
 import {
   useMutation,
+  useQuery,
   useQueryClient
 } from "@tanstack/react-query";
 import { Spinner } from '@/components/ui/spinner';
 import { DateSelection, DeleteUser, ExtendedField, ExtendedLabel, LinkedInField, TeamSelection, UsernameField } from '@/components/Form';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { teamQueries } from '@/services/queries';
 
 type LoaderData = {
   profile: Awaited<ReturnType<typeof getFullProfile>>
 }
 
 export const Route = createFileRoute('/team/people/$user_slug')({
-  loader: async ({ params }) => {
+  loader: async ({ params, context }) => {
     const profile = await getFullProfile({
       data: {
         username: params.user_slug
       }
     });
+
+    if (profile?.userId)
+      await context.queryClient.ensureQueryData(teamQueries.getRolesByProject(profile?.userId));
 
     return { profile };
   },
@@ -111,7 +116,11 @@ function RouteComponent() {
         </Link>
       </Button>
     </div>
-  )
+  );
+
+  const roles = useQuery(teamQueries.getRolesByUser((profile as Profile).userId??""));
+
+  console.log((profile as Profile).userId??"");
 
   return (
     <div className={"flex-1 overflow-x-hidden z-10"}>
@@ -404,6 +413,19 @@ function RouteComponent() {
                           ) : <></>;
                         }}
                       />
+
+                      {!editMode &&
+                        <div className="gap-1 col-span-full">
+                          <ExtendedLabel
+                            name={"roles"}
+                          >
+                            Roles
+                          </ExtendedLabel>
+                          <p>
+                            {roles.data?.map(r => r.name).join(", ")}
+                          </p>
+                        </div>
+                      }
                     </FieldGroup>
                   </form>
                   {/* <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-4 space-y-4 space-x-4">
