@@ -1,36 +1,70 @@
 import { Button } from '@/components/ui/button';
-import { createFileRoute, useNavigate } from '@tanstack/react-router'
-import { ShuffleIcon } from 'lucide-react';
-import { faker } from "@faker-js/faker";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createTeam } from '@/services/team.api';
-import { Team, TeamSchema } from '@/services/team.schema';
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import { ChevronDown } from 'lucide-react';
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { createProject } from '@/services/team.api';
+import { Project, ProjectSchema } from '@/services/team.schema';
 import { useForm } from '@tanstack/react-form';
 import { useState } from 'react';
-import { ExtendedField, ExtendedLabel } from '@/components/Form';
+import { DropdownSelect, ExtendedField, ExtendedLabel } from '@/components/Form';
 import { FieldGroup } from '@/components/ui/field';
 import { InputGroup, InputGroupTextarea, InputGroupAddon, InputGroupText } from '@/components/ui/input-group';
 import { Spinner } from '@/components/ui/spinner';
 import { Input } from '@/components/ui/input';
+import { teamQueries } from '@/services/queries';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { projectIconEnum } from '@/lib/db/schema';
 
-export const Route = createFileRoute('/admin/new-team')({
+export const Route = createFileRoute('/admin/new-project')({
   component: RouteComponent,
 });
 
-export function TeamForm(props: {
+export function ProjectSelection(
+  props: {
+    field: any;
+    isInvalid?: boolean;
+  } & React.ComponentProps<"div">
+) {
+  const { data } = useQuery(teamQueries.list());
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant='outline' className="w-full justify-between">
+          {props.field.state.value??"None"}
+          <ChevronDown />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuGroup>
+          {data?.map(t => (
+            <DropdownMenuItem
+              onClick={() => props.field.handleChange(t.name)}
+            >
+              {t.name}
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
+export function ProjectForm(props: {
   title: string,
-  defaults?: Team,
-  onSubmit: (data: { value: Team }) => Promise<void>
+  defaults?: Project,
+  onSubmit: (data: { value: Project }) => Promise<void>
 }) {
   const [waiting, setWaiting] = useState(false);
 
   const form = useForm({
     defaultValues: props.defaults??{
       id: "",
-      name: ""
-    } as Team,
+      name: "",
+      icon: "empty"
+    } as Project,
     validators: {
-      onSubmit: TeamSchema,
+      onSubmit: ProjectSchema,
     },
     onSubmit: async ({ value }) => {
       setWaiting(true);
@@ -43,7 +77,7 @@ export function TeamForm(props: {
 
   return (
     <div className="flex-1 h-screen flex flex-col justify-center items-center mt-20 pb-8">
-      <div className="relative flex-1 flex flex-col gap-4 p-4 px-8 max-w-[24rem] w-full h-fit grow-0 border border-border rounded-md">
+      <div className="relative flex-1 flex flex-col gap-4 p-4 px-8 max-w-[48rem] w-full h-fit grow-0 border border-border rounded-md">
         <div className="w-full">
           <form
             id="new-user-form"
@@ -53,7 +87,7 @@ export function TeamForm(props: {
             }}
             className="w-full"
           >
-            <h1 className="text-center uppercase font-mono text-lg mb-4">{props.title}</h1>
+            <h1 className="text-center uppercase font-mono text-lg mb-4">New Project</h1>
             <FieldGroup className="grid grid-cols-1 lg:grid-cols-2">
 
               <form.Field
@@ -62,7 +96,7 @@ export function TeamForm(props: {
                   const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
 
                   return (
-                    <ExtendedField isInvalid={isInvalid} className="col-span-full" field={field}>
+                    <ExtendedField isInvalid={isInvalid} field={field}>
                       <ExtendedLabel
                         name={field.name}
                       >
@@ -76,6 +110,49 @@ export function TeamForm(props: {
                         onChange={(e) => field.handleChange(e.target.value)}
                         aria-invalid={isInvalid}
                       />
+                    </ExtendedField>
+                  );
+                }}
+              />
+
+              <form.Field
+                name="acronym"
+                children={(field) => {  
+                  const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+
+                  return (
+                    <ExtendedField isInvalid={isInvalid} field={field}>
+                      <ExtendedLabel
+                        name={field.name}
+                      >
+                        Acronym
+                      </ExtendedLabel>
+                      <Input
+                        id={field.name}
+                        name={field.name}
+                        value={field.state.value}
+                        onBlur={field.handleBlur}
+                        onChange={(e) => field.handleChange(e.target.value)}
+                        aria-invalid={isInvalid}
+                      />
+                    </ExtendedField>
+                  );
+                }}
+              />
+
+              <form.Field
+                name="icon"
+                children={(field) => {  
+                  const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+
+                  return (
+                    <ExtendedField isInvalid={isInvalid} field={field}>
+                      <ExtendedLabel
+                        name={field.name}
+                      >
+                        Icon
+                      </ExtendedLabel>
+                      <DropdownSelect field={field} isInvalid={isInvalid} options={projectIconEnum.enumValues}/>
                     </ExtendedField>
                   );
                 }}
@@ -114,7 +191,7 @@ export function TeamForm(props: {
               />
 
               <form.Field
-                name="applicationUrl"
+                name="descriptionShort"
                 children={(field) => {  
                   const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
 
@@ -123,16 +200,23 @@ export function TeamForm(props: {
                       <ExtendedLabel
                         name={field.name}
                       >
-                        Application URL
+                        Short Description (Blurb)
                       </ExtendedLabel>
-                      <Input
-                        id={field.name}
-                        name={field.name}
-                        value={field.state.value??""}
-                        onBlur={field.handleBlur}
-                        onChange={(e) => field.handleChange(e.target.value)}
-                        aria-invalid={isInvalid}
-                      />
+                      <InputGroup>
+                        <InputGroupTextarea
+                          id={field.name}
+                          name={field.name}
+                          value={field.state.value??""}
+                          onBlur={field.handleBlur}
+                          onChange={(e) => field.handleChange(e.target.value)}
+                          aria-invalid={isInvalid}
+                        />
+                        <InputGroupAddon align='block-end'>
+                          <InputGroupText className="tabular-nums">
+                            {field.state.value?.length??0}/200 characters
+                          </InputGroupText>
+                        </InputGroupAddon>
+                      </InputGroup>
                     </ExtendedField>
                   );
                 }}
@@ -163,20 +247,20 @@ function RouteComponent() {
 
   const queryClient = useQueryClient();
 
-  const createTeamMutation = useMutation({
-    mutationKey: ["team", "create-team"],
-    mutationFn: createTeam,
+  const createProjectMutation = useMutation({
+    mutationKey: ["team", "create-role"],
+    mutationFn: createProject,
     onSuccess: (res) => {
       queryClient.invalidateQueries({ queryKey: ["team"] });
       navigate({ to: redirectTo || "/team" });
     },
   });
-  
+
   return (
-    <TeamForm
+    <ProjectForm
       title="New Subteam"
       onSubmit={async ({ value }) => {
-        await createTeamMutation.mutateAsync({ data: value });
+        await createProjectMutation.mutateAsync({ data: value });
       }}
     />
   );

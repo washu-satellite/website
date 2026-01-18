@@ -15,7 +15,7 @@ import {
 } from "@tanstack/react-query";
 import { Spinner } from '@/components/ui/spinner';
 import { createProfileAdmin } from '@/services/auth.api';
-import { DateSelection, ExtendedField, ExtendedLabel, LinkedInField, UsernameField } from '@/components/Form';
+import { DateSelection, ExtendedField, ExtendedLabel, LinkedInField, TeamSelection, UsernameField } from '@/components/Form';
 import { faker } from "@faker-js/faker";
 
 
@@ -222,6 +222,24 @@ function RouteComponent() {
               />
 
               <form.Field
+                name="teamId"
+                children={(field) => {  
+                  const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+
+                  return (
+                    <ExtendedField isInvalid={isInvalid} field={field}>
+                      <ExtendedLabel
+                        name={field.name}
+                      >
+                        Subteam
+                      </ExtendedLabel>
+                      <TeamSelection field={field} isInvalid={isInvalid}/>
+                    </ExtendedField>
+                  )
+                }}
+              />
+
+              <form.Field
                 name="linkedIn"
                 children={(field) => {  
                   const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
@@ -255,7 +273,7 @@ function RouteComponent() {
                         <InputGroupTextarea
                           id={field.name}
                           name={field.name}
-                          value={field.state.value}
+                          value={field.state.value??""}
                           onBlur={field.handleBlur}
                           onChange={(e) => field.handleChange(e.target.value)}
                           aria-invalid={isInvalid}

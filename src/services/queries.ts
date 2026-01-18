@@ -6,7 +6,7 @@ import {
 
 import { getUserSession } from "./auth.api"
 import { checkUsernameTaken, getFullProfile, listUsers, listUsersAdmin } from "./user.api";
-import { listTeams } from "./team.api";
+import { getMembersByTeam, getProject, getRole, getRolesByProject, getTeam, listProjects, listRoles, listTeams } from "./team.api";
 
 export const authQueries = {
   all: ["auth"],
@@ -18,7 +18,7 @@ export const authQueries = {
     }),
   profile: (username: string) =>
     queryOptions({
-      queryKey: [...authQueries.all, "profile"],
+      queryKey: [...authQueries.all, "profile", username],
       queryFn: () => getFullProfile({ data: { username } })
     })
 };
@@ -45,6 +45,48 @@ export const teamQueries = {
     queryOptions({
       queryKey: [...teamQueries.all, "list"],
       queryFn: () => listTeams(),
+      staleTime: 5000,
+    }),
+  get: (name: string) =>
+    queryOptions({
+      queryKey: [...teamQueries.all, "get", name],
+      queryFn: () => getTeam({ data: { name } }),
+      staleTime: 5000,
+    }),
+  getMembers: (name: string) =>
+    queryOptions({
+      queryKey: [...teamQueries.all, "get-members", name],
+      queryFn: () => getMembersByTeam({ data: { name } }),
+      staleTime: 5000,
+    }),
+  listProjects: () =>
+    queryOptions({
+      queryKey: [...teamQueries.all, "projects", "list"],
+      queryFn: () => listProjects(),
+      staleTime: 5000,
+    }),
+  getProject: (acronym: string) =>
+    queryOptions({
+      queryKey: [...teamQueries.all, "project", "get", acronym],
+      queryFn: () => getProject({ data: { acronym } }),
+      staleTime: 5000,
+    }),
+  getRolesByProject: (id: string) =>
+    queryOptions({
+      queryKey: [...teamQueries.all, "roles-by-project", "get", id],
+      queryFn: () => getRolesByProject({ data: { id } }),
+      staleTime: 5000,
+    }),
+  getRole: (id: string) =>
+    queryOptions({
+      queryKey: [...teamQueries.all, "role", "get", id],
+      queryFn: () => getRole({ data: { id } }),
+      staleTime: 5000,
+    }),
+  listRoles: () =>
+    queryOptions({
+      queryKey: [...teamQueries.all, "roles", "list"],
+      queryFn: () => listRoles(),
       staleTime: 5000,
     }),
 }

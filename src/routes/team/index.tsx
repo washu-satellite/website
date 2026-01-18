@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { userQueries } from "@/services/queries";
 import { DisplayUserShort } from "@/services/user.schema";
 import LoadingPage from "@/components/LoadingPage";
+import { MemberList } from "@/components/MemberList";
 
 export const Route = createFileRoute('/team/')({
     loader: async ({ context }) => {
@@ -21,12 +22,12 @@ export const Route = createFileRoute('/team/')({
     component: TeamPage,
 });
 
-const TeamTile = (props: DisplayUserShort) => {
+export const TeamTile = (props: DisplayUserShort) => {
     return (
         <div
             className={clsx(
                 `border-border border group shadow-sm dark:shadow-none`,
-                `flex flex-col font-mono justify-end rounded-md bg-background w-[16rem] h-[16rem] min-h-0`
+                `flex flex-col font-mono justify-end rounded-md bg-background w-full md:w-[16rem] h-[16rem] min-h-0`
             )}
         >
             
@@ -99,15 +100,9 @@ function TeamPage() {
                         />
                     ))}
                 </div> */}
-                <h2 className="text-text text-lg font-semibold my-8 mt-16">Members</h2>
-                <div className="flex flex-row flex-wrap justify-start gap-6">
-                    {data.filter(u => u.membershipStatus !== "Unknown").map(m => (
-                        <TeamTile
-                            key={m.name}
-                            {...m}
-                        />
-                    ))}
-                </div>
+                <MemberList
+                    members={data}
+                />
             </div>
         </GenericPage>
     );

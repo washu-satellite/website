@@ -17,6 +17,7 @@ import SignedIn from "./auth/SignedIn";
 import { signOut, useAuthenticatedUser } from "@/lib/auth/client";
 import { UserMenu } from "./UserMenu";
 import { teamQueries } from "@/services/queries";
+import { ProjectIcon } from "./Form";
 
 const MenuItem = (props: NavElement) => {
     return (
@@ -135,31 +136,32 @@ function Countdown() {
 }
 
 export default function NavBar() {
-    const [projects, setProjects] = useState<ReactNode[][]>([]);
+    // const [projects, setProjects] = useState<ReactNode[][]>([]);
     const [scrolled, setScrolled] = useState(false);
 
     const auth = useAuthenticatedUser();
 
     useEffect(() => {
-        setProjects([
-            ProjectHighlightData.filter(p => p.phase !== 'success').map(p => (
-                <MenuItem
-                    {...p}
-                />
-            )),
-            (ProjectHighlightData.filter(p => p.phase === 'success').map(p => (
-                <MenuItem
-                    {...p}
-                />
-            )))
-        ]);
+        // setProjects([
+        //     ProjectHighlightData.filter(p => p.phase !== 'success').map(p => (
+        //         <MenuItem
+        //             {...p}
+        //         />
+        //     )),
+        //     (ProjectHighlightData.filter(p => p.phase === 'success').map(p => (
+        //         <MenuItem
+        //             {...p}
+        //         />
+        //     )))
+        // ]);
 
         window.addEventListener('scroll', () => {
             setScrolled(window.scrollY > 0);
         });
     }, []);
 
-    const { data, isPending, error } = useQuery(teamQueries.list());
+    const teams = useQuery(teamQueries.list());
+    const projects = useQuery(teamQueries.listProjects());
 
     return (
         <div
@@ -189,17 +191,9 @@ export default function NavBar() {
 
                 <NavbarMenu title="Missions">
                     <DropdownMenuGroup>
-                        {ProjectHighlightData.filter(p => p.phase !== 'success').map(p => (
+                        {projects.data?.map(p => (
                             <DropdownMenuItem key={p.id}>
-                                <NavbarMenuItem title={p.id} description={p.short??""} icon={p.icon} href={p.posterUrl}/>
-                            </DropdownMenuItem>
-                        ))}
-                    </DropdownMenuGroup>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuGroup>
-                        {ProjectHighlightData.filter(p => p.phase === 'success').map(p => (
-                            <DropdownMenuItem key={p.id}>
-                                <NavbarMenuItem title={p.id} description={p.short??""} icon={p.icon} href={p.posterUrl}/>
+                                <NavbarMenuItem title={p.acronym} description={p.descriptionShort??""} icon={<ProjectIcon type={p.icon}/>} href={`/missions/${p.acronym}`}/>
                             </DropdownMenuItem>
                         ))}
                     </DropdownMenuGroup>
@@ -216,7 +210,7 @@ export default function NavBar() {
                         <DropdownMenuLabel>
                             Subteams
                         </DropdownMenuLabel>
-                            {data?.map(t => (
+                            {teams.data?.map(t => (
                                 <DropdownMenuItem>
                                     <NavbarMenuItem title={t.name} icon={<Waypoints/>} href={`/team/subteams/${t.name}`}/>
                                 </DropdownMenuItem>
@@ -233,15 +227,39 @@ export default function NavBar() {
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
                         <DropdownMenuGroup>
+                            <DropdownMenuLabel>
+                                Users
+                            </DropdownMenuLabel>
                             <DropdownMenuItem>
                                 <NavbarMenuItem title="User overview" icon={<Eye/>} href={"/admin/users"}/>
                             </DropdownMenuItem>
                             <DropdownMenuItem>
                                 <NavbarMenuItem title="Create a user" icon={<Plus/>} href={"/admin/new-user"}/>
                             </DropdownMenuItem>
+                        </DropdownMenuGroup>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuGroup>
+                            <DropdownMenuLabel>
+                                Subteams
+                            </DropdownMenuLabel>
                             <DropdownMenuItem>
                                 <NavbarMenuItem title="Create a subteam" icon={<Plus/>} href={"/admin/new-team"}/>
                             </DropdownMenuItem>
+                        </DropdownMenuGroup>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuGroup>
+                            <DropdownMenuLabel>
+                                Projects
+                            </DropdownMenuLabel>
+                            <DropdownMenuItem>
+                                <NavbarMenuItem title="Create a project" icon={<Plus/>} href={"/admin/new-project"}/>
+                            </DropdownMenuItem>
+                        </DropdownMenuGroup>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuGroup>
+                            <DropdownMenuLabel>
+                                Roles
+                            </DropdownMenuLabel>
                             <DropdownMenuItem>
                                 <NavbarMenuItem title="Create a role" icon={<Plus/>} href={"/admin/new-role"}/>
                             </DropdownMenuItem>

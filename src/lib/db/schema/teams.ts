@@ -14,6 +14,8 @@ export const team = pgTable("team", {
     .primaryKey()
     .$defaultFn(() => v7()),
   name: text("name").notNull().unique(),
+  description: text("description"),
+  applicationUrl: text("application_url")
 });
 
 export const projectIconEnum = pgEnum("project_icon", [
@@ -28,6 +30,7 @@ export const project = pgTable("project", {
     .primaryKey()
     .$defaultFn(() => v7()),
   name: text("name").notNull(),
+  acronym: text("acronym").notNull(),
   description: text("description"),
   descriptionShort: text("short"),
   icon: projectIconEnum("icon").notNull().default("empty"),
@@ -51,6 +54,7 @@ export const role = pgTable(
     id: text("id")
       .primaryKey()
       .$defaultFn(() => v7()),
+    name: text("name").notNull(),
     rank: integer("rank").notNull(),
     projectId: text("project_id").references(() => project.id, {
       onDelete: "cascade",

@@ -5,16 +5,19 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Button } from "./ui/button";
 import { Calendar } from "./ui/calendar";
 import {
+  Antenna,
   AtSign,
   CheckIcon,
   ChevronDown,
   ChevronDownIcon,
   CircleQuestionMarkIcon,
   LockIcon,
+  Satellite,
+  Telescope,
   XIcon,
 } from "lucide-react";
 import { InputGroup, InputGroupInput, InputGroupAddon } from "./ui/input-group";
-import { checkUsernameTaken } from "@/services/user.api";
+import { checkUsernameTaken, getFullProfile } from "@/services/user.api";
 import { Spinner } from "./ui/spinner";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { useAuthenticatedUser } from "@/lib/auth/client";
@@ -34,6 +37,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { deleteUser } from "@/services/user.api";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import { teamQueries } from "@/services/queries";
+import { projectIconEnum } from "@/lib/db/schema";
 
 export function ExtendedField(
   props: React.PropsWithChildren<
@@ -64,6 +68,7 @@ export function ExtendedField(
 export function ExtendedLabel(
   props: React.PropsWithChildren<{
     name: string;
+    required?: boolean;
     badge?: ReactNode;
     locked?: boolean;
     horizontal?: boolean;
@@ -120,6 +125,118 @@ export function DateSelection(props: { field: any }) {
   );
 }
 
+export function DropdownSelect(
+  props: {
+    field: any;
+    isInvalid?: boolean;
+    options: string[]
+  } & React.ComponentProps<"div">
+) {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant='outline' className="w-full justify-between">
+          {props.field.state.value??"None"}
+          <ChevronDown />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuGroup>
+          {props.options.map(v => (
+            <DropdownMenuItem
+              onClick={() => props.field.handleChange(v)}
+            >
+              {v}
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
+export function ProjectIcon(props: {
+  type: typeof projectIconEnum.enumValues[number]
+}) {
+  switch (props.type) {
+    case "antenna":
+      return <Antenna />;
+    case "satelllite":
+      return <Satellite />;
+    case "telescope":
+      return <Telescope />;
+    default:
+      return <></>;
+  } 
+}
+
+export function ProjectSelection(
+  props: {
+    field: any;
+    isInvalid?: boolean;
+  } & React.ComponentProps<"div">
+) {
+  const projects = useQuery(teamQueries.listProjects());
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant='outline' className="w-full justify-between">
+          {props.field.state.value ? projects.data?.filter(p => p.id === props.field.state.value)[0].acronym : "None"}
+          <ChevronDown />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuGroup>
+          {projects.data?.map(t => (
+            <DropdownMenuItem
+              onClick={() => props.field.handleChange(t.id)}
+              className="flex flex-row items-center gap-2"
+            >
+              <div className="p-1 rounded-md border border-border">
+                  {<ProjectIcon type={t.icon}/>}
+              </div>
+              {t.acronym}
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
+export function RoleSelection(
+  props: {
+    field: any;
+    isInvalid?: boolean;
+  } & React.ComponentProps<"div">
+) {
+  const roles = useQuery(teamQueries.listRoles());
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant='outline' className="w-full justify-between">
+          {props.field.state.value ? roles.data?.filter(p => p.id === props.field.state.value)[0].name : "None"}
+          <ChevronDown />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuGroup>
+          {roles.data?.map(t => (
+            <DropdownMenuItem
+              onClick={() => props.field.handleChange(t.id)}
+              className="flex flex-row items-center gap-2"
+            >
+              {t.name}
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
 export function TeamSelection(
   props: {
     field: any;
@@ -172,6 +289,98 @@ export function LinkedInField(
         <p>https://www.linkedin.com/in/</p>
       </InputGroupAddon>
     </InputGroup>
+  );
+}
+
+export function UsernameReferenceField(
+  props: {
+    form: any;
+    locked?: boolean;
+    horizontal?: boolean;
+    customLabel?: string;
+  } & React.ComponentProps<"div">
+) {
+  const [waiting, setWaiting] = useState(false);
+  const [nameValid, setNameValid] = useState<"exists" | "invalid" | null>(null);
+
+  return (
+    <props.form.Field
+      name="username"
+      validators={{
+        onBlurAsync: async ({ value }: { value: string }) => {
+          setWaiting(true);
+
+          const profile = await getFullProfile({ data: { username: value } });
+
+          setNameValid(profile ? "exists" : "invalid");
+
+          setWaiting(false);
+        },
+      }}
+      children={(field: any) => {
+        const isInvalid =
+          field.state.meta.isTouched && !field.state.meta.isValid;
+
+        return (
+          <Field
+            data-invalid={isInvalid || nameValid === "invalid"}
+            className={cn("gap-1", props.className, {
+              "-mt-1": props.horizontal,
+            })}
+          >
+            <ExtendedLabel
+              name={field.name}
+              horizontal={props.horizontal}
+              badge={
+                <Tooltip>
+                  <TooltipTrigger>
+                    <CircleQuestionMarkIcon className="w-3.5 text-foreground/60" />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    Enter the unique username for the user
+                  </TooltipContent>
+                </Tooltip>
+              }
+              locked={props.locked}
+            >
+              {props.customLabel??"User"}
+            </ExtendedLabel>
+            <InputGroup>
+              <InputGroupInput
+                id={field.name}
+                name={field.name}
+                value={field.state.value}
+                onBlur={field.handleBlur}
+                onChange={(e) => field.handleChange(e.target.value)}
+                aria-invalid={isInvalid || nameValid === "invalid"}
+                aria-disabled={props.locked}
+                disabled={props.locked}
+                placeholder={"j_smith"}
+              />
+              <InputGroupAddon>
+                {waiting ? <Spinner /> : <AtSign />}
+              </InputGroupAddon>
+            </InputGroup>
+            {isInvalid ? (
+              <FieldError
+                errors={field.state.meta.errors}
+                className="text-xs"
+              />
+            ) : (
+              nameValid &&
+              (nameValid === "invalid" ? (
+                <p className="text-destructive flex flex-row items-center text-xs gap-1">
+                  <XIcon className="w-4" />
+                  Invalid username
+                </p>
+              ) : (
+                <></>
+              ))
+            )}
+          </Field>
+        );
+      }}
+    />
   );
 }
 

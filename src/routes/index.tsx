@@ -24,7 +24,7 @@ export const Route = createFileRoute('/')({
   component: HomePage,
 });
 
-function DividerHeading(props: React.PropsWithChildren<{
+export function DividerHeading(props: React.PropsWithChildren<{
   index: number
 }>) {
   return (

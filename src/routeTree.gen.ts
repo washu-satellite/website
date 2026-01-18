@@ -17,13 +17,18 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ApplyRouteImport } from './routes/apply'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TeamIndexRouteImport } from './routes/team/index'
+import { Route as MissionsProject_slugRouteImport } from './routes/missions/$project_slug'
 import { Route as AdminUsersRouteImport } from './routes/admin/users'
 import { Route as AdminNewUserRouteImport } from './routes/admin/new-user'
 import { Route as AdminNewTeamRouteImport } from './routes/admin/new-team'
 import { Route as AdminNewRoleRouteImport } from './routes/admin/new-role'
+import { Route as AdminNewProjectRouteImport } from './routes/admin/new-project'
 import { Route as TeamSubteamsTeam_slugRouteImport } from './routes/team/subteams/$team_slug'
 import { Route as TeamPeopleUser_slugRouteImport } from './routes/team/people/$user_slug'
+import { Route as MissionsEditProject_slugRouteImport } from './routes/missions/edit/$project_slug'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as TeamSubteamsEditTeam_slugRouteImport } from './routes/team/subteams/edit/$team_slug'
+import { Route as MissionsRolesEditRole_slugRouteImport } from './routes/missions/roles/edit/$role_slug'
 
 const SignUpRoute = SignUpRouteImport.update({
   id: '/sign-up',
@@ -65,6 +70,11 @@ const TeamIndexRoute = TeamIndexRouteImport.update({
   path: '/team/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MissionsProject_slugRoute = MissionsProject_slugRouteImport.update({
+  id: '/missions/$project_slug',
+  path: '/missions/$project_slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminUsersRoute = AdminUsersRouteImport.update({
   id: '/admin/users',
   path: '/admin/users',
@@ -85,6 +95,11 @@ const AdminNewRoleRoute = AdminNewRoleRouteImport.update({
   path: '/admin/new-role',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminNewProjectRoute = AdminNewProjectRouteImport.update({
+  id: '/admin/new-project',
+  path: '/admin/new-project',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TeamSubteamsTeam_slugRoute = TeamSubteamsTeam_slugRouteImport.update({
   id: '/team/subteams/$team_slug',
   path: '/team/subteams/$team_slug',
@@ -95,11 +110,29 @@ const TeamPeopleUser_slugRoute = TeamPeopleUser_slugRouteImport.update({
   path: '/team/people/$user_slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MissionsEditProject_slugRoute =
+  MissionsEditProject_slugRouteImport.update({
+    id: '/missions/edit/$project_slug',
+    path: '/missions/edit/$project_slug',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TeamSubteamsEditTeam_slugRoute =
+  TeamSubteamsEditTeam_slugRouteImport.update({
+    id: '/team/subteams/edit/$team_slug',
+    path: '/team/subteams/edit/$team_slug',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const MissionsRolesEditRole_slugRoute =
+  MissionsRolesEditRole_slugRouteImport.update({
+    id: '/missions/roles/edit/$role_slug',
+    path: '/missions/roles/edit/$role_slug',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -109,14 +142,19 @@ export interface FileRoutesByFullPath {
   '/not-ready': typeof NotReadyRoute
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
+  '/admin/new-project': typeof AdminNewProjectRoute
   '/admin/new-role': typeof AdminNewRoleRoute
   '/admin/new-team': typeof AdminNewTeamRoute
   '/admin/new-user': typeof AdminNewUserRoute
   '/admin/users': typeof AdminUsersRoute
+  '/missions/$project_slug': typeof MissionsProject_slugRoute
   '/team': typeof TeamIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/missions/edit/$project_slug': typeof MissionsEditProject_slugRoute
   '/team/people/$user_slug': typeof TeamPeopleUser_slugRoute
   '/team/subteams/$team_slug': typeof TeamSubteamsTeam_slugRoute
+  '/missions/roles/edit/$role_slug': typeof MissionsRolesEditRole_slugRoute
+  '/team/subteams/edit/$team_slug': typeof TeamSubteamsEditTeam_slugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -126,14 +164,19 @@ export interface FileRoutesByTo {
   '/not-ready': typeof NotReadyRoute
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
+  '/admin/new-project': typeof AdminNewProjectRoute
   '/admin/new-role': typeof AdminNewRoleRoute
   '/admin/new-team': typeof AdminNewTeamRoute
   '/admin/new-user': typeof AdminNewUserRoute
   '/admin/users': typeof AdminUsersRoute
+  '/missions/$project_slug': typeof MissionsProject_slugRoute
   '/team': typeof TeamIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/missions/edit/$project_slug': typeof MissionsEditProject_slugRoute
   '/team/people/$user_slug': typeof TeamPeopleUser_slugRoute
   '/team/subteams/$team_slug': typeof TeamSubteamsTeam_slugRoute
+  '/missions/roles/edit/$role_slug': typeof MissionsRolesEditRole_slugRoute
+  '/team/subteams/edit/$team_slug': typeof TeamSubteamsEditTeam_slugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -144,14 +187,19 @@ export interface FileRoutesById {
   '/not-ready': typeof NotReadyRoute
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
+  '/admin/new-project': typeof AdminNewProjectRoute
   '/admin/new-role': typeof AdminNewRoleRoute
   '/admin/new-team': typeof AdminNewTeamRoute
   '/admin/new-user': typeof AdminNewUserRoute
   '/admin/users': typeof AdminUsersRoute
+  '/missions/$project_slug': typeof MissionsProject_slugRoute
   '/team/': typeof TeamIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/missions/edit/$project_slug': typeof MissionsEditProject_slugRoute
   '/team/people/$user_slug': typeof TeamPeopleUser_slugRoute
   '/team/subteams/$team_slug': typeof TeamSubteamsTeam_slugRoute
+  '/missions/roles/edit/$role_slug': typeof MissionsRolesEditRole_slugRoute
+  '/team/subteams/edit/$team_slug': typeof TeamSubteamsEditTeam_slugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -163,14 +211,19 @@ export interface FileRouteTypes {
     | '/not-ready'
     | '/sign-in'
     | '/sign-up'
+    | '/admin/new-project'
     | '/admin/new-role'
     | '/admin/new-team'
     | '/admin/new-user'
     | '/admin/users'
+    | '/missions/$project_slug'
     | '/team'
     | '/api/auth/$'
+    | '/missions/edit/$project_slug'
     | '/team/people/$user_slug'
     | '/team/subteams/$team_slug'
+    | '/missions/roles/edit/$role_slug'
+    | '/team/subteams/edit/$team_slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -180,14 +233,19 @@ export interface FileRouteTypes {
     | '/not-ready'
     | '/sign-in'
     | '/sign-up'
+    | '/admin/new-project'
     | '/admin/new-role'
     | '/admin/new-team'
     | '/admin/new-user'
     | '/admin/users'
+    | '/missions/$project_slug'
     | '/team'
     | '/api/auth/$'
+    | '/missions/edit/$project_slug'
     | '/team/people/$user_slug'
     | '/team/subteams/$team_slug'
+    | '/missions/roles/edit/$role_slug'
+    | '/team/subteams/edit/$team_slug'
   id:
     | '__root__'
     | '/'
@@ -197,14 +255,19 @@ export interface FileRouteTypes {
     | '/not-ready'
     | '/sign-in'
     | '/sign-up'
+    | '/admin/new-project'
     | '/admin/new-role'
     | '/admin/new-team'
     | '/admin/new-user'
     | '/admin/users'
+    | '/missions/$project_slug'
     | '/team/'
     | '/api/auth/$'
+    | '/missions/edit/$project_slug'
     | '/team/people/$user_slug'
     | '/team/subteams/$team_slug'
+    | '/missions/roles/edit/$role_slug'
+    | '/team/subteams/edit/$team_slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -215,14 +278,19 @@ export interface RootRouteChildren {
   NotReadyRoute: typeof NotReadyRoute
   SignInRoute: typeof SignInRoute
   SignUpRoute: typeof SignUpRoute
+  AdminNewProjectRoute: typeof AdminNewProjectRoute
   AdminNewRoleRoute: typeof AdminNewRoleRoute
   AdminNewTeamRoute: typeof AdminNewTeamRoute
   AdminNewUserRoute: typeof AdminNewUserRoute
   AdminUsersRoute: typeof AdminUsersRoute
+  MissionsProject_slugRoute: typeof MissionsProject_slugRoute
   TeamIndexRoute: typeof TeamIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  MissionsEditProject_slugRoute: typeof MissionsEditProject_slugRoute
   TeamPeopleUser_slugRoute: typeof TeamPeopleUser_slugRoute
   TeamSubteamsTeam_slugRoute: typeof TeamSubteamsTeam_slugRoute
+  MissionsRolesEditRole_slugRoute: typeof MissionsRolesEditRole_slugRoute
+  TeamSubteamsEditTeam_slugRoute: typeof TeamSubteamsEditTeam_slugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -283,6 +351,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeamIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/missions/$project_slug': {
+      id: '/missions/$project_slug'
+      path: '/missions/$project_slug'
+      fullPath: '/missions/$project_slug'
+      preLoaderRoute: typeof MissionsProject_slugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/users': {
       id: '/admin/users'
       path: '/admin/users'
@@ -311,6 +386,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminNewRoleRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/new-project': {
+      id: '/admin/new-project'
+      path: '/admin/new-project'
+      fullPath: '/admin/new-project'
+      preLoaderRoute: typeof AdminNewProjectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/team/subteams/$team_slug': {
       id: '/team/subteams/$team_slug'
       path: '/team/subteams/$team_slug'
@@ -325,11 +407,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeamPeopleUser_slugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/missions/edit/$project_slug': {
+      id: '/missions/edit/$project_slug'
+      path: '/missions/edit/$project_slug'
+      fullPath: '/missions/edit/$project_slug'
+      preLoaderRoute: typeof MissionsEditProject_slugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
       fullPath: '/api/auth/$'
       preLoaderRoute: typeof ApiAuthSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/team/subteams/edit/$team_slug': {
+      id: '/team/subteams/edit/$team_slug'
+      path: '/team/subteams/edit/$team_slug'
+      fullPath: '/team/subteams/edit/$team_slug'
+      preLoaderRoute: typeof TeamSubteamsEditTeam_slugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/missions/roles/edit/$role_slug': {
+      id: '/missions/roles/edit/$role_slug'
+      path: '/missions/roles/edit/$role_slug'
+      fullPath: '/missions/roles/edit/$role_slug'
+      preLoaderRoute: typeof MissionsRolesEditRole_slugRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -343,14 +446,19 @@ const rootRouteChildren: RootRouteChildren = {
   NotReadyRoute: NotReadyRoute,
   SignInRoute: SignInRoute,
   SignUpRoute: SignUpRoute,
+  AdminNewProjectRoute: AdminNewProjectRoute,
   AdminNewRoleRoute: AdminNewRoleRoute,
   AdminNewTeamRoute: AdminNewTeamRoute,
   AdminNewUserRoute: AdminNewUserRoute,
   AdminUsersRoute: AdminUsersRoute,
+  MissionsProject_slugRoute: MissionsProject_slugRoute,
   TeamIndexRoute: TeamIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
+  MissionsEditProject_slugRoute: MissionsEditProject_slugRoute,
   TeamPeopleUser_slugRoute: TeamPeopleUser_slugRoute,
   TeamSubteamsTeam_slugRoute: TeamSubteamsTeam_slugRoute,
+  MissionsRolesEditRole_slugRoute: MissionsRolesEditRole_slugRoute,
+  TeamSubteamsEditTeam_slugRoute: TeamSubteamsEditTeam_slugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
