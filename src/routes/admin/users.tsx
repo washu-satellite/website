@@ -279,7 +279,8 @@ function FileUpload() {
         }) as { data: any, errors: string[] };
 
         if (results.errors.length > 0) {
-            setErrorMessages(results.errors);
+            console.log(results.errors);
+            setErrorMessages(results.errors.map(e => JSON.stringify(e)));
             return false;
         }
 
@@ -294,6 +295,7 @@ function FileUpload() {
 
         const val = ProfileSchema.safeParse(filtered[0]);
         if (val.error) {
+            console.log(val.error);
             setErrorMessages(val.error.issues.map(i => `"${i.path[i.path.length-1].toString()}": ${i.message}`));
             return false;
         }

@@ -102,5 +102,5 @@ export const createProfileAdmin = createServerFn({ method: "POST" })
       .values({
         ...data,
         memberSince: new Date().toISOString().slice(0, 10)
-      });
+      }).onConflictDoNothing();
   });
