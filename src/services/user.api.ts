@@ -8,6 +8,7 @@ import { userRequiredMiddleware } from "./auth.api";
 import { Profile, ProfileSchema } from "./auth.schema";
 import { isAdmin } from "@/util/auth";
 import { ilike } from "drizzle-orm";
+import { DatabaseError } from "pg";
 
 export const listUsers = createServerFn({ method: "GET" })
     .handler(async () => {

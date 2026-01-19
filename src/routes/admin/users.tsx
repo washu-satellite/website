@@ -216,6 +216,14 @@ export const columns: ColumnDef<Column>[] = [
         enableHiding: true,
     },
     {
+        accessorKey: "teamId",
+        header: "team",
+        cell: ({ row }) => (
+            row.getValue("teamId")
+        ),
+        enableHiding: true,
+    },
+    {
         accessorKey: "memberSince",
         header: "member since",
         cell: ({ row }) => (
@@ -360,7 +368,7 @@ function FileUpload() {
                     {errorMessages.length > 0 &&
                         <ul className="text-destructive text-sm pt-2">
                             {errorMessages.map(m => (
-                                <li className="flex flex-row items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-destructive"/>{m}</li>
+                                <li className="flex flex-row items-center gap-2 shrink-0"><div className="w-1.5 h-1.5 rounded-full bg-destructive"/>{m}</li>
                             ))}
                         </ul>
                     }

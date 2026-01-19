@@ -32,13 +32,13 @@ export const TeamTile = (props: DisplayUserShort) => {
         >
             
             <div className="flex-1 w-full relative overflow-hidden">
-                {/* {props.avatar &&
+                {props.imageUrl &&
                     <img
                         className="object-cover w-full h-full rounded-t-[5px] group-hover:opacity-20"
-                        src={props.avatar}
+                        src={props.imageUrl}
                         alt=""
                     />
-                } */}
+                }
                 {props.membershipStatus === "Alum" &&
                     <Badge className="absolute top-1 right-1 bg-red-500/50 text-white border-red-500/70 font-sans">
                         Alum

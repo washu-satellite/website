@@ -8,6 +8,7 @@ import * as schema from "@/lib/db/schema";
 import * as z from 'zod';
 import { user } from "../../auth-schema";
 import { isAdmin } from "@/util/auth";
+import { DatabaseError } from "pg";
 
 export const getUserSession = createServerFn({ method: "GET" }).handler(
   async () => {
@@ -97,10 +98,28 @@ export const createProfileAdmin = createServerFn({ method: "POST" })
       throw new Error("Illegal user creation request");
     }
 
-    await db
-      .insert(schema.profile)
-      .values({
-        ...data,
-        memberSince: new Date().toISOString().slice(0, 10)
-      }).onConflictDoNothing();
+    try {
+      await db
+        .insert(schema.profile)
+        .values({
+          ...data,
+          memberSince: new Date().toISOString().slice(0, 10)
+        }).onConflictDoUpdate({
+          target: schema.profile.username,
+          set: { ...data, memberSince: new Date().toISOString().slice(0, 10) }
+        });
+    } catch (err) {
+      if (err instanceof DatabaseError) {
+        console.error("DB ERROR:", {
+          message: err.message,
+          code: err.code,
+          detail: err.detail,
+          constraint: err.constraint,
+          table: err.table,
+          column: err.column,
+        });
+        throw err;
+      }
+      throw err;
+    }
   });
