@@ -60,7 +60,7 @@ function ApplyPage() {
                         />
                         <RedirectButton
                             text="Business"
-                            href=""
+                            href="https://docs.google.com/forms/d/e/1FAIpQLSfI7XuR6qyBNYRNlWRo6x6Cbgxo6LRIIzvnEUdMnH0sEym33Q/viewform"
                         />
                         <RedirectButton
                             text="Other fields"
