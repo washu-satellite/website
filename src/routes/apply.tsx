@@ -40,7 +40,7 @@ function ApplyPage() {
                         />
                         <RedirectButton
                             text="Electrical"
-                            href=""
+                            href="https://docs.google.com/forms/d/e/1FAIpQLSfMATrKhKvE8pXQxbMHBzGcY0wrP4un_IE84Wti1uAkzCaUZA/viewform"
                         />
                         <RedirectButton
                             text="Mechanical"
@@ -56,7 +56,7 @@ function ApplyPage() {
                         />
                         <RedirectButton
                             text="Mission Ops"
-                            href=""
+                            href="https://docs.google.com/forms/d/e/1FAIpQLSfHnM8PfnN-Yo69oJH02rHdx29NOjz1tz1YyH6s7eqBnjdxig/viewform?usp=header"
                         />
                         <RedirectButton
                             text="Business"
