@@ -36,7 +36,7 @@ function ApplyPage() {
                     <div className="flex flex-row flex-wrap items-center justify-center gap-4">
                         <RedirectButton
                             text="Software"
-                            href=""
+                            href="https://docs.google.com/forms/d/e/1FAIpQLSdhP87gAjf44RndmdDmRfpuUNoBHnzopNQVnuSxV9kUNsVR0g/viewform"
                         />
                         <RedirectButton
                             text="Electrical"
@@ -46,14 +46,18 @@ function ApplyPage() {
                             text="Mechanical"
                             href="https://docs.google.com/forms/d/e/1FAIpQLSd-TYI6hK5fArY20bOJsPXlzgIxXlWp3oD7AqKZgeNQ5T1Uqg/viewform?usp=dialog"
                         />
-                        <RedirectButton
-                            text="Physics"
-                            href=""
-                        />
-                        <RedirectButton
-                            text="Systems"
-                            href=""
-                        />
+                        <div className="opacity-50 pointer-events-none">
+                                <RedirectButton
+                                text="Physics"
+                                href=""
+                            />
+                        </div>
+                        <div className="opacity-50 pointer-events-none">
+                            <RedirectButton
+                                text="Systems"
+                                href=""
+                            />
+                        </div>
                         <RedirectButton
                             text="Mission Ops"
                             href="https://docs.google.com/forms/d/e/1FAIpQLSfHnM8PfnN-Yo69oJH02rHdx29NOjz1tz1YyH6s7eqBnjdxig/viewform?usp=header"
@@ -64,7 +68,7 @@ function ApplyPage() {
                         />
                         <RedirectButton
                             text="Other fields"
-                            href=""
+                            href="https://docs.google.com/forms/d/e/1FAIpQLSeYu_DFKjRJsUIvLK7Row2LIDPBnLE5KOHz0adhgepyrpSnBg/viewform"
                         />
                     </div>
                 </div>
