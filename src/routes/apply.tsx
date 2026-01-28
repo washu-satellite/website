@@ -31,7 +31,7 @@ function ApplyPage() {
                     <div className="text-foreground/80">
                         <p className={`font-medium`}>All WashU students are welcome to join and participate in our organization.</p>
                         <br />
-                        <p className={`font-medium`}>Applications for the FL25 season closed on 9/5/25. If you weren't able to apply this semester, continue to check our pages for updates and we welcome your application in SP26.</p>
+                        <p className={`font-medium`}>Applications for the SP26 season are currently open.</p>
                     </div>
                     <div className="flex flex-row flex-wrap items-center justify-center gap-4">
                         <RedirectButton
