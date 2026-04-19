@@ -6,7 +6,7 @@ export const DisplayUserShortSchema = z.object({
     name: z
         .string()
         .min(5, "Name must be at least five characters")
-        .max(255, "Namme cannot be more than 255 characters"),
+        .max(255, "Name cannot be more than 255 characters"),
     username: z
         .string()
         .min(1, { error: "Username must be at least 1 character" })
@@ -14,7 +14,6 @@ export const DisplayUserShortSchema = z.object({
         .regex(/^[a-zA-Z0-9_]+$/, {
             error: "Username must be alphanumeric and/or underscores",
         })
-        .trim()
         .trim(),
     memberSince: z.date(),
     membershipStatus: z.enum(MEMBERSHIP_STATUS_OPTIONS),
@@ -27,7 +26,8 @@ export const DisplayUserShortSchema = z.object({
         .trim()
         .optional()
         .nullable(),
-    imageUrl: z.string().trim().optional().nullable()
+    imageUrl: z.string().trim().optional().nullable(),
+    teamId: z.string().trim().optional().nullable()
 });
 
 export type DisplayUserShort = z.infer<typeof DisplayUserShortSchema>;

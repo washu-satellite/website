@@ -32,8 +32,6 @@ export const getMembersByTeam = createServerFn({ method: "GET" })
     .handler(async ({ data }) => {
         const profiles = await db.select().from(schema.profile).where(eq(schema.profile.teamId, data.name));
 
-        console.log(profiles);
-
         return z.array(DisplayUserShortSchema).parse(profiles.map(p => ({ ...p, memberSince: new Date(p.memberSince) })));
     });
 

@@ -81,7 +81,13 @@ function TeamPage() {
     const { data, isPending, error } = useQuery(userQueries.list());
 
     if (isPending) return <LoadingPage />;
-    if (error) return "An error has occurred: " + error.message;
+    if (error) return (
+        <GenericPage title="Our Team" headerContent={<p>The folks who make it all happen</p>}>
+            <div className="px-[4rem] py-[4rem]">
+                <p className="text-foreground/80">An error has occurred: {error.message}</p>
+            </div>
+        </GenericPage>
+    );
 
     return (
         <GenericPage

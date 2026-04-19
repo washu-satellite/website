@@ -148,7 +148,7 @@ export interface FileRoutesByFullPath {
   '/admin/new-user': typeof AdminNewUserRoute
   '/admin/users': typeof AdminUsersRoute
   '/missions/$project_slug': typeof MissionsProject_slugRoute
-  '/team': typeof TeamIndexRoute
+  '/team/': typeof TeamIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/missions/edit/$project_slug': typeof MissionsEditProject_slugRoute
   '/team/people/$user_slug': typeof TeamPeopleUser_slugRoute
@@ -217,7 +217,7 @@ export interface FileRouteTypes {
     | '/admin/new-user'
     | '/admin/users'
     | '/missions/$project_slug'
-    | '/team'
+    | '/team/'
     | '/api/auth/$'
     | '/missions/edit/$project_slug'
     | '/team/people/$user_slug'
@@ -347,7 +347,7 @@ declare module '@tanstack/react-router' {
     '/team/': {
       id: '/team/'
       path: '/team'
-      fullPath: '/team'
+      fullPath: '/team/'
       preLoaderRoute: typeof TeamIndexRouteImport
       parentRoute: typeof rootRouteImport
     }

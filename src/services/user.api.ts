@@ -1,14 +1,12 @@
 import { db } from "@/lib/db";
 import { createServerFn } from "@tanstack/react-start";
 import * as schema from "@/lib/db/schema";
-import { and, eq, isNull } from "drizzle-orm";
+import { and, eq, ilike, isNull } from "drizzle-orm";
 import z from "zod";
 import { DisplayUserShortSchema } from "./user.schema";
 import { userRequiredMiddleware } from "./auth.api";
 import { Profile, ProfileSchema } from "./auth.schema";
 import { isAdmin } from "@/util/auth";
-import { ilike } from "drizzle-orm";
-import { DatabaseError } from "pg";
 
 export const listUsers = createServerFn({ method: "GET" })
     .handler(async () => {

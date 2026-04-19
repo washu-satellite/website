@@ -7,7 +7,7 @@ export const TeamSchema = z.object({
     description: z.string().trim()
         .max(2000, { error: "Description cannot be longer than 2000 characters" })
         .optional().nullable(),
-    applicationUrl: z.url().trim().optional().nullable()
+    applicationUrl: z.union([z.url(), z.literal("")]).optional().nullable()
 });
 
 export type Team = z.infer<typeof TeamSchema>;

@@ -37,7 +37,7 @@ export const Route = createFileRoute('/team/people/$user_slug')({
     });
 
     if (profile?.userId)
-      await context.queryClient.ensureQueryData(teamQueries.getRolesByProject(profile?.userId));
+      await context.queryClient.ensureQueryData(teamQueries.getRolesByUser(profile.userId));
 
     return { profile };
   },
@@ -106,6 +106,11 @@ function RouteComponent() {
 
   const isAdmin = session?.user.role === "admin";
 
+  const roles = useQuery({
+    ...teamQueries.getRolesByUser((profile as Profile | undefined)?.userId ?? ""),
+    enabled: !!(profile as Profile | undefined)?.userId,
+  });
+
   if (!profile) return (
     <div className="h-screen flex flex-col justify-center items-center text-center gap-4">
       <h1 className="text-lg">There is no user with id <Badge variant='outline' className="font-mono text-base font-semibold rounded-md">{params.user_slug}</Badge></h1>
@@ -117,10 +122,6 @@ function RouteComponent() {
       </Button>
     </div>
   );
-
-  const roles = useQuery(teamQueries.getRolesByUser((profile as Profile).userId??""));
-
-  console.log((profile as Profile).userId??"");
 
   return (
     <div className={"flex-1 overflow-x-hidden z-10"}>
@@ -266,10 +267,12 @@ function RouteComponent() {
                               </ExtendedLabel>
                               {editMode && isAdmin ? (
                                 <TeamSelection field={field} isInvalid={isInvalid}/>
-                              ) : (
+                              ) : field.state.value ? (
                                 <Link to="/team/subteams/$team_slug" params={{ team_slug: field.state.value }} className="hover:underline underline-offset-2">
                                   {field.state.value}
                                 </Link>
+                              ) : (
+                                <p className="text-foreground/40">None</p>
                               )}
                             </ExtendedField>
                           )

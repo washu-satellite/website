@@ -1,6 +1,6 @@
 import z from "zod";
 
-export const MEMBERSHIP_STATUS_OPTIONS = ["Current member", "Alum", "Unknown"];
+export const MEMBERSHIP_STATUS_OPTIONS = ["Current member", "Alum", "Unknown"] as const;
 
 export const NewProfileSchema = z.object({
   userId: z.string().trim(),
@@ -11,12 +11,11 @@ export const NewProfileSchema = z.object({
     .regex(/^[a-zA-Z0-9_]+$/, {
       error: "Username must be alphanumeric and/or underscores",
     })
-    .trim()
     .trim(),
   name: z
     .string()
     .min(5, "Name must be at least five characters")
-    .max(255, "Namme cannot be more than 255 characters"),
+    .max(255, "Name cannot be more than 255 characters"),
   email: z.email().trim()
 });
 
@@ -27,7 +26,7 @@ export const ProfileSchema = z.object({
   name: z
     .string()
     .min(5, "Name must be at least five characters")
-    .max(255, "Namme cannot be more than 255 characters"),
+    .max(255, "Name cannot be more than 255 characters"),
   username: z
     .string()
     .min(1, { error: "Username must be at least 1 character" })
@@ -35,7 +34,6 @@ export const ProfileSchema = z.object({
     .regex(/^[a-zA-Z0-9_]+$/, {
       error: "Username must be alphanumeric and/or underscores",
     })
-    .trim()
     .trim(),
   memberSince: z.date(),
   membershipStatus: z.enum(MEMBERSHIP_STATUS_OPTIONS),
@@ -58,7 +56,7 @@ export const SignUpSchema = z.object({
   name: z
     .string()
     .min(5, "Name must be at least five characters")
-    .max(255, "Namme cannot be more than 255 characters"),
+    .max(255, "Name cannot be more than 255 characters"),
   username: z
     .string()
     .min(1, { error: "Username must be at least 1 character" })

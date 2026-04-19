@@ -83,9 +83,9 @@ export const createProfile = createServerFn({ method: "POST" })
       .onConflictDoUpdate({
         target: schema.profile.username,
         set: {
-          ...data,
-          memberSince: new Date().toISOString().slice(0, 10),
-          membershipStatus: "Unknown"
+          userId: data.userId,
+          name: data.name,
+          email: data.email
         }
       });
   });

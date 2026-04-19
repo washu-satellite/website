@@ -145,6 +145,7 @@ export function DropdownSelect(
         <DropdownMenuGroup>
           {props.options.map(v => (
             <DropdownMenuItem
+              key={v}
               onClick={() => props.field.handleChange(v)}
             >
               {v}
@@ -183,7 +184,7 @@ export function ProjectSelection(
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant='outline' className="w-full justify-between">
-          {props.field.state.value ? projects.data?.filter(p => p.id === props.field.state.value)[0].acronym : "None"}
+          {props.field.state.value ? (projects.data?.find(p => p.id === props.field.state.value)?.acronym ?? "None") : "None"}
           <ChevronDown />
         </Button>
       </DropdownMenuTrigger>
@@ -191,6 +192,7 @@ export function ProjectSelection(
         <DropdownMenuGroup>
           {projects.data?.map(t => (
             <DropdownMenuItem
+              key={t.id}
               onClick={() => props.field.handleChange(t.id)}
               className="flex flex-row items-center gap-2"
             >
@@ -218,7 +220,7 @@ export function RoleSelection(
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant='outline' className="w-full justify-between">
-          {props.field.state.value ? roles.data?.filter(p => p.id === props.field.state.value)[0].name : "None"}
+          {props.field.state.value ? (roles.data?.find(p => p.id === props.field.state.value)?.name ?? "None") : "None"}
           <ChevronDown />
         </Button>
       </DropdownMenuTrigger>
@@ -226,6 +228,7 @@ export function RoleSelection(
         <DropdownMenuGroup>
           {roles.data?.map(t => (
             <DropdownMenuItem
+              key={t.id}
               onClick={() => props.field.handleChange(t.id)}
               className="flex flex-row items-center gap-2"
             >
@@ -258,6 +261,7 @@ export function TeamSelection(
         <DropdownMenuGroup>
           {data?.map(t => (
             <DropdownMenuItem
+              key={t.id ?? t.name}
               onClick={() => props.field.handleChange(t.name)}
             >
               {t.name}
