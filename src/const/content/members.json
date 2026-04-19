@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Aavik Wadivkar",
+    "gradYear": 2025,
+    "team": "Exec",
+    "isAdmin": true
+  },
+  {
+    "name": "Geoffrey Goffman",
+    "gradYear": 2025,
+    "team": "Exec",
+    "isAdmin": true
+  },
+  {
+    "name": "Nate Hayman",
+    "gradYear": 2025,
+    "team": "Exec",
+    "isAdmin": true
+  },
+  {
+    "name": "Sophie Fendler",
+    "gradYear": 2025,
+    "team": "Exec",
+    "isAdmin": true
+  },
+  {
+    "name": "Example Member",
+    "gradYear": 2027,
+    "team": "Software",
+    "isAdmin": false
+  }
+]

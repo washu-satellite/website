@@ -3,7 +3,6 @@ import { Message } from '@bufbuild/protobuf';
 import { Centrifuge, Subscription } from 'centrifuge/build/protobuf';
 import { StateCreator, StoreApi, UseBoundStore } from 'zustand';
 import { create } from 'zustand';
-import { Profile } from '@/services/auth.schema';
 
 export type MessageDetails = {
   timestamp: Date,
@@ -62,20 +61,15 @@ const createSocketStore: StateCreator<SocketStore, [], []> = (set) => ({
 
 export type ThemeOption = 'dark' | 'light' | 'system';
 
-// Contains all data for managing Centrifuge socket comms
 type UserStore = {
-  profile: Profile | null;
   theme: ThemeOption;
 
-  setProfile: (profile: Profile) => void;
   setTheme: (theme: ThemeOption) => void;
 }
 
 const createUserStore: StateCreator<UserStore, [], []> = (set) => ({
-  profile: null,
   theme: 'dark',
 
-  setProfile: (profile) => set(() => ({ profile })),
   setTheme: (theme) => set(() => ({ theme }))
 });
 

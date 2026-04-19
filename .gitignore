@@ -19,3 +19,5 @@ gen
 
 ca.crt
 ca.crt.b64
+
+.claude/

@@ -2,8 +2,8 @@ import clsx from "clsx";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { PiInstagramLogoFill } from "react-icons/pi";
 
-import { ProjectHighlightData } from "@/const/content/projects";
 import ThemedLink from "./ThemedLink";
+import { teamSlugs } from "@/const/content/members";
 import { Sun, Moon, Monitor } from "lucide-react";
 import { Button } from "./ui/button";
 import { bStore } from "@/hooks/useAppStore";
@@ -80,9 +80,9 @@ export default function Footer() {
                 </div>
             </div>
             <div className="flex-1 flex flex-col items-start gap-1 border-l-0 border-b-0 md:border-l md:border-b border-border p-2">
-                <ThemedLink href={"/"}><p className="-ml-1">Missions</p></ThemedLink>
-                {ProjectHighlightData.map((p, i) => (
-                    <ThemedLink key={i} arrowLink href={p.posterUrl ? p.posterUrl : `/missions/${p.id.replaceAll("-", "").toLowerCase()}`} className={clsx(`text-foreground/80`, "font-normal")}>{p.id}</ThemedLink>
+                <ThemedLink href={"/team"}><p className="-ml-1">Subteams</p></ThemedLink>
+                {teamSlugs().map((t) => (
+                    <ThemedLink key={t} arrowLink href={`/team/subteams/${t}`} className={clsx(`text-foreground/80`, "font-normal")}>{t}</ThemedLink>
                 ))}
             </div>
             <div className="flex-1 flex flex-col items-start gap-1 border-l-0 border-b-0 md:border-l md:border-b border-border p-2">

@@ -1,4 +1,4 @@
-import { HeadContent, Scripts, createRootRouteWithContext, useLocation } from '@tanstack/react-router'
+import { HeadContent, Scripts, createRootRouteWithContext } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 
@@ -9,21 +9,11 @@ import Footer from '@/components/Footer'
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { bStore } from '@/hooks/useAppStore'
 import { cn } from '@/lib/utils'
-import { authQueries } from '@/services/queries'
 import { queryClient } from '@/queryClient'
-import { useEffect } from 'react'
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient
 }>()({
-  beforeLoad: async ({ context }) => {
-    const userSession = await context.queryClient.fetchQuery(
-      authQueries.user()
-    );
-
-    return { userSession };
-  },
-
   head: () => ({
     meta: [
       {
@@ -49,10 +39,6 @@ export const Route = createRootRouteWithContext<{
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-  // const location = useLocation();
-
-  // const dashboardActive = ["/dashboard"].some(r => location.pathname.startsWith(r))
-
   const _theme = bStore.use.theme();
 
   return (
@@ -70,7 +56,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             }
           )}
         >
-          {/* <Header /> */}
           <NavBar />
           {children}
           <Footer />
