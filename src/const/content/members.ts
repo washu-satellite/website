@@ -2,14 +2,15 @@ import membersJson from "./members.json";
 
 export type Member = {
   name: string;
-  gradYear: number;
-  team: string;
+  email?: string;
+  teams: string[];
   isAdmin: boolean;
+  gradYear?: number;
 };
 
 export const members: Member[] = membersJson;
 
-export function slugify(name: string) {
+export function slugify(name: string): string {
   return name
     .toLowerCase()
     .trim()
@@ -21,12 +22,7 @@ export function memberBySlug(slug: string): Member | undefined {
   return members.find((m) => slugify(m.name) === slug);
 }
 
-export function teamSlugs(): string[] {
-  return Array.from(new Set(members.map((m) => m.team))).sort();
-}
-
-export function membersByTeam(teamSlug: string): Member[] {
-  return members.filter(
-    (m) => slugify(m.team) === slugify(teamSlug) || m.team === teamSlug,
-  );
+/** Primary team = first listed team. Used for /team grouping. */
+export function primaryTeam(m: Member): string {
+  return m.teams[0] ?? "Unassigned";
 }

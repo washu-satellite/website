@@ -1,16 +1,22 @@
 import { TeamTile } from "@/routes/team";
-import type { Member } from "@/const/content/members";
+import { primaryTeam, type Member } from "@/const/content/members";
 
 function groupByTeam(members: Member[]) {
   const groups = new Map<string, Member[]>();
 
   for (const m of members) {
-    const existing = groups.get(m.team);
+    const key = primaryTeam(m);
+    const existing = groups.get(key);
     if (existing) existing.push(m);
-    else groups.set(m.team, [m]);
+    else groups.set(key, [m]);
   }
 
-  return Array.from(groups.entries()).sort(([a], [b]) => a.localeCompare(b));
+  // Always show Exec first if present, then alphabetical.
+  return Array.from(groups.entries()).sort(([a], [b]) => {
+    if (a === "Exec") return -1;
+    if (b === "Exec") return 1;
+    return a.localeCompare(b);
+  });
 }
 
 export function MemberList(props: { members?: Member[] }) {

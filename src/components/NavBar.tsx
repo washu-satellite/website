@@ -4,19 +4,16 @@ import ThemedLink from "./ThemedLink";
 
 import type { NavElement } from "@/types/data";
 
-import { ChevronDown, Users, Waypoints } from "lucide-react";
+import { ChevronDown, Users } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { Link } from "@tanstack/react-router";
-import { teamSlugs } from "@/const/content/members";
 
 const MenuItem = (props: NavElement) => {
   return (
@@ -102,8 +99,6 @@ export default function NavBar() {
     });
   }, []);
 
-  const teams = teamSlugs();
-
   return (
     <div
       className={cn(
@@ -131,19 +126,6 @@ export default function NavBar() {
                 href={"/team"}
               />
             </DropdownMenuItem>
-          </DropdownMenuGroup>
-          <DropdownMenuSeparator />
-          <DropdownMenuGroup>
-            <DropdownMenuLabel>Subteams</DropdownMenuLabel>
-            {teams.map((t) => (
-              <DropdownMenuItem key={t}>
-                <NavbarMenuItem
-                  title={t}
-                  icon={<Waypoints />}
-                  href={`/team/subteams/${t}`}
-                />
-              </DropdownMenuItem>
-            ))}
           </DropdownMenuGroup>
         </NavbarMenu>
       </div>

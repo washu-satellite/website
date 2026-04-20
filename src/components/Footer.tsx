@@ -3,7 +3,6 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { PiInstagramLogoFill } from "react-icons/pi";
 
 import ThemedLink from "./ThemedLink";
-import { teamSlugs } from "@/const/content/members";
 import { Sun, Moon, Monitor } from "lucide-react";
 import { Button } from "./ui/button";
 import { bStore } from "@/hooks/useAppStore";
@@ -78,12 +77,6 @@ export default function Footer() {
                     <a href="https://www.instagram.com/washusatellite/"><PiInstagramLogoFill size={24} /></a>
                     <a href="https://github.com/washu-satellite"><FaGithub size={24} /></a>
                 </div>
-            </div>
-            <div className="flex-1 flex flex-col items-start gap-1 border-l-0 border-b-0 md:border-l md:border-b border-border p-2">
-                <ThemedLink href={"/team"}><p className="-ml-1">Subteams</p></ThemedLink>
-                {teamSlugs().map((t) => (
-                    <ThemedLink key={t} arrowLink href={`/team/subteams/${t}`} className={clsx(`text-foreground/80`, "font-normal")}>{t}</ThemedLink>
-                ))}
             </div>
             <div className="flex-1 flex flex-col items-start gap-1 border-l-0 border-b-0 md:border-l md:border-b border-border p-2">
                 <ThemedLink key={"keep-in-touch"} href={"/"}><p className="-ml-1">Keep in Touch</p></ThemedLink>

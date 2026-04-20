@@ -15,7 +15,6 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ApplyRouteImport } from './routes/apply'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TeamIndexRouteImport } from './routes/team/index'
-import { Route as TeamSubteamsTeam_slugRouteImport } from './routes/team/subteams/$team_slug'
 import { Route as TeamPeopleUser_slugRouteImport } from './routes/team/people/$user_slug'
 
 const NotReadyRoute = NotReadyRouteImport.update({
@@ -48,11 +47,6 @@ const TeamIndexRoute = TeamIndexRouteImport.update({
   path: '/team/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TeamSubteamsTeam_slugRoute = TeamSubteamsTeam_slugRouteImport.update({
-  id: '/team/subteams/$team_slug',
-  path: '/team/subteams/$team_slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const TeamPeopleUser_slugRoute = TeamPeopleUser_slugRouteImport.update({
   id: '/team/people/$user_slug',
   path: '/team/people/$user_slug',
@@ -67,7 +61,6 @@ export interface FileRoutesByFullPath {
   '/not-ready': typeof NotReadyRoute
   '/team': typeof TeamIndexRoute
   '/team/people/$user_slug': typeof TeamPeopleUser_slugRoute
-  '/team/subteams/$team_slug': typeof TeamSubteamsTeam_slugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -77,7 +70,6 @@ export interface FileRoutesByTo {
   '/not-ready': typeof NotReadyRoute
   '/team': typeof TeamIndexRoute
   '/team/people/$user_slug': typeof TeamPeopleUser_slugRoute
-  '/team/subteams/$team_slug': typeof TeamSubteamsTeam_slugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -88,7 +80,6 @@ export interface FileRoutesById {
   '/not-ready': typeof NotReadyRoute
   '/team/': typeof TeamIndexRoute
   '/team/people/$user_slug': typeof TeamPeopleUser_slugRoute
-  '/team/subteams/$team_slug': typeof TeamSubteamsTeam_slugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -100,7 +91,6 @@ export interface FileRouteTypes {
     | '/not-ready'
     | '/team'
     | '/team/people/$user_slug'
-    | '/team/subteams/$team_slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -110,7 +100,6 @@ export interface FileRouteTypes {
     | '/not-ready'
     | '/team'
     | '/team/people/$user_slug'
-    | '/team/subteams/$team_slug'
   id:
     | '__root__'
     | '/'
@@ -120,7 +109,6 @@ export interface FileRouteTypes {
     | '/not-ready'
     | '/team/'
     | '/team/people/$user_slug'
-    | '/team/subteams/$team_slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -131,7 +119,6 @@ export interface RootRouteChildren {
   NotReadyRoute: typeof NotReadyRoute
   TeamIndexRoute: typeof TeamIndexRoute
   TeamPeopleUser_slugRoute: typeof TeamPeopleUser_slugRoute
-  TeamSubteamsTeam_slugRoute: typeof TeamSubteamsTeam_slugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -178,13 +165,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeamIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/team/subteams/$team_slug': {
-      id: '/team/subteams/$team_slug'
-      path: '/team/subteams/$team_slug'
-      fullPath: '/team/subteams/$team_slug'
-      preLoaderRoute: typeof TeamSubteamsTeam_slugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/team/people/$user_slug': {
       id: '/team/people/$user_slug'
       path: '/team/people/$user_slug'
@@ -203,7 +183,6 @@ const rootRouteChildren: RootRouteChildren = {
   NotReadyRoute: NotReadyRoute,
   TeamIndexRoute: TeamIndexRoute,
   TeamPeopleUser_slugRoute: TeamPeopleUser_slugRoute,
-  TeamSubteamsTeam_slugRoute: TeamSubteamsTeam_slugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -62,22 +62,31 @@ function RouteComponent() {
                   <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
                     <div>
                       <p className="font-mono text-xs uppercase text-foreground/60">
-                        Graduation Year
+                        Teams
                       </p>
-                      <p>{member.gradYear}</p>
+                      <p>{member.teams.join(" · ")}</p>
                     </div>
-                    <div>
-                      <p className="font-mono text-xs uppercase text-foreground/60">
-                        Team
-                      </p>
-                      <Link
-                        to="/team/subteams/$team_slug"
-                        params={{ team_slug: member.team }}
-                        className="hover:underline underline-offset-2"
-                      >
-                        {member.team}
-                      </Link>
-                    </div>
+                    {member.email && (
+                      <div>
+                        <p className="font-mono text-xs uppercase text-foreground/60">
+                          Email
+                        </p>
+                        <a
+                          href={`mailto:${member.email}`}
+                          className="hover:underline underline-offset-2"
+                        >
+                          {member.email}
+                        </a>
+                      </div>
+                    )}
+                    {member.gradYear && (
+                      <div>
+                        <p className="font-mono text-xs uppercase text-foreground/60">
+                          Graduation Year
+                        </p>
+                        <p>{member.gradYear}</p>
+                      </div>
+                    )}
                     {member.isAdmin && (
                       <div>
                         <p className="font-mono text-xs uppercase text-foreground/60">

@@ -33,16 +33,12 @@ export const TeamTile = (props: Member) => {
           <p className="font-sans">See full profile</p>
         </Link>
       </div>
-      <div
-        className={clsx(
-          "border-inherit w-full p-4 rounded-b-md shrink-0",
-        )}
-      >
+      <div className="border-inherit w-full p-4 rounded-b-md shrink-0">
         <div className="flex flex-row items-start justify-between">
           <div>
             <h3 className="font-sans font-medium">{props.name}</h3>
             <p className="text-sm font-sans text-foreground/80">
-              Class of {props.gradYear} · {props.team}
+              {props.teams.join(" · ")}
             </p>
           </div>
         </div>
