@@ -124,7 +124,7 @@ function TeamIntro() {
 
           <div className="pl-0 md:pl-8">
             <Card>
-              <div className="font-sans space-y-2 z-10">
+              <div id="who" className="font-sans space-y-2 z-10 scroll-mt-24">
                 <h2 className="font-semibold text-foreground text-xl">Who are we?</h2>
                 <p className={"font-normal mb-2 text-foreground/80 pb-2"}>
                   {HomepageContent.aboutUs}
@@ -165,6 +165,7 @@ function HomePage() {
               <div className="flex-1 flex flex-col">
                 <TeamIntro />
 
+                <div id="timeline" className="scroll-mt-24" />
                 <DividerHeading index={1}>
                   Timeline
                 </DividerHeading>

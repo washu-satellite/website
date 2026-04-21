@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ChevronDown } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import GenericPage from "@/components/GenericPage";
 import { Badge } from "@/components/ui/badge";
 import { MemberList } from "@/components/MemberList";
@@ -19,15 +19,12 @@ import {
   type Member,
 } from "@/const/content/members";
 
-type SortMode = "subteam" | "alphabetical" | "admins";
+type SortMode = "subteam" | "alphabetical";
 
 const SORT_LABELS: Record<SortMode, string> = {
-  subteam: "By subteam",
+  subteam: "Exec first",
   alphabetical: "Alphabetical",
-  admins: "Admins first",
 };
-
-const ALL_TEAMS = "__all__";
 
 export const Route = createFileRoute("/team/")({
   component: TeamPage,
@@ -59,33 +56,25 @@ export const TeamTile = (props: Member) => {
   );
 };
 
-function FilterDropdown(props: {
-  label: string;
-  options: { value: string; label: string }[];
-  value: string;
-  onChange: (v: string) => void;
+function SortDropdown(props: {
+  value: SortMode;
+  onChange: (v: SortMode) => void;
 }) {
-  const current =
-    props.options.find((o) => o.value === props.value)?.label ?? props.value;
-
   return (
     <div className="flex flex-col gap-1">
       <span className="font-mono text-xs uppercase text-foreground/60">
-        {props.label}
+        Sort
       </span>
       <DropdownMenu>
-        <DropdownMenuTrigger className="flex flex-row items-center justify-between gap-2 bg-input/30 border-input border px-3 py-1.5 rounded-md text-sm min-w-[12rem]">
-          <span>{current}</span>
+        <DropdownMenuTrigger className="flex flex-row items-center justify-between gap-2 bg-input/30 border-input border px-3 py-1.5 rounded-md text-sm min-w-[10rem]">
+          <span>{SORT_LABELS[props.value]}</span>
           <ChevronDown className="w-4 h-4" />
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="border-border min-w-[12rem]">
+        <DropdownMenuContent className="border-border min-w-[10rem]">
           <DropdownMenuGroup>
-            {props.options.map((o) => (
-              <DropdownMenuItem
-                key={o.value}
-                onClick={() => props.onChange(o.value)}
-              >
-                {o.label}
+            {(Object.keys(SORT_LABELS) as SortMode[]).map((s) => (
+              <DropdownMenuItem key={s} onClick={() => props.onChange(s)}>
+                {SORT_LABELS[s]}
               </DropdownMenuItem>
             ))}
           </DropdownMenuGroup>
@@ -96,13 +85,28 @@ function FilterDropdown(props: {
 }
 
 function TeamPage() {
-  const [teamFilter, setTeamFilter] = useState<string>(ALL_TEAMS);
   const [sortMode, setSortMode] = useState<SortMode>("subteam");
+  const [teamFilter, setTeamFilter] = useState<string | null>(null);
 
-  const allTeams = teamNames();
+  // Filter by the URL hash set from the nav dropdown (e.g. /team#exec).
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const apply = () => {
+      const h = window.location.hash.replace(/^#/, "");
+      setTeamFilter(h || null);
+    };
+    apply();
+    window.addEventListener("hashchange", apply);
+    return () => window.removeEventListener("hashchange", apply);
+  }, []);
+
+  const teamLabel = useMemo(() => {
+    if (!teamFilter) return null;
+    return teamNames().find((t) => slugify(t) === teamFilter) ?? teamFilter;
+  }, [teamFilter]);
 
   const filtered = useMemo(() => {
-    if (teamFilter === ALL_TEAMS) return members;
+    if (!teamFilter) return members;
     return members.filter((m) =>
       m.teams.some((t) => slugify(t) === teamFilter),
     );
@@ -112,46 +116,42 @@ function TeamPage() {
     if (sortMode === "alphabetical") {
       return [...filtered].sort((a, b) => a.name.localeCompare(b.name));
     }
-    if (sortMode === "admins") {
-      return [...filtered].sort((a, b) => {
-        if (a.isAdmin !== b.isAdmin) return a.isAdmin ? -1 : 1;
-        return a.name.localeCompare(b.name);
-      });
-    }
     return filtered;
   }, [filtered, sortMode]);
 
   return (
     <GenericPage
-      title="Our Team"
-      headerContent={<p>The folks who make it all happen</p>}
+      title={teamLabel ? `${teamLabel} Team` : "Our Team"}
+      headerContent={
+        <p>
+          {teamLabel
+            ? `Members of the ${teamLabel} subteam`
+            : "The folks who make it all happen"}
+        </p>
+      }
     >
       <div className="z-10 bg-bg px-[4rem] pt-4 pb-[4rem] flex flex-col gap-4">
         <div className="flex flex-row flex-wrap items-end gap-4 border-b border-border pb-4">
-          <FilterDropdown
-            label="Subteam"
-            value={teamFilter}
-            onChange={setTeamFilter}
-            options={[
-              { value: ALL_TEAMS, label: "All subteams" },
-              ...allTeams.map((t) => ({ value: slugify(t), label: t })),
-            ]}
-          />
-          <FilterDropdown
-            label="Sort"
-            value={sortMode}
-            onChange={(v) => setSortMode(v as SortMode)}
-            options={(Object.keys(SORT_LABELS) as SortMode[]).map((s) => ({
-              value: s,
-              label: SORT_LABELS[s],
-            }))}
-          />
+          <SortDropdown value={sortMode} onChange={setSortMode} />
+          {teamFilter && (
+            <a
+              href="/team"
+              onClick={(e) => {
+                e.preventDefault();
+                history.replaceState(null, "", "/team");
+                setTeamFilter(null);
+              }}
+              className="text-sm text-foreground/70 hover:text-foreground underline underline-offset-2"
+            >
+              Clear subteam filter
+            </a>
+          )}
           <p className="text-sm text-foreground/60 ml-auto">
             {sorted.length} {sorted.length === 1 ? "member" : "members"}
           </p>
         </div>
 
-        {sortMode === "subteam" ? (
+        {sortMode === "subteam" && !teamFilter ? (
           <MemberList members={sorted} />
         ) : (
           <div className="flex flex-row flex-wrap justify-start gap-4">

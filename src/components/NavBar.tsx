@@ -4,7 +4,7 @@ import ThemedLink from "./ThemedLink";
 
 import type { NavElement } from "@/types/data";
 
-import { ChevronDown, Rocket, Users } from "lucide-react";
+import { ChevronDown, Rocket, Users, Waypoints } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,6 +17,8 @@ import {
 import { cn } from "@/lib/utils";
 import { Link } from "@tanstack/react-router";
 import { ProjectPages } from "@/const/content/projects";
+import { slugify, teamNames } from "@/const/content/members";
+import { bStore } from "@/hooks/useAppStore";
 
 const MenuItem = (props: NavElement) => {
   return (
@@ -47,9 +49,12 @@ function NavbarMenuItem(props: {
   description?: string;
   href?: string;
 }) {
+  const [path, hash] = (props.href ?? "").split("#");
+
   return (
     <Link
-      to={props.href}
+      to={path || undefined}
+      hash={hash}
       className={cn("flex flex-row items-start p gap-2 w-full", {
         "items-start": props.description !== undefined,
         "items-center": !props.description,
@@ -95,6 +100,7 @@ function NavbarMenu(
 
 export default function NavBar() {
   const [scrolled, setScrolled] = useState(false);
+  const theme = bStore.use.theme();
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -116,7 +122,11 @@ export default function NavBar() {
     >
       <div className="flex flex-row justify-start items-center font-normal relative gap-2">
         <Link to="/" className={clsx("font-bold text-base")}>
-          <img alt="" src="/logo.svg" className="h-8 mr-4" />
+          <img
+            alt="WashU Satellite"
+            src={theme === "light" ? "/logo_light.svg" : "/logo.svg"}
+            className="h-8 mr-4"
+          />
         </Link>
 
         <NavbarMenu title="Missions">
@@ -163,6 +173,19 @@ export default function NavBar() {
                 href={"/team"}
               />
             </DropdownMenuItem>
+          </DropdownMenuGroup>
+          <DropdownMenuSeparator />
+          <DropdownMenuGroup>
+            <DropdownMenuLabel>Subteams</DropdownMenuLabel>
+            {teamNames().map((t) => (
+              <DropdownMenuItem key={t}>
+                <NavbarMenuItem
+                  title={t}
+                  icon={<Waypoints />}
+                  href={`/team#${slugify(t)}`}
+                />
+              </DropdownMenuItem>
+            ))}
           </DropdownMenuGroup>
         </NavbarMenu>
       </div>

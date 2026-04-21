@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { ExternalLink, Mail } from "lucide-react";
 import { newsletters } from "@/const/content/newsletters";
 
+const SIGNUP_URL = "https://signup.e2ma.net/signup/2009107/1979383/";
+
 export const Route = createFileRoute("/newsletters/")({
   component: NewslettersPage,
 });
@@ -22,7 +24,22 @@ function NewslettersPage() {
   return (
     <GenericPage
       title="Newsletters"
-      headerContent={<p>Past updates from WashU Satellite</p>}
+      headerContent={
+        <div className="flex flex-col gap-4">
+          <p>Past updates from WashU Satellite</p>
+          <div className="flex flex-row flex-wrap items-center gap-3">
+            <Button asChild>
+              <a href={SIGNUP_URL} target="_blank" rel="noreferrer">
+                <Mail className="w-4 h-4 mr-2" />
+                Sign up for the newsletter
+              </a>
+            </Button>
+            <span className="text-xs text-foreground/60">
+              Get new issues in your inbox.
+            </span>
+          </div>
+        </div>
+      }
     >
       <div className="px-[4rem] py-8">
         {newsletters.length === 0 ? (
