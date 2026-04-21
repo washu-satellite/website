@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { useMemo, useState } from "react";
 import GenericPage from "@/components/GenericPage";
 import { Badge } from "@/components/ui/badge";
@@ -35,38 +35,27 @@ export const Route = createFileRoute("/team/")({
 
 export const TeamTile = (props: Member) => {
   return (
-    <div
+    <Link
+      to={"/team/people/$user_slug"}
+      params={{ user_slug: slugify(props.name) }}
       className={clsx(
-        `border-border border group shadow-sm dark:shadow-none`,
-        `flex flex-col font-mono justify-end rounded-md bg-background w-full md:w-[16rem] h-[16rem] min-h-0`,
+        "border-border border shadow-sm dark:shadow-none bg-background rounded-md",
+        "flex flex-row items-start justify-between gap-3 font-mono",
+        "w-full md:w-[16rem] p-4 hover:border-primary/60 transition-colors",
       )}
     >
-      <div className="flex-1 w-full relative overflow-hidden">
-        {props.isAdmin && (
-          <Badge className="absolute top-1 right-1 bg-primary/50 text-primary-foreground border-primary/70 font-sans">
-            Admin
-          </Badge>
-        )}
-        <Link
-          to={"/team/people/$user_slug"}
-          params={{ user_slug: slugify(props.name) }}
-          className="absolute top-0 left-0 flex flex-col items-center justify-center w-full h-full opacity-0 transition-all duration-500 group-hover:opacity-100"
-        >
-          <ArrowRight className="-rotate-45 w-24 h-24 transition-all duration-500 mt-6 mr-6 group-hover:mt-0 group-hover:mr-0" />
-          <p className="font-sans">See full profile</p>
-        </Link>
+      <div className="flex flex-col min-w-0">
+        <h3 className="font-sans font-medium truncate">{props.name}</h3>
+        <p className="text-sm font-sans text-foreground/80 truncate">
+          {props.teams.join(" · ")}
+        </p>
       </div>
-      <div className="border-inherit w-full p-4 rounded-b-md shrink-0">
-        <div className="flex flex-row items-start justify-between">
-          <div>
-            <h3 className="font-sans font-medium">{props.name}</h3>
-            <p className="text-sm font-sans text-foreground/80">
-              {props.teams.join(" · ")}
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+      {props.isAdmin && (
+        <Badge className="bg-primary/50 text-primary-foreground border-primary/70 font-sans shrink-0">
+          Admin
+        </Badge>
+      )}
+    </Link>
   );
 };
 

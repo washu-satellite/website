@@ -1,7 +1,8 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { House, User } from "lucide-react";
+import { House } from "lucide-react";
+import GenericPage from "@/components/GenericPage";
 import { memberBySlug } from "@/const/content/members";
 
 export const Route = createFileRoute("/team/people/$user_slug")({
@@ -35,75 +36,48 @@ function RouteComponent() {
   }
 
   return (
-    <div className="flex-1 overflow-x-hidden z-10">
-      <main>
-        <div className="w-full h-[10rem] md:h-[12rem] overflow-hidden">
-          <img src="/space_bg.png" loading="lazy" decoding="async" className="size-full object-cover" />
+    <GenericPage
+      title={member.name}
+      headerContent={
+        <div className="flex flex-row flex-wrap items-center gap-3 text-foreground/80">
+          <span>{member.teams.join(" · ")}</span>
+          {member.isAdmin && (
+            <Badge className="bg-primary/50 text-primary-foreground border-primary/70">
+              Admin
+            </Badge>
+          )}
         </div>
-        <div className="relative border-t border-border bg-deep-background">
-          <div className="flex flex-col px-2 md:px-4 lg:px-[4rem] gap-8 relative border-b">
-            <div className="border-border md:border-x">
-              <div className="w-full block md:flex flex-row border-t border-border">
-                <div className="w-full md:w-1/3 xl:w-1/6 relative border-r border-border flex flex-col items-center justify-center bg-[repeating-linear-gradient(45deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:10px_10px] bg-fixed [--pattern-fg:theme(colors.secondary)]">
-                  <div className="w-48 h-48 flex items-center justify-center">
-                    <User className="w-16 h-16 text-foreground/80" />
-                  </div>
-                  <p className="absolute bottom-2 right-2 font-mono text-xs uppercase text-foreground/60">
-                    Photo
-                  </p>
-                </div>
-                <div className="w-full md:w-2/3 xl:w-5/6 text-foreground/90 p-6 flex flex-col gap-4">
-                  <div>
-                    <p className="font-mono text-xs uppercase text-foreground/60">
-                      Name
-                    </p>
-                    <h1 className="text-2xl font-medium">{member.name}</h1>
-                  </div>
-                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div>
-                      <p className="font-mono text-xs uppercase text-foreground/60">
-                        Teams
-                      </p>
-                      <p>{member.teams.join(" · ")}</p>
-                    </div>
-                    {member.email && (
-                      <div>
-                        <p className="font-mono text-xs uppercase text-foreground/60">
-                          Email
-                        </p>
-                        <a
-                          href={`mailto:${member.email}`}
-                          className="hover:underline underline-offset-2"
-                        >
-                          {member.email}
-                        </a>
-                      </div>
-                    )}
-                    {member.gradYear && (
-                      <div>
-                        <p className="font-mono text-xs uppercase text-foreground/60">
-                          Graduation Year
-                        </p>
-                        <p>{member.gradYear}</p>
-                      </div>
-                    )}
-                    {member.isAdmin && (
-                      <div>
-                        <p className="font-mono text-xs uppercase text-foreground/60">
-                          Role
-                        </p>
-                        <Badge className="bg-primary/50 text-primary-foreground border-primary/70">
-                          Admin
-                        </Badge>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
+      }
+    >
+      <div className="px-[4rem] py-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+        {member.email && (
+          <div>
+            <p className="font-mono text-xs uppercase text-foreground/60">
+              Email
+            </p>
+            <a
+              href={`mailto:${member.email}`}
+              className="hover:underline underline-offset-2"
+            >
+              {member.email}
+            </a>
           </div>
+        )}
+        {member.gradYear && (
+          <div>
+            <p className="font-mono text-xs uppercase text-foreground/60">
+              Graduation Year
+            </p>
+            <p>{member.gradYear}</p>
+          </div>
+        )}
+        <div>
+          <p className="font-mono text-xs uppercase text-foreground/60">
+            Teams
+          </p>
+          <p>{member.teams.join(", ")}</p>
         </div>
-      </main>
-    </div>
+      </div>
+    </GenericPage>
   );
 }
