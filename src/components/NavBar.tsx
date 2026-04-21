@@ -108,21 +108,25 @@ export default function NavBar() {
     });
   }, []);
 
-  // Only the homepage has a dark hero (video) sitting behind the fixed header.
-  // On that page, while the header is still transparent (scrollY = 0), we
-  // need to override to the dark-variant logo + white text or they disappear
-  // in light mode. Once scrolled, or on any other route, honor the theme.
+  // Only the homepage has a dark hero (video) sitting behind the fixed
+  // header. On that page, while the header is still transparent (scrollY = 0),
+  // override to the dark-variant logo + white text or they disappear in
+  // light mode. Once scrolled, or on any other route, honor the theme.
   const isHomeHero = location.pathname === "/" && !scrolled;
   const useDarkVariant = isHomeHero || theme !== "light";
   const logoSrc = useDarkVariant ? "/logo.svg" : "/logo_light.svg";
 
+  // Inline color instead of a Tailwind class so we bypass any cascade/layer
+  // oddness — this guarantees the navbar text is white on the home hero and
+  // theme-matching everywhere else.
+  const navTextColor = isHomeHero ? "#ffffff" : "var(--foreground)";
+
   return (
     <div
+      style={{ color: navTextColor }}
       className={cn(
         `transition-all duration-300 border-border`,
         {
-          "text-white": isHomeHero,
-          "text-foreground": !isHomeHero,
           "bg-background dark:bg-background/50 dark:backdrop-blur-lg border-b inset-shadow-current/15 inset-shadow-sm":
             scrolled,
           "bg-none backdrop-blur-none border-b-0": !scrolled,
