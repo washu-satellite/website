@@ -15,7 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { ProjectPages } from "@/const/content/projects";
 import { slugify, teamNames } from "@/const/content/members";
 import { bStore } from "@/hooks/useAppStore";
@@ -101,6 +101,7 @@ function NavbarMenu(
 export default function NavBar() {
   const [scrolled, setScrolled] = useState(false);
   const theme = bStore.use.theme();
+  const location = useLocation();
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -108,21 +109,21 @@ export default function NavBar() {
     });
   }, []);
 
-  // When the navbar is transparent (top of page) the content behind it is
-  // dark (hero video on the homepage, dark header on inner routes), so force
-  // the dark-variant logo + white text regardless of the user's theme.
-  // Once the navbar has a solid background we can honor the theme.
-  const overDarkBackdrop = !scrolled;
-  const logoSrc =
-    overDarkBackdrop || theme !== "light" ? "/logo.svg" : "/logo_light.svg";
+  // Only the homepage has a dark hero (video) sitting behind the fixed header.
+  // On that page, while the header is still transparent (scrollY = 0), we
+  // need to override to the dark-variant logo + white text or they disappear
+  // in light mode. Once scrolled, or on any other route, honor the theme.
+  const isHomeHero = location.pathname === "/" && !scrolled;
+  const useDarkVariant = isHomeHero || theme !== "light";
+  const logoSrc = useDarkVariant ? "/logo.svg" : "/logo_light.svg";
 
   return (
     <div
       className={cn(
         `transition-all duration-300 border-border`,
         {
-          "text-white": overDarkBackdrop,
-          "text-text": !overDarkBackdrop,
+          "text-white": isHomeHero,
+          "text-foreground": !isHomeHero,
           "bg-background dark:bg-background/50 dark:backdrop-blur-lg border-b inset-shadow-current/15 inset-shadow-sm":
             scrolled,
           "bg-none backdrop-blur-none border-b-0": !scrolled,
