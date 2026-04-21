@@ -108,11 +108,21 @@ export default function NavBar() {
     });
   }, []);
 
+  // When the navbar is transparent (top of page) the content behind it is
+  // dark (hero video on the homepage, dark header on inner routes), so force
+  // the dark-variant logo + white text regardless of the user's theme.
+  // Once the navbar has a solid background we can honor the theme.
+  const overDarkBackdrop = !scrolled;
+  const logoSrc =
+    overDarkBackdrop || theme !== "light" ? "/logo.svg" : "/logo_light.svg";
+
   return (
     <div
       className={cn(
-        `text-text transition-all duration-300 border-border`,
+        `transition-all duration-300 border-border`,
         {
+          "text-white": overDarkBackdrop,
+          "text-text": !overDarkBackdrop,
           "bg-background dark:bg-background/50 dark:backdrop-blur-lg border-b inset-shadow-current/15 inset-shadow-sm":
             scrolled,
           "bg-none backdrop-blur-none border-b-0": !scrolled,
@@ -122,11 +132,7 @@ export default function NavBar() {
     >
       <div className="flex flex-row justify-start items-center font-normal relative gap-2">
         <Link to="/" className={clsx("font-bold text-base")}>
-          <img
-            alt="WashU Satellite"
-            src={theme === "light" ? "/logo_light.svg" : "/logo.svg"}
-            className="h-8 mr-4"
-          />
+          <img alt="WashU Satellite" src={logoSrc} className="h-8 mr-4" />
         </Link>
 
         <NavbarMenu title="Missions">
@@ -196,7 +202,7 @@ export default function NavBar() {
         }
       >
         <ThemedLink headerLink key={"newsletters"} href={"/newsletters"} className="-mx-2">
-          Newsletters
+          Newsletter
         </ThemedLink>
 
         <ThemedLink headerLink key={"contact"} href={"/contact"} className="-mx-2">

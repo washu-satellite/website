@@ -9,6 +9,12 @@ export const Route = createFileRoute("/newsletters/$slug")({
   component: NewsletterView,
 });
 
+function formatMonthYear(iso: string) {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return iso;
+  return d.toLocaleDateString("en-US", { year: "numeric", month: "long" });
+}
+
 function NewsletterView() {
   const { slug } = Route.useParams();
   const nl = newsletters.find((n) => n.slug === slug);
@@ -58,6 +64,15 @@ function NewsletterView() {
             All newsletters
           </Link>
         </Button>
+        <div className="flex flex-col gap-1 mb-2">
+          <h1 className="text-3xl md:text-4xl font-semibold">{nl.title}</h1>
+          <p className="text-foreground/70 font-mono text-sm">
+            {formatMonthYear(nl.date)}
+          </p>
+          {nl.summary && (
+            <p className="text-foreground/80 mt-1">{nl.summary}</p>
+          )}
+        </div>
         {error ? (
           <div className="flex flex-col items-center gap-2 text-foreground/70 py-16 text-center">
             <House className="w-8 h-8" />
