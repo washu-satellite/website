@@ -77,11 +77,6 @@ function ProjectPage() {
       }
     >
       <div className="flex flex-col gap-8 px-[4rem] py-8">
-        {p.image && (
-          <div className="w-full overflow-hidden rounded-md border border-border">
-            <img src={p.image} alt={p.title} className="w-full h-auto" />
-          </div>
-        )}
         <p className="text-foreground/90 leading-relaxed">{p.description}</p>
         {p.posterUrl && (
           <div>
@@ -91,6 +86,17 @@ function ProjectPage() {
                 View poster
               </a>
             </Button>
+          </div>
+        )}
+        {p.image && (
+          <div className="w-full overflow-hidden rounded-md border border-border">
+            <img
+              src={p.image}
+              alt={p.title}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-auto"
+            />
           </div>
         )}
       </div>
