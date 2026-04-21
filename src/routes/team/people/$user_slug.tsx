@@ -38,7 +38,7 @@ function RouteComponent() {
     <div className="flex-1 overflow-x-hidden z-10">
       <main>
         <div className="w-full h-[10rem] md:h-[12rem] overflow-hidden">
-          <img src="/space_bg.png" className="size-full object-cover" />
+          <img src="/space_bg.png" loading="lazy" decoding="async" className="size-full object-cover" />
         </div>
         <div className="relative border-t border-border bg-deep-background">
           <div className="flex flex-col px-2 md:px-4 lg:px-[4rem] gap-8 relative border-b">

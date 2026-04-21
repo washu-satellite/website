@@ -4,16 +4,19 @@ import ThemedLink from "./ThemedLink";
 
 import type { NavElement } from "@/types/data";
 
-import { ChevronDown, Users } from "lucide-react";
+import { ChevronDown, Rocket, Users } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { Link } from "@tanstack/react-router";
+import { ProjectPages } from "@/const/content/projects";
 
 const MenuItem = (props: NavElement) => {
   return (
@@ -116,6 +119,40 @@ export default function NavBar() {
           <img alt="" src="/logo.svg" className="h-8 mr-4" />
         </Link>
 
+        <NavbarMenu title="Missions">
+          <DropdownMenuGroup>
+            <DropdownMenuLabel>Active Projects</DropdownMenuLabel>
+            {Object.entries(ProjectPages)
+              .filter(([, v]) => v.project.phase !== "success")
+              .map(([slug, { project }]) => (
+                <DropdownMenuItem key={slug}>
+                  <NavbarMenuItem
+                    title={project.id}
+                    description={project.short}
+                    icon={project.icon ?? <Rocket />}
+                    href={`/projects/${slug}`}
+                  />
+                </DropdownMenuItem>
+              ))}
+          </DropdownMenuGroup>
+          <DropdownMenuSeparator />
+          <DropdownMenuGroup>
+            <DropdownMenuLabel>Past Missions</DropdownMenuLabel>
+            {Object.entries(ProjectPages)
+              .filter(([, v]) => v.project.phase === "success")
+              .map(([slug, { project }]) => (
+                <DropdownMenuItem key={slug}>
+                  <NavbarMenuItem
+                    title={project.id}
+                    description={project.short}
+                    icon={project.icon ?? <Rocket />}
+                    href={`/projects/${slug}`}
+                  />
+                </DropdownMenuItem>
+              ))}
+          </DropdownMenuGroup>
+        </NavbarMenu>
+
         <NavbarMenu title="Team">
           <DropdownMenuGroup>
             <DropdownMenuItem>
@@ -135,6 +172,10 @@ export default function NavBar() {
           "flex-row hidden lg:flex justify-end items-center font-semibold gap-4"
         }
       >
+        <ThemedLink headerLink key={"newsletters"} href={"/newsletters"} className="-mx-2">
+          Newsletters
+        </ThemedLink>
+
         <ThemedLink headerLink key={"contact"} href={"/contact"} className="-mx-2">
           Contact
         </ThemedLink>

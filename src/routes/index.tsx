@@ -2,12 +2,9 @@
 
 import NavBar from "@/components/NavBar";
 import Photo from "@/components/Photo";
-import ProjectHighlight from "@/components/ProjectHighlight";
-
 // @ts-ignore
 import Button, { ArrowButton } from "@/components/Button";
 import { HomepageContent } from "@/const/content/homepage";
-import { ProjectHighlightData } from "@/const/content/projects";
 import clsx from "clsx";
 import { FaArrowRightLong } from "react-icons/fa6";
 
@@ -97,11 +94,7 @@ function Banner() {
           loop
           preload="none"
           poster="/sat.webp"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: 'cover'
-          }}
+          className="hero-video"
         >
           <source src="/sat.mp4" type='video/mp4' />
         </video>
@@ -148,7 +141,7 @@ function TeamIntro() {
 
 
         <div className="relative flex-1 flex flex-row justify-center items-center border-l-0 md:border-l border-border bg-[repeating-linear-gradient(45deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:10px_10px] bg-fixed [--pattern-fg:theme(colors.secondary)]">
-          <img src={"/balloon.png"} className="w-[26rem] object-cover rounded-md p-8"/>
+          <img src={"/balloon.png"} loading="lazy" decoding="async" className="w-[26rem] object-cover rounded-md p-8"/>
           <p className="absolute bottom-2 right-2 font-mono text-xs uppercase text-foreground/60">SP24 Team Photo</p>
         </div>
       </div>
@@ -168,10 +161,7 @@ function HomePage() {
             className="flex flex-col px-2 md:px-4 lg:px-[4rem] gap-8 relative"
           >
             <div className="border-border md:border-x pb-8">
-              <div
-                style={{ backgroundImage: `url("/dots.svg")`, backgroundSize: "100px", backgroundPositionX: 0 }}
-                className="hidden dark:block absolute z-0 left-0 top-0 w-[10rem] opacity-60 h-full bg-repeat-y"
-              />
+              <div className="dots-vertical hidden dark:block absolute z-0 left-0 top-0 w-[10rem] opacity-60 h-full bg-repeat-y" />
               <div className="flex-1 flex flex-col">
                 <TeamIntro />
 
@@ -230,33 +220,6 @@ function HomePage() {
                   </TimelineEntry>
                 </Timeline>
 
-                <DividerHeading index={2}>
-                  Projects
-                </DividerHeading>
-
-                <div className={"flex flex-row flex-wrap items-center gap-y-[4rem] gap-x-[2rem] -mt-32 p-8"}>
-                  {ProjectHighlightData.filter(p => p.phase !== 'success').map((p, i) => (
-                    <ProjectHighlight
-                      key={i}
-                      {...p}
-                      direction={i % 2 === 0 ? 'right' : 'left'}
-                    />
-                  ))}
-                </div>
-
-                <DividerHeading index={3}>
-                  Past Projects
-                </DividerHeading>
-
-                <div className={"flex flex-col gap-[4rem] p-8"}>
-                  {ProjectHighlightData.filter(p => p.phase === 'success').map((p, i) => (
-                    <ProjectHighlight
-                      {...p}
-                      key={p.id}
-                      direction={i % 2 === 0 ? 'right' : 'left'}
-                    />
-                  ))}
-                </div>
               </div>
             </div>
           </div>

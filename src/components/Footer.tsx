@@ -81,7 +81,6 @@ export default function Footer() {
             <div className="flex-1 flex flex-col items-start gap-1 border-l-0 border-b-0 md:border-l md:border-b border-border p-2">
                 <ThemedLink key={"keep-in-touch"} href={"/"}><p className="-ml-1">Keep in Touch</p></ThemedLink>
                 <ThemedLink key={"contact-us"} arrowLink href={"/contact"} className={clsx(`text-foreground/80`, "font-normal")}>Contact us</ThemedLink>
-                <ThemedLink key={"interest-form"} arrowLink href={"/subscribe"} className={clsx(`text-foreground/80`, "font-normal")}>Interest form</ThemedLink>
                 <ThemedLink key={"join-the-team"} arrowLink href={"/apply"} className={clsx(`text-foreground/80`, "font-normal")}>Join the team</ThemedLink>
             </div>
             <div className="flex-1 flex flex-col items-start gap-1 border-l-0 border-b-0 md:border-l md:border-b border-border p-2">

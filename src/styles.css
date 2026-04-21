@@ -184,3 +184,35 @@ code {
     @apply bg-background text-foreground;
   }
 }
+
+/* ---------------------------------------------------------------------------
+ * App-specific utilities (hoisted from inline style={{}} props)
+ * ------------------------------------------------------------------------- */
+
+.dots-header {
+  background-image: url("/dotsh.svg");
+  background-size: 20rem;
+}
+
+.dots-vertical {
+  background-image: url("/dots.svg");
+  background-size: 100px;
+  background-position-x: 0;
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.newsletter-content {
+  line-height: 1.6;
+}
+.newsletter-content h1 { font-size: 1.5rem; font-weight: 600; margin: 1rem 0 0.5rem; }
+.newsletter-content h2 { font-size: 1.25rem; font-weight: 600; margin: 1rem 0 0.5rem; }
+.newsletter-content h3 { font-size: 1.125rem; font-weight: 600; margin: 0.75rem 0 0.5rem; }
+.newsletter-content p { margin: 0.5rem 0; }
+.newsletter-content ul, .newsletter-content ol { margin: 0.5rem 0 0.5rem 1.5rem; }
+.newsletter-content a { text-decoration: underline; text-underline-offset: 2px; }
+.newsletter-content img { max-width: 100%; height: auto; margin: 1rem 0; border-radius: 0.375rem; }

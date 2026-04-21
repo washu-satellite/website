@@ -15,6 +15,9 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ApplyRouteImport } from './routes/apply'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TeamIndexRouteImport } from './routes/team/index'
+import { Route as NewslettersIndexRouteImport } from './routes/newsletters/index'
+import { Route as ProjectsProject_slugRouteImport } from './routes/projects/$project_slug'
+import { Route as NewslettersSlugRouteImport } from './routes/newsletters/$slug'
 import { Route as TeamPeopleUser_slugRouteImport } from './routes/team/people/$user_slug'
 
 const NotReadyRoute = NotReadyRouteImport.update({
@@ -47,6 +50,21 @@ const TeamIndexRoute = TeamIndexRouteImport.update({
   path: '/team/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NewslettersIndexRoute = NewslettersIndexRouteImport.update({
+  id: '/newsletters/',
+  path: '/newsletters/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsProject_slugRoute = ProjectsProject_slugRouteImport.update({
+  id: '/projects/$project_slug',
+  path: '/projects/$project_slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewslettersSlugRoute = NewslettersSlugRouteImport.update({
+  id: '/newsletters/$slug',
+  path: '/newsletters/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TeamPeopleUser_slugRoute = TeamPeopleUser_slugRouteImport.update({
   id: '/team/people/$user_slug',
   path: '/team/people/$user_slug',
@@ -59,6 +77,9 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/error': typeof ErrorRoute
   '/not-ready': typeof NotReadyRoute
+  '/newsletters/$slug': typeof NewslettersSlugRoute
+  '/projects/$project_slug': typeof ProjectsProject_slugRoute
+  '/newsletters': typeof NewslettersIndexRoute
   '/team': typeof TeamIndexRoute
   '/team/people/$user_slug': typeof TeamPeopleUser_slugRoute
 }
@@ -68,6 +89,9 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/error': typeof ErrorRoute
   '/not-ready': typeof NotReadyRoute
+  '/newsletters/$slug': typeof NewslettersSlugRoute
+  '/projects/$project_slug': typeof ProjectsProject_slugRoute
+  '/newsletters': typeof NewslettersIndexRoute
   '/team': typeof TeamIndexRoute
   '/team/people/$user_slug': typeof TeamPeopleUser_slugRoute
 }
@@ -78,6 +102,9 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/error': typeof ErrorRoute
   '/not-ready': typeof NotReadyRoute
+  '/newsletters/$slug': typeof NewslettersSlugRoute
+  '/projects/$project_slug': typeof ProjectsProject_slugRoute
+  '/newsletters/': typeof NewslettersIndexRoute
   '/team/': typeof TeamIndexRoute
   '/team/people/$user_slug': typeof TeamPeopleUser_slugRoute
 }
@@ -89,6 +116,9 @@ export interface FileRouteTypes {
     | '/contact'
     | '/error'
     | '/not-ready'
+    | '/newsletters/$slug'
+    | '/projects/$project_slug'
+    | '/newsletters'
     | '/team'
     | '/team/people/$user_slug'
   fileRoutesByTo: FileRoutesByTo
@@ -98,6 +128,9 @@ export interface FileRouteTypes {
     | '/contact'
     | '/error'
     | '/not-ready'
+    | '/newsletters/$slug'
+    | '/projects/$project_slug'
+    | '/newsletters'
     | '/team'
     | '/team/people/$user_slug'
   id:
@@ -107,6 +140,9 @@ export interface FileRouteTypes {
     | '/contact'
     | '/error'
     | '/not-ready'
+    | '/newsletters/$slug'
+    | '/projects/$project_slug'
+    | '/newsletters/'
     | '/team/'
     | '/team/people/$user_slug'
   fileRoutesById: FileRoutesById
@@ -117,6 +153,9 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   ErrorRoute: typeof ErrorRoute
   NotReadyRoute: typeof NotReadyRoute
+  NewslettersSlugRoute: typeof NewslettersSlugRoute
+  ProjectsProject_slugRoute: typeof ProjectsProject_slugRoute
+  NewslettersIndexRoute: typeof NewslettersIndexRoute
   TeamIndexRoute: typeof TeamIndexRoute
   TeamPeopleUser_slugRoute: typeof TeamPeopleUser_slugRoute
 }
@@ -165,6 +204,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeamIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/newsletters/': {
+      id: '/newsletters/'
+      path: '/newsletters'
+      fullPath: '/newsletters'
+      preLoaderRoute: typeof NewslettersIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects/$project_slug': {
+      id: '/projects/$project_slug'
+      path: '/projects/$project_slug'
+      fullPath: '/projects/$project_slug'
+      preLoaderRoute: typeof ProjectsProject_slugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/newsletters/$slug': {
+      id: '/newsletters/$slug'
+      path: '/newsletters/$slug'
+      fullPath: '/newsletters/$slug'
+      preLoaderRoute: typeof NewslettersSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/team/people/$user_slug': {
       id: '/team/people/$user_slug'
       path: '/team/people/$user_slug'
@@ -181,6 +241,9 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   ErrorRoute: ErrorRoute,
   NotReadyRoute: NotReadyRoute,
+  NewslettersSlugRoute: NewslettersSlugRoute,
+  ProjectsProject_slugRoute: ProjectsProject_slugRoute,
+  NewslettersIndexRoute: NewslettersIndexRoute,
   TeamIndexRoute: TeamIndexRoute,
   TeamPeopleUser_slugRoute: TeamPeopleUser_slugRoute,
 }
