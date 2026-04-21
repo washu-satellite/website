@@ -50,31 +50,27 @@ function NewsletterView() {
   }
 
   return (
-    <div className="flex-1 pt-[6rem] pb-[4rem] px-4 md:px-[4rem]">
-      <div className="max-w-4xl mx-auto flex flex-col gap-4">
+    <div className="flex-1 pt-[5rem] pb-[4rem] px-4">
+      <div className="max-w-3xl mx-auto flex flex-col gap-3">
         <Button asChild variant="ghost" className="self-start">
           <Link to="/newsletters" className="flex flex-row items-center">
             <ArrowLeft className="w-4 h-4 mr-2" />
             All newsletters
           </Link>
         </Button>
-        <h1 className="text-3xl font-semibold">{nl.title}</h1>
-        <p className="text-foreground/70 font-mono text-sm">{nl.date}</p>
-        <div className="border border-border rounded-md bg-background p-6 mt-4">
-          {error ? (
-            <div className="flex flex-col items-center gap-2 text-foreground/70 py-8 text-center">
-              <House className="w-8 h-8" />
-              <p>Couldn't load this newsletter ({error}).</p>
-            </div>
-          ) : html === null ? (
-            <p className="text-foreground/60">Loading…</p>
-          ) : (
-            <div
-              className="newsletter-content"
-              dangerouslySetInnerHTML={{ __html: html }}
-            />
-          )}
-        </div>
+        {error ? (
+          <div className="flex flex-col items-center gap-2 text-foreground/70 py-16 text-center">
+            <House className="w-8 h-8" />
+            <p>Couldn't load this newsletter ({error}).</p>
+          </div>
+        ) : html === null ? (
+          <p className="text-foreground/60 py-16 text-center">Loading…</p>
+        ) : (
+          <div
+            className="newsletter-content"
+            dangerouslySetInnerHTML={{ __html: html }}
+          />
+        )}
       </div>
     </div>
   );
