@@ -48,13 +48,12 @@ function NavbarMenuItem(props: {
   title: string;
   description?: string;
   href?: string;
+  search?: Record<string, string>;
 }) {
-  const [path, hash] = (props.href ?? "").split("#");
-
   return (
     <Link
-      to={path || undefined}
-      hash={hash}
+      to={props.href || undefined}
+      search={props.search as never}
       className={cn("flex flex-row items-start p gap-2 w-full", {
         "items-start": props.description !== undefined,
         "items-center": !props.description,
@@ -189,7 +188,8 @@ export default function NavBar() {
                 <NavbarMenuItem
                   title={t}
                   icon={<Waypoints />}
-                  href={`/team#${slugify(t)}`}
+                  href="/team"
+                  search={{ team: slugify(t) }}
                 />
               </DropdownMenuItem>
             ))}

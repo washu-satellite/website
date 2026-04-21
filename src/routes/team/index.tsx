@@ -1,7 +1,8 @@
 import clsx from "clsx";
-import { createFileRoute, Link, useLocation } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ChevronDown } from "lucide-react";
 import { useMemo, useState } from "react";
+import * as z from "zod";
 import GenericPage from "@/components/GenericPage";
 import { Badge } from "@/components/ui/badge";
 import { MemberList } from "@/components/MemberList";
@@ -26,8 +27,13 @@ const SORT_LABELS: Record<SortMode, string> = {
   alphabetical: "Alphabetical",
 };
 
+const teamSearchSchema = z.object({
+  team: z.string().optional().catch(undefined),
+});
+
 export const Route = createFileRoute("/team/")({
   component: TeamPage,
+  validateSearch: teamSearchSchema,
 });
 
 export const TeamTile = (props: Member) => {
@@ -87,10 +93,11 @@ function SortDropdown(props: {
 function TeamPage() {
   const [sortMode, setSortMode] = useState<SortMode>("subteam");
 
-  // Read the hash from Tanstack Router so nav-driven clicks (which use the
-  // router, not the browser's native hashchange event) re-render correctly.
-  const location = useLocation();
-  const teamFilter = (location.hash ?? "").replace(/^#/, "") || null;
+  // Subteam filter is a search param: /team?team=exec. Tanstack Router
+  // re-renders whenever validated search changes, so switching subteams
+  // from the nav dropdown works even when already on /team.
+  const { team: teamParam } = Route.useSearch();
+  const teamFilter = teamParam ?? null;
 
   const teamLabel = useMemo(() => {
     if (!teamFilter) return null;
@@ -128,6 +135,7 @@ function TeamPage() {
           {teamFilter && (
             <Link
               to="/team"
+              search={{}}
               className="text-sm text-foreground/70 hover:text-foreground underline underline-offset-2"
             >
               Clear subteam filter
