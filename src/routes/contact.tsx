@@ -19,14 +19,16 @@ function ContactPage() {
             )}>
                 <div className="dots-header absolute top-1 w-full z-0 h-[8rem] bg-repeat-x opacity-60" />
                 <div className={`flex z-10 flex-col items-center gap-8 justify-center max-w-[40rem] bg-background border-inherit border p-8 -mt-[10rem] rounded-md`}>
-                    <h1 className={`text-accent-red text-center font-mono font-semibold text-5xl md:text-6xl`}>QUESTIONS?</h1>
-                    <p className={`font-medium text-text-dark text-center md:text-left`}>Send any inquires to &nbsp;
-                        <Button asChild variant='outline'>
-                            <a href="mailto:washusatellite@gmail.com">
-                                washusatellite@gmail.com
-                            </a>
-                        </Button>
-                    </p>
+                    <h1 className={`text-accent-red text-center font-mono font-semibold text-5xl md:text-6xl whitespace-nowrap`}>REACH OUT</h1>
+                    <div className="text-foreground/80 text-center">
+                        <p className="font-medium">Questions, comments, or concerns?</p>
+                        <p className="font-medium">We&rsquo;d love to hear from you!</p>
+                    </div>
+                    <Button asChild variant='outline'>
+                        <a href="mailto:washusatellite@gmail.com">
+                            washusatellite@gmail.com
+                        </a>
+                    </Button>
                 </div>
                 <div className="flex flex-row flex-wrap items-center justify-center gap-8">
                     <RedirectCard

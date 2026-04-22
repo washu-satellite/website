@@ -6,15 +6,15 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
         project: {
             id: "GS-1",
             title: "Ground Station mk. 1",
-            url: "/gs_1_poster.pdf",
+            url: "/posters/gs_1_poster.pdf",
             short: "A UHF ground station to communicate with deployed payloads",
             description: "The communication link for our satellite operations, supporting critical coordination with orbiting spacecraft and high altitude balloons. The system features a high-gain, in-house engineered Yagi antenna, commercial rotator, custom roof mount, and data processing through an SDR.",
             contributors: 47,
             date: "Q2-2025",
             icon: (<SatelliteDish size={22} />),
             phase: 'assembly',
-            posterUrl: "/gs_1_poster.pdf",
-            image: "/gs1.png"
+            posterUrl: "/posters/gs_1_poster.pdf",
+            image: "/projects/gs1.png"
         },
         overview: "",
         disciplineOverviews: []
@@ -23,15 +23,15 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
         project: {
             id: "AIRIS",
             title: "ADAPT Incidence Resolution & Imaging System",
-            url: "/airis_poster.pdf",
+            url: "/posters/airis_poster.pdf",
             short: "Upper-atmosphere optical telescope payload for spacial search algorithms and physics research",
             description: "Our piggyback payload to the ADAPT mission, a high-altitude WashU Physics, NASA-funded mission which will demonstrate the APT detector on gamma ray burst transients.  Our payload will improve upon transient source predictions by imaging the sky space with a rotating optical telescope, the results of which will be forwarded to the NASA General Coordinates Network for further observation by ground telescopes around the world.",
             contributors: 47,
             date: "Q2-2027",
             icon: (<Telescope size={24} />),
             phase: 'assembly',
-            posterUrl: "/airis_poster.pdf",
-            image: "/airis.png",
+            posterUrl: "/posters/airis_poster.pdf",
+            image: "/projects/airis.png",
             imageSize: "60rem"
             // imageSize: 1000
         },
@@ -56,15 +56,15 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
         project: {
             id: "VECTOR",
             title: "Versatile Educational Controls Testbed for Optical Response",
-            url: "/vector_poster.pdf",
+            url: "/posters/vector_poster.pdf",
             short: "3U CubeSat for astronomical transient imaging; spaceflight search algorithm testbed",
             description: "A 3U CubeSat designed as a reconfigurable educational platform and on-orbit search and control laboratory for multi-messenger astronomy developed primarily by undergraduate students. Its design invites broad participation, allowing students and the public to engage with and contribute to the mission through algorithm development and testing, building on the success of the ESA’s OPS-SAT. VECTOR combines optical astronomy with a modular in-house developed bus architecture, serving as an accessible in-space testbed and transient event observer.",
             contributors: 47,
             date: "2028",
             icon: (<Satellite size={22} />),
             phase: 'proposal',
-            posterUrl: "/vector_poster.pdf",
-            image: "/vector.png",
+            posterUrl: "/posters/vector_poster.pdf",
+            image: "/projects/vector.png",
             imageSize: "60rem"
         },
         overview: "",
@@ -74,14 +74,14 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
         project: {
             id: "SPINOR",
             title: "Spinning Past-Ionospheric Networked Observation of Radio",
-            url: "/spinor_poster.pdf",
+            url: "/posters/spinor_poster.pdf",
             short: "Opening a new frequency window of the radio sky for astronomy",
             description: "A program designed to image the sub-30 MHz radio sky in fine resolution for the first time, promising discoveries across exoplanet magnetic interactions, heliophysics and space weather, and early universe 21-cm cosmology. Its hardware consists of a set of spin stabilized conductive tethers located beyond the ionosphere, acting as configurable, low-frequency resonant antennas, using interferometric super-resolution imaging.",
             contributors: 47,
             date: "Phase I: Q2-2026",
             icon: (<Satellite size={22} />),
             phase: 'proposal',
-            posterUrl: "/spinor_poster.pdf"
+            posterUrl: "/posters/spinor_poster.pdf"
         },
         overview: "",
         disciplineOverviews: []

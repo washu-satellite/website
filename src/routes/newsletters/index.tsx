@@ -36,21 +36,18 @@ function NewslettersPage() {
             NEWSLETTERS
           </h1>
           <div className="text-foreground/80 text-center">
-            <p className="font-medium">Read past editions below.</p>
-            <br />
-            <p className="font-medium">
-              Want to get new issues in your inbox?
-            </p>
+            <p className="font-medium">Missed a previous issue? Read them below. Want to get new ones in your inbox?</p>
           </div>
           <div className="flex flex-row items-center justify-center">
-            <Button
-              asChild
-              style={{ backgroundColor: "#000000", color: "#ffffff" }}
-              className="hover:opacity-90"
-            >
-              <a href={SIGNUP_URL} target="_blank" rel="noreferrer">
-                <Mail className="w-4 h-4 mr-2" />
-                Sign up
+            <Button variant="outline" asChild>
+              <a
+                href={SIGNUP_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="flex flex-row items-center gap-2 group"
+              >
+                <Mail className="w-4 h-4 group-hover:translate-x-[-2px] transition-transform duration-300" />
+                <span>Sign up</span>
               </a>
             </Button>
           </div>
