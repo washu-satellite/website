@@ -6,6 +6,7 @@ import * as z from "zod";
 import GenericPage from "@/components/GenericPage";
 import { Badge } from "@/components/ui/badge";
 import { MemberList } from "@/components/MemberList";
+import { MemberAvatar } from "@/components/MemberAvatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -43,11 +44,12 @@ export const TeamTile = (props: Member) => {
       params={{ user_slug: slugify(props.name) }}
       className={clsx(
         "border-border border shadow-sm dark:shadow-none bg-background rounded-md",
-        "flex flex-row items-start justify-between gap-3 font-mono",
-        "w-full md:w-[16rem] p-4 hover:border-primary/60 transition-colors",
+        "flex flex-row items-center gap-3 font-mono",
+        "w-full md:w-[16rem] p-3 hover:border-primary/60 transition-colors",
       )}
     >
-      <div className="flex flex-col min-w-0">
+      <MemberAvatar member={props} size="size-12" />
+      <div className="flex flex-col min-w-0 flex-1">
         <h3 className="font-sans font-medium truncate">{props.name}</h3>
         <p className="text-sm font-sans text-foreground/80 truncate">
           {props.teams.join(" · ")}

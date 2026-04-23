@@ -2,8 +2,10 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { House } from "lucide-react";
+import { FaLinkedin } from "react-icons/fa6";
 import GenericPage from "@/components/GenericPage";
-import { memberBySlug } from "@/const/content/members";
+import { MemberAvatar } from "@/components/MemberAvatar";
+import { linkedinUrl, memberBySlug } from "@/const/content/members";
 
 export const Route = createFileRoute("/team/people/$user_slug")({
   component: RouteComponent,
@@ -35,6 +37,8 @@ function RouteComponent() {
     );
   }
 
+  const liUrl = linkedinUrl(member.linkedin);
+
   return (
     <GenericPage
       title={member.name}
@@ -49,33 +53,54 @@ function RouteComponent() {
         </div>
       }
     >
-      <div className="px-[4rem] py-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-        {member.email && (
+      <div className="px-[4rem] py-8 flex flex-col md:flex-row gap-8 items-start">
+        <MemberAvatar
+          member={member}
+          size="size-48 md:size-56"
+          rounded="md"
+          className="border-2"
+        />
+        <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <p className="font-mono text-xs uppercase text-foreground/60">
-              Email
+              Teams
             </p>
-            <a
-              href={`mailto:${member.email}`}
-              className="hover:underline underline-offset-2"
-            >
-              {member.email}
-            </a>
+            <p>{member.teams.join(", ")}</p>
           </div>
-        )}
-        {member.gradYear && (
-          <div>
-            <p className="font-mono text-xs uppercase text-foreground/60">
-              Graduation Year
-            </p>
-            <p>{member.gradYear}</p>
-          </div>
-        )}
-        <div>
-          <p className="font-mono text-xs uppercase text-foreground/60">
-            Teams
-          </p>
-          <p>{member.teams.join(", ")}</p>
+          {member.email && (
+            <div>
+              <p className="font-mono text-xs uppercase text-foreground/60">
+                Email
+              </p>
+              <a
+                href={`mailto:${member.email}`}
+                className="hover:underline underline-offset-2"
+              >
+                {member.email}
+              </a>
+            </div>
+          )}
+          {member.gradYear && (
+            <div>
+              <p className="font-mono text-xs uppercase text-foreground/60">
+                Graduation Year
+              </p>
+              <p>{member.gradYear}</p>
+            </div>
+          )}
+          {liUrl && (
+            <div>
+              <p className="font-mono text-xs uppercase text-foreground/60">
+                LinkedIn
+              </p>
+              <Button asChild variant="outline" className="mt-1">
+                <a href={liUrl} target="_blank" rel="noreferrer">
+                  <FaLinkedin className="w-4 h-4 mr-2" />
+                  View profile
+                </a>
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </GenericPage>

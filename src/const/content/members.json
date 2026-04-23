@@ -1,11 +1,11 @@
 [
-  { "name": "Aavik Wadivkar", "email": "a.wadivkar@wustl.edu", "teams": ["Exec"], "isAdmin": true },
-  { "name": "Avery Cohen", "email": "a.w.cohen@wustl.edu", "teams": ["Exec", "Business"], "isAdmin": true },
-  { "name": "Jack Galloway", "email": "galloway.j@wustl.edu", "teams": ["Exec"], "isAdmin": true },
+  { "name": "Aavik Wadivkar", "email": "a.wadivkar@wustl.edu", "teams": ["Exec"], "isAdmin": true, "headshot": "/headshots/aavik.jpg" },
+  { "name": "Avery Cohen", "email": "a.w.cohen@wustl.edu", "teams": ["Exec", "Business"], "isAdmin": true, "headshot": "/headshots/avery.jpg" },
+  { "name": "Jack Galloway", "email": "galloway.j@wustl.edu", "teams": ["Exec"], "isAdmin": true, "headshot": "/headshots/jackheadshot.jpg" },
   { "name": "John Babineau", "email": "babineau@wustl.edu", "teams": ["Exec"], "isAdmin": true },
   { "name": "Aidan Moriarty", "email": "a.f.moriarty@wustl.edu", "teams": ["Exec", "Mission Ops"], "isAdmin": true },
-  { "name": "Nathaniel Bowman", "email": "bowman.n@wustl.edu", "teams": ["Exec"], "isAdmin": true },
-  { "name": "Sophie Fendler", "email": "a.fendler@wustl.edu", "teams": ["Exec", "Physics"], "isAdmin": true },
+  { "name": "Nathaniel Bowman", "email": "bowman.n@wustl.edu", "teams": ["Exec"], "isAdmin": true, "headshot": "/headshots/nathaniel.jpg" },
+  { "name": "Sophie Fendler", "email": "a.fendler@wustl.edu", "teams": ["Exec", "Physics"], "isAdmin": true, "headshot": "/headshots/sophie.JPG" },
   { "name": "Jesse Myoung", "email": "c.myoung@wustl.edu", "teams": ["Exec"], "isAdmin": true },
   { "name": "Oliver Yeaman", "email": "o.a.yeaman@wustl.edu", "teams": ["Exec", "Mechanical"], "isAdmin": true },
   { "name": "Samir Afsary", "email": "a.samir@wustl.edu", "teams": ["Exec", "Software"], "isAdmin": true },
@@ -14,7 +14,7 @@
   { "name": "Anja Seifert", "email": "a.e.seifert@wustl.edu", "teams": ["Systems"], "isAdmin": false },
   { "name": "Cooper Rodriguez", "email": "c.l.rodriguez@wustl.edu", "teams": ["Systems"], "isAdmin": false },
   { "name": "Lilian Lu", "email": "l.lilian@wustl.edu", "teams": ["Systems"], "isAdmin": false },
-  { "name": "Siri Rodin", "email": "r.siri@wustl.edu", "teams": ["Systems"], "isAdmin": false },
+  { "name": "Siri Rodin", "email": "r.siri@wustl.edu", "teams": ["Systems"], "isAdmin": false, "headshot": "/headshots/siri.jpeg" },
   { "name": "Andrew Tang", "email": "andrew.tang@wustl.edu", "teams": ["Electrical"], "isAdmin": false },
   { "name": "Josh Smith", "email": "j.w.smith@wustl.edu", "teams": ["Software"], "isAdmin": false },
   { "name": "Raneem Mousa", "email": "mousa@wustl.edu", "teams": ["Software"], "isAdmin": false },
@@ -30,7 +30,7 @@
   { "name": "Travis Kuo", "email": "k.travis@wustl.edu", "teams": ["Software"], "isAdmin": false },
   { "name": "Peter Essa", "email": "e.peter@wustl.edu", "teams": ["Mechanical"], "isAdmin": false },
   { "name": "Alex Feingold-Black", "email": "a.feingold-black@wustl.edu", "teams": ["Mechanical"], "isAdmin": false },
-  { "name": "Wilson Gao", "email": "gao.wilson@wustl.edu", "teams": ["Mechanical"], "isAdmin": false },
+  { "name": "Wilson Gao", "email": "gao.wilson@wustl.edu", "teams": ["Mechanical"], "isAdmin": false, "headshot": "/headshots/wilson.jpg" },
   { "name": "Julia Hannon", "email": "hannon.j@wustl.edu", "teams": ["Mechanical"], "isAdmin": false },
   { "name": "Andrew Press", "email": "a.h.press@wustl.edu", "teams": ["Mechanical"], "isAdmin": false },
   { "name": "Becky Winkler", "email": "winklerr@wustl.edu", "teams": ["Mechanical"], "isAdmin": false },
@@ -60,5 +60,5 @@
   { "name": "Khoa Vu Ngoc", "email": "vungoc@wustl.edu", "teams": ["Physics"], "isAdmin": false },
   { "name": "Matt Dunn", "email": "dunn.m.e@wustl.edu", "teams": ["Physics"], "isAdmin": false },
   { "name": "Kelvin Han", "email": "h.kelvin@wustl.edu", "teams": ["Business"], "isAdmin": false },
-  { "name": "Ben Veiel", "email": "b.e.veiel@wustl.edu", "teams": ["Business"], "isAdmin": false }
+  { "name": "Ben Veiel", "email": "b.e.veiel@wustl.edu", "teams": ["Business"], "isAdmin": false, "headshot": "/headshots/ben.jpg" }
 ]

@@ -6,6 +6,10 @@ export type Member = {
   teams: string[];
   isAdmin: boolean;
   gradYear?: number;
+  /** Path under public/headshots/, e.g. "/headshots/aavik.jpg". */
+  headshot?: string;
+  /** LinkedIn handle (e.g. "geoffrey-goffman") OR a full URL. */
+  linkedin?: string;
 };
 
 export const members: Member[] = membersJson;
@@ -25,6 +29,24 @@ export function memberBySlug(slug: string): Member | undefined {
 /** Primary team = first listed team. Used for /team grouping. */
 export function primaryTeam(m: Member): string {
   return m.teams[0] ?? "Unassigned";
+}
+
+/** Uppercase initials from a name, e.g. "Aidan Moriarty" -> "AM". */
+export function initials(name: string): string {
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return "?";
+  if (parts.length === 1) return parts[0]!.charAt(0).toUpperCase();
+  return (parts[0]!.charAt(0) + parts[parts.length - 1]!.charAt(0)).toUpperCase();
+}
+
+/** Convert a handle or full URL into a canonical LinkedIn URL. */
+export function linkedinUrl(value: string | undefined): string | undefined {
+  if (!value) return undefined;
+  const v = value.trim();
+  if (!v) return undefined;
+  if (/^https?:\/\//i.test(v)) return v;
+  const handle = v.replace(/^\/+|\/+$/g, "").replace(/^in\//i, "");
+  return `https://www.linkedin.com/in/${handle}`;
 }
 
 /** Unique team names across all members, sorted with Exec pinned first. */
