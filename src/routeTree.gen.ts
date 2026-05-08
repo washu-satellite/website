@@ -9,6 +9,8 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SponsorsRouteImport } from './routes/sponsors'
+import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as NotReadyRouteImport } from './routes/not-ready'
 import { Route as ErrorRouteImport } from './routes/error'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -20,6 +22,16 @@ import { Route as ProjectsProject_slugRouteImport } from './routes/projects/$pro
 import { Route as NewslettersSlugRouteImport } from './routes/newsletters/$slug'
 import { Route as TeamPeopleUser_slugRouteImport } from './routes/team/people/$user_slug'
 
+const SponsorsRoute = SponsorsRouteImport.update({
+  id: '/sponsors',
+  path: '/sponsors',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RoadmapRoute = RoadmapRouteImport.update({
+  id: '/roadmap',
+  path: '/roadmap',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NotReadyRoute = NotReadyRouteImport.update({
   id: '/not-ready',
   path: '/not-ready',
@@ -77,6 +89,8 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/error': typeof ErrorRoute
   '/not-ready': typeof NotReadyRoute
+  '/roadmap': typeof RoadmapRoute
+  '/sponsors': typeof SponsorsRoute
   '/newsletters/$slug': typeof NewslettersSlugRoute
   '/projects/$project_slug': typeof ProjectsProject_slugRoute
   '/newsletters': typeof NewslettersIndexRoute
@@ -89,6 +103,8 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/error': typeof ErrorRoute
   '/not-ready': typeof NotReadyRoute
+  '/roadmap': typeof RoadmapRoute
+  '/sponsors': typeof SponsorsRoute
   '/newsletters/$slug': typeof NewslettersSlugRoute
   '/projects/$project_slug': typeof ProjectsProject_slugRoute
   '/newsletters': typeof NewslettersIndexRoute
@@ -102,6 +118,8 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/error': typeof ErrorRoute
   '/not-ready': typeof NotReadyRoute
+  '/roadmap': typeof RoadmapRoute
+  '/sponsors': typeof SponsorsRoute
   '/newsletters/$slug': typeof NewslettersSlugRoute
   '/projects/$project_slug': typeof ProjectsProject_slugRoute
   '/newsletters/': typeof NewslettersIndexRoute
@@ -116,6 +134,8 @@ export interface FileRouteTypes {
     | '/contact'
     | '/error'
     | '/not-ready'
+    | '/roadmap'
+    | '/sponsors'
     | '/newsletters/$slug'
     | '/projects/$project_slug'
     | '/newsletters'
@@ -128,6 +148,8 @@ export interface FileRouteTypes {
     | '/contact'
     | '/error'
     | '/not-ready'
+    | '/roadmap'
+    | '/sponsors'
     | '/newsletters/$slug'
     | '/projects/$project_slug'
     | '/newsletters'
@@ -140,6 +162,8 @@ export interface FileRouteTypes {
     | '/contact'
     | '/error'
     | '/not-ready'
+    | '/roadmap'
+    | '/sponsors'
     | '/newsletters/$slug'
     | '/projects/$project_slug'
     | '/newsletters/'
@@ -153,6 +177,8 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   ErrorRoute: typeof ErrorRoute
   NotReadyRoute: typeof NotReadyRoute
+  RoadmapRoute: typeof RoadmapRoute
+  SponsorsRoute: typeof SponsorsRoute
   NewslettersSlugRoute: typeof NewslettersSlugRoute
   ProjectsProject_slugRoute: typeof ProjectsProject_slugRoute
   NewslettersIndexRoute: typeof NewslettersIndexRoute
@@ -162,6 +188,20 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sponsors': {
+      id: '/sponsors'
+      path: '/sponsors'
+      fullPath: '/sponsors'
+      preLoaderRoute: typeof SponsorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/roadmap': {
+      id: '/roadmap'
+      path: '/roadmap'
+      fullPath: '/roadmap'
+      preLoaderRoute: typeof RoadmapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/not-ready': {
       id: '/not-ready'
       path: '/not-ready'
@@ -241,6 +281,8 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   ErrorRoute: ErrorRoute,
   NotReadyRoute: NotReadyRoute,
+  RoadmapRoute: RoadmapRoute,
+  SponsorsRoute: SponsorsRoute,
   NewslettersSlugRoute: NewslettersSlugRoute,
   ProjectsProject_slugRoute: ProjectsProject_slugRoute,
   NewslettersIndexRoute: NewslettersIndexRoute,
