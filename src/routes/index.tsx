@@ -16,6 +16,8 @@ import Card from "@/components/Card";
 import { bStore } from "@/hooks/useAppStore";
 import { cn } from "@/lib/utils";
 import { Timeline, TimelineDate, TimelineIcon, TimelineContent, TimelineEntry } from "@/components/Timeline";
+import LaunchCountdown from "@/components/LaunchCountdown";
+import InstagramFeed from "@/components/InstagramFeed";
 
 export const Route = createFileRoute('/')({
   component: HomePage,
@@ -165,34 +167,31 @@ function HomePage() {
               <div className="flex-1 flex flex-col">
                 <TeamIntro />
 
-                <div id="timeline" className="scroll-mt-24" />
+                <div id="launches" className="scroll-mt-24" />
                 <DividerHeading index={1}>
+                  Next Launches
+                </DividerHeading>
+
+                <div className="py-8">
+                  <LaunchCountdown />
+                </div>
+
+                <div id="timeline" className="scroll-mt-24" />
+                <DividerHeading index={2}>
                   Timeline
                 </DividerHeading>
 
                 <Timeline hideControls>
                   <TimelineEntry>
                     <TimelineDate>
-                      Jan 2024
+                      Oct 2024
                     </TimelineDate>
                     <TimelineIcon>
-                      <Rocket className="w-6 h-6"/>
+                      <Antenna className="w-6 h-6"/>
                     </TimelineIcon>
                     <TimelineContent>
-                      <h5>Getting started</h5>
-                      <p className="text-sm text-foreground/80">Club is founded with 11 initial members</p>
-                    </TimelineContent>
-                  </TimelineEntry>
-                  <TimelineEntry>
-                    <TimelineDate>
-                      Apr 2024
-                    </TimelineDate>
-                    <TimelineIcon>
-                      <Balloon className="w-6 h-6"/>
-                    </TimelineIcon>
-                    <TimelineContent>
-                      <h5>First mission</h5>
-                      <p className="text-sm text-foreground/80">Small balloon mission "SB-1" is developed and launched in Tisch Park</p>
+                      <h5>GS-1 PDRs</h5>
+                      <p className="text-sm text-foreground/80">Preliminary design reviews for the first ground station are passed</p>
                     </TimelineContent>
                   </TimelineEntry>
                   <TimelineEntry>
@@ -209,17 +208,38 @@ function HomePage() {
                   </TimelineEntry>
                   <TimelineEntry>
                     <TimelineDate>
-                      Oct 2024
+                      Apr 2024
                     </TimelineDate>
                     <TimelineIcon>
-                      <Antenna className="w-6 h-6"/>
+                      <Balloon className="w-6 h-6"/>
                     </TimelineIcon>
                     <TimelineContent>
-                      <h5>GS-1 PDRs</h5>
-                      <p className="text-sm text-foreground/80">Preliminary design reviews for the first ground station are passed</p>
+                      <h5>First mission</h5>
+                      <p className="text-sm text-foreground/80">Small balloon mission "SB-1" is developed and launched in Tisch Park</p>
+                    </TimelineContent>
+                  </TimelineEntry>
+                  <TimelineEntry>
+                    <TimelineDate>
+                      Jan 2024
+                    </TimelineDate>
+                    <TimelineIcon>
+                      <Rocket className="w-6 h-6"/>
+                    </TimelineIcon>
+                    <TimelineContent>
+                      <h5>Getting started</h5>
+                      <p className="text-sm text-foreground/80">Club is founded with 11 initial members</p>
                     </TimelineContent>
                   </TimelineEntry>
                 </Timeline>
+
+                <div id="instagram" className="scroll-mt-24" />
+                <DividerHeading index={3}>
+                  Instagram
+                </DividerHeading>
+
+                <div className="py-8">
+                  <InstagramFeed />
+                </div>
 
               </div>
             </div>
