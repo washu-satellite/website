@@ -5,6 +5,8 @@ export type Member = {
   email?: string;
   teams: string[];
   isAdmin: boolean;
+  /** Optional title, e.g. "President", "CFO / Business Operations". Shown on tiles + detail page. */
+  role?: string;
   gradYear?: number;
   /** Path under public/headshots/, e.g. "/headshots/aavik.jpg". */
   headshot?: string;

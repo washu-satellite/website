@@ -4,7 +4,6 @@ import { ChevronDown } from "lucide-react";
 import { useMemo, useState } from "react";
 import * as z from "zod";
 import GenericPage from "@/components/GenericPage";
-import { Badge } from "@/components/ui/badge";
 import { MemberList } from "@/components/MemberList";
 import { MemberAvatar } from "@/components/MemberAvatar";
 import {
@@ -51,15 +50,15 @@ export const TeamTile = (props: Member) => {
       <MemberAvatar member={props} size="size-12" />
       <div className="flex flex-col min-w-0 flex-1">
         <h3 className="font-sans font-medium truncate">{props.name}</h3>
-        <p className="text-sm font-sans text-foreground/80 truncate">
+        {props.role && (
+          <p className="text-sm font-sans text-foreground/90 truncate">
+            {props.role}
+          </p>
+        )}
+        <p className="text-xs font-sans text-foreground/60 truncate">
           {props.teams.join(" · ")}
         </p>
       </div>
-      {props.isAdmin && (
-        <Badge className="bg-primary/50 text-primary-foreground border-primary/70 font-sans shrink-0">
-          Admin
-        </Badge>
-      )}
     </Link>
   );
 };

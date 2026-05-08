@@ -43,13 +43,11 @@ function RouteComponent() {
     <GenericPage
       title={member.name}
       headerContent={
-        <div className="flex flex-row flex-wrap items-center gap-3 text-foreground/80">
-          <span>{member.teams.join(" · ")}</span>
-          {member.isAdmin && (
-            <Badge className="bg-primary/50 text-primary-foreground border-primary/70">
-              Admin
-            </Badge>
+        <div className="flex flex-col items-center gap-1 text-foreground/80">
+          {member.role && (
+            <span className="font-medium text-foreground">{member.role}</span>
           )}
+          <span className="text-sm">{member.teams.join(" · ")}</span>
         </div>
       }
     >
@@ -61,6 +59,14 @@ function RouteComponent() {
           className="border-2"
         />
         <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6">
+          {member.role && (
+            <div>
+              <p className="font-mono text-xs uppercase text-foreground/60">
+                Role
+              </p>
+              <p>{member.role}</p>
+            </div>
+          )}
           <div>
             <p className="font-mono text-xs uppercase text-foreground/60">
               Teams

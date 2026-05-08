@@ -1,5 +1,4 @@
 "use client";
-import NavBar from "@/components/NavBar";
 import RedirectCard from "@/components/RedirectCard";
 import { Button } from "@/components/ui/button";
 import { createFileRoute } from "@tanstack/react-router";
@@ -29,7 +28,11 @@ function ContactPage() {
                             washusatellite@gmail.com
                         </a>
                     </Button>
+                    <p className="text-xs text-foreground/60 text-center max-w-[26rem]">
+                        Email us about anything &mdash; questions, partnerships, sponsorship, press, joining the team. We&rsquo;ll get back to you as soon as we can.
+                    </p>
                 </div>
+
                 <div className="flex flex-row flex-wrap items-center justify-center gap-8">
                     <RedirectCard
                         title="Looking to join?"

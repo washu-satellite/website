@@ -1,5 +1,5 @@
 [
-  { "name": "Aavik Wadivkar", "email": "a.wadivkar@wustl.edu", "teams": ["Exec"], "isAdmin": true, "headshot": "/headshots/Exec/Wadivkar_Aavik.jpg" },
+  { "name": "Aavik Wadivkar", "email": "a.wadivkar@wustl.edu", "teams": ["Exec"], "isAdmin": true, "role": "President", "headshot": "/headshots/Exec/Wadivkar_Aavik.jpg" },
   { "name": "Avery Cohen", "email": "a.w.cohen@wustl.edu", "teams": ["Exec", "Business"], "isAdmin": true, "headshot": "/headshots/Exec/Cohen_Avery.jpg" },
   { "name": "Jack Galloway", "email": "galloway.j@wustl.edu", "teams": ["Exec"], "isAdmin": true, "headshot": "/headshots/Exec/Galloway_Jack.jpg" },
   { "name": "John Babineau", "email": "babineau@wustl.edu", "teams": ["Exec"], "isAdmin": true, "headshot": "/headshots/Exec/Babineau_John.jpg" },
@@ -10,7 +10,7 @@
   { "name": "Oliver Yeaman", "email": "o.a.yeaman@wustl.edu", "teams": ["Exec", "Mechanical"], "isAdmin": true, "headshot": "/headshots/Exec/Yeaman_Oliver.jpg" },
   { "name": "Samir Afsary", "email": "a.samir@wustl.edu", "teams": ["Exec", "Software"], "isAdmin": true, "headshot": "/headshots/Exec/Afsary_Samir.jpg" },
   { "name": "Sachin Agrawal", "email": "asachin@wustl.edu", "teams": ["Exec", "Business"], "isAdmin": true, "headshot": "/headshots/Business/Agrawal_Sachin.jpg" },
-  { "name": "Caden Warren", "email": "c.a.warren@wustl.edu", "teams": ["Exec", "Business"], "isAdmin": true, "headshot": "/headshots/Business/Warren_Caden.jpg" },
+  { "name": "Caden Warren", "email": "c.a.warren@wustl.edu", "teams": ["Exec", "Business"], "isAdmin": true, "role": "CFO / Business Operations", "headshot": "/headshots/Business/Warren_Caden.jpg" },
   { "name": "Anja Seifert", "email": "a.e.seifert@wustl.edu", "teams": ["Systems"], "isAdmin": false, "headshot": "/headshots/Systems/Anja_Seifert.jpg" },
   { "name": "Cooper Rodriguez", "email": "c.l.rodriguez@wustl.edu", "teams": ["Systems"], "isAdmin": false, "headshot": "/headshots/Systems/Cooper_Rodriguez.jpg" },
   { "name": "Lilian Lu", "email": "l.lilian@wustl.edu", "teams": ["Systems"], "isAdmin": false, "headshot": "/headshots/Systems/Lillian_Lu.jpg" },
