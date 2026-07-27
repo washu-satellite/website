@@ -22,3 +22,5 @@ ca.crt.b64
 
 .claude/
 .archive/
+.vercel
+.env*
