@@ -43,27 +43,35 @@ const MenuItem = (props: NavElement) => {
   );
 };
 
-function NavbarMenuItem(props: {
+function NavbarMenuItem({
+  icon,
+  title,
+  description,
+  href,
+  search,
+  ...linkProps
+}: {
   icon: ReactNode;
   title: string;
   description?: string;
   href?: string;
   search?: Record<string, string>;
-}) {
+} & Omit<React.ComponentProps<typeof Link>, "to" | "search">) {
   return (
     <Link
-      to={props.href || undefined}
-      search={props.search as never}
+      to={href || undefined}
+      search={search as never}
       className={cn("flex flex-row items-start p gap-2 w-full", {
-        "items-start": props.description !== undefined,
-        "items-center": !props.description,
+        "items-start": description !== undefined,
+        "items-center": !description,
       })}
+      {...linkProps}
     >
-      <div className="p-1 rounded-md border border-border">{props.icon}</div>
+      <div className="p-1 rounded-md border border-border">{icon}</div>
       <div>
-        <h5 className="text-sm">{props.title}</h5>
-        {props.description && (
-          <p className="text-xs text-foreground/70">{props.description}</p>
+        <h5 className="text-sm">{title}</h5>
+        {description && (
+          <p className="text-xs text-foreground/70">{description}</p>
         )}
       </div>
     </Link>
@@ -145,7 +153,7 @@ export default function NavBar() {
             {Object.entries(ProjectPages)
               .filter(([, v]) => v.project.phase !== "success")
               .map(([slug, { project }]) => (
-                <DropdownMenuItem key={slug}>
+                <DropdownMenuItem key={slug} asChild>
                   <NavbarMenuItem
                     title={project.id}
                     description={project.short}
@@ -161,7 +169,7 @@ export default function NavBar() {
             {Object.entries(ProjectPages)
               .filter(([, v]) => v.project.phase === "success")
               .map(([slug, { project }]) => (
-                <DropdownMenuItem key={slug}>
+                <DropdownMenuItem key={slug} asChild>
                   <NavbarMenuItem
                     title={project.id}
                     description={project.short}
@@ -175,7 +183,7 @@ export default function NavBar() {
 
         <NavbarMenu title="Team">
           <DropdownMenuGroup>
-            <DropdownMenuItem>
+            <DropdownMenuItem asChild>
               <NavbarMenuItem
                 title="Members & Alumni"
                 description="The people who make it all possible"
@@ -188,7 +196,7 @@ export default function NavBar() {
           <DropdownMenuGroup>
             <DropdownMenuLabel>Subteams</DropdownMenuLabel>
             {teamNames().map((t) => (
-              <DropdownMenuItem key={t}>
+              <DropdownMenuItem key={t} asChild>
                 <NavbarMenuItem
                   title={t}
                   icon={<Waypoints />}
