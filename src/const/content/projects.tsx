@@ -143,23 +143,23 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
             id: "SCALAR",
             title: "Secure Configurable Autonomous Laboratory for Algorithm Research",
             short: "1U CubeSat building WashU Satellite's orbital heritage",
-            description: "SCALAR is our first orbital mission — a 1U CubeSat designed to build orbital heritage for WashU Satellite, demonstrating our ability to design, build, test, and operate a satellite end-to-end alongside our ground station. It also flies a Field Programmable Analog Array (FPAA) — a class of computer never before flown in space — and serves as the first deployment of our novel Mission Operations Framework.",
+            description: "SCALAR is our first orbital mission — a 1U CubeSat designed to build orbital heritage for WashU Satellite, demonstrating our ability to design, build, test, and operate a satellite end-to-end alongside our ground station. Its payload is our novel Mission Operations Framework, which turns the spacecraft into a reconfigurable orbital laboratory that experiments can be uploaded to and run on from the ground.",
             contributors: 47,
             date: "Early 2027",
             icon: (<Satellite size={22} />),
             phase: 'design'
         },
-        tagline: "Our first satellite — building orbital heritage and flying a first-of-its-kind FPAA.",
+        tagline: "Our first satellite — building orbital heritage and flying our Mission Operations Framework.",
         factSheet: [
             { label: "Form Factor", value: "1U CubeSat" },
             { label: "Planned Launch", value: "Early 2027" },
-            { label: "Heritage", value: "Open-source hardware and software (notably OreSat)" },
-            { label: "Demonstration", value: "Field Programmable Analog Array (FPAA) on orbit" },
+            { label: "Heritage", value: "Open-source hardware and software (notably the PROVES Kit)" },
+            { label: "Demonstration", value: "Mission Operations Framework on orbit" },
         ],
         sections: [
             {
                 heading: "What is SCALAR?",
-                body: "SCALAR's primary mission is to prove WashU Satellite can design, build, and operate a satellite while running our own mission and ground station — earning the orbital heritage every future mission depends on. Its payload demonstrates a Field Programmable Analog Array (FPAA), a class of computer never before flown in space. FPAAs offer unique radiation fault tolerance and are well-suited to edge AI compute, a key enabling technology for our follow-on VECTOR mission.",
+                body: "SCALAR's primary mission is to prove WashU Satellite can design, build, and operate a satellite while running our own mission and ground station — earning the orbital heritage every future mission depends on. Its payload is the first orbital deployment of our Mission Operations Framework, making the spacecraft a reconfigurable laboratory for algorithms uploaded after launch — the operational foundation our follow-on VECTOR mission depends on.",
             },
             {
                 heading: "Mission Operations Framework",
@@ -168,12 +168,12 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
         ],
         engineering: [
             {
-                title: "FPAA Payload",
-                description: "First-ever orbital flight of a Field Programmable Analog Array. Multiple algorithms will be uploaded across the mission to characterize FPAA performance for radiation-tolerant edge compute.",
+                title: "Reconfigurable Payload",
+                description: "Algorithms are uploaded and swapped across the mission rather than fixed at launch, letting a single 1U bus run many experiments over its lifetime.",
             },
             {
                 title: "Open-Source Heritage",
-                description: "Heavily leverages open-source CubeSat hardware and software — particularly OreSat — to keep an aggressive timeline realistic.",
+                description: "Heavily leverages open-source CubeSat hardware and software — particularly the PROVES Kit — to keep an aggressive timeline realistic.",
             },
             {
                 title: "Mission Operations Framework",
