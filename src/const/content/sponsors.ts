@@ -1,3 +1,4 @@
+// Not rendered yet — /sponsors is CTA-only until the confirmed sponsor list lands.
 export type Sponsor = {
   name: string;
   /** Optional URL for the sponsor's website. */

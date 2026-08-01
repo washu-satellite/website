@@ -132,15 +132,26 @@ item most likely to stall.
 
 ## 9. Sponsorships page
 
-`[ ]`
+`[~]` CTA version shipped. Sponsor list intentionally not rendered yet.
 
-- Page exists: `src/routes/sponsors.tsx`, data in `src/const/content/sponsors.ts`.
-- Tiers defined: Founding, Major, Supporting, Partner.
-- Gaps: no sponsor logos are set (`logo` field unused), and there is no "become a sponsor"
-  call to action or sponsorship-deck download.
+Done:
+- `src/routes/sponsors.tsx` rebuilt as a CTA page: pitch + "Become a sponsor" mailto in the
+  header, a "What your support funds" section, and a closing CTA block at the bottom with the
+  email and a link through to `/contact`.
+- Both mailto links carry the subject "Sponsorship inquiry — WashU Satellite" so inquiries are
+  filterable in the inbox.
+- Link paths verified in the browser: `/sponsors` -> `/contact` -> footer "Sponsors" -> `/sponsors`
+  all route correctly. Footer entry already existed at `src/components/Footer.tsx:92`.
+- The current sponsor list in `src/const/content/sponsors.ts` is left in place but no longer
+  rendered, per Caden — waiting on a confirmed list.
 
-Needed: sponsor logo files, confirmed tier for each sponsor, and the sponsorship packet PDF
-if we want to link it.
+Still open:
+- Confirmed sponsor list, then re-render the tier sections (the `SponsorTile` markup is in git
+  history at commit `ad2a7ae` if it is worth restoring rather than rewriting).
+- Sponsor logo files under `public/sponsors/` — the `logo` field has never been populated.
+- Sponsorship packet PDF. The closing CTA promises one by email; either produce it or soften
+  that line.
+- `/sponsors` is in the footer but not the top nav. Decide whether it belongs there too.
 
 ---
 
@@ -154,15 +165,15 @@ if we want to link it.
 5. Mission status updates from each lead — unblocks item 5.
 6. Wireframe / CAD source files — unblocks item 6.
 7. Discipline write-ups from each team lead — unblocks item 7.
-8. Sponsor logos and sponsorship packet — unblocks item 9.
+8. Confirmed sponsor list, logos, and the sponsorship packet PDF — finishes item 9.
 
 ## Suggested order
 
 Do the unblocked structural work first so content drops in cleanly:
 
-1. Item 3 — unify timeline and roadmap onto `roadmap.ts` (no outside input needed).
-2. Item 8 — roadmap page cleanup, falls out of item 3.
-3. Item 9 — sponsors page CTA and logo slots (build the slots, fill later).
+1. ~~Item 9 — sponsors page CTA~~ done.
+2. Item 3 — unify timeline and roadmap onto `roadmap.ts` (no outside input needed).
+3. Item 8 — roadmap page cleanup, falls out of item 3.
 4. Item 7 — scaffold discipline subpages with placeholder copy.
 5. Items 1, 2, 4, 5 — pure content edits, fast once the data arrives.
 6. Item 6 — largest unknown, start only after the source files exist.
