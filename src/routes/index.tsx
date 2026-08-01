@@ -19,6 +19,7 @@ import { cn } from "@/lib/utils";
 import { Timeline, TimelineDate, TimelineIcon, TimelineContent, TimelineEntry } from "@/components/Timeline";
 import LaunchCountdown from "@/components/LaunchCountdown";
 import InstagramFeed from "@/components/InstagramFeed";
+import SocialLinks from "@/components/SocialLinks";
 
 export const Route = createFileRoute('/')({
   component: HomePage,
@@ -89,6 +90,7 @@ function BannerText() {
               {bannerTextLoop[bannerTextIndex]}
             </h1>
           </div>
+          <SocialLinks className="mt-4 justify-center lg:justify-start flex-wrap" />
         </div>
       </div>
   )
