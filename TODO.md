@@ -217,7 +217,7 @@ Still open:
    26 untitled members, status of Geoffrey Goffman and Jack Galloway, and missing headshots.
 2. New "who are we" copy — unblocks item 2.
 3. ~~Milestones since Oct 2024~~ — received via the Notion Missions DB export, items 3 and 8 done.
-   Still need: GS-1 open-or-closed, and a year for AIRIS integration testing.
+   ~~GS-1 open-or-closed~~ resolved. Still need: a year for AIRIS integration testing.
 4. ~~RIDE deadline date for SCALAR~~ — 23 Oct 2026, item 4 done. Still need: confirm or clear
    AIRIS's 1 Dec 2026 countdown target.
 5. Mission status updates from each lead — unblocks item 5.
