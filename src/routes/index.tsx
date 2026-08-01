@@ -138,9 +138,11 @@ function TeamIntro() {
             <Card>
               <div id="who" className="font-sans space-y-2 z-10 scroll-mt-24">
                 <h2 className="font-semibold text-foreground text-xl">Who are we?</h2>
-                <p className={"font-normal mb-2 text-foreground/80 pb-2"}>
-                  {HomepageContent.aboutUs}
-                </p>
+                {HomepageContent.aboutUs.map((para, i) => (
+                  <p key={i} className={"font-normal mb-2 text-foreground/80 pb-2"}>
+                    {para}
+                  </p>
+                ))}
                 <RedirectButton
                   text="Meet the team"
                   href="/team"

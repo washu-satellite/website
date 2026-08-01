@@ -17,7 +17,7 @@ const SUPPORTS = [
   {
     Icon: Rocket,
     title: "Flight hardware",
-    body: "Structures, optics, avionics, and power systems for AIRIS and SCALAR — the parts that actually leave the ground.",
+    body: "Structures, optics, avionics, and power systems for AIRIS and SCALAR: the parts that actually leave the ground.",
   },
   {
     Icon: Antenna,

@@ -52,12 +52,25 @@ Sheet data issues worth fixing at the source:
 
 ## 2. "Who are we" update
 
-`[!]` Blocked: need new copy.
+`[x]` Done. Rewritten against the no-ai-slop rules.
 
-- Current text: `src/const/content/homepage.tsx` -> `aboutUs`.
-- It is stale: says "Fall of 2024 ... grew from 12 members to more than 40". Roster is now 59.
-- Rendered at `src/routes/index.tsx:130`.
-- Also review `missionStatement` and `tagline` in the same file while we are in there.
+- `aboutUs` is now an array of three paragraphs in `src/const/content/homepage.tsx`, mapped in
+  `src/routes/index.tsx`. It used to be one string in one `<p>`, so paragraph breaks were impossible.
+- Numbers corrected: 11 founding members (was implied 12), 59 today (was "more than 40").
+- `missionStatement` rewritten to drop "equip our members" and "cutting-edge".
+- `tagline` left as "Design. Develop. Educate." It is a list of three, which the slop rules flag,
+  but it reads as established branding rather than filler. Change it if you disagree.
+
+Style rules applied, from
+[no_ai_slop_writing_rules](https://github.com/realrossmanngroup/no_ai_slop_writing_rules):
+- Zero em dashes in any user-facing copy. Replaced with commas, colons, or sentence breaks across
+  `projects.tsx`, `homepage.tsx`, `sponsors.tsx`, and `LaunchCountdown.tsx`. The only remaining
+  ones are in code comments and in the "Role — Project" member titles, which is a data separator
+  Caden picked deliberately.
+- Banned verbs and adjectives swept out: "leverages", "cutting-edge", "novel", "plethora".
+- Vague claims swapped for checkable ones. "Advancing the future of multi-messenger astrophysics"
+  became "Thirty seconds to find a gamma-ray burst before it fades."
+- Sentence length deliberately varied; contractions used; no hedging stacks.
 
 ## 3. Timeline update
 
@@ -135,9 +148,13 @@ Deliberately left off the page:
 - `contributors: 47` was copied from the other missions, which all use that number. Real per-project
   counts would be better on every page.
 
+Copy pass (done): descriptions and taglines for AIRIS, SCALAR, VECTOR, and SB-1 rewritten to the
+same no-slop rules as item 2. Facts were not invented; only the prose changed, plus the SB-1
+description now names the balloon and Tisch Park, which the roadmap already stated.
+
 Still open: AIRIS, SCALAR, VECTOR, and SB-1 need current phase, objectives, and subsystem lists
-from their leads. GS-2 needs a poster PDF and a hero image (`/projects/gs2.png`) — every other
-mission page has both.
+from their leads. That is a factual review, not a writing one. GS-2 needs a poster PDF and a hero
+image (`/projects/gs2.png`); every other mission page has both.
 
 ## 6. Sync page scrolling to a wireframe explode graphic
 

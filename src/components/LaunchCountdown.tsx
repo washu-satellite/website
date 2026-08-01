@@ -19,7 +19,7 @@ export const LAUNCHES: Launch[] = [
   {
     name: "AIRIS",
     target: "2026-12-01T00:00:00",
-    blurb: "Antarctic balloon flight (target — pending NASA decision)",
+    blurb: "Antarctic balloon flight (target date pending NASA decision)",
   },
   {
     // No launch date is set for SCALAR, so we count down to the last thing that
@@ -27,7 +27,7 @@ export const LAUNCHES: Launch[] = [
     // deliverable is not late until the due date is over.
     name: "SCALAR",
     target: "2026-10-23T23:59:59",
-    blurb: "Final RIDE deliverable — environmental test report",
+    blurb: "Final RIDE deliverable: environmental test report",
     kind: "deliverable",
   },
 ];
