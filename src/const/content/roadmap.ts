@@ -65,13 +65,29 @@ export const roadmap: RoadmapItem[] = [
     featured: true,
   },
   {
-    date: "2026",
-    title: "GS-2 in development",
+    date: "Feb 2027",
+    title: "GS-2 operational",
     description:
-      "Second ground station under active build across nine modules — antenna, TX/RX, power, control, routing, and structures.",
+      "Second ground station assembled, tested, and ready to command SCALAR from the Crow Hall rooftop.",
+    status: "planned",
+    icon: "antenna",
+  },
+  {
+    date: "2026",
+    title: "GS-2 in assembly",
+    description:
+      "Antenna simulation, structures, and control software in progress across seven modules. Rooftop site selected.",
     status: "active",
     icon: "antenna",
     featured: true,
+  },
+  {
+    date: "Late 2025",
+    title: "GS-1 closed, GS-2 begins",
+    description:
+      "The team closed out GS-1 and restarted as GS-2 with a written requirements sheet, carrying forward its hardware, software, and lessons learned.",
+    status: "done",
+    icon: "antenna",
   },
   {
     date: "2026",

@@ -10,15 +10,15 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
             short: "An in-house UHF ground station for LEO satellite communication",
             description: "To communicate with our future satellites, WashU Satellite needed an in-house-built UHF ground station antenna. GS-1 consists of a 3.6 m circularly-polarized Yagi-Uda antenna, an azimuth and elevation rotator, an SDR (software defined radio), and a frame to hold it all. It is designed to operate in rooftop outdoor conditions indefinitely, including up to 90 mph winds, rain, and snow.",
             contributors: 47,
-            date: "Q2-2025",
+            date: "2024 – 2025",
             icon: (<SatelliteDish size={22} />),
-            phase: 'assembly',
+            phase: 'success',
             posterUrl: "/posters/gs_1_poster.pdf",
             image: "/projects/gs1.png"
         },
         tagline: "A UHF Ground Station for LEO Satellite Communication.",
         factSheet: [
-            { label: "Status", value: "Tuned and assembled; pending end-to-end software and rotator-control testing" },
+            { label: "Status", value: "Complete — superseded by GS-2, which carries forward its hardware and lessons learned" },
             { label: "Operating Frequency", value: "437.5 MHz (UHF)" },
             { label: "Antenna", value: "3.6 m circularly-polarized Yagi-Uda" },
             { label: "Design Gain", value: "16–17 dBiC" },
@@ -28,7 +28,11 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
         sections: [
             {
                 heading: "Introduction",
-                body: "Building our own UHF link took longer than buying one off the shelf, but gave our technical teams the depth of experience needed for satellite-side communications, where a design error can end a mission. GS-1 is currently tuned and assembled, waiting on end-to-end software testing and rotator control debugging before being installed on a WashU rooftop.",
+                body: "Building our own UHF link took longer than buying one off the shelf, but gave our technical teams the depth of experience needed for satellite-side communications, where a design error can end a mission. GS-1 took the team from no RF experience to a tuned, assembled 3.6 m antenna, a working balun, and a full CCSDS software pipeline.",
+            },
+            {
+                heading: "Why GS-1 closed",
+                body: "In late 2025 the team chose to close GS-1 and start fresh as GS-2 rather than re-baseline it. The yagi had been selected early on because it was a challenging, interesting build — not because it was the best answer to a documented requirement — and tuning it proved harder than expected. GS-2 inherits GS-1's hardware, software pipeline, and hard-won lessons, but starts from a written requirements sheet. GS-1 remains the reason the team knows how to build the second one.",
             },
         ],
         engineering: [
@@ -51,6 +55,76 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
         ],
         modules: ["Mechanical", "Electrical", "Software", "Systems"],
         acknowledgments: "Supported by WashU Satellite, McKelvey Engineering, the ESE Department, and the MEMS Department. Special thanks to PI James Buckley, Andrew Clark, Marion Sudvarg, Louis Woodhams, and all our advisors and mentors.",
+        overview: "",
+        disciplineOverviews: []
+    },
+    gs2: {
+        project: {
+            id: "GS-2",
+            title: "Ground Station 2",
+            short: "The UHF ground station that will command and track SCALAR in orbit",
+            description: "GS-2 is WashU Satellite's second ground station and the link that will carry commands to SCALAR and bring its telemetry back down. Where GS-1 was the team's first attempt at an RF system, GS-2 starts from a written requirements sheet and inherits GS-1's hardware, software pipeline, and lessons learned. It is being built across seven modules by students from every discipline on the team, with a target of full operation before SCALAR reaches orbit.",
+            contributors: 47,
+            date: "2025 – 2027",
+            icon: (<SatelliteDish size={22} />),
+            phase: 'assembly',
+        },
+        tagline: "The link between SCALAR and the ground.",
+        factSheet: [
+            { label: "Status", value: "In assembly — antenna simulation, structures, and control software in progress" },
+            { label: "Purpose", value: "Command and telemetry for SCALAR; tracking and downlink for future missions" },
+            { label: "Planned site", value: "Crow Hall rooftop, WashU campus (being finalized with the Physics Department)" },
+            { label: "Elevation range", value: "5° minimum operating angle, for RF safety over campus" },
+            { label: "Azimuth range", value: "Full 360° sweep, with partial obstruction depending on final siting" },
+            { label: "Band", value: "UHF" },
+            { label: "Target", value: "Fully assembled and testable before fall break; operational ahead of SCALAR" },
+        ],
+        sections: [
+            {
+                heading: "Why a second ground station",
+                body: "GS-1 proved the team could build an RF system from nothing, but its antenna had been chosen for the challenge rather than against a documented requirement, and tuning it never fully converged. Rather than patch that design, the team closed GS-1 and restarted as GS-2 with an updated requirements sheet — keeping the hardware, the CCSDS software pipeline, and everything the first build taught us. The result is a ground station designed backwards from what SCALAR actually needs.",
+            },
+            {
+                heading: "Talking to SCALAR",
+                body: "SCALAR is a 1U CubeSat in low Earth orbit, which means passes are short and infrequent. Every pass has to count. GS-2's command and telemetry stack is built on fprime-gds: commands are defined on the flight software side and picked up automatically by the ground system, so the two halves cannot drift out of sync. Telemetry is stored and visualized through a web interface that logs which operator sent which command.",
+            },
+            {
+                heading: "Licensing and operators",
+                body: "A ground station is only useful if someone is licensed to operate it. The team is working through FCC licensing for the station itself and building a pool of licensed amateur radio operators who can take passes — because orbits will come whether or not someone is available to work them. Downlink is easier: the worldwide SatNOGS network carries UHF stations that can receive SCALAR even when it is nowhere near St. Louis.",
+            },
+        ],
+        engineering: [
+            {
+                title: "Antenna",
+                description: "A high-gain UHF antenna, currently in electromagnetic simulation to settle element geometry and tuning parameters before anything is cut. GS-1's antenna targeted roughly 17 dBi; GS-2's design is being validated in simulation first rather than tuned by trial and error on the roof.",
+            },
+            {
+                title: "TX / RX",
+                description: "The radio chain between the antenna and the computer — feedpoint, filtering, and amplification. Handles both the uplink that carries commands to the spacecraft and the downlink that brings telemetry back.",
+            },
+            {
+                title: "Power",
+                description: "Distribution to every electrical component on the station, plus the grounding and surge protection a permanently installed rooftop system needs.",
+            },
+            {
+                title: "Control",
+                description: "Azimuth and elevation pointing. The station has to track a spacecraft moving across the sky in minutes, holding the antenna on it for the whole pass.",
+            },
+            {
+                title: "Routing",
+                description: "The packet path between the radio and the operator: CCSDS conversion, transport, and cloud infrastructure so passes can be worked and reviewed from anywhere.",
+            },
+            {
+                title: "Structures",
+                description: "The mast, supports, and enclosure that hold the antenna steady and keep the electronics dry through a St. Louis winter.",
+            },
+            {
+                title: "Graphical Interface",
+                description: "The operator's view of the station — telemetry visualization, command entry, and a per-operator log of what was sent and when.",
+            },
+        ],
+        modules: ["Mechanical", "Electrical", "Software", "Systems", "Mission Ops"],
+        acknowledgments: "Supported by WashU Satellite, McKelvey Engineering, and the Physics Department. Special thanks to the antenna engineers and advisors who have reviewed our designs.",
         overview: "",
         disciplineOverviews: []
     },

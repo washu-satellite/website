@@ -97,14 +97,47 @@ Still open:
 
 ## 5. All missions need to be updated
 
-`[!]` Blocked: need per-mission current status from mission leads.
+`[~]` Ground stations done. AIRIS, SCALAR, VECTOR, SB-1 still need lead review.
 
-- Content: `src/const/content/projects.tsx`. Missions defined: `airis` (line 57), `scalar` (141),
-  `vector` (190), `spinor` (257), plus Ground Station 1 (line 8) and Small Balloon 1 (line 310).
-- SCALAR copy and exec roster were partially corrected in commit `afafeb3`; the rest is unreviewed.
-- Rendered by `src/routes/projects/$project_slug.tsx` and `src/components/ProjectPage.tsx`.
+Done:
+- **GS-2 page created** (`src/const/content/projects.tsx`, `gs2` entry). It did not exist before,
+  despite being the active project. Sourced from Slack `#ground-station` and `#exec`.
+- **GS-1 moved to past missions** — `phase: 'success'`, status line rewritten from the stale
+  "pending end-to-end software and rotator-control testing" to completed-and-superseded, plus a
+  "Why GS-1 closed" section explaining the handoff to GS-2.
+- The Missions dropdown now lists GS-2 first under Active Projects and GS-1 under Past Missions.
+- SPINOR left at Proposal Phase, per Caden.
 
-Needed from each mission lead: current phase, updated objectives, and any changed subsystem list.
+**Notion MCP is not connected in this session** — only Slack. Everything on the GS-2 page came
+from Slack, so anything that lives only in Notion (requirement IDs, module-level task status, the
+GS test plan deck) is not reflected. Connect Notion if you want that pulled in.
+
+GS-2 facts sourced from Slack, worth verifying before this goes to production:
+- Site: Crow Hall rooftop, chosen Jun 2026 for sightlines, access, grounding, and power. Still
+  being finalized with the Physics Department — the page says "planned site" for that reason.
+- Pointing: 5° minimum elevation for RF safety, full 360° azimuth with partial obstruction.
+- Deadline: Preston's "fully functional by February at the latest", with an assembled and
+  semi-functional prototype before fall break.
+- Software: fprime-gds, commands defined flight-side and picked up automatically; operator
+  sign-in logging requested by Mission Ops.
+- Licensing: FCC Part 5 Conventional License being pursued over amateur; ham operator recruitment
+  is running in `#ham-radio`.
+
+Deliberately left off the page:
+- **Operating frequency.** Warren asked "what frequency are we tuning our gs to detect scalar?"
+  in July and I found no answer. The page says "UHF" only. GS-1's page still states 437.5 MHz.
+- **Antenna type.** The team debated dropping the yagi, then an outside antenna engineer
+  (Gil Schmitt) recommended reviving it. Paul Fleck's HFSS simulations were still running as of
+  30 Jul. The page describes it as "a high-gain UHF antenna" in simulation rather than naming a
+  type. Fill this in once the design closes.
+- Internal candor from the exec thread about GS-1's tuning never converging is paraphrased
+  neutrally rather than quoted.
+- `contributors: 47` was copied from the other missions, which all use that number. Real per-project
+  counts would be better on every page.
+
+Still open: AIRIS, SCALAR, VECTOR, and SB-1 need current phase, objectives, and subsystem lists
+from their leads. GS-2 needs a poster PDF and a hero image (`/projects/gs2.png`) — every other
+mission page has both.
 
 ## 6. Sync page scrolling to a wireframe explode graphic
 
@@ -136,13 +169,12 @@ item most likely to stall.
 `[x]` Done as part of item 3 — one dataset, two views.
 
 Open questions raised by the data:
-- **GS-1 status conflict.** The Role Breakdown sheet labels it "GS-1 (closed FL25)"; the Notion
-  Missions DB says "In progress". The old roadmap claimed "GS-1 operational (active)" for 2025.
-  Unverifiable either way, so the roadmap now stops at the Oct 2024 GS-1 PDRs. Confirm which is
-  right and I will add the closing entry.
-- **TVAC, LUNAR, and SPINOR are absent from the roadmap.** All three are "Not started" with no
-  dates in Notion, so there was nothing to put on a dated timeline. Note that SPINOR does have a
-  mission page (`src/const/content/projects.tsx:257`) — that inconsistency is worth resolving.
+- ~~GS-1 status conflict.~~ Resolved: finished and superseded by GS-2. The roadmap now carries
+  "Late 2025 — GS-1 closed, GS-2 begins", "2026 — GS-2 in assembly", and "Feb 2027 — GS-2
+  operational". Slack `#exec` (29 Sep 2025) has the decision thread if you need the receipts.
+- **TVAC and LUNAR are absent from the roadmap.** Both are "Not started" with no dates in Notion,
+  so there was nothing to put on a dated timeline. SPINOR is also absent but does have a mission
+  page — worth resolving that inconsistency.
 - **AIRIS's "full integration testing complete" milestone has no year in the export** (just
   "Sep 1"), so it is described without a date rather than guessed at. There is still an open
   "Create AIRIS Timeline" task on your side — that would fill the gap.
