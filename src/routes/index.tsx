@@ -10,7 +10,8 @@ import { FaArrowRightLong } from "react-icons/fa6";
 
 import { createFileRoute } from "@tanstack/react-router";
 import React, { useEffect, useState } from "react";
-import { Antenna, Balloon, BookUp, NotebookText, Rocket, Video } from "lucide-react";
+import { Antenna, Balloon, BookUp, FileCheck, NotebookText, Rocket, Satellite, Video } from "lucide-react";
+import { featuredRoadmap, type RoadmapIcon } from "@/const/content/roadmap";
 import RedirectButton from "@/components/RedirectButton";
 import Card from "@/components/Card";
 import { bStore } from "@/hooks/useAppStore";
@@ -33,6 +34,15 @@ export function DividerHeading(props: React.PropsWithChildren<{
     </h2>
   );
 }
+
+const ROADMAP_ICONS: Record<RoadmapIcon, typeof Rocket> = {
+  rocket: Rocket,
+  balloon: Balloon,
+  antenna: Antenna,
+  notebook: NotebookText,
+  satellite: Satellite,
+  file: FileCheck,
+};
 
 const bannerTextLoop = ["satellites", "science balloons", "interfaces", "earth stations"];
 
@@ -182,55 +192,30 @@ function HomePage() {
                 </DividerHeading>
 
                 <Timeline hideControls>
-                  <TimelineEntry>
-                    <TimelineDate>
-                      Oct 2024
-                    </TimelineDate>
-                    <TimelineIcon>
-                      <Antenna className="w-6 h-6"/>
-                    </TimelineIcon>
-                    <TimelineContent>
-                      <h5>GS-1 PDRs</h5>
-                      <p className="text-sm text-foreground/80">Preliminary design reviews for the first ground station are passed</p>
-                    </TimelineContent>
-                  </TimelineEntry>
-                  <TimelineEntry>
-                    <TimelineDate>
-                      Aug 2024
-                    </TimelineDate>
-                    <TimelineIcon>
-                      <NotebookText className="w-6 h-6"/>
-                    </TimelineIcon>
-                    <TimelineContent>
-                      <h5>Team Procedures</h5>
-                      <p className="text-sm text-foreground/80">Important standards including engineering design reviews, budgets, responsible engineering, and more are formalized</p>
-                    </TimelineContent>
-                  </TimelineEntry>
-                  <TimelineEntry>
-                    <TimelineDate>
-                      Apr 2024
-                    </TimelineDate>
-                    <TimelineIcon>
-                      <Balloon className="w-6 h-6"/>
-                    </TimelineIcon>
-                    <TimelineContent>
-                      <h5>First mission</h5>
-                      <p className="text-sm text-foreground/80">Small balloon mission "SB-1" is developed and launched in Tisch Park</p>
-                    </TimelineContent>
-                  </TimelineEntry>
-                  <TimelineEntry>
-                    <TimelineDate>
-                      Jan 2024
-                    </TimelineDate>
-                    <TimelineIcon>
-                      <Rocket className="w-6 h-6"/>
-                    </TimelineIcon>
-                    <TimelineContent>
-                      <h5>Getting started</h5>
-                      <p className="text-sm text-foreground/80">Club is founded with 11 initial members</p>
-                    </TimelineContent>
-                  </TimelineEntry>
+                  {featuredRoadmap.map((r, i) => {
+                    const Icon = ROADMAP_ICONS[r.icon ?? "rocket"];
+                    return (
+                      <TimelineEntry key={`${r.date}-${i}`}>
+                        <TimelineDate>
+                          {r.date}
+                        </TimelineDate>
+                        <TimelineIcon>
+                          <Icon className="w-6 h-6"/>
+                        </TimelineIcon>
+                        <TimelineContent>
+                          <h5>{r.title}</h5>
+                          {r.description && (
+                            <p className="text-sm text-foreground/80">{r.description}</p>
+                          )}
+                        </TimelineContent>
+                      </TimelineEntry>
+                    );
+                  })}
                 </Timeline>
+
+                <div className="flex justify-center pb-4">
+                  <RedirectButton text="See the full roadmap" href="/roadmap" />
+                </div>
 
                 <div id="instagram" className="scroll-mt-24" />
                 <DividerHeading index={3}>

@@ -61,28 +61,39 @@ Sheet data issues worth fixing at the source:
 
 ## 3. Timeline update
 
-`[ ]` Not blocked on content decisions, but needs new milestones.
+`[x]` Done. Homepage timeline and `/roadmap` now share one dataset.
 
-- Two sources of truth exist and they disagree — fix this as part of the update:
-  - Homepage timeline is hardcoded JSX, `src/routes/index.tsx:184-233` (4 entries, newest Oct 2024).
-  - `src/const/content/roadmap.ts` has a richer, newer list (through 2026) used by `/roadmap`.
-- Plan: make the homepage timeline render from `roadmap.ts` so there is one list to maintain,
-  then add the missing 2025-2026 milestones.
+- `src/const/content/roadmap.ts` is the single source of truth. `/roadmap` renders everything;
+  the homepage timeline renders the entries flagged `featured`.
+- The hardcoded JSX timeline in `src/routes/index.tsx` is gone. Adding a milestone is now a
+  one-file edit. Icons are set per item by a string key (`icon: "antenna"`) so the data file
+  stays free of JSX; the key maps to a lucide component in `index.tsx`.
+- Added a "See the full roadmap" button under the homepage timeline.
+- Milestones rebuilt from the Notion Missions DB export: SCALAR's RIDE waves (Apr, Jun, Aug,
+  Sep, Oct 2026), GS-2 and AIRIS in development, and VECTOR's Fall 2026 / Feb 2027 narrative.
 
-Needed from the team: milestones since Oct 2024 with dates.
+Deliberately left off the public site: task-level "BLOCKED" and overdue states from Notion.
+Statuses are flattened to done / in progress / planned. If you want the site to mirror internal
+status more closely, say so — but broadcasting a blocked FCC filing publicly is a choice, not
+an oversight.
 
 ## 4. Countdown to RIDE requirements for SCALAR
 
-`[!]` Blocked: need the RIDE deadline date and what exactly we are counting down to.
+`[x]` Done.
 
-- Countdown component: `src/components/LaunchCountdown.tsx`, entries in `LAUNCHES` at line 14.
-- Currently two entries: AIRIS (2026-12-01) and SCALAR (2027-02-01, "planned 1U CubeSat launch").
-- The component supports `target: undefined` to render a TBD state, so we can ship the card
-  before the date firms up.
+- SCALAR now counts down to **23 Oct 2026**, the final RIDE deliverable (satellite environmental
+  test report), instead of the invented 2027 launch date.
+- `LaunchCountdown.tsx` gained a `kind: "deliverable"` variant: file icon instead of a rocket,
+  "Due" instead of "Target", and "Submitted" instead of "Launched" once the date passes.
+- Fixed an off-by-one in the displayed date. Targets were written as UTC midnight (`...T00:00:00Z`),
+  which renders as the previous day anywhere west of UTC — the tile read "Oct 22" for a 23 Oct
+  target. Targets are now local-time, and the SCALAR one is end-of-day since a deliverable is not
+  late until the due date is over.
 
-Needed:
-- The RIDE requirements submission/deadline date (ISO).
-- Whether this replaces the SCALAR launch countdown or is a third entry alongside it.
+Still open:
+- **AIRIS's countdown target (1 Dec 2026) is not backed by anything.** The Missions DB has an
+  empty launch date for all eight missions. The blurb hedges with "pending NASA decision", but
+  either confirm the date or set `target: undefined` to render "T-minus TBD".
 
 ## 5. All missions need to be updated
 
@@ -122,13 +133,23 @@ item most likely to stall.
 
 ## 8. Roadmap
 
-`[ ]`
+`[x]` Done as part of item 3 — one dataset, two views.
 
-- Page exists: `src/routes/roadmap.tsx`, data in `src/const/content/roadmap.ts`.
-- Needs the same refresh as the timeline (item 3) — statuses are stale (GS-1 still "active",
-  SCALAR design freeze "active" for 2026).
-- Decide the relationship between roadmap and timeline: one dataset, two views, or two datasets.
-  Recommendation: one dataset.
+Open questions raised by the data:
+- **GS-1 status conflict.** The Role Breakdown sheet labels it "GS-1 (closed FL25)"; the Notion
+  Missions DB says "In progress". The old roadmap claimed "GS-1 operational (active)" for 2025.
+  Unverifiable either way, so the roadmap now stops at the Oct 2024 GS-1 PDRs. Confirm which is
+  right and I will add the closing entry.
+- **TVAC, LUNAR, and SPINOR are absent from the roadmap.** All three are "Not started" with no
+  dates in Notion, so there was nothing to put on a dated timeline. Note that SPINOR does have a
+  mission page (`src/const/content/projects.tsx:257`) — that inconsistency is worth resolving.
+- **AIRIS's "full integration testing complete" milestone has no year in the export** (just
+  "Sep 1"), so it is described without a date rather than guessed at. There is still an open
+  "Create AIRIS Timeline" task on your side — that would fill the gap.
+- **Recruitment dates are not on the roadmap** (Aug 17 orientation, Aug 24 activity fair, Sep 4
+  applications due, Sep 13 decisions). They are publicly useful, especially the application
+  deadline, but they are club-ops rather than mission milestones. Say the word and I will add
+  them, either to the roadmap or to `/apply`.
 
 ## 9. Sponsorships page
 
@@ -151,7 +172,10 @@ Still open:
 - Sponsor logo files under `public/sponsors/` — the `logo` field has never been populated.
 - Sponsorship packet PDF. The closing CTA promises one by email; either produce it or soften
   that line.
-- `/sponsors` is in the footer but not the top nav. Decide whether it belongs there too.
+- ~~`/sponsors` is in the footer but not the top nav.~~ Added to the top nav between Newsletter
+  and Contact. Note the top-nav right-hand group is `hidden lg:flex`, so Sponsors, Newsletter,
+  Contact, and Apply all vanish below 1024px with no mobile menu to replace them. Pre-existing,
+  but it means the footer is the only way to reach those pages on a phone.
 
 ---
 
@@ -160,8 +184,10 @@ Still open:
 1. ~~Roster spreadsheet with titles~~ — received, item 1 applied. Still need: confirmation of the
    26 untitled members, status of Geoffrey Goffman and Jack Galloway, and missing headshots.
 2. New "who are we" copy — unblocks item 2.
-3. Milestones since Oct 2024 — unblocks items 3 and 8.
-4. RIDE deadline date for SCALAR — unblocks item 4.
+3. ~~Milestones since Oct 2024~~ — received via the Notion Missions DB export, items 3 and 8 done.
+   Still need: GS-1 open-or-closed, and a year for AIRIS integration testing.
+4. ~~RIDE deadline date for SCALAR~~ — 23 Oct 2026, item 4 done. Still need: confirm or clear
+   AIRIS's 1 Dec 2026 countdown target.
 5. Mission status updates from each lead — unblocks item 5.
 6. Wireframe / CAD source files — unblocks item 6.
 7. Discipline write-ups from each team lead — unblocks item 7.
@@ -172,8 +198,9 @@ Still open:
 Do the unblocked structural work first so content drops in cleanly:
 
 1. ~~Item 9 — sponsors page CTA~~ done.
-2. Item 3 — unify timeline and roadmap onto `roadmap.ts` (no outside input needed).
-3. Item 8 — roadmap page cleanup, falls out of item 3.
-4. Item 7 — scaffold discipline subpages with placeholder copy.
-5. Items 1, 2, 4, 5 — pure content edits, fast once the data arrives.
-6. Item 6 — largest unknown, start only after the source files exist.
+2. ~~Item 3 — unify timeline and roadmap onto `roadmap.ts`~~ done.
+3. ~~Item 8 — roadmap page refresh~~ done.
+4. ~~Item 4 — SCALAR RIDE countdown~~ done.
+5. Item 7 — scaffold discipline subpages with placeholder copy. Next unblocked item.
+6. Items 1, 2, 5 — pure content edits, fast once the data arrives.
+7. Item 6 — largest unknown, start only after the source files exist.
