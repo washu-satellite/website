@@ -19,8 +19,6 @@ Done:
   "Role — Project" ("Structures Module RE — GS-2").
 - Title picked by priority when someone holds several: Exec title > project lead / admin >
   module RE > component owner. Andrew Press holds 8 current roles, shows "Project Manager".
-- Added Nathaniel Bowman (Chief Electrical Engineer) — he held a current Exec role but was
-  missing from the site entirely.
 - Chief Physicist conflict resolved in Kian Eghtesady's favor; Sophie Fendler now shows
   "Imaging Module RE — AIRIS".
 - Skipped roles under "GS-1 (closed FL25)" — the project is closed, so those rows are stale.
@@ -33,10 +31,12 @@ Still open:
   Jackson Shurman, Paul Fleck, Nickalus Bui, Tyler Zhang, Allen Maldonado, Ananyaa Srivastan,
   Luis Garcia, Cole Smith, Ruby Corzine, Ethan Silver, Dory Dugal, Quan Do, Luke Gardiner,
   Keith Bass, Jeremy Friedman-Wellisch, Khoa Vu Ngoc, Matt Dunn, Kelvin Han, Ben Veiel, Lilian Lu.
-- Two people hold a current role in the sheet but are not on the site. Both look like they cycled
-  out (their leadership rows are closed) and have one lingering open row, so they were not added.
-  Confirm current or alumni: Geoffrey Goffman (GS-2 Frame), Jack Galloway (SCALAR RIDE & Contract).
-- Nathaniel Bowman needs an email, headshot, and grad year.
+- Three people hold a current role in the sheet but are deliberately not on the site:
+  Geoffrey Goffman (GS-2 Frame), Jack Galloway (SCALAR RIDE & Contract), and Nathaniel Bowman
+  (listed as Chief Electrical Engineer, removed at Caden's direction). Their sheet rows are still
+  open — close them out so the sheet stops reporting them as current.
+- Nothing on the site currently shows a Chief Electrical Engineer. Confirm who holds CEE, or
+  whether the position is vacant.
 - Still missing headshots: Andrew Press, Aman Verma, Qihan Wang, Nick Jarmuz, Isaac Gutierrez,
   Sophie Yokoo, Zachary Dang, Travis Kuo, Julia Hannon, Warren Schindler, William Fang,
   Jackson Shurman, Nickalus Bui, and others.

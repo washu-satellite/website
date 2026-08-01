@@ -57,6 +57,5 @@
   { "name": "Matt Dunn", "email": "dunn.m.e@wustl.edu", "teams": ["Physics"], "isAdmin": false },
   { "name": "Avery Cohen", "email": "a.w.cohen@wustl.edu", "teams": ["Business"], "isAdmin": false, "role": "NOAA — SCALAR", "headshot": "/headshots/Exec/Cohen_Avery.jpg" },
   { "name": "Kelvin Han", "email": "h.kelvin@wustl.edu", "teams": ["Business"], "isAdmin": false, "headshot": "/headshots/Business/Han_Kelvin.jpg" },
-  { "name": "Ben Veiel", "email": "b.e.veiel@wustl.edu", "teams": ["Business"], "isAdmin": false, "headshot": "/headshots/Business/Veiel_Ben.jpg" },
-  { "name": "Nathaniel Bowman", "teams": ["Exec", "Electrical"], "isAdmin": true, "role": "Chief Electrical Engineer (CEE)" }
+  { "name": "Ben Veiel", "email": "b.e.veiel@wustl.edu", "teams": ["Business"], "isAdmin": false, "headshot": "/headshots/Business/Veiel_Ben.jpg" }
 ]
