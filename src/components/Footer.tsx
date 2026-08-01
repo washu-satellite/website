@@ -2,7 +2,6 @@ import clsx from "clsx";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { PiInstagramLogoFill } from "react-icons/pi";
 
-import { ProjectHighlightData } from "@/const/content/projects";
 import ThemedLink from "./ThemedLink";
 import { Sun, Moon, Monitor } from "lucide-react";
 import { Button } from "./ui/button";
@@ -80,22 +79,18 @@ export default function Footer() {
                 </div>
             </div>
             <div className="flex-1 flex flex-col items-start gap-1 border-l-0 border-b-0 md:border-l md:border-b border-border p-2">
-                <ThemedLink href={"/"}><p className="-ml-1">Missions</p></ThemedLink>
-                {ProjectHighlightData.map((p, i) => (
-                    <ThemedLink key={i} arrowLink href={p.posterUrl ? p.posterUrl : `/missions/${p.id.replaceAll("-", "").toLowerCase()}`} className={clsx(`text-foreground/80`, "font-normal")}>{p.id}</ThemedLink>
-                ))}
-            </div>
-            <div className="flex-1 flex flex-col items-start gap-1 border-l-0 border-b-0 md:border-l md:border-b border-border p-2">
                 <ThemedLink key={"keep-in-touch"} href={"/"}><p className="-ml-1">Keep in Touch</p></ThemedLink>
                 <ThemedLink key={"contact-us"} arrowLink href={"/contact"} className={clsx(`text-foreground/80`, "font-normal")}>Contact us</ThemedLink>
-                <ThemedLink key={"interest-form"} arrowLink href={"/subscribe"} className={clsx(`text-foreground/80`, "font-normal")}>Interest form</ThemedLink>
                 <ThemedLink key={"join-the-team"} arrowLink href={"/apply"} className={clsx(`text-foreground/80`, "font-normal")}>Join the team</ThemedLink>
+                <ThemedLink key={"newsletter"} arrowLink href={"/newsletters"} className={clsx(`text-foreground/80`, "font-normal")}>Newsletters</ThemedLink>
             </div>
             <div className="flex-1 flex flex-col items-start gap-1 border-l-0 border-b-0 md:border-l md:border-b border-border p-2">
                 <ThemedLink key={"more-info"} href={"/"}><p className="-ml-1">More Information</p></ThemedLink>
-                <ThemedLink key={"who-are-we"} arrowLink href={"/not-ready"} className={clsx(`text-foreground/80`, "font-normal")}>What is WashU Satellite?</ThemedLink>
-                <ThemedLink key={"team"} arrowLink href={"/team"} className={clsx(`text-foreground/80`, "font-normal")}>Our Team</ThemedLink>
-                <ThemedLink key={"team-management"} arrowLink href={"/not-ready"} className={clsx(`text-foreground/80`, "font-normal")}>Team Management</ThemedLink>
+                <ThemedLink key={"about-us"} arrowLink href={"/#who"} className={clsx(`text-foreground/80`, "font-normal")}>About Us</ThemedLink>
+                <ThemedLink key={"timeline"} arrowLink href={"/#timeline"} className={clsx(`text-foreground/80`, "font-normal")}>Timeline</ThemedLink>
+                <ThemedLink key={"disciplines"} arrowLink href={"/disciplines"} className={clsx(`text-foreground/80`, "font-normal")}>Disciplines</ThemedLink>
+                <ThemedLink key={"roadmap"} arrowLink href={"/roadmap"} className={clsx(`text-foreground/80`, "font-normal")}>Roadmap</ThemedLink>
+                <ThemedLink key={"sponsors"} arrowLink href={"/sponsors"} className={clsx(`text-foreground/80`, "font-normal")}>Sponsors</ThemedLink>
             </div>
             <div className="flex-1 flex flex-col items-start gap-1 border-l-0 border-b-0 md:border-l md:border-b border-border p-4">
                 <h3 className="text-sm">Site theme</h3>

@@ -18,6 +18,8 @@ export function TextLink(props: React.ComponentProps<typeof Link> & { linkVarian
 }
 
 export default function ThemedLink(props: PropsWithChildren<ThemedLinkProps>) {
+    const [path, hash] = props.href.split("#");
+
     return (
         <Button variant='ghost' asChild>
             <Link
@@ -28,7 +30,8 @@ export default function ThemedLink(props: PropsWithChildren<ThemedLinkProps>) {
                     `group flex flex-row items-center transition-all duration-300 ease-out cursor-pointer text-text hover:text-text-hover`,
                     props.className
                 )}
-                to={props.href}
+                to={path || undefined}
+                hash={hash}
             >
                 {props.children}
                 {props.arrowLink &&

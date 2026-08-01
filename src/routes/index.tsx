@@ -2,23 +2,23 @@
 
 import NavBar from "@/components/NavBar";
 import Photo from "@/components/Photo";
-import ProjectHighlight from "@/components/ProjectHighlight";
-
 // @ts-ignore
 import Button, { ArrowButton } from "@/components/Button";
 import { HomepageContent } from "@/const/content/homepage";
-import { ProjectHighlightData } from "@/const/content/projects";
 import clsx from "clsx";
 import { FaArrowRightLong } from "react-icons/fa6";
 
 import { createFileRoute } from "@tanstack/react-router";
 import React, { useEffect, useState } from "react";
-import { Antenna, Balloon, BookUp, NotebookText, Rocket, Video } from "lucide-react";
+import { Antenna, Balloon, BookUp, FileCheck, NotebookText, Rocket, Satellite, Video } from "lucide-react";
+import { featuredRoadmap, type RoadmapIcon } from "@/const/content/roadmap";
 import RedirectButton from "@/components/RedirectButton";
 import Card from "@/components/Card";
 import { bStore } from "@/hooks/useAppStore";
 import { cn } from "@/lib/utils";
 import { Timeline, TimelineDate, TimelineIcon, TimelineContent, TimelineEntry } from "@/components/Timeline";
+import LaunchCountdown from "@/components/LaunchCountdown";
+import InstagramFeed from "@/components/InstagramFeed";
 
 export const Route = createFileRoute('/')({
   component: HomePage,
@@ -34,6 +34,15 @@ export function DividerHeading(props: React.PropsWithChildren<{
     </h2>
   );
 }
+
+const ROADMAP_ICONS: Record<RoadmapIcon, typeof Rocket> = {
+  rocket: Rocket,
+  balloon: Balloon,
+  antenna: Antenna,
+  notebook: NotebookText,
+  satellite: Satellite,
+  file: FileCheck,
+};
 
 const bannerTextLoop = ["satellites", "science balloons", "interfaces", "earth stations"];
 
@@ -97,11 +106,7 @@ function Banner() {
           loop
           preload="none"
           poster="/sat.webp"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: 'cover'
-          }}
+          className="hero-video"
         >
           <source src="/sat.mp4" type='video/mp4' />
         </video>
@@ -131,11 +136,13 @@ function TeamIntro() {
 
           <div className="pl-0 md:pl-8">
             <Card>
-              <div className="font-sans space-y-2 z-10">
+              <div id="who" className="font-sans space-y-2 z-10 scroll-mt-24">
                 <h2 className="font-semibold text-foreground text-xl">Who are we?</h2>
-                <p className={"font-normal mb-2 text-foreground/80 pb-2"}>
-                  {HomepageContent.aboutUs}
-                </p>
+                {HomepageContent.aboutUs.map((para, i) => (
+                  <p key={i} className={"font-normal mb-2 text-foreground/80 pb-2"}>
+                    {para}
+                  </p>
+                ))}
                 <RedirectButton
                   text="Meet the team"
                   href="/team"
@@ -148,7 +155,7 @@ function TeamIntro() {
 
 
         <div className="relative flex-1 flex flex-row justify-center items-center border-l-0 md:border-l border-border bg-[repeating-linear-gradient(45deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:10px_10px] bg-fixed [--pattern-fg:theme(colors.secondary)]">
-          <img src={"/balloon.png"} className="w-[26rem] object-cover rounded-md p-8"/>
+          <img src={"/balloon.png"} loading="lazy" decoding="async" className="w-[26rem] object-cover rounded-md p-8"/>
           <p className="absolute bottom-2 right-2 font-mono text-xs uppercase text-foreground/60">SP24 Team Photo</p>
         </div>
       </div>
@@ -168,95 +175,59 @@ function HomePage() {
             className="flex flex-col px-2 md:px-4 lg:px-[4rem] gap-8 relative"
           >
             <div className="border-border md:border-x pb-8">
-              <div
-                style={{ backgroundImage: `url("/dots.svg")`, backgroundSize: "100px", backgroundPositionX: 0 }}
-                className="hidden dark:block absolute z-0 left-0 top-0 w-[10rem] opacity-60 h-full bg-repeat-y"
-              />
+              <div className="dots-vertical hidden dark:block absolute z-0 left-0 top-0 w-[10rem] opacity-60 h-full bg-repeat-y" />
               <div className="flex-1 flex flex-col">
                 <TeamIntro />
 
+                <div id="launches" className="scroll-mt-24" />
                 <DividerHeading index={1}>
+                  Next Launches
+                </DividerHeading>
+
+                <div className="py-8">
+                  <LaunchCountdown />
+                </div>
+
+                <div id="timeline" className="scroll-mt-24" />
+                <DividerHeading index={2}>
                   Timeline
                 </DividerHeading>
 
                 <Timeline hideControls>
-                  <TimelineEntry>
-                    <TimelineDate>
-                      Jan 2024
-                    </TimelineDate>
-                    <TimelineIcon>
-                      <Rocket className="w-6 h-6"/>
-                    </TimelineIcon>
-                    <TimelineContent>
-                      <h5>Getting started</h5>
-                      <p className="text-sm text-foreground/80">Club is founded with 11 initial members</p>
-                    </TimelineContent>
-                  </TimelineEntry>
-                  <TimelineEntry>
-                    <TimelineDate>
-                      Apr 2024
-                    </TimelineDate>
-                    <TimelineIcon>
-                      <Balloon className="w-6 h-6"/>
-                    </TimelineIcon>
-                    <TimelineContent>
-                      <h5>First mission</h5>
-                      <p className="text-sm text-foreground/80">Small balloon mission "SB-1" is developed and launched in Tisch Park</p>
-                    </TimelineContent>
-                  </TimelineEntry>
-                  <TimelineEntry>
-                    <TimelineDate>
-                      Aug 2024
-                    </TimelineDate>
-                    <TimelineIcon>
-                      <NotebookText className="w-6 h-6"/>
-                    </TimelineIcon>
-                    <TimelineContent>
-                      <h5>Team Procedures</h5>
-                      <p className="text-sm text-foreground/80">Important standards including engineering design reviews, budgets, responsible engineering, and more are formalized</p>
-                    </TimelineContent>
-                  </TimelineEntry>
-                  <TimelineEntry>
-                    <TimelineDate>
-                      Oct 2024
-                    </TimelineDate>
-                    <TimelineIcon>
-                      <Antenna className="w-6 h-6"/>
-                    </TimelineIcon>
-                    <TimelineContent>
-                      <h5>GS-1 PDRs</h5>
-                      <p className="text-sm text-foreground/80">Preliminary design reviews for the first ground station are passed</p>
-                    </TimelineContent>
-                  </TimelineEntry>
+                  {featuredRoadmap.map((r, i) => {
+                    const Icon = ROADMAP_ICONS[r.icon ?? "rocket"];
+                    return (
+                      <TimelineEntry key={`${r.date}-${i}`}>
+                        <TimelineDate>
+                          {r.date}
+                        </TimelineDate>
+                        <TimelineIcon>
+                          <Icon className="w-6 h-6"/>
+                        </TimelineIcon>
+                        <TimelineContent>
+                          <h5>{r.title}</h5>
+                          {r.description && (
+                            <p className="text-sm text-foreground/80">{r.description}</p>
+                          )}
+                        </TimelineContent>
+                      </TimelineEntry>
+                    );
+                  })}
                 </Timeline>
 
-                <DividerHeading index={2}>
-                  Projects
-                </DividerHeading>
-
-                <div className={"flex flex-row flex-wrap items-center gap-y-[4rem] gap-x-[2rem] -mt-32 p-8"}>
-                  {ProjectHighlightData.filter(p => p.phase !== 'success').map((p, i) => (
-                    <ProjectHighlight
-                      key={i}
-                      {...p}
-                      direction={i % 2 === 0 ? 'right' : 'left'}
-                    />
-                  ))}
+                <div className="flex justify-center pb-4">
+                  <RedirectButton text="See the full roadmap" href="/roadmap" />
                 </div>
 
+                <div id="instagram" className="scroll-mt-24" />
                 <DividerHeading index={3}>
-                  Past Projects
+                  Instagram
                 </DividerHeading>
 
-                <div className={"flex flex-col gap-[4rem] p-8"}>
-                  {ProjectHighlightData.filter(p => p.phase === 'success').map((p, i) => (
-                    <ProjectHighlight
-                      {...p}
-                      key={p.id}
-                      direction={i % 2 === 0 ? 'right' : 'left'}
-                    />
-                  ))}
+                <div className="py-8">
+                  <InstagramFeed />
                 </div>
+
               </div>
             </div>
           </div>

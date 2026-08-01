@@ -16,7 +16,7 @@ export default function ProjectPage(props: PropsWithChildren<ProjectPageProps>) 
                 <div className="flex flex-col items-center gap-8 pt-[8rem]">
                     <div className="relative h-[10rem] w-full">
                         <img
-                            src={"/AIRIS.svg"}
+                            src={"/projects/AIRIS.svg"}
                             alt=""
                         />
                         <h1 className="absolute bottom-[3rem] font-mono text-center w-full font-semibold text-3xl">ADAPT Incidence and Image Resolution Telescope</h1>

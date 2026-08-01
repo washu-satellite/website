@@ -1,7 +1,12 @@
 export const HomepageContent = {
-    missionStatement: "We equip our members with the skills required to excel in the professional engineering industry through real world experience with cutting-edge spaceflight research and spacecraft development",
+    missionStatement: "We give students real spaceflight hardware to be responsible for, early enough that it changes what they can build by the time they graduate.",
 
     tagline: "Design. Develop. Educate.",
 
-    aboutUs: "Founded in January 2024, WashU Satellite is the university's only space mission engineering team. Consisting of physics majors, electrical, systems, computer, software and mechanical engineers, we represent many disciplines in the McKelvey School of Engineering. We also present opportunities for those with non-technical specialties to participate in communications, graphic design, and more. In Fall of 2024, we successfully grew our team from 12 members to more than 40, bringing in talent from all schools and grades, including graduate students.",
+    /** Rendered as separate paragraphs under "Who are we?". */
+    aboutUs: [
+        "In January 2024 we were 11 students with no flight heritage and nothing built. Today we're 59, and SCALAR, our first satellite, is working through the last of its launch requirements.",
+        "Along the way we flew a payload on a balloon over Tisch Park, designed an optical telescope headed for a NASA flight over Antarctica, and built the ground station we'll use to talk to our own spacecraft. Students designed, machined, soldered, and coded all of it.",
+        "Almost nobody arrives knowing how to do any of this. You learn it here, next to people working out the same problems, and you graduate having built things most engineers don't touch until years into a career. We have a good time doing it, and we're always looking for people who want in.",
+    ],
 };
