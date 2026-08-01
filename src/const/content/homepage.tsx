@@ -5,8 +5,8 @@ export const HomepageContent = {
 
     /** Rendered as separate paragraphs under "Who are we?". */
     aboutUs: [
-        "WashU Satellite started in January 2024 with 11 students and nothing built. We're 59 now, working across mechanical, electrical, software, systems, and physics, with people on business and mission operations as well.",
-        "We build things and fly them. The first was SB-1, a balloon payload launched out of Tisch Park that April. Then came a UHF ground station, which taught us enough to close it out and start a better one. Right now we're working on SCALAR, a 1U CubeSat going through its launch provider's requirements review, and AIRIS, an optical telescope that flies on a NASA balloon over Antarctica.",
-        "Most people join having never touched spaceflight hardware. You get a piece of a real system to own: an antenna, a power board, a search algorithm. Every project lead here started that way.",
+        "In January 2024 we were 11 students with no flight heritage and nothing built. Today we're 59, and SCALAR, our first satellite, is working through the last of its launch requirements.",
+        "Along the way we flew a payload on a balloon over Tisch Park, designed an optical telescope headed for a NASA flight over Antarctica, and built the ground station we'll use to talk to our own spacecraft. Students designed, machined, soldered, and coded all of it.",
+        "Almost nobody arrives knowing how to do any of this. You learn it here, next to people working out the same problems, and you graduate having built things most engineers don't touch until years into a career. We have a good time doing it, and we're always looking for people who want in.",
     ],
 };

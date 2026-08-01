@@ -18,7 +18,7 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
         },
         tagline: "A UHF Ground Station for LEO Satellite Communication.",
         factSheet: [
-            { label: "Status", value: "Complete. Superseded by GS-2, which carries forward its hardware and lessons learned" },
+            { label: "Status", value: "Complete. Its hardware, software, and RF experience carry forward into GS-2" },
             { label: "Operating Frequency", value: "437.5 MHz (UHF)" },
             { label: "Antenna", value: "3.6 m circularly-polarized Yagi-Uda" },
             { label: "Design Gain", value: "16–17 dBiC" },
@@ -28,11 +28,11 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
         sections: [
             {
                 heading: "Introduction",
-                body: "Building our own UHF link took longer than buying one off the shelf, but gave our technical teams the depth of experience needed for satellite-side communications, where a design error can end a mission. GS-1 took the team from no RF experience to a tuned, assembled 3.6 m antenna, a working balun, and a full CCSDS software pipeline.",
+                body: "Building our own UHF link took longer than buying one off the shelf, and that was the point. Satellite-side communications leave no room for a design error, so the team wanted the depth of experience that only comes from building the thing yourself. GS-1 delivered exactly that: a 3.6 m antenna designed, assembled, and tuned in house, with the software pipeline to match.",
             },
             {
-                heading: "Why GS-1 closed",
-                body: "In late 2025 the team chose to close GS-1 and start fresh as GS-2 rather than re-baseline it. The yagi had been selected early on because it was a challenging, interesting build, not because it was the best answer to a documented requirement, and tuning it proved harder than expected. GS-2 inherits GS-1's hardware, software pipeline, and hard-won lessons, but starts from a written requirements sheet. GS-1 remains the reason the team knows how to build the second one.",
+                heading: "What GS-1 built",
+                body: "GS-1 was where the team learned RF. A group with no radio experience ended up with a tuned 3.6 m antenna, a working balun, a full CCSDS software pipeline, and a clear picture of what a ground station has to do. In late 2025 we carried all of that into GS-2, a second station designed from a written requirements sheet and built around what SCALAR needs. GS-1 is the reason we knew how to design the second one properly.",
             },
         ],
         engineering: [
@@ -63,7 +63,7 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
             id: "GS-2",
             title: "Ground Station 2",
             short: "The UHF ground station that will command and track SCALAR in orbit",
-            description: "GS-2 is WashU Satellite's second ground station and the link that will carry commands to SCALAR and bring its telemetry back down. Where GS-1 was the team's first attempt at an RF system, GS-2 starts from a written requirements sheet and inherits GS-1's hardware, software pipeline, and lessons learned. It is being built across seven modules by students from every discipline on the team, with a target of full operation before SCALAR reaches orbit.",
+            description: "GS-2 is the link that will carry commands up to SCALAR and bring its telemetry back down. It builds directly on GS-1, taking that station's hardware, software pipeline, and RF experience and designing around a written requirements sheet aimed at what SCALAR needs. Seven modules, students from every discipline on the team, and a target of full operation before SCALAR reaches orbit.",
             contributors: 47,
             date: "2025 – 2027",
             icon: (<SatelliteDish size={22} />),
@@ -81,8 +81,8 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
         ],
         sections: [
             {
-                heading: "Why a second ground station",
-                body: "GS-1 proved the team could build an RF system from nothing, but its antenna had been chosen for the challenge rather than against a documented requirement, and tuning it never fully converged. Rather than patch that design, the team closed GS-1 and restarted as GS-2 with an updated requirements sheet, keeping the hardware, the CCSDS software pipeline, and everything the first build taught us. The result is a ground station designed backwards from what SCALAR actually needs.",
+                heading: "Building on GS-1",
+                body: "GS-1 proved the team could build an RF system from nothing. GS-2 takes that head start and aims it at one job: talking to SCALAR. It keeps GS-1's hardware and CCSDS software pipeline, adds a written requirements sheet, and validates the antenna in simulation before anything gets cut. Every design choice traces back to a requirement, which is the advantage a first build buys you.",
             },
             {
                 heading: "Talking to SCALAR",

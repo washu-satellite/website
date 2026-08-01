@@ -18,6 +18,7 @@ import { cn } from "@/lib/utils";
 import { Link, useLocation } from "@tanstack/react-router";
 import { ProjectPages } from "@/const/content/projects";
 import { slugify, teamNames } from "@/const/content/members";
+import { disciplines } from "@/const/content/disciplines";
 import { bStore } from "@/hooks/useAppStore";
 
 const MenuItem = (props: NavElement) => {
@@ -178,6 +179,32 @@ export default function NavBar() {
                   />
                 </DropdownMenuItem>
               ))}
+          </DropdownMenuGroup>
+        </NavbarMenu>
+
+        <NavbarMenu title="Disciplines">
+          <DropdownMenuGroup>
+            <DropdownMenuItem asChild>
+              <NavbarMenuItem
+                title="All disciplines"
+                description="Eight subteams, one satellite"
+                icon={<Waypoints />}
+                href={"/disciplines"}
+              />
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+          <DropdownMenuSeparator />
+          <DropdownMenuGroup>
+            {disciplines.map((d) => (
+              <DropdownMenuItem key={d.slug} asChild>
+                <NavbarMenuItem
+                  title={d.name}
+                  description={d.tagline}
+                  icon={<Waypoints />}
+                  href={`/disciplines/${d.slug}`}
+                />
+              </DropdownMenuItem>
+            ))}
           </DropdownMenuGroup>
         </NavbarMenu>
 

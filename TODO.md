@@ -57,6 +57,13 @@ Sheet data issues worth fixing at the source:
 - `aboutUs` is now an array of three paragraphs in `src/const/content/homepage.tsx`, mapped in
   `src/routes/index.tsx`. It used to be one string in one `<p>`, so paragraph breaks were impossible.
 - Numbers corrected: 11 founding members (was implied 12), 59 today (was "more than 40").
+- Second pass reframed it around the arc Caden asked for: no flight heritage in 2024, a satellite
+  working through its launch requirements now. Ends on an open invitation rather than a hard ask.
+- Ground station copy softened across the homepage, GS-1, and GS-2. The earlier draft said the
+  yagi was picked "because it was a challenging build, not because it was the best answer" and
+  that tuning "never fully converged". Accurate, but it read as self-criticism on pages meant to
+  recruit and attract sponsors. It now frames GS-1 as where the team learned RF and GS-2 as what
+  that head start bought. No facts were changed, only emphasis.
 - `missionStatement` rewritten to drop "equip our members" and "cutting-edge".
 - `tagline` left as "Design. Develop. Educate." It is a list of three, which the slop rules flag,
   but it reads as established branding rather than filler. Change it if you disagree.
@@ -170,16 +177,27 @@ Needed: which mission's wireframe (SCALAR bus? AIRIS payload?), and the source f
 
 ## 7. Discipline subpages
 
-`[!]` Blocked: waiting on write-ups from each discipline leader.
+`[~]` Built and live. Copy is a first draft written from role data, not from the leads.
 
-- Today `/team` groups by team but there are no per-discipline pages.
-- Teams present in the data: Exec, Mission Ops, Physics, Mechanical, Electrical, Software,
-  Systems, Business.
-- Plan: add `src/routes/team/$team_slug.tsx` plus a `disciplines.ts` content file holding
-  the blurb, what the team does, current projects, and how to join.
+Done:
+- `src/const/content/disciplines.ts` holds all eight: Mechanical, Electrical, Software, Systems,
+  Physics, Mission Operations, Business, Executive. Each has a tagline, two body paragraphs,
+  "What we're working on", and "What you'll pick up".
+- `/disciplines` index plus `/disciplines/$discipline_slug` pages.
+- New "Disciplines" dropdown in the top nav, between Missions and Team, listing all eight plus an
+  "All disciplines" entry. Also added to the footer.
+- Each page lists the current members of that team, pulled live from `members.json`, so the roster
+  stays in sync automatically. Each ends with an applications CTA.
+- Routes live at `/disciplines/...` rather than `/team/$team_slug` to avoid colliding with the
+  existing `/team/people/$user_slug` route.
 
-Needed: 1-3 paragraphs from each discipline leader. Chase these individually — this is the
-item most likely to stall.
+Still open:
+- **The copy is mine, not the leads'.** I wrote it from the roles in the Role Breakdown sheet and
+  the missions each team owns, so it is accurate but generic. Send it to each discipline leader to
+  correct or replace. The structure is there, so their edits are a text swap.
+- "What we're working on" is hardcoded per discipline. It will go stale as missions move. Worth
+  deriving from mission data later if it drifts.
+- No per-discipline photos. A shot of each team working would carry more than the copy does.
 
 ## 8. Roadmap
 
@@ -250,6 +268,7 @@ Do the unblocked structural work first so content drops in cleanly:
 2. ~~Item 3 — unify timeline and roadmap onto `roadmap.ts`~~ done.
 3. ~~Item 8 — roadmap page refresh~~ done.
 4. ~~Item 4 — SCALAR RIDE countdown~~ done.
-5. Item 7 — scaffold discipline subpages with placeholder copy. Next unblocked item.
-6. Items 1, 2, 5 — pure content edits, fast once the data arrives.
-7. Item 6 — largest unknown, start only after the source files exist.
+5. ~~Item 7 — discipline subpages~~ built; copy needs lead review.
+6. ~~Item 2 — who we are~~ done.
+7. Items 1, 5 — factual review from leads, fast once the data arrives.
+8. Item 6 — largest unknown, start only after the source files exist.
