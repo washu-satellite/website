@@ -1,8 +1,7 @@
 import clsx from "clsx";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { PiInstagramLogoFill } from "react-icons/pi";
 
 import ThemedLink from "./ThemedLink";
+import SocialLinks from "./SocialLinks";
 import { Sun, Moon, Monitor } from "lucide-react";
 import { Button } from "./ui/button";
 import { bStore } from "@/hooks/useAppStore";
@@ -72,11 +71,7 @@ export default function Footer() {
                         width={140}
                     />
                 </ThemedLink>
-                <div className="flex flex-row items-center gap-2">
-                    <a href="https://www.linkedin.com/company/washu-satellite/posts/?feedView=all"><FaLinkedin size={24} /></a>
-                    <a href="https://www.instagram.com/washusatellite/"><PiInstagramLogoFill size={24} /></a>
-                    <a href="https://github.com/washu-satellite"><FaGithub size={24} /></a>
-                </div>
+                <SocialLinks variant="icon" />
             </div>
             <div className="flex-1 flex flex-col items-start gap-1 border-l-0 border-b-0 md:border-l md:border-b border-border p-2">
                 <ThemedLink key={"keep-in-touch"} href={"/"}><p className="-ml-1">Keep in Touch</p></ThemedLink>
@@ -88,6 +83,7 @@ export default function Footer() {
                 <ThemedLink key={"more-info"} href={"/"}><p className="-ml-1">More Information</p></ThemedLink>
                 <ThemedLink key={"about-us"} arrowLink href={"/#who"} className={clsx(`text-foreground/80`, "font-normal")}>About Us</ThemedLink>
                 <ThemedLink key={"timeline"} arrowLink href={"/#timeline"} className={clsx(`text-foreground/80`, "font-normal")}>Timeline</ThemedLink>
+                <ThemedLink key={"disciplines"} arrowLink href={"/disciplines"} className={clsx(`text-foreground/80`, "font-normal")}>Disciplines</ThemedLink>
                 <ThemedLink key={"roadmap"} arrowLink href={"/roadmap"} className={clsx(`text-foreground/80`, "font-normal")}>Roadmap</ThemedLink>
                 <ThemedLink key={"sponsors"} arrowLink href={"/sponsors"} className={clsx(`text-foreground/80`, "font-normal")}>Sponsors</ThemedLink>
             </div>

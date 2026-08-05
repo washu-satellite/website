@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Rocket } from "lucide-react";
+import { FileCheck, Rocket } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export type Launch = {
@@ -7,20 +7,28 @@ export type Launch = {
   /** ISO date — set to undefined when TBD. */
   target?: string;
   blurb?: string;
+  /** "deliverable" counts down to a due date rather than a launch. */
+  kind?: "launch" | "deliverable";
 };
 
-// Edit these as launch dates firm up. Setting target to undefined renders
+// Edit these as dates firm up. Setting target to undefined renders
 // a "TBD" state instead of a countdown.
+// No trailing Z — these parse as local time, so the displayed date matches the
+// calendar date people mean rather than shifting back a day west of UTC.
 export const LAUNCHES: Launch[] = [
   {
     name: "AIRIS",
-    target: "2026-12-01T00:00:00Z",
-    blurb: "Antarctic balloon flight (target — pending NASA decision)",
+    target: "2026-12-01T00:00:00",
+    blurb: "Antarctic balloon flight (target date pending NASA decision)",
   },
   {
+    // No launch date is set for SCALAR, so we count down to the last thing that
+    // does have a hard date: the final RIDE deliverable. End-of-day, since a
+    // deliverable is not late until the due date is over.
     name: "SCALAR",
-    target: "2027-02-01T00:00:00Z",
-    blurb: "Planned 1U CubeSat launch (early 2027)",
+    target: "2026-10-23T23:59:59",
+    blurb: "Final RIDE deliverable: environmental test report",
+    kind: "deliverable",
   },
 ];
 
@@ -60,6 +68,8 @@ function LaunchTile({ launch }: { launch: Launch }) {
   const target = launch.target ? new Date(launch.target) : null;
   const remaining = target ? diff(target) : null;
   const isLaunched = !!target && remaining === null;
+  const isDeliverable = launch.kind === "deliverable";
+  const Icon = isDeliverable ? FileCheck : Rocket;
 
   return (
     <div
@@ -70,7 +80,7 @@ function LaunchTile({ launch }: { launch: Launch }) {
     >
       <div className="flex flex-row items-center gap-2">
         <div className="rounded-full bg-red-500/40 p-2">
-          <Rocket className="w-4 h-4" />
+          <Icon className="w-4 h-4" />
         </div>
         <div className="flex flex-col">
           <h3 className="font-mono uppercase text-sm font-semibold tracking-wide">
@@ -90,7 +100,9 @@ function LaunchTile({ launch }: { launch: Launch }) {
           <CountdownCell value={remaining.seconds} label="Sec" />
         </div>
       ) : isLaunched ? (
-        <p className="font-mono uppercase text-sm text-green-500">Launched</p>
+        <p className="font-mono uppercase text-sm text-green-500">
+          {isDeliverable ? "Submitted" : "Launched"}
+        </p>
       ) : (
         <p className="font-mono uppercase text-sm text-foreground/50">
           T-minus TBD
@@ -98,7 +110,7 @@ function LaunchTile({ launch }: { launch: Launch }) {
       )}
       {target && (
         <p className="font-mono text-[0.65rem] uppercase text-foreground/50">
-          Target: {target.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })}
+          {isDeliverable ? "Due" : "Target"}: {target.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })}
         </p>
       )}
       {/* keep `now` referenced so the interval re-renders */}

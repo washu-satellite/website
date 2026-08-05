@@ -18,8 +18,10 @@ import { Route as ApplyRouteImport } from './routes/apply'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TeamIndexRouteImport } from './routes/team/index'
 import { Route as NewslettersIndexRouteImport } from './routes/newsletters/index'
+import { Route as DisciplinesIndexRouteImport } from './routes/disciplines/index'
 import { Route as ProjectsProject_slugRouteImport } from './routes/projects/$project_slug'
 import { Route as NewslettersSlugRouteImport } from './routes/newsletters/$slug'
+import { Route as DisciplinesDiscipline_slugRouteImport } from './routes/disciplines/$discipline_slug'
 import { Route as TeamPeopleUser_slugRouteImport } from './routes/team/people/$user_slug'
 
 const SponsorsRoute = SponsorsRouteImport.update({
@@ -67,6 +69,11 @@ const NewslettersIndexRoute = NewslettersIndexRouteImport.update({
   path: '/newsletters/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DisciplinesIndexRoute = DisciplinesIndexRouteImport.update({
+  id: '/disciplines/',
+  path: '/disciplines/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProjectsProject_slugRoute = ProjectsProject_slugRouteImport.update({
   id: '/projects/$project_slug',
   path: '/projects/$project_slug',
@@ -77,6 +84,12 @@ const NewslettersSlugRoute = NewslettersSlugRouteImport.update({
   path: '/newsletters/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DisciplinesDiscipline_slugRoute =
+  DisciplinesDiscipline_slugRouteImport.update({
+    id: '/disciplines/$discipline_slug',
+    path: '/disciplines/$discipline_slug',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const TeamPeopleUser_slugRoute = TeamPeopleUser_slugRouteImport.update({
   id: '/team/people/$user_slug',
   path: '/team/people/$user_slug',
@@ -91,8 +104,10 @@ export interface FileRoutesByFullPath {
   '/not-ready': typeof NotReadyRoute
   '/roadmap': typeof RoadmapRoute
   '/sponsors': typeof SponsorsRoute
+  '/disciplines/$discipline_slug': typeof DisciplinesDiscipline_slugRoute
   '/newsletters/$slug': typeof NewslettersSlugRoute
   '/projects/$project_slug': typeof ProjectsProject_slugRoute
+  '/disciplines': typeof DisciplinesIndexRoute
   '/newsletters': typeof NewslettersIndexRoute
   '/team': typeof TeamIndexRoute
   '/team/people/$user_slug': typeof TeamPeopleUser_slugRoute
@@ -105,8 +120,10 @@ export interface FileRoutesByTo {
   '/not-ready': typeof NotReadyRoute
   '/roadmap': typeof RoadmapRoute
   '/sponsors': typeof SponsorsRoute
+  '/disciplines/$discipline_slug': typeof DisciplinesDiscipline_slugRoute
   '/newsletters/$slug': typeof NewslettersSlugRoute
   '/projects/$project_slug': typeof ProjectsProject_slugRoute
+  '/disciplines': typeof DisciplinesIndexRoute
   '/newsletters': typeof NewslettersIndexRoute
   '/team': typeof TeamIndexRoute
   '/team/people/$user_slug': typeof TeamPeopleUser_slugRoute
@@ -120,8 +137,10 @@ export interface FileRoutesById {
   '/not-ready': typeof NotReadyRoute
   '/roadmap': typeof RoadmapRoute
   '/sponsors': typeof SponsorsRoute
+  '/disciplines/$discipline_slug': typeof DisciplinesDiscipline_slugRoute
   '/newsletters/$slug': typeof NewslettersSlugRoute
   '/projects/$project_slug': typeof ProjectsProject_slugRoute
+  '/disciplines/': typeof DisciplinesIndexRoute
   '/newsletters/': typeof NewslettersIndexRoute
   '/team/': typeof TeamIndexRoute
   '/team/people/$user_slug': typeof TeamPeopleUser_slugRoute
@@ -136,8 +155,10 @@ export interface FileRouteTypes {
     | '/not-ready'
     | '/roadmap'
     | '/sponsors'
+    | '/disciplines/$discipline_slug'
     | '/newsletters/$slug'
     | '/projects/$project_slug'
+    | '/disciplines'
     | '/newsletters'
     | '/team'
     | '/team/people/$user_slug'
@@ -150,8 +171,10 @@ export interface FileRouteTypes {
     | '/not-ready'
     | '/roadmap'
     | '/sponsors'
+    | '/disciplines/$discipline_slug'
     | '/newsletters/$slug'
     | '/projects/$project_slug'
+    | '/disciplines'
     | '/newsletters'
     | '/team'
     | '/team/people/$user_slug'
@@ -164,8 +187,10 @@ export interface FileRouteTypes {
     | '/not-ready'
     | '/roadmap'
     | '/sponsors'
+    | '/disciplines/$discipline_slug'
     | '/newsletters/$slug'
     | '/projects/$project_slug'
+    | '/disciplines/'
     | '/newsletters/'
     | '/team/'
     | '/team/people/$user_slug'
@@ -179,8 +204,10 @@ export interface RootRouteChildren {
   NotReadyRoute: typeof NotReadyRoute
   RoadmapRoute: typeof RoadmapRoute
   SponsorsRoute: typeof SponsorsRoute
+  DisciplinesDiscipline_slugRoute: typeof DisciplinesDiscipline_slugRoute
   NewslettersSlugRoute: typeof NewslettersSlugRoute
   ProjectsProject_slugRoute: typeof ProjectsProject_slugRoute
+  DisciplinesIndexRoute: typeof DisciplinesIndexRoute
   NewslettersIndexRoute: typeof NewslettersIndexRoute
   TeamIndexRoute: typeof TeamIndexRoute
   TeamPeopleUser_slugRoute: typeof TeamPeopleUser_slugRoute
@@ -251,6 +278,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NewslettersIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/disciplines/': {
+      id: '/disciplines/'
+      path: '/disciplines'
+      fullPath: '/disciplines'
+      preLoaderRoute: typeof DisciplinesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/projects/$project_slug': {
       id: '/projects/$project_slug'
       path: '/projects/$project_slug'
@@ -263,6 +297,13 @@ declare module '@tanstack/react-router' {
       path: '/newsletters/$slug'
       fullPath: '/newsletters/$slug'
       preLoaderRoute: typeof NewslettersSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/disciplines/$discipline_slug': {
+      id: '/disciplines/$discipline_slug'
+      path: '/disciplines/$discipline_slug'
+      fullPath: '/disciplines/$discipline_slug'
+      preLoaderRoute: typeof DisciplinesDiscipline_slugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/team/people/$user_slug': {
@@ -283,8 +324,10 @@ const rootRouteChildren: RootRouteChildren = {
   NotReadyRoute: NotReadyRoute,
   RoadmapRoute: RoadmapRoute,
   SponsorsRoute: SponsorsRoute,
+  DisciplinesDiscipline_slugRoute: DisciplinesDiscipline_slugRoute,
   NewslettersSlugRoute: NewslettersSlugRoute,
   ProjectsProject_slugRoute: ProjectsProject_slugRoute,
+  DisciplinesIndexRoute: DisciplinesIndexRoute,
   NewslettersIndexRoute: NewslettersIndexRoute,
   TeamIndexRoute: TeamIndexRoute,
   TeamPeopleUser_slugRoute: TeamPeopleUser_slugRoute,
