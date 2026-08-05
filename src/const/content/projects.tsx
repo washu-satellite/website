@@ -222,7 +222,10 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
             contributors: 47,
             date: "Early 2027",
             icon: (<Satellite size={22} />),
-            phase: 'design'
+            phase: 'design',
+            frameSequence: { dir: "/frames/scalar", count: 63 },
+            imagePosition: "right",
+            imageSize: "60rem"
         },
         tagline: "Our first satellite, and a laboratory you can reprogram from the ground.",
         factSheet: [

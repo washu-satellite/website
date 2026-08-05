@@ -8,9 +8,9 @@ import { HomepageContent } from "@/const/content/homepage";
 import clsx from "clsx";
 import { FaArrowRightLong } from "react-icons/fa6";
 
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import React, { useEffect, useState } from "react";
-import { BookUp, Video } from "lucide-react";
+import { ArrowRight, BookUp, Video } from "lucide-react";
 import RedirectButton from "@/components/RedirectButton";
 import Card from "@/components/Card";
 import { bStore } from "@/hooks/useAppStore";
@@ -81,6 +81,22 @@ function BannerText() {
             </h1>
           </div>
           <SocialLinks className="mt-4 justify-center lg:justify-start flex-wrap" />
+
+          <Link
+            to="/apply"
+            className={cn(
+              "group mt-10 md:mt-12 inline-flex items-center gap-3 rounded-xl",
+              "px-10 py-5 text-xl md:text-2xl font-semibold text-white",
+              "bg-gradient-to-r from-[#b3281e] to-[#d1352a]",
+              "border border-white/15 shadow-lg shadow-black/40",
+              "hover:brightness-110 hover:shadow-xl focus-visible:outline-2",
+              "focus-visible:outline-offset-4 focus-visible:outline-white",
+              "transition-all duration-300",
+            )}
+          >
+            Apply
+            <ArrowRight className="w-6 h-6 group-hover:translate-x-[6px] transition-transform duration-300" />
+          </Link>
         </div>
       </div>
   )

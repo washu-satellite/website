@@ -137,19 +137,21 @@ export const disciplines: Discipline[] = [
     slug: "mission-ops",
     team: "Mission Ops",
     name: "Mission Operations",
-    tagline: "Flying the spacecraft once it is up there.",
+    tagline: "Planning the mission, then flying it.",
     summary:
-      "FCC licensing, pass planning, and trained console operators, so the few minutes a satellite is overhead actually count.",
+      "Simulation and analysis long before launch, then the licensing, procedures, and trained operators that fly the spacecraft on orbit.",
     body: [
-      "Building a satellite is half the job. Mission Ops handles the other half: licensing, procedures, pass planning, and the people trained to sit at a console and send commands correctly the first time.",
-      "SCALAR will pass overhead several times a week, and each pass is short. Ops decides what happens during those minutes and writes the procedures everyone else follows.",
+      "Mission Ops starts years before anything launches. Simulating orbits and passes, analysing what the spacecraft can actually accomplish, and turning that into the plan every other subteam designs against.",
+      "Then it flies the thing. SCALAR will pass overhead several times a week and each pass is short, so Ops writes the procedures, holds the licences, and trains the people who sit at the console and send commands correctly the first time.",
     ],
     working: [
+      "Orbit and pass simulation, and mission analysis ahead of launch",
       "FCC licensing and regulatory filings for SCALAR and GS-2",
       "Ground pass planning and operator procedures",
       "Recruiting and training licensed amateur radio operators",
     ],
     learn: [
+      "Mission simulation and analysis",
       "Spectrum licensing and regulatory work",
       "Operational procedure writing",
       "Orbit and pass planning",
