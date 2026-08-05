@@ -249,6 +249,10 @@ export default function NavBar() {
           Sponsors
         </ThemedLink>
 
+        <ThemedLink headerLink key={"shop"} href={"/shop"} className="-mx-2">
+          Shop
+        </ThemedLink>
+
         <ThemedLink headerLink key={"contact"} href={"/contact"} className="-mx-2">
           Contact
         </ThemedLink>

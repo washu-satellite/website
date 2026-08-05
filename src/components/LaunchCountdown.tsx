@@ -22,13 +22,11 @@ export const LAUNCHES: Launch[] = [
     blurb: "Antarctic balloon flight (target date pending NASA decision)",
   },
   {
-    // No launch date is set for SCALAR, so we count down to the last thing that
-    // does have a hard date: the final RIDE deliverable. End-of-day, since a
-    // deliverable is not late until the due date is over.
+    // Target intentionally unset. The program milestone dates we track
+    // internally are confidential, so this stays TBD until a launch date is
+    // public. Do not put deliverable due dates here.
     name: "SCALAR",
-    target: "2026-10-23T23:59:59",
-    blurb: "Final RIDE deliverable: environmental test report",
-    kind: "deliverable",
+    blurb: "1U CubeSat — launch date TBD",
   },
 ];
 

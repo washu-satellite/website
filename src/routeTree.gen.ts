@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SponsorsRouteImport } from './routes/sponsors'
+import { Route as ShopRouteImport } from './routes/shop'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as NotReadyRouteImport } from './routes/not-ready'
 import { Route as ErrorRouteImport } from './routes/error'
@@ -27,6 +28,11 @@ import { Route as TeamPeopleUser_slugRouteImport } from './routes/team/people/$u
 const SponsorsRoute = SponsorsRouteImport.update({
   id: '/sponsors',
   path: '/sponsors',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopRoute = ShopRouteImport.update({
+  id: '/shop',
+  path: '/shop',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RoadmapRoute = RoadmapRouteImport.update({
@@ -103,6 +109,7 @@ export interface FileRoutesByFullPath {
   '/error': typeof ErrorRoute
   '/not-ready': typeof NotReadyRoute
   '/roadmap': typeof RoadmapRoute
+  '/shop': typeof ShopRoute
   '/sponsors': typeof SponsorsRoute
   '/disciplines/$discipline_slug': typeof DisciplinesDiscipline_slugRoute
   '/newsletters/$slug': typeof NewslettersSlugRoute
@@ -119,6 +126,7 @@ export interface FileRoutesByTo {
   '/error': typeof ErrorRoute
   '/not-ready': typeof NotReadyRoute
   '/roadmap': typeof RoadmapRoute
+  '/shop': typeof ShopRoute
   '/sponsors': typeof SponsorsRoute
   '/disciplines/$discipline_slug': typeof DisciplinesDiscipline_slugRoute
   '/newsletters/$slug': typeof NewslettersSlugRoute
@@ -136,6 +144,7 @@ export interface FileRoutesById {
   '/error': typeof ErrorRoute
   '/not-ready': typeof NotReadyRoute
   '/roadmap': typeof RoadmapRoute
+  '/shop': typeof ShopRoute
   '/sponsors': typeof SponsorsRoute
   '/disciplines/$discipline_slug': typeof DisciplinesDiscipline_slugRoute
   '/newsletters/$slug': typeof NewslettersSlugRoute
@@ -154,6 +163,7 @@ export interface FileRouteTypes {
     | '/error'
     | '/not-ready'
     | '/roadmap'
+    | '/shop'
     | '/sponsors'
     | '/disciplines/$discipline_slug'
     | '/newsletters/$slug'
@@ -170,6 +180,7 @@ export interface FileRouteTypes {
     | '/error'
     | '/not-ready'
     | '/roadmap'
+    | '/shop'
     | '/sponsors'
     | '/disciplines/$discipline_slug'
     | '/newsletters/$slug'
@@ -186,6 +197,7 @@ export interface FileRouteTypes {
     | '/error'
     | '/not-ready'
     | '/roadmap'
+    | '/shop'
     | '/sponsors'
     | '/disciplines/$discipline_slug'
     | '/newsletters/$slug'
@@ -203,6 +215,7 @@ export interface RootRouteChildren {
   ErrorRoute: typeof ErrorRoute
   NotReadyRoute: typeof NotReadyRoute
   RoadmapRoute: typeof RoadmapRoute
+  ShopRoute: typeof ShopRoute
   SponsorsRoute: typeof SponsorsRoute
   DisciplinesDiscipline_slugRoute: typeof DisciplinesDiscipline_slugRoute
   NewslettersSlugRoute: typeof NewslettersSlugRoute
@@ -220,6 +233,13 @@ declare module '@tanstack/react-router' {
       path: '/sponsors'
       fullPath: '/sponsors'
       preLoaderRoute: typeof SponsorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shop': {
+      id: '/shop'
+      path: '/shop'
+      fullPath: '/shop'
+      preLoaderRoute: typeof ShopRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/roadmap': {
@@ -323,6 +343,7 @@ const rootRouteChildren: RootRouteChildren = {
   ErrorRoute: ErrorRoute,
   NotReadyRoute: NotReadyRoute,
   RoadmapRoute: RoadmapRoute,
+  ShopRoute: ShopRoute,
   SponsorsRoute: SponsorsRoute,
   DisciplinesDiscipline_slugRoute: DisciplinesDiscipline_slugRoute,
   NewslettersSlugRoute: NewslettersSlugRoute,

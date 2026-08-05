@@ -174,7 +174,7 @@ export const disciplines: Discipline[] = [
     ],
     working: [
       "Design review and engineering standards across all missions",
-      "Schedule and deliverable tracking, including SCALAR's launch requirements",
+      "Schedule tracking and milestone planning across the mission portfolio",
       "Recruiting, onboarding, and subteam staffing",
     ],
     learn: [

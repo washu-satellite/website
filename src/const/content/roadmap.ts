@@ -21,6 +21,11 @@ export type RoadmapItem = {
 
 // Newest first. Single source of truth — /roadmap renders all of it, the
 // homepage timeline renders the `featured` subset.
+//
+// This is public. We are under NDA covering our launch provider and the
+// deliverables package tied to it, so do not name either, and do not publish
+// deliverable names or their due dates. Describe our own engineering progress
+// instead. Check with program leadership before adding SCALAR flight dates.
 export const roadmap: RoadmapItem[] = [
   {
     date: "Feb 2027",
@@ -31,21 +36,13 @@ export const roadmap: RoadmapItem[] = [
     icon: "notebook",
   },
   {
-    date: "Oct 2026",
-    title: "SCALAR environmental test report",
+    date: "Late 2026",
+    title: "SCALAR environmental testing",
     description:
-      "The final RIDE deliverable. Closes out SCALAR's requirements package with the launch provider.",
+      "Vibration and thermal testing to qualify the flight unit for launch.",
     status: "planned",
     icon: "file",
     featured: true,
-  },
-  {
-    date: "Sep 2026",
-    title: "SCALAR integration procedure",
-    description:
-      "Satellite integration procedure update and insurance inputs submitted to RIDE.",
-    status: "planned",
-    icon: "satellite",
   },
   {
     date: "Fall 2026",
@@ -57,9 +54,9 @@ export const roadmap: RoadmapItem[] = [
   },
   {
     date: "Aug 2026",
-    title: "SCALAR mass properties final issue",
+    title: "SCALAR design freeze",
     description:
-      "Final mass properties, constituents list, and the environmental test plan delivered to RIDE.",
+      "Mass properties and the environmental test plan finalized as SCALAR settles into flight configuration.",
     status: "active",
     icon: "satellite",
     featured: true,
@@ -100,17 +97,17 @@ export const roadmap: RoadmapItem[] = [
   },
   {
     date: "Jun 2026",
-    title: "SCALAR range safety accepted",
+    title: "SCALAR range safety review passed",
     description:
-      "Range safety requirements manual accepted, with ground operations and transport plans submitted.",
+      "Range safety requirements accepted, with ground operations and transport planning complete.",
     status: "done",
     icon: "file",
   },
   {
     date: "Apr 2026",
-    title: "SCALAR enters the RIDE program",
+    title: "SCALAR passes program entry review",
     description:
-      "Payload program introduction, CAD model, and initial mass properties accepted by the launch provider.",
+      "Initial design package accepted, moving SCALAR from concept into flight development.",
     status: "done",
     icon: "satellite",
     featured: true,
