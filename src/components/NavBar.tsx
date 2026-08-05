@@ -241,6 +241,10 @@ export default function NavBar() {
           "flex-row hidden lg:flex justify-end items-center font-semibold gap-4"
         }
       >
+        <ThemedLink headerLink key={"timeline"} href={"/#timeline"} className="-mx-2">
+          Timeline
+        </ThemedLink>
+
         <ThemedLink headerLink key={"newsletters"} href={"/newsletters"} className="-mx-2">
           Newsletter
         </ThemedLink>
