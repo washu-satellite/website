@@ -1,9 +1,9 @@
 import { cn } from "@/lib/utils";
 import React, { ReactNode } from "react";
 
-type BgPosition = 'left' | 'right' | 'center';
+export type BgPosition = 'left' | 'right' | 'center';
 
-const BG_POSITION: Record<BgPosition, { justify: string; translate: string }> = {
+export const BG_POSITION: Record<BgPosition, { justify: string; translate: string }> = {
     left:   { justify: "justify-start",  translate: "-translate-x-[15%]" },
     right:  { justify: "justify-end",    translate: "translate-x-[15%]"  },
     center: { justify: "justify-center", translate: "translate-x-0"      },
@@ -14,6 +14,8 @@ export default function GenericPage(props: React.PropsWithChildren<{
     headerContent?: ReactNode,
     /** Optional decorative image rendered as a faded backdrop. */
     backgroundImage?: string,
+    /** Scroll-scrubbed frame sequence, used instead of backgroundImage. */
+    backgroundFrames?: ReactNode,
     /** Where to anchor the backdrop horizontally. Default "right". */
     backgroundPosition?: BgPosition,
 }>) {
@@ -22,7 +24,8 @@ export default function GenericPage(props: React.PropsWithChildren<{
     return (
         <div className="flex-1">
             <div className={`fixed top-0 w-full h-full bg-bg-blue`}/>
-            {props.backgroundImage && (
+            {props.backgroundFrames}
+            {!props.backgroundFrames && props.backgroundImage && (
                 <div
                     aria-hidden
                     className={cn(

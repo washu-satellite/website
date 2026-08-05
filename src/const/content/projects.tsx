@@ -141,6 +141,7 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
             phase: 'assembly',
             posterUrl: "/posters/airis_poster.pdf",
             image: "/projects/airis.png",
+            frameSequence: { dir: "/frames/airis", count: 60 },
             imagePosition: "left",
             imageSize: "60rem"
         },

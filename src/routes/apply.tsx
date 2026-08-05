@@ -31,9 +31,9 @@ function ApplyPage() {
                 </div>
                 <div className="flex flex-row flex-wrap items-center justify-center w-full gap-8">
                     <RedirectCard
-                        title="Learn more about us"
-                        href={"/team"}
-                        buttonText={"Meet the team"}
+                        title="Not sure where you'd fit?"
+                        href={"/disciplines"}
+                        buttonText={"Meet the teams"}
                     />
                 </div>
             </div>
