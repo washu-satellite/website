@@ -11,10 +11,7 @@ export type FrameSequence = {
    * this is not 16:9 — hardcoding an aspect would letterbox and shrink them.
    */
   aspect: number;
-  /**
-   * Native pixel width of a frame. The canvas never renders wider than this —
-   * upscaling past it is what made the first pass look soft.
-   */
+  /** Native pixel width of a frame, before DISPLAY_SCALE is applied. */
   width: number;
   /** Where the backdrop sits horizontally. Matches GenericPage's positions. */
   position?: BgPosition;
@@ -25,6 +22,13 @@ export type FrameSequence = {
    */
   tint?: string;
 };
+
+/**
+ * How much larger than its native pixel size the backdrop is drawn. Above 1
+ * this upscales the frames, so raising it further means re-rendering at a
+ * matching resolution rather than just changing this number.
+ */
+const DISPLAY_SCALE = 1.3;
 
 function frameSrc(dir: string, i: number) {
   return `${dir}/f_${String(i + 1).padStart(4, "0")}.webp`;
@@ -214,7 +218,10 @@ export default function ScrollFrameBackground({
     >
       <canvas
         ref={canvas}
-        style={{ aspectRatio: aspect, width: `min(${width}px, 100vw)` }}
+        style={{
+          aspectRatio: aspect,
+          width: `min(${Math.round(width * DISPLAY_SCALE)}px, 110vw)`,
+        }}
         className={cn("opacity-50 dark:opacity-60", pos.translate)}
       />
     </div>
