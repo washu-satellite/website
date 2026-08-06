@@ -223,7 +223,7 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
             date: "Early 2027",
             icon: (<Satellite size={22} />),
             phase: 'design',
-            frameSequence: { dir: "/frames/scalar", count: 63, aspect: 1.0646, width: 988 },
+            frameSequence: { dir: "/frames/scalar", count: 100, aspect: 1.0646, width: 988 },
             imagePosition: "right",
             imageSize: "60rem"
         },
