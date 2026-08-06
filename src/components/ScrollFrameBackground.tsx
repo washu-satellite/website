@@ -6,6 +6,16 @@ export type FrameSequence = {
   /** Directory under /public holding f_0001.webp … */
   dir: string;
   count: number;
+  /**
+   * Width / height of the frames. Frames are cropped to the model's bounds so
+   * this is not 16:9 — hardcoding an aspect would letterbox and shrink them.
+   */
+  aspect: number;
+  /**
+   * Native pixel width of a frame. The canvas never renders wider than this —
+   * upscaling past it is what made the first pass look soft.
+   */
+  width: number;
   /** Where the backdrop sits horizontally. Matches GenericPage's positions. */
   position?: BgPosition;
   /**
@@ -31,6 +41,8 @@ function frameSrc(dir: string, i: number) {
 export default function ScrollFrameBackground({
   dir,
   count,
+  aspect,
+  width,
   position = "right",
   tint = "#b33c3c",
 }: FrameSequence) {
@@ -168,10 +180,8 @@ export default function ScrollFrameBackground({
     >
       <canvas
         ref={canvas}
-        className={cn(
-          "w-[80rem] max-w-[110vw] aspect-video opacity-50 dark:opacity-60",
-          pos.translate,
-        )}
+        style={{ aspectRatio: aspect, width: `min(${width}px, 100vw)` }}
+        className={cn("opacity-50 dark:opacity-60", pos.translate)}
       />
     </div>
   );

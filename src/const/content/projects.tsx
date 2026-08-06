@@ -141,7 +141,7 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
             phase: 'assembly',
             posterUrl: "/posters/airis_poster.pdf",
             image: "/projects/airis.png",
-            frameSequence: { dir: "/frames/airis", count: 60 },
+            frameSequence: { dir: "/frames/airis", count: 60, aspect: 1.1177, width: 1149 },
             imagePosition: "left",
             imageSize: "60rem"
         },
@@ -223,7 +223,7 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
             date: "Early 2027",
             icon: (<Satellite size={22} />),
             phase: 'design',
-            frameSequence: { dir: "/frames/scalar", count: 63 },
+            frameSequence: { dir: "/frames/scalar", count: 63, aspect: 1.0646, width: 988 },
             imagePosition: "right",
             imageSize: "60rem"
         },

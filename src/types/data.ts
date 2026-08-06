@@ -11,7 +11,7 @@ export type ProjectData = NavElement & {
      * Scroll-scrubbed exploded view. `dir` is a folder under /public holding
      * f_0001.webp … f_NNNN.webp. Takes precedence over `image`.
      */
-    frameSequence?: { dir: string, count: number },
+    frameSequence?: { dir: string, count: number, aspect: number, width: number },
     /** Where to anchor the background render. Default "right". */
     imagePosition?: 'left' | 'right' | 'center',
     imageSize?: string | number,

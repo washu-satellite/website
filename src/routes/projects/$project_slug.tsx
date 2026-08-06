@@ -66,6 +66,8 @@ function ProjectPage() {
           <ScrollFrameBackground
             dir={p.frameSequence.dir}
             count={p.frameSequence.count}
+            aspect={p.frameSequence.aspect}
+            width={p.frameSequence.width}
             position={p.imagePosition}
           />
         )

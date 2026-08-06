@@ -82,20 +82,25 @@ function BannerText() {
           </div>
           <SocialLinks className="mt-4 justify-center lg:justify-start flex-wrap" />
 
+          {/* Deliberately the same glass chip as the pill above and the social
+              handles: mono, bg-[#111]/50, border-[#222]. Only the scale and the
+              crimson arrow mark it as the primary action. */}
           <Link
             to="/apply"
             className={cn(
-              "group mt-10 md:mt-12 inline-flex items-center gap-3 rounded-xl",
-              "px-10 py-5 text-xl md:text-2xl font-semibold text-white",
-              "bg-gradient-to-r from-[#b3281e] to-[#d1352a]",
-              "border border-white/15 shadow-lg shadow-black/40",
-              "hover:brightness-110 hover:shadow-xl focus-visible:outline-2",
-              "focus-visible:outline-offset-4 focus-visible:outline-white",
-              "transition-all duration-300",
+              "group mt-8 md:mt-10 inline-flex items-center gap-6 rounded-xl",
+              "px-8 py-4 font-mono uppercase tracking-wider text-lg md:text-xl",
+              "border border-[#222] bg-[#111]/50 backdrop-blur-3xl",
+              "text-white/90 hover:text-white hover:border-[#b3281e]/60",
+              "focus-visible:outline-2 focus-visible:outline-offset-2",
+              "focus-visible:outline-white transition-colors duration-300",
             )}
           >
             Apply
-            <ArrowRight className="w-6 h-6 group-hover:translate-x-[6px] transition-transform duration-300" />
+            <ArrowRight
+              aria-hidden
+              className="w-5 h-5 text-[#d1352a] group-hover:translate-x-[6px] transition-transform duration-300"
+            />
           </Link>
         </div>
       </div>
