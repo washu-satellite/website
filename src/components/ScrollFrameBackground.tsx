@@ -56,6 +56,16 @@ export default function ScrollFrameBackground({
   // means an early scroll has nothing to draw. Batching splits the difference.
   useEffect(() => {
     frames.current = new Array(count).fill(null);
+    // Navigating between two project pages reuses this component, so the new
+    // sequence has to reset `ready`. Without it, `ready` is still true from the
+    // previous project, setReady(true) below is a no-op, the draw effect never
+    // re-fires, and the old model stays on screen until the visitor scrolls.
+    setReady(false);
+    // Wipe the previous model rather than leaving it up while the new frames
+    // download — showing the wrong spacecraft is worse than showing none.
+    const el = canvas.current;
+    el?.getContext("2d")?.clearRect(0, 0, el.width, el.height);
+
     let cancelled = false;
     const CONCURRENCY = 6;
     let next = 0;
@@ -113,16 +123,28 @@ export default function ScrollFrameBackground({
           ? 0.5
           : Math.min(1, Math.max(0, window.scrollY / scrollable));
 
-      const wanted = Math.round(progress * (count - 1));
-      // Fall back to the nearest already-loaded frame so early scrolling still
-      // moves instead of freezing on frame 0.
-      let img = frames.current[wanted];
-      if (!img) {
-        for (let step = 1; step < count && !img; step++) {
-          img = frames.current[wanted - step] ?? frames.current[wanted + step];
+      // Keep the fractional position: the pair of frames either side of it get
+      // cross-faded, so motion stays continuous instead of snapping frame to
+      // frame as you scroll.
+      const exact = progress * (count - 1);
+      const lower = Math.floor(exact);
+      const blend = exact - lower;
+
+      const nearest = (from: number) => {
+        const at = frames.current[from];
+        if (at) return at;
+        // Fall back to the nearest already-loaded frame so early scrolling
+        // still moves instead of freezing on frame 0.
+        for (let step = 1; step < count; step++) {
+          const hit = frames.current[from - step] ?? frames.current[from + step];
+          if (hit) return hit;
         }
-      }
+        return null;
+      };
+
+      const img = nearest(lower);
       if (!img) return;
+      const next = blend > 0 ? frames.current[lower + 1] : null;
 
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const w = el.clientWidth * dpr;
@@ -135,8 +157,20 @@ export default function ScrollFrameBackground({
       // the red wireframe costs ~4x the bytes for the same result. Tint here
       // with source-in so the lines pick up the site's accent colour.
       ctx.clearRect(0, 0, el.width, el.height);
-      ctx.globalCompositeOperation = "source-over";
-      ctx.drawImage(img, 0, 0, el.width, el.height);
+      if (next) {
+        // "lighter" sums the alphas, giving a true (1-t)·A + t·B dissolve.
+        // Plain source-over would leave A at full strength and only fade B in
+        // on top, so the outgoing frame would never actually leave.
+        ctx.globalCompositeOperation = "lighter";
+        ctx.globalAlpha = 1 - blend;
+        ctx.drawImage(img, 0, 0, el.width, el.height);
+        ctx.globalAlpha = blend;
+        ctx.drawImage(next, 0, 0, el.width, el.height);
+        ctx.globalAlpha = 1;
+      } else {
+        ctx.globalCompositeOperation = "source-over";
+        ctx.drawImage(img, 0, 0, el.width, el.height);
+      }
       ctx.globalCompositeOperation = "source-in";
       ctx.fillStyle = tint;
       ctx.fillRect(0, 0, el.width, el.height);
@@ -166,7 +200,7 @@ export default function ScrollFrameBackground({
         rafId.current = null;
       }
     };
-  }, [count, ready, tint]);
+  }, [dir, count, ready, tint]);
 
   const pos = BG_POSITION[position];
 
