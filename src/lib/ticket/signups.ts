@@ -1,4 +1,4 @@
-import { list, put } from "@vercel/blob";
+import { get, list, put } from "@vercel/blob";
 import type { SignupEntry } from "./signupSchema";
 
 export interface SignupStore {
@@ -14,6 +14,10 @@ export interface SignupStore {
  * One blob per signup rather than one appended log. Blob has no append, so a shared log would mean
  * read-modify-write on every claim, and two people claiming at once would drop one of them. Separate
  * keys make that race impossible; `list()` reassembles them in timestamp order.
+ *
+ * The store is private. These entries carry a person's name and their user agent, and a public blob
+ * is readable by anyone who has the URL -- unguessable is not the same as protected. Reads therefore
+ * go through the SDK with the token rather than a plain fetch of blob.url.
  */
 const PREFIX = "ticket-signups/";
 
@@ -31,7 +35,7 @@ export class BlobSignupStore implements SignupStore {
 
     try {
       await put(key, JSON.stringify(entry), {
-        access: "public",
+        access: "private",
         contentType: "application/json",
         // The key already carries a timestamp and a random suffix; letting Blob add its own would
         // make the object impossible to find again by prefix listing.
@@ -56,11 +60,11 @@ export class BlobSignupStore implements SignupStore {
     const entries = await Promise.all(
       blobs.map(async (blob) => {
         try {
-          const res = await fetch(blob.url);
-          if (!res.ok) {
-            throw new Error(`status ${res.status}`);
+          const result = await get(blob.pathname, { access: "private" });
+          if (!result) {
+            throw new Error("blob not found");
           }
-          return (await res.json()) as SignupEntry;
+          return JSON.parse(await new Response(result.stream).text()) as SignupEntry;
         } catch (err) {
           // One unreadable blob should not hide every other signup.
           console.error("signups: could not read blob", {
