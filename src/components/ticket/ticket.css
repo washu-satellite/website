@@ -1,0 +1,36 @@
+/*
+ * Scoped to the ticket route rather than merged into styles.css: the site's own pages must keep
+ * their background, their font stack and their scroll behaviour. Only the two rules the piece
+ * genuinely needs globally are hoisted onto the element the route mounts.
+ */
+.ticket-root {
+  /* The overscroll bounce at the end of the page fights the scroll cascade and, on macOS, briefly
+     lifts the pinned canvas away from the viewport edge. */
+  overscroll-behavior-y: none;
+  color: #f2f1fa;
+}
+
+.ticket-root .scroll-hint {
+  animation: ticket-scroll-hint 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  transform-origin: top;
+}
+
+@keyframes ticket-scroll-hint {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  35% {
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticket-root .scroll-hint {
+    animation: none;
+  }
+}
