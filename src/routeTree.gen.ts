@@ -16,6 +16,7 @@ import { Route as NotReadyRouteImport } from './routes/not-ready'
 import { Route as ErrorRouteImport } from './routes/error'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ApplyRouteImport } from './routes/apply'
+import { Route as R9njdxq3eRouteImport } from './routes/9njdxq3e'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TeamIndexRouteImport } from './routes/team/index'
 import { Route as NewslettersIndexRouteImport } from './routes/newsletters/index'
@@ -23,6 +24,7 @@ import { Route as DisciplinesIndexRouteImport } from './routes/disciplines/index
 import { Route as ProjectsProject_slugRouteImport } from './routes/projects/$project_slug'
 import { Route as NewslettersSlugRouteImport } from './routes/newsletters/$slug'
 import { Route as DisciplinesDiscipline_slugRouteImport } from './routes/disciplines/$discipline_slug'
+import { Route as ApiTicketSignupRouteImport } from './routes/api/ticket-signup'
 import { Route as TeamPeopleUser_slugRouteImport } from './routes/team/people/$user_slug'
 
 const SponsorsRoute = SponsorsRouteImport.update({
@@ -58,6 +60,11 @@ const ContactRoute = ContactRouteImport.update({
 const ApplyRoute = ApplyRouteImport.update({
   id: '/apply',
   path: '/apply',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const R9njdxq3eRoute = R9njdxq3eRouteImport.update({
+  id: '/9njdxq3e',
+  path: '/9njdxq3e',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -96,6 +103,11 @@ const DisciplinesDiscipline_slugRoute =
     path: '/disciplines/$discipline_slug',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiTicketSignupRoute = ApiTicketSignupRouteImport.update({
+  id: '/api/ticket-signup',
+  path: '/api/ticket-signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TeamPeopleUser_slugRoute = TeamPeopleUser_slugRouteImport.update({
   id: '/team/people/$user_slug',
   path: '/team/people/$user_slug',
@@ -104,6 +116,7 @@ const TeamPeopleUser_slugRoute = TeamPeopleUser_slugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/9njdxq3e': typeof R9njdxq3eRoute
   '/apply': typeof ApplyRoute
   '/contact': typeof ContactRoute
   '/error': typeof ErrorRoute
@@ -111,6 +124,7 @@ export interface FileRoutesByFullPath {
   '/roadmap': typeof RoadmapRoute
   '/shop': typeof ShopRoute
   '/sponsors': typeof SponsorsRoute
+  '/api/ticket-signup': typeof ApiTicketSignupRoute
   '/disciplines/$discipline_slug': typeof DisciplinesDiscipline_slugRoute
   '/newsletters/$slug': typeof NewslettersSlugRoute
   '/projects/$project_slug': typeof ProjectsProject_slugRoute
@@ -121,6 +135,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/9njdxq3e': typeof R9njdxq3eRoute
   '/apply': typeof ApplyRoute
   '/contact': typeof ContactRoute
   '/error': typeof ErrorRoute
@@ -128,6 +143,7 @@ export interface FileRoutesByTo {
   '/roadmap': typeof RoadmapRoute
   '/shop': typeof ShopRoute
   '/sponsors': typeof SponsorsRoute
+  '/api/ticket-signup': typeof ApiTicketSignupRoute
   '/disciplines/$discipline_slug': typeof DisciplinesDiscipline_slugRoute
   '/newsletters/$slug': typeof NewslettersSlugRoute
   '/projects/$project_slug': typeof ProjectsProject_slugRoute
@@ -139,6 +155,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/9njdxq3e': typeof R9njdxq3eRoute
   '/apply': typeof ApplyRoute
   '/contact': typeof ContactRoute
   '/error': typeof ErrorRoute
@@ -146,6 +163,7 @@ export interface FileRoutesById {
   '/roadmap': typeof RoadmapRoute
   '/shop': typeof ShopRoute
   '/sponsors': typeof SponsorsRoute
+  '/api/ticket-signup': typeof ApiTicketSignupRoute
   '/disciplines/$discipline_slug': typeof DisciplinesDiscipline_slugRoute
   '/newsletters/$slug': typeof NewslettersSlugRoute
   '/projects/$project_slug': typeof ProjectsProject_slugRoute
@@ -158,6 +176,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/9njdxq3e'
     | '/apply'
     | '/contact'
     | '/error'
@@ -165,6 +184,7 @@ export interface FileRouteTypes {
     | '/roadmap'
     | '/shop'
     | '/sponsors'
+    | '/api/ticket-signup'
     | '/disciplines/$discipline_slug'
     | '/newsletters/$slug'
     | '/projects/$project_slug'
@@ -175,6 +195,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/9njdxq3e'
     | '/apply'
     | '/contact'
     | '/error'
@@ -182,6 +203,7 @@ export interface FileRouteTypes {
     | '/roadmap'
     | '/shop'
     | '/sponsors'
+    | '/api/ticket-signup'
     | '/disciplines/$discipline_slug'
     | '/newsletters/$slug'
     | '/projects/$project_slug'
@@ -192,6 +214,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/9njdxq3e'
     | '/apply'
     | '/contact'
     | '/error'
@@ -199,6 +222,7 @@ export interface FileRouteTypes {
     | '/roadmap'
     | '/shop'
     | '/sponsors'
+    | '/api/ticket-signup'
     | '/disciplines/$discipline_slug'
     | '/newsletters/$slug'
     | '/projects/$project_slug'
@@ -210,6 +234,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  R9njdxq3eRoute: typeof R9njdxq3eRoute
   ApplyRoute: typeof ApplyRoute
   ContactRoute: typeof ContactRoute
   ErrorRoute: typeof ErrorRoute
@@ -217,6 +242,7 @@ export interface RootRouteChildren {
   RoadmapRoute: typeof RoadmapRoute
   ShopRoute: typeof ShopRoute
   SponsorsRoute: typeof SponsorsRoute
+  ApiTicketSignupRoute: typeof ApiTicketSignupRoute
   DisciplinesDiscipline_slugRoute: typeof DisciplinesDiscipline_slugRoute
   NewslettersSlugRoute: typeof NewslettersSlugRoute
   ProjectsProject_slugRoute: typeof ProjectsProject_slugRoute
@@ -277,6 +303,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApplyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/9njdxq3e': {
+      id: '/9njdxq3e'
+      path: '/9njdxq3e'
+      fullPath: '/9njdxq3e'
+      preLoaderRoute: typeof R9njdxq3eRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -326,6 +359,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DisciplinesDiscipline_slugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/ticket-signup': {
+      id: '/api/ticket-signup'
+      path: '/api/ticket-signup'
+      fullPath: '/api/ticket-signup'
+      preLoaderRoute: typeof ApiTicketSignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/team/people/$user_slug': {
       id: '/team/people/$user_slug'
       path: '/team/people/$user_slug'
@@ -338,6 +378,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  R9njdxq3eRoute: R9njdxq3eRoute,
   ApplyRoute: ApplyRoute,
   ContactRoute: ContactRoute,
   ErrorRoute: ErrorRoute,
@@ -345,6 +386,7 @@ const rootRouteChildren: RootRouteChildren = {
   RoadmapRoute: RoadmapRoute,
   ShopRoute: ShopRoute,
   SponsorsRoute: SponsorsRoute,
+  ApiTicketSignupRoute: ApiTicketSignupRoute,
   DisciplinesDiscipline_slugRoute: DisciplinesDiscipline_slugRoute,
   NewslettersSlugRoute: NewslettersSlugRoute,
   ProjectsProject_slugRoute: ProjectsProject_slugRoute,
