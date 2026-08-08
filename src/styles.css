@@ -12,6 +12,20 @@
   --color-deep-background: var(--deep-background);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  /* The site's own palette. These classes (bg-bg, text-accent-red, text-text,
+     …) are used ~60 times across the app but were never declared after the
+     Tailwind v4 move, so every one of them silently resolved to nothing —
+     which is why light mode read as white-on-white. */
+  --color-bg: var(--bg);
+  --color-bg-blue: var(--bg-blue);
+  --color-bg-highlight: var(--bg-highlight);
+  --color-accent-red: var(--accent-red);
+  --color-accent-red-hover: var(--accent-red-hover);
+  --color-text: var(--text);
+  --color-text-dark: var(--text-dark);
+  --color-text-hover: var(--text-hover);
+  --color-text-secondary: var(--text-secondary);
   --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo,
@@ -56,9 +70,25 @@
 
 :root {
   --radius: 0.625rem;
-  --deep-background: oklch(100% 0.00011 271.152);
+  /* Light mode used to be pure white on pure white: deep-background, background
+     and card were all oklch(1 0 0), so the panels, the page and the chrome were
+     literally indistinguishable. Each surface now steps down slightly, and the
+     tint is a cool blue so the steps read as depth rather than as dirt. */
+  --deep-background: oklch(0.968 0.004 264);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
+
+  --bg: oklch(0.988 0.003 264);
+  --bg-blue: oklch(0.952 0.008 264);
+  --bg-highlight: oklch(0.895 0.007 264);
+  /* Crimson already used inline in ThemedLink and the hero CTA. Kept identical
+     so the accent class and the hard-coded gradients cannot drift apart. */
+  --accent-red: #b3281e;
+  --accent-red-hover: #8f1f18;
+  --text: oklch(0.145 0 0);
+  --text-dark: oklch(0.505 0.006 264);
+  --text-hover: #b3281e;
+  --text-secondary: oklch(0.42 0.006 264);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -72,8 +102,9 @@
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
+  /* Was 0.922, which against a white page was very nearly invisible. */
+  --border: oklch(0.878 0.005 264);
+  --input: oklch(0.878 0.005 264);
   --ring: oklch(0.708 0 0);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -94,6 +125,19 @@
   --deep-background: oklch(0% 0 0);
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
+
+  --bg: oklch(0.165 0.004 264);
+  /* #03020a, the near-black blue already used elsewhere in the app. */
+  --bg-blue: oklch(0.108 0.018 275);
+  --bg-highlight: oklch(0.285 0.004 264);
+  /* Brighter than the light-mode crimson: #b3281e on near-black does not carry
+     enough luminance contrast to read as a colour. */
+  --accent-red: #d1352a;
+  --accent-red-hover: #e2401b;
+  --text: oklch(0.985 0 0);
+  --text-dark: oklch(0.665 0.005 264);
+  --text-hover: #e2401b;
+  --text-secondary: oklch(0.78 0.004 264);
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);

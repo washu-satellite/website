@@ -8,9 +8,9 @@ import { HomepageContent } from "@/const/content/homepage";
 import clsx from "clsx";
 import { FaArrowRightLong } from "react-icons/fa6";
 
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import React, { useEffect, useState } from "react";
-import { ArrowRight, BookUp, Video } from "lucide-react";
+import { BookUp, Video } from "lucide-react";
 import RedirectButton from "@/components/RedirectButton";
 import Card from "@/components/Card";
 import { bStore } from "@/hooks/useAppStore";
@@ -81,27 +81,6 @@ function BannerText() {
             </h1>
           </div>
           <SocialLinks className="mt-4 justify-center lg:justify-start flex-wrap" />
-
-          {/* Deliberately the same glass chip as the pill above and the social
-              handles: mono, bg-[#111]/50, border-[#222]. Only the scale and the
-              crimson arrow mark it as the primary action. */}
-          <Link
-            to="/apply"
-            className={cn(
-              "group mt-8 md:mt-10 inline-flex items-center gap-6 rounded-xl",
-              "px-8 py-4 font-mono uppercase tracking-wider text-lg md:text-xl",
-              "border border-[#222] bg-[#111]/50 backdrop-blur-3xl",
-              "text-white/90 hover:text-white hover:border-[#b3281e]/60",
-              "focus-visible:outline-2 focus-visible:outline-offset-2",
-              "focus-visible:outline-white transition-colors duration-300",
-            )}
-          >
-            Apply
-            <ArrowRight
-              aria-hidden
-              className="w-5 h-5 text-[#d1352a] group-hover:translate-x-[6px] transition-transform duration-300"
-            />
-          </Link>
         </div>
       </div>
   )

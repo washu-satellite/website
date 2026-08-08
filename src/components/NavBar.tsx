@@ -4,7 +4,7 @@ import ThemedLink from "./ThemedLink";
 
 import type { NavElement } from "@/types/data";
 
-import { ChevronDown, Rocket, Users, Waypoints } from "lucide-react";
+import { ArrowRight, ChevronDown, Rocket, Users, Waypoints } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -236,12 +236,9 @@ export default function NavBar() {
         </NavbarMenu>
       </div>
 
-      <div
-        className={
-          "flex-row hidden lg:flex justify-end items-center font-semibold gap-4"
-        }
-      >
-        <ThemedLink headerLink key={"timeline"} href={"/#timeline"} className="-mx-2">
+      <div className="flex flex-row justify-end items-center font-semibold gap-4">
+        <div className="flex-row hidden lg:flex items-center gap-4">
+        <ThemedLink headerLink key={"timeline"} href={"/roadmap"} className="-mx-2">
           Timeline
         </ThemedLink>
 
@@ -260,10 +257,28 @@ export default function NavBar() {
         <ThemedLink headerLink key={"contact"} href={"/contact"} className="-mx-2">
           Contact
         </ThemedLink>
+        </div>
 
-        <ThemedLink headerLink key={"apply"} href={"/apply"} className="-mx-2">
+        {/* The only filled control in the header, and the only one that stays
+            visible below lg. It replaces the hero CTA, so it has to carry the
+            primary action on its own at every breakpoint. */}
+        <Link
+          to="/apply"
+          className={cn(
+            "group inline-flex items-center gap-2 rounded-md shrink-0",
+            "px-4 py-2 font-mono text-sm uppercase tracking-wider font-semibold",
+            "bg-accent-red hover:bg-accent-red-hover text-white",
+            "shadow-sm hover:shadow-md",
+            "focus-visible:outline-2 focus-visible:outline-offset-2",
+            "focus-visible:outline-accent-red transition-all duration-300",
+          )}
+        >
           Apply
-        </ThemedLink>
+          <ArrowRight
+            aria-hidden
+            className="w-4 h-4 group-hover:translate-x-[3px] transition-transform duration-300"
+          />
+        </Link>
       </div>
     </div>
   );
