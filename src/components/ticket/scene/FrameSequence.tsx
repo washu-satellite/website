@@ -92,6 +92,18 @@ const TILT_MARGIN = 0.14;
 const MAX_CROP = 2.2;
 
 /**
+ * Floor on how much of the frame's WIDTH stays on screen. MAX_CROP alone is not enough on a phone:
+ * it is a multiple of the contain fit, and against a 4:3 frame on a portrait viewport that still
+ * blew the card up to twice the screen width, so PASSENGER, SEAT and the writing line all sat off
+ * the left edge and the card could not be read, let alone signed.
+ *
+ * Only ever binds on viewports narrower than the frame. Landscape is untouched -- at 1440x813 cover
+ * already shows the full width, and a squarer 1280x1024 still crops to 94% and keeps its edges
+ * touching. A portrait phone goes from 45% of the card visible to 92%.
+ */
+const MIN_WIDTH_VISIBLE = 0.92;
+
+/**
  * Where the passenger rule sits on the plate, in normalised frame coordinates (0,0 top-left). A
  * single anchor now: the sequence is frozen well before the form appears, so there is nothing left
  * to track. `v` puts the field just above the rule rather than astride it, so the line still reads
@@ -288,7 +300,8 @@ export function FrameSequence({ quality }: { quality: QualitySettings }) {
     const cover = Math.max(frustumW, frustumH * FRAME_ASPECT);
     const contain = Math.min(frustumW, frustumH * FRAME_ASPECT);
     const planeW =
-      Math.min(cover, contain * MAX_CROP) * (1 + TILT_MARGIN * effect);
+      Math.min(cover, contain * MAX_CROP, frustumW / MIN_WIDTH_VISIBLE) *
+      (1 + TILT_MARGIN * effect);
     const planeH = planeW / FRAME_ASPECT;
     mesh.scale.set(planeW, planeH, 1);
 

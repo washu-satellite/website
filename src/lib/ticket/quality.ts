@@ -73,6 +73,22 @@ function probeGpu(): GpuProbe {
 }
 
 /** `?tier=high|low` overrides detection, for testing the other tier on this machine. */
+/**
+ * iOS and iPadOS, including the iPads that report themselves as Macs.
+ *
+ * Safari there is far stricter about texture memory than the desktop, and it does not degrade when
+ * it runs out -- it kills the tab. The high tier keeps 504MB of atlas resident, measured, which no
+ * iOS device will tolerate, so none of them may have it however capable they look. This needs its
+ * own check because nothing else here catches an iPad: it reports eight or more cores, no
+ * deviceMemory at all, and a viewport far wider than the coarse-and-narrow phone test.
+ */
+function isIOS(): boolean {
+  const ua = navigator.userAgent;
+  if (/iPad|iPhone|iPod/.test(ua)) return true;
+  // iPadOS 13+ serves a desktop Safari user agent; the touch points are what give it away.
+  return navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1;
+}
+
 function forcedTier(): QualityTier | null {
   const raw = new URLSearchParams(window.location.search).get("tier");
   return raw === "high" || raw === "low" ? raw : null;
@@ -89,6 +105,10 @@ function detectTier(): QualityTier {
 
   // Hard gates: the high tier is simply unusable on these, regardless of anything else.
   if (gpu.software) return "low";
+  if (isIOS()) {
+    console.log("quality: iOS, holding to the low tier on memory grounds");
+    return "low";
+  }
   if (gpu.maxTexture < HI_PAGE_WIDTH) {
     console.log("quality: max texture size below the high-tier atlas page", {
       maxTexture: gpu.maxTexture,

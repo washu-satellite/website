@@ -185,6 +185,12 @@ export function ScrollProvider({ children }: { children: ReactNode }) {
     // user input, so a run of wheel events would keep killing and restarting the tween. Setting the
     // position ourselves each tick means continued downward input is simply absorbed, which is what
     // "keeps cascading at a constant rate" has to mean.
+    // A touch screen never gets the cascade. It exists to carry a wheel gesture onward, which is
+    // something a flick already does by itself, and Lenis is not intercepting touch here -- so the
+    // browser runs its own momentum scroll while the cascade writes scrollTop every frame. Two
+    // schedulers fighting over one value reads, on iOS, as the page fighting your finger.
+    const touchDriven = window.matchMedia("(pointer: coarse)").matches;
+
     const cascade = { active: false, from: 0, to: 0, elapsed: 0, duration: 0 };
 
     const stopCascade = () => {
@@ -192,7 +198,7 @@ export function ScrollProvider({ children }: { children: ReactNode }) {
     };
 
     const startCascade = () => {
-      if (cascade.active || lenisRef.current === null) return;
+      if (touchDriven || cascade.active || lenisRef.current === null) return;
       const to = Math.min(
         section.offsetTop + section.offsetHeight - window.innerHeight,
         lenis.limit,
@@ -232,21 +238,6 @@ export function ScrollProvider({ children }: { children: ReactNode }) {
       else if (e.deltaY < -GESTURE_EPSILON) stopCascade();
     };
 
-    let touchY: number | null = null;
-    const onTouchStart = (e: TouchEvent) => {
-      touchY = e.touches[0]?.clientY ?? null;
-      // A finger down is a grab; hand control back for the duration of the gesture.
-      stopCascade();
-    };
-    const onTouchMove = (e: TouchEvent) => {
-      const y = e.touches[0]?.clientY;
-      if (y === undefined || touchY === null) return;
-      const delta = touchY - y;
-      touchY = y;
-      if (delta > GESTURE_EPSILON) startCascade();
-      else if (delta < -GESTURE_EPSILON) stopCascade();
-    };
-
     const onKeyDown = (e: KeyboardEvent) => {
       // Typing must never drive the page. The field takes focus by itself at the end now, so a
       // space in a passenger's name would otherwise launch the cascade from under the caret.
@@ -263,8 +254,6 @@ export function ScrollProvider({ children }: { children: ReactNode }) {
     };
 
     window.addEventListener("wheel", onWheel, { passive: true });
-    window.addEventListener("touchstart", onTouchStart, { passive: true });
-    window.addEventListener("touchmove", onTouchMove, { passive: true });
     window.addEventListener("keydown", onKeyDown);
 
     let lastTime = 0;
@@ -279,8 +268,6 @@ export function ScrollProvider({ children }: { children: ReactNode }) {
 
     return () => {
       window.removeEventListener("wheel", onWheel);
-      window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("keydown", onKeyDown);
       gsap.ticker.remove(drive);
       trigger.kill();

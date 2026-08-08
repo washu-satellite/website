@@ -28,6 +28,21 @@ function TicketPage() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
+  // Overscroll has to be suppressed on the scrolling element itself, which is the document, not this
+  // container -- a nested rule simply never applies. Without it the rubber-band at either end fights
+  // the sequence, and on iOS it lifts the pinned canvas away from the viewport edge. Restored on
+  // unmount so the rest of the site keeps its normal bounce.
+  useEffect(() => {
+    const { documentElement: root, body } = document;
+    const previous = [root.style.overscrollBehaviorY, body.style.overscrollBehaviorY];
+    root.style.overscrollBehaviorY = "none";
+    body.style.overscrollBehaviorY = "none";
+    return () => {
+      root.style.overscrollBehaviorY = previous[0];
+      body.style.overscrollBehaviorY = previous[1];
+    };
+  }, []);
+
   return (
     <main className="ticket-root relative min-h-screen w-full bg-[#03020a]">
       {mounted ? <Experience /> : null}
