@@ -130,35 +130,33 @@ export function ScrollProvider({ children }: { children: ReactNode }) {
   const debugEnabled = useSyncExternalStore(NEVER_CHANGES, getDebugEnabled, () => false);
   const reducedMotion = usePrefersReducedMotion();
 
-  // Reduced motion skips the sequence entirely and renders the final composed state, so the
-  // phases are derived rather than stored -- nothing has to drive them to `true`.
-  const phases = useMemo<Phases>(
-    () =>
-      reducedMotion
-        ? { formVisible: true, formInteractive: true, formSettled: true }
-        : scrolledPhases,
-    [reducedMotion, scrolledPhases],
-  );
+  // Phases follow the scroll in every mode. They used to be forced true under reduced motion,
+  // which went with pinning progress at 1 -- see the note on the effect below for why that is gone.
+  const phases = scrolledPhases;
 
   useEffect(() => {
-    if (!reducedMotion) return;
-    progress.current.target = 1;
-    progress.current.current = 1;
-  }, [reducedMotion]);
-
-  useEffect(() => {
-    if (reducedMotion) return;
-
+    // Reduced motion keeps the sequence; it only gives up the motion nobody asked for.
+    //
+    // This used to pin progress at 1 and collapse the page to one viewport, which did not reduce
+    // motion so much as remove the piece: you landed on the last frame with the card cropped and
+    // nothing to scroll, because there was no longer any scroll to have. Scroll-linked animation is
+    // driven by the reader, frame by frame, and is not what the preference is about -- autoplay,
+    // parallax and inertia are, and those are what get dropped here: no Lenis smoothing, no
+    // cascade, no pointer parallax or tilt, and progress follows the scrollbar exactly.
     gsap.registerPlugin(ScrollTrigger);
 
-    const lenis = new Lenis({ lerp: 0.08, wheelMultiplier: 1 });
+    const lenis = reducedMotion
+      ? null
+      : new Lenis({ lerp: 0.08, wheelMultiplier: 1 });
     lenisRef.current = lenis;
 
     // Driving Lenis from the GSAP ticker puts scroll updates and ScrollTrigger evaluation in the
     // same execution block. Running Lenis on its own RAF loop causes visible jitter.
-    const raf = (time: number) => lenis.raf(time * 1000);
-    lenis.on("scroll", ScrollTrigger.update);
-    gsap.ticker.add(raf);
+    const raf = lenis ? (time: number) => lenis.raf(time * 1000) : null;
+    if (lenis && raf) {
+      lenis.on("scroll", ScrollTrigger.update);
+      gsap.ticker.add(raf);
+    }
     gsap.ticker.lagSmoothing(0);
 
     const section = document.getElementById(SCROLL_SECTION_ID);
@@ -198,7 +196,7 @@ export function ScrollProvider({ children }: { children: ReactNode }) {
     };
 
     const startCascade = () => {
-      if (touchDriven || cascade.active || lenisRef.current === null) return;
+      if (touchDriven || cascade.active || lenis === null) return;
       const to = Math.min(
         section.offsetTop + section.offsetHeight - window.innerHeight,
         lenis.limit,
@@ -220,7 +218,7 @@ export function ScrollProvider({ children }: { children: ReactNode }) {
     };
 
     const advanceCascade = (deltaSeconds: number) => {
-      if (!cascade.active) return;
+      if (!cascade.active || lenis === null) return;
       // A locked Lenis means the form has focus; driving the page under the caret is hostile.
       if (lenis.isStopped) {
         stopCascade();
@@ -253,8 +251,10 @@ export function ScrollProvider({ children }: { children: ReactNode }) {
       else if (["ArrowUp", "PageUp", "Home"].includes(e.code)) stopCascade();
     };
 
-    window.addEventListener("wheel", onWheel, { passive: true });
-    window.addEventListener("keydown", onKeyDown);
+    if (lenis) {
+      window.addEventListener("wheel", onWheel, { passive: true });
+      window.addEventListener("keydown", onKeyDown);
+    }
 
     let lastTime = 0;
     const drive = (time: number) => {
@@ -271,8 +271,8 @@ export function ScrollProvider({ children }: { children: ReactNode }) {
       window.removeEventListener("keydown", onKeyDown);
       gsap.ticker.remove(drive);
       trigger.kill();
-      gsap.ticker.remove(raf);
-      lenis.destroy();
+      if (raf) gsap.ticker.remove(raf);
+      lenis?.destroy();
       lenisRef.current = null;
     };
   }, [reducedMotion]);

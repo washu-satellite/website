@@ -14,7 +14,7 @@ import { Loader } from "./ui/Loader";
 
 function Sequence() {
   const quality = useQuality();
-  const { reducedMotion, setScrollLocked } = useScrollSequence();
+  const { setScrollLocked } = useScrollSequence();
   const [ready, setReady] = useState(false);
   const onReady = useCallback(() => setReady(true), []);
   usePointerTracking();
@@ -39,7 +39,9 @@ function Sequence() {
       <section
         id={SCROLL_SECTION_ID}
         className="relative w-full"
-        style={{ height: reducedMotion ? "100vh" : `${SEQUENCE_VH}vh` }}
+        // Full height in every mode. Collapsing this to one viewport under reduced motion left the
+        // page with nothing to scroll, which is why it read as completely stuck.
+        style={{ height: `${SEQUENCE_VH}vh` }}
       >
         {/* Fixed, not sticky. A sticky child bottoms out exactly at the end of its section, and
             260vh of an 813px viewport is 2113.8px while scrollHeight rounds to 2114 -- so the last

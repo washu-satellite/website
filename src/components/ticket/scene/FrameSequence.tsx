@@ -275,7 +275,8 @@ export function FrameSequence({ quality }: { quality: QualitySettings }) {
     const mesh = screen.current;
     if (!g || !mesh || pages.length === 0) return;
 
-    const p = reducedMotion ? 1 : sequence.p;
+    // Scrubs in every mode now; reduced motion drops the pointer effect below, not the sequence.
+    const p = sequence.p;
     const effect = reducedMotion
       ? 0
       : 1 - easeInOutCubic(clamp01(p / EFFECT_ENDS_AT));

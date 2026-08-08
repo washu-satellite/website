@@ -9,12 +9,15 @@ import { useScrollSequence } from "@/lib/ticket/scroll";
  */
 export function Headline() {
   const root = useRef<HTMLDivElement>(null);
-  const { progress, reducedMotion } = useScrollSequence();
+  const { progress } = useScrollSequence();
 
   // Driven by rAF straight onto the node: this reads scroll progress every frame and must not
   // re-render React while the 3D scene is running.
+  // Runs under reduced motion too. It used to bail, which went with the sequence being pinned at
+  // its last frame -- now that the piece scrubs in both modes, bailing left a sealed envelope with
+  // nothing on screen telling you to scroll. The opacity here follows the scrollbar, and the pulse
+  // on the scroll hint is already turned off by a prefers-reduced-motion rule in the stylesheet.
   useEffect(() => {
-    if (reducedMotion) return;
     let raf = 0;
     const tick = () => {
       const el = root.current;
@@ -29,9 +32,7 @@ export function Headline() {
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [progress, reducedMotion]);
-
-  if (reducedMotion) return null;
+  }, [progress]);
 
   return (
     <div
