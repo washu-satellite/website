@@ -109,7 +109,7 @@ export class MemorySignupStore implements SignupStore {
   private readonly entries: SignupEntry[] = [];
 
   async append(entry: SignupEntry): Promise<void> {
-    console.log("signups: no BLOB_READ_WRITE_TOKEN, keeping in memory", {
+    console.log("signups: no Blob store configured, keeping in memory", {
       name: entry.name,
     });
     this.entries.push(entry);
@@ -129,16 +129,28 @@ export class MemorySignupStore implements SignupStore {
  * until someone went looking for the list and found it empty. Callers use this to refuse instead.
  */
 export function storageUnavailable(): boolean {
-  return Boolean(process.env.VERCEL) && !process.env.BLOB_READ_WRITE_TOKEN;
+  return Boolean(process.env.VERCEL) && !blobIsConfigured();
+}
+
+/**
+ * Blob can be reached two ways and only one of them sets a token.
+ *
+ * A store connected the classic way exports BLOB_READ_WRITE_TOKEN. A store connected through the
+ * OIDC integration exports BLOB_STORE_ID instead and the SDK exchanges credentials at runtime, so
+ * keying off the token alone reports "no storage" on a project that has perfectly good storage --
+ * which is how signups ended up in the memory fallback in production.
+ */
+function blobIsConfigured(): boolean {
+  return Boolean(
+    process.env.BLOB_READ_WRITE_TOKEN || process.env.BLOB_STORE_ID,
+  );
 }
 
 let store: SignupStore | null = null;
 
 export function getSignupStore(): SignupStore {
   if (!store) {
-    store = process.env.BLOB_READ_WRITE_TOKEN
-      ? new BlobSignupStore()
-      : new MemorySignupStore();
+    store = blobIsConfigured() ? new BlobSignupStore() : new MemorySignupStore();
     console.log("signups: store selected", {
       kind: store.constructor.name,
     });
