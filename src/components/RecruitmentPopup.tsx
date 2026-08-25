@@ -57,14 +57,19 @@ const EVENTS: RecruitmentEvent[] = [
   },
 ];
 
-const DISMISS_KEY = "wusat-recruitment-popup-dismissed-2026f";
-
 export default function RecruitmentPopup() {
   // Rendered only after mount. Date filtering on the server and on the client
   // can disagree, and a hydration mismatch on the root layout is not worth the
   // few hundred milliseconds this costs.
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
+
+  // Dismissal is deliberately in-memory only. Recruitment runs for three
+  // weeks and the dates change underneath the visitor, so someone who closed
+  // it on 8/24 should still see the 9/4 deadline when they come back. This
+  // component lives in the root layout, so client-side navigation between
+  // pages does not remount it: a dismissal holds for the rest of the visit
+  // and the popup returns on a fresh load.
 
   const upcoming = useMemo(
     () => EVENTS.filter((e) => new Date(e.endsAt).getTime() > Date.now()),
@@ -73,24 +78,11 @@ export default function RecruitmentPopup() {
 
   useEffect(() => {
     setMounted(true);
-    let dismissed = false;
-    try {
-      dismissed = window.localStorage.getItem(DISMISS_KEY) === "1";
-    } catch (err) {
-      // Safari private mode throws on localStorage. Showing the popup twice is
-      // better than the popup never appearing.
-      console.error("recruitment popup: localStorage read failed", err);
-    }
-    if (!dismissed) setOpen(true);
+    setOpen(true);
   }, []);
 
   function dismiss() {
     setOpen(false);
-    try {
-      window.localStorage.setItem(DISMISS_KEY, "1");
-    } catch (err) {
-      console.error("recruitment popup: localStorage write failed", err);
-    }
   }
 
   // Nothing left to advertise once the last date passes, so the whole thing
