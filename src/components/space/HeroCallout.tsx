@@ -14,7 +14,9 @@ export default function HeroCallout() {
     <Link
       to="/space"
       className={cn(
-        "group mt-6 flex w-full max-w-[34rem] flex-col items-start gap-3 rounded-xl",
+        // Hugs its content once there is room, so losing the body line does not leave a wide empty
+        // panel. Still full width on a phone, where it is the page's main control.
+        "group mt-6 flex w-full flex-col items-start gap-3 rounded-xl sm:w-fit",
         "border border-[#222] bg-[#111]/50 px-5 py-5 backdrop-blur-3xl sm:px-6",
         "text-left transition-colors duration-300 hover:border-accent-red",
         "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-red",
@@ -26,11 +28,6 @@ export default function HeroCallout() {
 
       <span className="text-3xl font-black leading-tight text-white md:text-4xl">
         Want to go to space?
-      </span>
-
-      <span className="text-sm text-white/70">
-        We are engraving names on SCALAR before it launches in January 2027.
-        Adding yours is free and takes a moment.
       </span>
 
       <span
