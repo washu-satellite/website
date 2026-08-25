@@ -6,6 +6,7 @@ import { TanStackDevtools } from '@tanstack/react-devtools'
 import appCss from '../styles.css?url'
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
+import RecruitmentPopup from '@/components/RecruitmentPopup'
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { bStore } from '@/hooks/useAppStore'
 import { cn } from '@/lib/utils'
@@ -70,6 +71,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
           {!bare && <NavBar />}
           {children}
           {!bare && <Footer />}
+          {!bare && <RecruitmentPopup />}
           <TanStackDevtools
             config={{
               position: 'bottom-right',
