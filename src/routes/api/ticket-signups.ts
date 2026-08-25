@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type { SignupEntry } from "@/lib/ticket/signupSchema";
-import { getSignupStore, type SignupStore } from "@/lib/ticket/signups";
+import type { SignupStore } from "@/lib/ticket/signups";
 
 /**
  * Reads back everyone who has claimed a ticket. These rows are names and email addresses, so the
@@ -43,7 +43,11 @@ function toCsv(entries: SignupEntry[]): string {
 /** Injectable so the auth and formatting can be exercised without a live Blob store. */
 export async function handleExport(
   request: Request,
-  store: SignupStore,
+  // Loaded on demand, not imported. @vercel/blob drags in @vercel/oidc, which calls require() from
+  // inside an ES module and throws at import time on any host that is not Vercel itself. Keeping it
+  // behind a dynamic import means an unauthenticated or unconfigured request answers cleanly
+  // instead of dying while the module graph loads.
+  openStore: () => Promise<SignupStore>,
   secret: string | undefined,
 ): Promise<Response> {
   const json = (body: unknown, status: number) =>
@@ -75,7 +79,7 @@ export async function handleExport(
 
   let entries: SignupEntry[];
   try {
-    entries = await store.list();
+    entries = await (await openStore()).list();
   } catch (err) {
     console.error("signups export: could not read the store", { err });
     return json(
@@ -110,7 +114,11 @@ export const Route = createFileRoute("/api/ticket-signups")({
   server: {
     handlers: {
       GET: ({ request }) =>
-        handleExport(request, getSignupStore(), process.env.SIGNUP_EXPORT_TOKEN),
+        handleExport(
+          request,
+          async () => (await import("@/lib/ticket/signups")).getSignupStore(),
+          process.env.SIGNUP_EXPORT_TOKEN,
+        ),
     },
   },
 });
