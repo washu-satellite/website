@@ -25,6 +25,7 @@ import { Route as DisciplinesIndexRouteImport } from './routes/disciplines/index
 import { Route as ProjectsProject_slugRouteImport } from './routes/projects/$project_slug'
 import { Route as NewslettersSlugRouteImport } from './routes/newsletters/$slug'
 import { Route as DisciplinesDiscipline_slugRouteImport } from './routes/disciplines/$discipline_slug'
+import { Route as ApiTicketSignupsRouteImport } from './routes/api/ticket-signups'
 import { Route as ApiTicketSignupRouteImport } from './routes/api/ticket-signup'
 import { Route as TeamPeopleUser_slugRouteImport } from './routes/team/people/$user_slug'
 
@@ -109,6 +110,11 @@ const DisciplinesDiscipline_slugRoute =
     path: '/disciplines/$discipline_slug',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiTicketSignupsRoute = ApiTicketSignupsRouteImport.update({
+  id: '/api/ticket-signups',
+  path: '/api/ticket-signups',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiTicketSignupRoute = ApiTicketSignupRouteImport.update({
   id: '/api/ticket-signup',
   path: '/api/ticket-signup',
@@ -132,6 +138,7 @@ export interface FileRoutesByFullPath {
   '/space': typeof SpaceRoute
   '/sponsors': typeof SponsorsRoute
   '/api/ticket-signup': typeof ApiTicketSignupRoute
+  '/api/ticket-signups': typeof ApiTicketSignupsRoute
   '/disciplines/$discipline_slug': typeof DisciplinesDiscipline_slugRoute
   '/newsletters/$slug': typeof NewslettersSlugRoute
   '/projects/$project_slug': typeof ProjectsProject_slugRoute
@@ -152,6 +159,7 @@ export interface FileRoutesByTo {
   '/space': typeof SpaceRoute
   '/sponsors': typeof SponsorsRoute
   '/api/ticket-signup': typeof ApiTicketSignupRoute
+  '/api/ticket-signups': typeof ApiTicketSignupsRoute
   '/disciplines/$discipline_slug': typeof DisciplinesDiscipline_slugRoute
   '/newsletters/$slug': typeof NewslettersSlugRoute
   '/projects/$project_slug': typeof ProjectsProject_slugRoute
@@ -173,6 +181,7 @@ export interface FileRoutesById {
   '/space': typeof SpaceRoute
   '/sponsors': typeof SponsorsRoute
   '/api/ticket-signup': typeof ApiTicketSignupRoute
+  '/api/ticket-signups': typeof ApiTicketSignupsRoute
   '/disciplines/$discipline_slug': typeof DisciplinesDiscipline_slugRoute
   '/newsletters/$slug': typeof NewslettersSlugRoute
   '/projects/$project_slug': typeof ProjectsProject_slugRoute
@@ -195,6 +204,7 @@ export interface FileRouteTypes {
     | '/space'
     | '/sponsors'
     | '/api/ticket-signup'
+    | '/api/ticket-signups'
     | '/disciplines/$discipline_slug'
     | '/newsletters/$slug'
     | '/projects/$project_slug'
@@ -215,6 +225,7 @@ export interface FileRouteTypes {
     | '/space'
     | '/sponsors'
     | '/api/ticket-signup'
+    | '/api/ticket-signups'
     | '/disciplines/$discipline_slug'
     | '/newsletters/$slug'
     | '/projects/$project_slug'
@@ -235,6 +246,7 @@ export interface FileRouteTypes {
     | '/space'
     | '/sponsors'
     | '/api/ticket-signup'
+    | '/api/ticket-signups'
     | '/disciplines/$discipline_slug'
     | '/newsletters/$slug'
     | '/projects/$project_slug'
@@ -256,6 +268,7 @@ export interface RootRouteChildren {
   SpaceRoute: typeof SpaceRoute
   SponsorsRoute: typeof SponsorsRoute
   ApiTicketSignupRoute: typeof ApiTicketSignupRoute
+  ApiTicketSignupsRoute: typeof ApiTicketSignupsRoute
   DisciplinesDiscipline_slugRoute: typeof DisciplinesDiscipline_slugRoute
   NewslettersSlugRoute: typeof NewslettersSlugRoute
   ProjectsProject_slugRoute: typeof ProjectsProject_slugRoute
@@ -379,6 +392,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DisciplinesDiscipline_slugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/ticket-signups': {
+      id: '/api/ticket-signups'
+      path: '/api/ticket-signups'
+      fullPath: '/api/ticket-signups'
+      preLoaderRoute: typeof ApiTicketSignupsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/ticket-signup': {
       id: '/api/ticket-signup'
       path: '/api/ticket-signup'
@@ -408,6 +428,7 @@ const rootRouteChildren: RootRouteChildren = {
   SpaceRoute: SpaceRoute,
   SponsorsRoute: SponsorsRoute,
   ApiTicketSignupRoute: ApiTicketSignupRoute,
+  ApiTicketSignupsRoute: ApiTicketSignupsRoute,
   DisciplinesDiscipline_slugRoute: DisciplinesDiscipline_slugRoute,
   NewslettersSlugRoute: NewslettersSlugRoute,
   ProjectsProject_slugRoute: ProjectsProject_slugRoute,
