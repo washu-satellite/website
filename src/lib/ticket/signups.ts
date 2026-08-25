@@ -70,7 +70,12 @@ export class BlobSignupStore implements SignupStore {
 
     let response: Response;
     try {
-      response = await fetch(`${BLOB_API}/${key}`, {
+      // The pathname is a query parameter, not a URL path segment. Putting it in the path is
+      // rejected as "Invalid pathname".
+      const target = new URL(`${BLOB_API}/`);
+      target.searchParams.set("pathname", key);
+
+      response = await fetch(target, {
         method: "PUT",
         headers: {
           ...authHeaders(token),
