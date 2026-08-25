@@ -30,7 +30,7 @@ function keyFor(entry: SignupEntry): string {
   return `${PREFIX}${stamp}-${suffix}.json`;
 }
 
-const BLOB_API = "https://blob.vercel-storage.com";
+const BLOB_API = "https://vercel.com/api/blob";
 
 /** Matches the version @vercel/blob itself sends. The API rejects requests that omit it. */
 const API_VERSION = "12";
@@ -102,7 +102,7 @@ export class BlobSignupStore implements SignupStore {
 
     // Paginated, because a successful campaign is exactly the case where one page is not enough.
     do {
-      const url = new URL(BLOB_API);
+      const url = new URL(`${BLOB_API}/`);
       url.searchParams.set("prefix", PREFIX);
       url.searchParams.set("limit", "1000");
       if (cursor) url.searchParams.set("cursor", cursor);
