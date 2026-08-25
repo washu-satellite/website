@@ -95,7 +95,28 @@ export async function handleExport(
 
   console.log("signups export: served", { count: entries.length });
 
-  const format = new URL(request.url).searchParams.get("format");
+  const params = new URL(request.url).searchParams;
+
+  if (params.get("diagnose") === "1") {
+    // Names only, never values. Connecting a Blob store lets you choose an env-var prefix, so the
+    // token is not always called BLOB_READ_WRITE_TOKEN, and the store silently falls back to memory
+    // when it cannot find the name it expects. This reports which names actually arrived.
+    const tokenNames = Object.keys(process.env).filter((key) =>
+      /BLOB|READ_WRITE_TOKEN/i.test(key),
+    );
+    return json(
+      {
+        commit: process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ?? "unknown",
+        onVercel: Boolean(process.env.VERCEL),
+        hasBlobReadWriteToken: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
+        blobRelatedEnvNames: tokenNames,
+        storeCount: entries.length,
+      },
+      200,
+    );
+  }
+
+  const format = params.get("format");
   if (format === "json") {
     return json({ count: entries.length, entries }, 200);
   }
