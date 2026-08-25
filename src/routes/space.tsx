@@ -12,18 +12,6 @@ import TicketClaim, { LAUNCH_WINDOW } from "@/components/space/TicketClaim";
  * /9njdxq3e prototype, so leave those in place.
  */
 
-/**
- * The honest version of the offer, and the one sentence on this page most likely to need changing.
- *
- * Nobody has yet proposed a mechanism for physically carrying names on SCALAR -- no plate, no
- * memory card, no silkscreen -- and the flight configuration is already through range-safety
- * review. So the page promises a place on the manifest we keep and a boarding pass, and says
- * plainly that flying the manifest itself is something we are still trying to do. If mechanical
- * confirms a mechanism, this is the string to rewrite.
- */
-const MANIFEST_NOTE =
-  "Your name goes on the SCALAR launch manifest, the list we keep of everyone backing this mission. We are also trying to fly that manifest with the satellite itself. That part is not confirmed yet, and we will tell you either way.";
-
 export const Route = createFileRoute("/space")({
   head: () => ({
     meta: [
@@ -31,13 +19,13 @@ export const Route = createFileRoute("/space")({
       {
         name: "description",
         content:
-          "Add your name to the launch manifest for SCALAR, a 1U CubeSat built by students at WashU. Free, open to anyone, and you get a boarding pass.",
+          "WashU Satellite is sending SCALAR, a 1U CubeSat, to orbit in January 2027. Add your name and we will engrave it on the spacecraft. Free, open to anyone.",
       },
       { property: "og:title", content: "Want to go to space?" },
       {
         property: "og:description",
         content:
-          "Add your name to the SCALAR launch manifest and get a boarding pass.",
+          "Add your name to SCALAR before it launches, and take a boarding pass.",
       },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -59,7 +47,7 @@ const STEPS = [
   {
     icon: Radio,
     title: "Follow it up",
-    body: `We email you when SCALAR ships, when it launches in ${LAUNCH_WINDOW.toLowerCase()}, and when it first calls home.`,
+    body: `We email you when SCALAR ships, when it launches in ${LAUNCH_WINDOW}, and when it first calls home.`,
   },
 ];
 
@@ -90,10 +78,12 @@ function SpacePage() {
         aria-hidden
         className="pointer-events-none fixed inset-0 z-0 flex items-center justify-end overflow-hidden"
       >
+        {/* The frame is white linework on transparency, drawn for a dark page. Inverting it in
+            light mode turns those strokes black rather than leaving them invisible. */}
         <img
-          src="/space/scalar-backdrop.png"
+          src="/frames/scalar/f_0025.webp"
           alt=""
-          className="w-[80rem] max-w-[110vw] translate-x-[15%] object-contain opacity-50 dark:opacity-60"
+          className="w-[45rem] max-w-[85vw] max-h-[70vh] translate-x-[12%] object-contain opacity-40 invert dark:opacity-55 dark:invert-0"
           loading="lazy"
           decoding="async"
         />
@@ -118,10 +108,10 @@ function SpacePage() {
           </h1>
 
           <p className="text-center text-foreground/80">
-            We are students at WashU building{" "}
+            WashU Satellite is sending{" "}
             <span className="font-medium text-foreground">SCALAR</span>, a 1U
-            CubeSat launching {LAUNCH_WINDOW.toLowerCase()}. Add your name to the
-            manifest and we will send you a boarding pass.
+            CubeSat, to orbit in {LAUNCH_WINDOW}. Add your name below and we
+            will engrave it on the spacecraft before it ships.
           </p>
 
           <TicketClaim />
@@ -152,18 +142,6 @@ function SpacePage() {
                   </div>
                 ))}
               </div>
-            </section>
-
-            <section className="flex flex-col gap-3 rounded-md border border-border bg-secondary/30 p-6">
-              <h2 className="font-mono text-xs uppercase tracking-wider text-foreground/60">
-                What we are actually promising
-              </h2>
-              <p className="text-sm text-foreground/80">{MANIFEST_NOTE}</p>
-              <p className="text-xs text-foreground/60">
-                We keep your name and email to send those updates and for
-                nothing else. We do not sell or share them, and every email can
-                unsubscribe you.
-              </p>
             </section>
 
             <section className="flex flex-col gap-4">

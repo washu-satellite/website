@@ -14,11 +14,11 @@ import { jpegToPdf } from "@/lib/ticket/pdf";
 import { MAX_NAME_LENGTH } from "@/lib/ticket/signupSchema";
 
 /**
- * Deliberately imprecise, and the only place this page states a date. We are not free to publish a
- * launch month for SCALAR, so this matches the roadmap entry and the project fact sheet. Widen it,
- * never narrow it, until the launch provider clears an exact date.
+ * The launch month, stated on Caden's instruction. Note this is more specific than the rest of the
+ * site, which says "Early 2027" because the launch provider agreement bars naming a month. If that
+ * becomes a problem this is the single string to widen, here and on the ticket.
  */
-export const LAUNCH_WINDOW = "Early 2027";
+export const LAUNCH_WINDOW = "January 2027";
 
 /**
  * Survives a reload so someone returning to the page gets their pass back rather than an empty form
@@ -125,7 +125,7 @@ export default function TicketClaim() {
       const trimmedName = name.trim();
       const trimmedEmail = email.trim();
 
-      if (!trimmedName) return setError("Enter the name you want on the manifest.");
+      if (!trimmedName) return setError("Enter the name you want engraved.");
       if (!trimmedEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
         return setError("Enter an email so we can reach you about the launch.");
       }
@@ -211,13 +211,13 @@ export default function TicketClaim() {
       <div className="flex w-full flex-col gap-6">
         <div className="flex items-center justify-center gap-2 font-mono text-xs uppercase tracking-wider text-accent-red">
           <Check aria-hidden className="h-4 w-4" />
-          You are on the manifest
+          Your name is going to space
         </div>
 
         <canvas
           ref={canvasRef}
           role="img"
-          aria-label={`Boarding pass for ${claimed.name}, manifest ${manifestId}, mission SCALAR, launch window ${LAUNCH_WINDOW}`}
+          aria-label={`Boarding pass for ${claimed.name}, manifest ${manifestId}, mission SCALAR, launch ${LAUNCH_WINDOW}`}
           className="h-auto w-full rounded-md border border-border shadow-sm"
         />
 
@@ -250,7 +250,7 @@ export default function TicketClaim() {
     <form onSubmit={submit} className="flex w-full flex-col gap-5" noValidate>
       <div className="flex flex-col gap-2">
         <label htmlFor="space-name" className={labelClass}>
-          Name on the manifest
+          Name to engrave
         </label>
         <input
           id="space-name"

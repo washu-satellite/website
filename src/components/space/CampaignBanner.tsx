@@ -26,7 +26,7 @@ export default function CampaignBanner() {
             Want to go to space?
           </span>
           <span className="text-sm text-foreground/80">
-            Put your name on the SCALAR launch manifest and take a boarding pass.
+            We will engrave your name on SCALAR before it launches in January 2027.
           </span>
         </div>
 
