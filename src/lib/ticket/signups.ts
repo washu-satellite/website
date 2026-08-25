@@ -1,52 +1,25 @@
 import type { SignupEntry } from "./signupSchema";
 
 /**
- * @vercel/blob is loaded on demand rather than imported.
+ * Blob is spoken to over its REST API rather than through @vercel/blob.
  *
- * Its token resolution falls back to reading the Vercel CLI's config, and that path calls require()
- * from inside an ES module, which throws while the module graph initialises. In a built server that
- * kills the whole route chunk before any handler runs, so a signup came back as an unhandled 500
- * instead of saving. Importing it only when there is a token to use keeps that path unreachable.
+ * The SDK resolves credentials through a helper that was bundled from CommonJS into ESM, so it
+ * calls require() and throws the moment you read or write. Passing a token explicitly does not
+ * avoid it and neither does marking the package external, so every signup failed in production.
+ * These three requests are the whole of what we need and they depend on nothing but fetch.
  */
-type BlobSdk = typeof import("@vercel/blob");
-
-let sdk: Promise<BlobSdk> | null = null;
-
-function blobSdk(): Promise<BlobSdk> {
-  if (!sdk) sdk = import("@vercel/blob");
-  return sdk;
-}
-
-/**
- * Every call passes its token explicitly.
- *
- * Left to resolve a token on its own, the SDK walks an OIDC path whose helpers were bundled from
- * CommonJS into ESM, so they call require() and throw -- which is what broke every read and write in
- * production even after a valid token was configured. Handing it the token means that code never
- * runs. Undefined is fine: it only reaches here when a store id is what marked storage as
- * configured, and the SDK falls back to its own resolution in that case.
- */
-function blobToken(): string | undefined {
-  return process.env.BLOB_READ_WRITE_TOKEN;
-}
-
 export interface SignupStore {
   append(entry: SignupEntry): Promise<void>;
   list(): Promise<SignupEntry[]>;
 }
 
 /**
- * Blob-backed, because this runs on Vercel now. The original store appended to a local JSONL file,
- * which works locally and silently loses every claimed name in production: the serverless filesystem
- * is read-only outside /tmp, and /tmp itself is per-invocation.
- *
  * One blob per signup rather than one appended log. Blob has no append, so a shared log would mean
- * read-modify-write on every claim, and two people claiming at once would drop one of them. Separate
- * keys make that race impossible; `list()` reassembles them in timestamp order.
+ * read-modify-write on every claim and two people claiming at once would drop one of them. Separate
+ * keys make that race impossible; list() reassembles them in timestamp order.
  *
- * The store is private. These entries carry a person's name and their user agent, and a public blob
- * is readable by anyone who has the URL -- unguessable is not the same as protected. Reads therefore
- * go through the SDK with the token rather than a plain fetch of blob.url.
+ * The store is private. These entries carry a person's name and their email, and a public blob is
+ * readable by anyone holding the URL -- unguessable is not the same as protected.
  */
 const PREFIX = "ticket-signups/";
 
@@ -57,53 +30,107 @@ function keyFor(entry: SignupEntry): string {
   return `${PREFIX}${stamp}-${suffix}.json`;
 }
 
+const BLOB_API = "https://blob.vercel-storage.com";
+
+/** The SDK pins this; the API rejects requests that omit it. */
+const API_VERSION = "7";
+
+type BlobListItem = { pathname: string; url: string; downloadUrl?: string };
+
+function requireToken(operation: string): string {
+  const token = process.env.BLOB_READ_WRITE_TOKEN;
+  if (!token) {
+    throw new Error(
+      `${operation} needs BLOB_READ_WRITE_TOKEN, which is not set on this deployment`,
+    );
+  }
+  return token;
+}
+
+function authHeaders(token: string): Record<string, string> {
+  return {
+    authorization: `Bearer ${token}`,
+    "x-api-version": API_VERSION,
+  };
+}
+
+/** Blob's errors are JSON bodies, so the status alone never says what went wrong. */
+async function failure(operation: string, response: Response): Promise<Error> {
+  const body = await response.text().catch(() => "");
+  return new Error(
+    `${operation} failed: ${response.status} ${response.statusText} ${body.slice(0, 300)}`,
+  );
+}
+
 export class BlobSignupStore implements SignupStore {
   async append(entry: SignupEntry): Promise<void> {
     const key = keyFor(entry);
+    const token = requireToken("Storing a signup");
     console.log("signups: writing blob", { key, name: entry.name });
 
+    let response: Response;
     try {
-      const { put } = await blobSdk();
-      await put(key, JSON.stringify(entry), {
-        access: "private",
-        token: blobToken(),
-        contentType: "application/json",
-        // The key already carries a timestamp and a random suffix; letting Blob add its own would
-        // make the object impossible to find again by prefix listing.
-        addRandomSuffix: false,
+      response = await fetch(`${BLOB_API}/${key}`, {
+        method: "PUT",
+        headers: {
+          ...authHeaders(token),
+          "content-type": "application/json",
+          // The key already carries a timestamp and a random suffix; a second one from Blob would
+          // only make the object harder to find again.
+          "x-add-random-suffix": "0",
+        },
+        body: JSON.stringify(entry),
       });
     } catch (err) {
-      throw new Error(
-        `Could not store the signup for "${entry.name}" at ${key}`,
-        { cause: err },
-      );
+      throw new Error(`Could not reach Blob to store "${entry.name}" at ${key}`, {
+        cause: err,
+      });
+    }
+
+    if (!response.ok) {
+      throw await failure(`Storing the signup for "${entry.name}" at ${key}`, response);
     }
   }
 
   async list(): Promise<SignupEntry[]> {
-    let blobs;
-    const { get, list } = await blobSdk();
-    try {
-      ({ blobs } = await list({ prefix: PREFIX, token: blobToken() }));
-    } catch (err) {
-      throw new Error(`Could not list signups under ${PREFIX}`, { cause: err });
-    }
+    const token = requireToken("Listing signups");
+    const items: BlobListItem[] = [];
+    let cursor: string | undefined;
+
+    // Paginated, because a successful campaign is exactly the case where one page is not enough.
+    do {
+      const url = new URL(BLOB_API);
+      url.searchParams.set("prefix", PREFIX);
+      url.searchParams.set("limit", "1000");
+      if (cursor) url.searchParams.set("cursor", cursor);
+
+      const response = await fetch(url, { headers: authHeaders(token) });
+      if (!response.ok) {
+        throw await failure(`Listing signups under ${PREFIX}`, response);
+      }
+
+      const page = (await response.json()) as {
+        blobs?: BlobListItem[];
+        cursor?: string;
+        hasMore?: boolean;
+      };
+      items.push(...(page.blobs ?? []));
+      cursor = page.hasMore ? page.cursor : undefined;
+    } while (cursor);
 
     const entries = await Promise.all(
-      blobs.map(async (blob) => {
+      items.map(async (item) => {
         try {
-          const result = await get(blob.pathname, {
-          access: "private",
-          token: blobToken(),
-        });
-          if (!result) {
-            throw new Error("blob not found");
-          }
-          return JSON.parse(await new Response(result.stream).text()) as SignupEntry;
+          // Private blobs need the token on the download too, not just on the listing.
+          const response = await fetch(item.downloadUrl ?? item.url, {
+            headers: authHeaders(token),
+          });
+          if (!response.ok) throw await failure(`Reading ${item.pathname}`, response);
+          return JSON.parse(await response.text()) as SignupEntry;
         } catch (err) {
           // One unreadable blob should not hide every other signup.
           console.error("signups: could not read blob", {
-            key: blob.pathname,
+            key: item.pathname,
             err,
           });
           return null;
