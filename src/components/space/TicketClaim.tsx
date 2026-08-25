@@ -293,8 +293,7 @@ export default function TicketClaim() {
           className="mt-[3px] h-4 w-4 shrink-0 accent-accent-red"
         />
         <span>
-          Email me updates on the build and the launch. A few times a year, and
-          every one of them has an unsubscribe link.
+          Email me launch updates. Unsubscribe anytime.
         </span>
       </label>
 
