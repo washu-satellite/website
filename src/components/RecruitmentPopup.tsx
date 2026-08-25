@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, CalendarDays, X } from "lucide-react";
 
+import { bStore } from "@/hooks/useAppStore";
 import { cn } from "@/lib/utils";
 
 /**
@@ -57,6 +58,15 @@ const EVENTS: RecruitmentEvent[] = [
   },
 ];
 
+/**
+ * Events that have not yet finished. Exported so a page can hide its "show the
+ * dates" control once recruitment is over, rather than offering a button that
+ * opens nothing.
+ */
+export function upcomingRecruitmentEvents(): RecruitmentEvent[] {
+  return EVENTS.filter((e) => new Date(e.endsAt).getTime() > Date.now());
+}
+
 export default function RecruitmentPopup() {
   // Rendered only after mount. Date filtering on the server and on the client
   // can disagree, and a hydration mismatch on the root layout is not worth the
@@ -71,15 +81,23 @@ export default function RecruitmentPopup() {
   // pages does not remount it: a dismissal holds for the rest of the visit
   // and the popup returns on a fresh load.
 
+  const reopenRequests = bStore.use.recruitmentPopupRequests();
+
   const upcoming = useMemo(
     () => EVENTS.filter((e) => new Date(e.endsAt).getTime() > Date.now()),
-    [mounted],
+    [mounted, reopenRequests],
   );
 
   useEffect(() => {
     setMounted(true);
     setOpen(true);
   }, []);
+
+  // Someone asked for it again from elsewhere on the site (the apply page).
+  // Skips the initial render so this does not fight the mount effect above.
+  useEffect(() => {
+    if (reopenRequests > 0) setOpen(true);
+  }, [reopenRequests]);
 
   function dismiss() {
     setOpen(false);
