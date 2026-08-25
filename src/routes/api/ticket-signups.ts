@@ -77,6 +77,31 @@ export async function handleExport(
     return json({ error: "Unauthorized." }, 401);
   }
 
+  if (new URL(request.url).searchParams.get("diagnose") === "1") {
+    // Deliberately ahead of the store read. Reading is exactly what breaks when storage is
+    // misconfigured, and a diagnostic that needs the broken call to succeed first tells you nothing.
+    // Names only, never values.
+    let readCheck: string;
+    try {
+      readCheck = `ok, ${(await (await openStore()).list()).length} entries`;
+    } catch (err) {
+      readCheck = err instanceof Error ? err.message : String(err);
+    }
+
+    return json(
+      {
+        commit: process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ?? "unknown",
+        onVercel: Boolean(process.env.VERCEL),
+        hasBlobReadWriteToken: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
+        blobRelatedEnvNames: Object.keys(process.env).filter((key) =>
+          /BLOB|READ_WRITE_TOKEN/i.test(key),
+        ),
+        readCheck,
+      },
+      200,
+    );
+  }
+
   let entries: SignupEntry[];
   try {
     entries = await (await openStore()).list();
@@ -95,28 +120,7 @@ export async function handleExport(
 
   console.log("signups export: served", { count: entries.length });
 
-  const params = new URL(request.url).searchParams;
-
-  if (params.get("diagnose") === "1") {
-    // Names only, never values. Connecting a Blob store lets you choose an env-var prefix, so the
-    // token is not always called BLOB_READ_WRITE_TOKEN, and the store silently falls back to memory
-    // when it cannot find the name it expects. This reports which names actually arrived.
-    const tokenNames = Object.keys(process.env).filter((key) =>
-      /BLOB|READ_WRITE_TOKEN/i.test(key),
-    );
-    return json(
-      {
-        commit: process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ?? "unknown",
-        onVercel: Boolean(process.env.VERCEL),
-        hasBlobReadWriteToken: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
-        blobRelatedEnvNames: tokenNames,
-        storeCount: entries.length,
-      },
-      200,
-    );
-  }
-
-  const format = params.get("format");
+  const format = new URL(request.url).searchParams.get("format");
   if (format === "json") {
     return json({ count: entries.length, entries }, 200);
   }
