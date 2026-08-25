@@ -3,6 +3,7 @@
 // when you publish a new post. Newest first. Reels work too — paste the
 // full reel URL ("https://www.instagram.com/reel/...").
 export const INSTAGRAM_POSTS: string[] = [
+  "https://www.instagram.com/p/DcZxn-IFpo8/",
   "https://www.instagram.com/p/DZ8vALjluyk/",
   "https://www.instagram.com/p/DZ1LgC-lnAG/",
   "https://www.instagram.com/p/DZZ5Bzjlk5u/",

@@ -43,7 +43,10 @@ export const roadmap: RoadmapItem[] = [
     icon: "rocket",
   },
   {
-    date: "Feb 2027",
+    // Deliberately imprecise. We do not publish a launch month for SCALAR;
+    // the manifest is not ours to announce. "Early 2027" is the most specific
+    // form we use, and it matches the project page fact sheet.
+    date: "Early 2027",
     sort: "2027-02",
     title: "SCALAR launch",
     description:
