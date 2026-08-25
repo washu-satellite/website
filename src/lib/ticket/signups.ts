@@ -17,6 +17,19 @@ function blobSdk(): Promise<BlobSdk> {
   return sdk;
 }
 
+/**
+ * Every call passes its token explicitly.
+ *
+ * Left to resolve a token on its own, the SDK walks an OIDC path whose helpers were bundled from
+ * CommonJS into ESM, so they call require() and throw -- which is what broke every read and write in
+ * production even after a valid token was configured. Handing it the token means that code never
+ * runs. Undefined is fine: it only reaches here when a store id is what marked storage as
+ * configured, and the SDK falls back to its own resolution in that case.
+ */
+function blobToken(): string | undefined {
+  return process.env.BLOB_READ_WRITE_TOKEN;
+}
+
 export interface SignupStore {
   append(entry: SignupEntry): Promise<void>;
   list(): Promise<SignupEntry[]>;
@@ -53,6 +66,7 @@ export class BlobSignupStore implements SignupStore {
       const { put } = await blobSdk();
       await put(key, JSON.stringify(entry), {
         access: "private",
+        token: blobToken(),
         contentType: "application/json",
         // The key already carries a timestamp and a random suffix; letting Blob add its own would
         // make the object impossible to find again by prefix listing.
@@ -70,7 +84,7 @@ export class BlobSignupStore implements SignupStore {
     let blobs;
     const { get, list } = await blobSdk();
     try {
-      ({ blobs } = await list({ prefix: PREFIX }));
+      ({ blobs } = await list({ prefix: PREFIX, token: blobToken() }));
     } catch (err) {
       throw new Error(`Could not list signups under ${PREFIX}`, { cause: err });
     }
@@ -78,7 +92,10 @@ export class BlobSignupStore implements SignupStore {
     const entries = await Promise.all(
       blobs.map(async (blob) => {
         try {
-          const result = await get(blob.pathname, { access: "private" });
+          const result = await get(blob.pathname, {
+          access: "private",
+          token: blobToken(),
+        });
           if (!result) {
             throw new Error("blob not found");
           }
