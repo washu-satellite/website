@@ -245,11 +245,6 @@ export default function NavBar() {
 
       <div className="flex flex-row justify-end items-center font-semibold gap-2 sm:gap-4">
         <div className="flex-row hidden lg:flex items-center gap-4">
-        {/* Campaign link for the SCALAR launch push. Remove with the /space page. */}
-        <ThemedLink headerLink key={"space"} href={"/space"} className="-mx-2">
-          Go to space
-        </ThemedLink>
-
         <ThemedLink headerLink key={"timeline"} href={"/roadmap"} className="-mx-2">
           Timeline
         </ThemedLink>

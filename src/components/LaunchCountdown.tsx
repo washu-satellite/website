@@ -9,6 +9,11 @@ export type Launch = {
   blurb?: string;
   /** "deliverable" counts down to a due date rather than a launch. */
   kind?: "launch" | "deliverable";
+  /**
+   * Shown in place of the countdown when there is no target. Defaults to "T-minus TBD", which
+   * reads as "we do not know". Set it where we do know and are not free to say.
+   */
+  pending?: string;
 };
 
 // Edit these as dates firm up. Setting target to undefined renders
@@ -22,11 +27,12 @@ export const LAUNCHES: Launch[] = [
     blurb: "Antarctic balloon flight (target date pending NASA decision)",
   },
   {
-    // Target intentionally unset. The program milestone dates we track
-    // internally are confidential, so this stays TBD until a launch date is
-    // public. Do not put deliverable due dates here.
+    // Target intentionally unset. We know the date; the launch provider
+    // agreement is what stops us printing it, so say that rather than "TBD".
+    // Do not put deliverable due dates here.
     name: "SCALAR",
-    blurb: "1U CubeSat — launch date TBD",
+    blurb: "1U CubeSat — launching 2027",
+    pending: "Date under NDA",
   },
 ];
 
@@ -103,7 +109,7 @@ function LaunchTile({ launch }: { launch: Launch }) {
         </p>
       ) : (
         <p className="font-mono uppercase text-sm text-foreground/50">
-          T-minus TBD
+          {launch.pending ?? "T-minus TBD"}
         </p>
       )}
       {target && (

@@ -110,8 +110,7 @@ function SpacePage() {
           <p className="text-center text-foreground/80">
             WashU Satellite is sending{" "}
             <span className="font-medium text-foreground">SCALAR</span>, a 1U
-            CubeSat, to orbit in {LAUNCH_WINDOW}. Add your name below and we
-            will engrave it on the spacecraft before it ships.
+            CubeSat, to orbit in {LAUNCH_WINDOW}.
           </p>
 
           <TicketClaim />
