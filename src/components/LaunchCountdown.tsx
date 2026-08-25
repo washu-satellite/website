@@ -9,6 +9,11 @@ export type Launch = {
   blurb?: string;
   /** "deliverable" counts down to a due date rather than a launch. */
   kind?: "launch" | "deliverable";
+  /**
+   * Shown in place of the countdown when there is no target. Defaults to "T-minus TBD", which
+   * reads as "we do not know". Set it where we do know and are not free to say.
+   */
+  pending?: string;
 };
 
 // Edit these as dates firm up. Setting target to undefined renders
@@ -22,13 +27,12 @@ export const LAUNCHES: Launch[] = [
     blurb: "Antarctic balloon flight (target date pending NASA decision)",
   },
   {
-    // No launch date is set for SCALAR, so we count down to the last thing that
-    // does have a hard date: the final RIDE deliverable. End-of-day, since a
-    // deliverable is not late until the due date is over.
+    // Target intentionally unset. We know the date; the launch provider
+    // agreement is what stops us printing it, so say that rather than "TBD".
+    // Do not put deliverable due dates here.
     name: "SCALAR",
-    target: "2026-10-23T23:59:59",
-    blurb: "Final RIDE deliverable: environmental test report",
-    kind: "deliverable",
+    blurb: "1U CubeSat — launching 2027",
+    pending: "Date under NDA",
   },
 ];
 
@@ -105,7 +109,7 @@ function LaunchTile({ launch }: { launch: Launch }) {
         </p>
       ) : (
         <p className="font-mono uppercase text-sm text-foreground/50">
-          T-minus TBD
+          {launch.pending ?? "T-minus TBD"}
         </p>
       )}
       {target && (

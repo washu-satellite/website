@@ -11,6 +11,12 @@ export type RoadmapIcon =
 
 export type RoadmapItem = {
   date: string;
+  /**
+   * Sort key, "YYYY-MM". `date` is written for humans ("Fall 2026", "Late
+   * 2025") so it cannot be parsed reliably — this is what actually orders the
+   * timeline. Pick the month the item lands in.
+   */
+  sort: string;
   title: string;
   description?: string;
   status: RoadmapStatus;
@@ -21,9 +27,37 @@ export type RoadmapItem = {
 
 // Newest first. Single source of truth — /roadmap renders all of it, the
 // homepage timeline renders the `featured` subset.
+//
+// This is public. We are under NDA covering our launch provider and the
+// deliverables package tied to it, so do not name either, and do not publish
+// deliverable names or their due dates. Describe our own engineering progress
+// instead. Check with program leadership before adding SCALAR flight dates.
 export const roadmap: RoadmapItem[] = [
   {
+    date: "2027+",
+    sort: "2027-06",
+    title: "VECTOR development begins",
+    description:
+      "Versatile Educational Controls Testbed for Optical Response — the next step after SCALAR, carrying configurable algorithms for transient observation.",
+    status: "planned",
+    icon: "rocket",
+  },
+  {
+    // Deliberately imprecise. We do not publish a launch month for SCALAR;
+    // the manifest is not ours to announce. "Early 2027" is the most specific
+    // form we use, and it matches the project page fact sheet.
+    date: "Early 2027",
+    sort: "2027-02",
+    title: "SCALAR launch",
+    description:
+      "Our first satellite reaches orbit: a 1U CubeSat demonstrating attitude control with magnetic torque rods, bus endurance, and ground-side mission operations.",
+    status: "planned",
+    icon: "satellite",
+    featured: true,
+  },
+  {
     date: "Feb 2027",
+    sort: "2027-02",
     title: "VECTOR proposal complete",
     description:
       "University Nanosatellite Program proposal draft finished, closing out the VECTOR concept phase.",
@@ -31,24 +65,27 @@ export const roadmap: RoadmapItem[] = [
     icon: "notebook",
   },
   {
-    date: "Oct 2026",
-    title: "SCALAR environmental test report",
+    date: "Feb 2027",
+    sort: "2027-01",
+    title: "GS-2 operational",
     description:
-      "The final RIDE deliverable. Closes out SCALAR's requirements package with the launch provider.",
+      "Second ground station assembled, tested, and ready to command SCALAR from the Crow Hall rooftop.",
+    status: "planned",
+    icon: "antenna",
+  },
+  {
+    date: "Late 2026",
+    sort: "2026-11",
+    title: "SCALAR protoflight testing",
+    description:
+      "Vibration and thermal testing to qualify the flight unit for launch.",
     status: "planned",
     icon: "file",
     featured: true,
   },
   {
-    date: "Sep 2026",
-    title: "SCALAR integration procedure",
-    description:
-      "Satellite integration procedure update and insurance inputs submitted to RIDE.",
-    status: "planned",
-    icon: "satellite",
-  },
-  {
     date: "Fall 2026",
+    sort: "2026-09",
     title: "VECTOR concept work begins",
     description:
       "Project kickoff, systems engineering and integration leads named, sensor and lens trade study opens.",
@@ -57,32 +94,56 @@ export const roadmap: RoadmapItem[] = [
   },
   {
     date: "Aug 2026",
-    title: "SCALAR mass properties final issue",
+    sort: "2026-08",
+    title: "SCALAR engineering model build",
     description:
-      "Final mass properties, constituents list, and the environmental test plan delivered to RIDE.",
+      "The integrated 3D prototype is done and the full engineering model enters machining and assembly, with mass properties and the test plan settled.",
     status: "active",
     icon: "satellite",
     featured: true,
   },
   {
-    date: "Feb 2027",
-    title: "GS-2 operational",
-    description:
-      "Second ground station assembled, tested, and ready to command SCALAR from the Crow Hall rooftop.",
-    status: "planned",
-    icon: "antenna",
-  },
-  {
     date: "2026",
+    sort: "2026-07",
     title: "GS-2 in assembly",
     description:
-      "Antenna simulation, structures, and control software in progress across seven modules. Rooftop site selected.",
+      "Antenna simulation, structures, and control software in progress across seven modules, aimed at rapid data downlink. Rooftop site selected.",
     status: "active",
     icon: "antenna",
     featured: true,
   },
   {
+    date: "Jun 2026",
+    sort: "2026-06",
+    title: "SCALAR range safety review passed",
+    description:
+      "Range safety requirements accepted, with ground operations and transport planning complete.",
+    status: "done",
+    icon: "file",
+  },
+  {
+    date: "2026",
+    sort: "2026-05",
+    title: "AIRIS in development",
+    description:
+      "A fast-slewing optical telescope flying on ADAPT, a NASA near-space balloon over Antarctica, imaging gamma-ray burst afterglows for the multi-messenger collaboration.",
+    status: "active",
+    icon: "balloon",
+    featured: true,
+  },
+  {
+    date: "Apr 2026",
+    sort: "2026-04",
+    title: "SCALAR passes program entry review",
+    description:
+      "Initial design package accepted, moving SCALAR from concept into flight development.",
+    status: "done",
+    icon: "satellite",
+    featured: true,
+  },
+  {
     date: "Late 2025",
+    sort: "2025-10",
     title: "GS-1 closed, GS-2 begins",
     description:
       "The team closed out GS-1 and restarted as GS-2 with a written requirements sheet, carrying forward its hardware, software, and lessons learned.",
@@ -90,33 +151,8 @@ export const roadmap: RoadmapItem[] = [
     icon: "antenna",
   },
   {
-    date: "2026",
-    title: "AIRIS in development",
-    description:
-      "Balloon-borne transient imaging payload. Full integration testing complete; flight opportunity pending.",
-    status: "active",
-    icon: "balloon",
-    featured: true,
-  },
-  {
-    date: "Jun 2026",
-    title: "SCALAR range safety accepted",
-    description:
-      "Range safety requirements manual accepted, with ground operations and transport plans submitted.",
-    status: "done",
-    icon: "file",
-  },
-  {
-    date: "Apr 2026",
-    title: "SCALAR enters the RIDE program",
-    description:
-      "Payload program introduction, CAD model, and initial mass properties accepted by the launch provider.",
-    status: "done",
-    icon: "satellite",
-    featured: true,
-  },
-  {
     date: "Oct 2024",
+    sort: "2024-10",
     title: "GS-1 PDRs",
     description: "Preliminary design reviews for the first ground station passed.",
     status: "done",
@@ -124,6 +160,7 @@ export const roadmap: RoadmapItem[] = [
   },
   {
     date: "Aug 2024",
+    sort: "2024-08",
     title: "Team procedures formalized",
     description:
       "Engineering reviews, budgets, and responsible-engineering standards adopted.",
@@ -132,6 +169,7 @@ export const roadmap: RoadmapItem[] = [
   },
   {
     date: "Apr 2024",
+    sort: "2024-04",
     title: "SB-1 launch",
     description: "First mission: small balloon launched from Tisch Park.",
     status: "done",
@@ -140,6 +178,7 @@ export const roadmap: RoadmapItem[] = [
   },
   {
     date: "Jan 2024",
+    sort: "2024-01",
     title: "Club founded",
     description: "WashU Satellite founded with 11 initial members.",
     status: "done",
@@ -149,3 +188,8 @@ export const roadmap: RoadmapItem[] = [
 ];
 
 export const featuredRoadmap = roadmap.filter((r) => r.featured);
+
+/** Oldest first — the order the horizontal timeline reads, left to right. */
+export const chronologicalRoadmap = [...roadmap].sort((a, b) =>
+  a.sort.localeCompare(b.sort),
+);

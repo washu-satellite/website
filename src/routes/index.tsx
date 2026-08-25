@@ -10,15 +10,15 @@ import { FaArrowRightLong } from "react-icons/fa6";
 
 import { createFileRoute } from "@tanstack/react-router";
 import React, { useEffect, useState } from "react";
-import { Antenna, Balloon, BookUp, FileCheck, NotebookText, Rocket, Satellite, Video } from "lucide-react";
-import { featuredRoadmap, type RoadmapIcon } from "@/const/content/roadmap";
+import { BookUp, Video } from "lucide-react";
 import RedirectButton from "@/components/RedirectButton";
 import Card from "@/components/Card";
 import { bStore } from "@/hooks/useAppStore";
 import { cn } from "@/lib/utils";
-import { Timeline, TimelineDate, TimelineIcon, TimelineContent, TimelineEntry } from "@/components/Timeline";
+import HorizontalTimeline from "@/components/HorizontalTimeline";
 import LaunchCountdown from "@/components/LaunchCountdown";
 import InstagramFeed from "@/components/InstagramFeed";
+import HeroCallout from "@/components/space/HeroCallout";
 import SocialLinks from "@/components/SocialLinks";
 
 export const Route = createFileRoute('/')({
@@ -35,15 +35,6 @@ export function DividerHeading(props: React.PropsWithChildren<{
     </h2>
   );
 }
-
-const ROADMAP_ICONS: Record<RoadmapIcon, typeof Rocket> = {
-  rocket: Rocket,
-  balloon: Balloon,
-  antenna: Antenna,
-  notebook: NotebookText,
-  satellite: Satellite,
-  file: FileCheck,
-};
 
 const bannerTextLoop = ["satellites", "science balloons", "interfaces", "earth stations"];
 
@@ -91,6 +82,9 @@ function BannerText() {
             </h1>
           </div>
           <SocialLinks className="mt-4 justify-center lg:justify-start flex-wrap" />
+
+          {/* Temporary: remove with the /space campaign. */}
+          <HeroCallout />
         </div>
       </div>
   )
@@ -195,27 +189,9 @@ function HomePage() {
                   Timeline
                 </DividerHeading>
 
-                <Timeline hideControls>
-                  {featuredRoadmap.map((r, i) => {
-                    const Icon = ROADMAP_ICONS[r.icon ?? "rocket"];
-                    return (
-                      <TimelineEntry key={`${r.date}-${i}`}>
-                        <TimelineDate>
-                          {r.date}
-                        </TimelineDate>
-                        <TimelineIcon>
-                          <Icon className="w-6 h-6"/>
-                        </TimelineIcon>
-                        <TimelineContent>
-                          <h5>{r.title}</h5>
-                          {r.description && (
-                            <p className="text-sm text-foreground/80">{r.description}</p>
-                          )}
-                        </TimelineContent>
-                      </TimelineEntry>
-                    );
-                  })}
-                </Timeline>
+                <div className="py-8">
+                  <HorizontalTimeline />
+                </div>
 
                 <div className="flex justify-center pb-4">
                   <RedirectButton text="See the full roadmap" href="/roadmap" />

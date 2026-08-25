@@ -1,5 +1,5 @@
 export const HomepageContent = {
-    missionStatement: "We give students real spaceflight hardware to be responsible for, early enough that it changes what they can build by the time they graduate.",
+    missionStatement: "We hand undergraduates real spacecraft hardware, and the responsibility that comes with it, early enough that they graduate having built something that actually flew.",
 
     tagline: "Design. Develop. Educate.",
 

@@ -6,11 +6,19 @@ export type ThemeOption = "dark" | "light" | "system";
 type UserStore = {
   theme: ThemeOption;
   setTheme: (theme: ThemeOption) => void;
+  // Bumped to ask the recruitment popup to reopen. A counter rather than a
+  // boolean so a second request still fires after the visitor has closed it
+  // again; the popup owns whether it is actually on screen.
+  recruitmentPopupRequests: number;
+  openRecruitmentPopup: () => void;
 };
 
 const createUserStore: StateCreator<UserStore, [], []> = (set) => ({
   theme: "dark",
   setTheme: (theme) => set(() => ({ theme })),
+  recruitmentPopupRequests: 0,
+  openRecruitmentPopup: () =>
+    set((s) => ({ recruitmentPopupRequests: s.recruitmentPopupRequests + 1 })),
 });
 
 export const useBoundedStore = create<UserStore>()((...a) => ({

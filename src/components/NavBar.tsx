@@ -4,7 +4,7 @@ import ThemedLink from "./ThemedLink";
 
 import type { NavElement } from "@/types/data";
 
-import { ChevronDown, Rocket, Users, Waypoints } from "lucide-react";
+import { ArrowRight, ChevronDown, Rocket, Users, Waypoints } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -82,13 +82,20 @@ function NavbarMenuItem({
 function NavbarMenu(
   props: React.PropsWithChildren<{
     title: string;
+    /** Extra classes on the trigger, so a menu can drop out at a breakpoint. */
+    triggerClassName?: string;
   }>,
 ) {
   const [open, setOpen] = useState(false);
 
   return (
     <DropdownMenu key={props.title} open={open} onOpenChange={setOpen}>
-      <DropdownMenuTrigger className="flex flex-row items-center overflow-hidden">
+      <DropdownMenuTrigger
+        className={cn(
+          "flex flex-row items-center overflow-hidden",
+          props.triggerClassName,
+        )}
+      >
         <span className={"p-1 px-2 rounded-md font-normal text-sm/6"}>
           {props.title}
         </span>
@@ -140,12 +147,12 @@ export default function NavBar() {
             scrolled,
           "bg-none backdrop-blur-none border-b-0": !scrolled,
         },
-        "fixed z-50 w-full top-0 left-0 flex flex-row justify-between items-center py-3 px-4 xl:px-8 lg:px-[4rem]",
+        "fixed z-50 w-full top-0 left-0 flex flex-row justify-between items-center py-3 px-3 sm:px-4 xl:px-8 lg:px-[4rem]",
       )}
     >
-      <div className="flex flex-row justify-start items-center font-normal relative gap-2">
+      <div className="flex flex-row justify-start items-center font-normal relative gap-1 sm:gap-2">
         <Link to="/" className={clsx("font-bold text-base")}>
-          <img alt="WashU Satellite" src={logoSrc} className="h-8 mr-4" />
+          <img alt="WashU Satellite" src={logoSrc} className="h-8 max-[380px]:h-6 mr-1 sm:mr-4" />
         </Link>
 
         <NavbarMenu title="Missions">
@@ -208,7 +215,7 @@ export default function NavBar() {
           </DropdownMenuGroup>
         </NavbarMenu>
 
-        <NavbarMenu title="Team">
+        <NavbarMenu title="Team" triggerClassName="max-[380px]:hidden">
           <DropdownMenuGroup>
             <DropdownMenuItem asChild>
               <NavbarMenuItem
@@ -236,11 +243,12 @@ export default function NavBar() {
         </NavbarMenu>
       </div>
 
-      <div
-        className={
-          "flex-row hidden lg:flex justify-end items-center font-semibold gap-4"
-        }
-      >
+      <div className="flex flex-row justify-end items-center font-semibold gap-2 sm:gap-4">
+        <div className="flex-row hidden lg:flex items-center gap-4">
+        <ThemedLink headerLink key={"timeline"} href={"/roadmap"} className="-mx-2">
+          Timeline
+        </ThemedLink>
+
         <ThemedLink headerLink key={"newsletters"} href={"/newsletters"} className="-mx-2">
           Newsletter
         </ThemedLink>
@@ -249,13 +257,35 @@ export default function NavBar() {
           Sponsors
         </ThemedLink>
 
+        <ThemedLink headerLink key={"shop"} href={"/shop"} className="-mx-2">
+          Shop
+        </ThemedLink>
+
         <ThemedLink headerLink key={"contact"} href={"/contact"} className="-mx-2">
           Contact
         </ThemedLink>
+        </div>
 
-        <ThemedLink headerLink key={"apply"} href={"/apply"} className="-mx-2">
+        {/* The only filled control in the header, and the only one that stays
+            visible below lg. It replaces the hero CTA, so it has to carry the
+            primary action on its own at every breakpoint. */}
+        <Link
+          to="/apply"
+          className={cn(
+            "group inline-flex items-center gap-2 rounded-md shrink-0",
+            "px-3 sm:px-4 py-2 font-mono text-sm uppercase tracking-wider font-semibold",
+            "bg-accent-red hover:bg-accent-red-hover text-white",
+            "shadow-sm hover:shadow-md",
+            "focus-visible:outline-2 focus-visible:outline-offset-2",
+            "focus-visible:outline-accent-red transition-all duration-300",
+          )}
+        >
           Apply
-        </ThemedLink>
+          <ArrowRight
+            aria-hidden
+            className="w-4 h-4 group-hover:translate-x-[3px] transition-transform duration-300"
+          />
+        </Link>
       </div>
     </div>
   );

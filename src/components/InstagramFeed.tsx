@@ -120,8 +120,15 @@ export default function InstagramFeed(props: {
           className="flex flex-row gap-4 overflow-x-auto snap-x snap-mandatory scrollbar pb-2"
           style={{ justifyContent: "safe center" }}
         >
+          {/* Instagram's embed is a cross-origin iframe from instagram.com, so
+              its interior cannot be themed and it has no dark-mode parameter.
+              The white panel is unavoidable; framing it in a themed card makes
+              it read as a deliberate photo mount instead of a glare box. */}
           {posts.map((url) => (
-            <div key={url} className="snap-start shrink-0 w-[20rem] md:w-[24rem]">
+            <div
+              key={url}
+              className="snap-start shrink-0 w-[20rem] md:w-[24rem] rounded-lg border border-border bg-background p-2 shadow-sm dark:bg-bg dark:shadow-none"
+            >
               <InstagramPost url={url} />
             </div>
           ))}

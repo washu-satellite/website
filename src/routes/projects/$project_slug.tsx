@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CheckCircle2, ExternalLink, House, Mail } from "lucide-react";
 import GenericPage from "@/components/GenericPage";
+import ScrollFrameBackground from "@/components/ScrollFrameBackground";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ProjectPages } from "@/const/content/projects";
@@ -60,6 +61,17 @@ function ProjectPage() {
     <GenericPage
       title={p.id}
       backgroundImage={p.image}
+      backgroundFrames={
+        p.frameSequence && (
+          <ScrollFrameBackground
+            dir={p.frameSequence.dir}
+            count={p.frameSequence.count}
+            aspect={p.frameSequence.aspect}
+            width={p.frameSequence.width}
+            position={p.imagePosition}
+          />
+        )
+      }
       backgroundPosition={p.imagePosition}
       headerContent={
         <div className="w-full flex flex-col gap-4">

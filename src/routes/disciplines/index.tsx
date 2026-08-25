@@ -31,6 +31,7 @@ function DisciplinesPage() {
               </span>
             </div>
             <p className="text-sm text-foreground/80">{d.tagline}</p>
+            <p className="text-xs text-foreground/60">{d.summary}</p>
           </Link>
         ))}
       </div>
