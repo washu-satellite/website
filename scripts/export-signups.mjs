@@ -8,9 +8,33 @@
  *
  * `vercel env pull` will fetch either token if you have access to the project.
  */
-import { list, get } from "@vercel/blob";
+import { readFileSync } from "node:fs";
 
 const PREFIX = "ticket-signups/";
+
+/**
+ * Reads .env.local before anything else, so the token lives in a gitignored file rather than in
+ * shell history or in whoever-is-asking's clipboard. Missing file is the normal case in CI.
+ */
+function loadEnvFile(path) {
+  let contents;
+  try {
+    contents = readFileSync(path, "utf8");
+  } catch (err) {
+    if (err.code !== "ENOENT") console.error(`export-signups: could not read ${path}`, err);
+    return;
+  }
+
+  for (const line of contents.split("\n")) {
+    const match = /^\s*([A-Z0-9_]+)\s*=\s*(.*)$/.exec(line);
+    if (!match) continue;
+    const [, key, rawValue] = match;
+    if (process.env[key] !== undefined) continue;
+    process.env[key] = rawValue.trim().replace(/^["']|["']$/g, "");
+  }
+}
+
+loadEnvFile(new URL("../.env.local", import.meta.url));
 
 function csvCell(value) {
   const text = value === undefined || value === null ? "" : String(value);
@@ -25,29 +49,6 @@ function toCsv(entries) {
       .join(","),
   );
   return [header, ...rows].join("\r\n");
-}
-
-async function fromBlob() {
-  const { blobs } = await list({ prefix: PREFIX });
-  console.error(`export-signups: found ${blobs.length} signup blobs`);
-
-  const entries = await Promise.all(
-    blobs.map(async (blob) => {
-      try {
-        const result = await get(blob.pathname, { access: "private" });
-        if (!result) throw new Error("blob not found");
-        return JSON.parse(await new Response(result.stream).text());
-      } catch (err) {
-        // One unreadable blob should not cost you the rest of the export.
-        console.error(`export-signups: skipping ${blob.pathname}`, err);
-        return null;
-      }
-    }),
-  );
-
-  return entries
-    .filter(Boolean)
-    .sort((a, b) => a.timestamp.localeCompare(b.timestamp));
 }
 
 async function fromSite(site, token) {
@@ -66,23 +67,18 @@ async function fromSite(site, token) {
   return (await response.json()).entries;
 }
 
-const blobToken = process.env.BLOB_READ_WRITE_TOKEN;
 const exportToken = process.env.SIGNUP_EXPORT_TOKEN;
 const site = process.env.SITE ?? "https://www.washusatellite.com";
 
 try {
-  const entries = blobToken
-    ? await fromBlob()
-    : exportToken
-      ? await fromSite(site, exportToken)
-      : null;
-
-  if (entries === null) {
+  if (!exportToken) {
     console.error(
-      "export-signups: set BLOB_READ_WRITE_TOKEN (reads Blob directly) or SIGNUP_EXPORT_TOKEN (reads the live site).",
+      "export-signups: no SIGNUP_EXPORT_TOKEN. Put it in .env.local (gitignored) or pass it inline.",
     );
     process.exit(1);
   }
+
+  const entries = await fromSite(site, exportToken);
 
   console.error(`export-signups: ${entries.length} signups`);
   console.log(toCsv(entries));
