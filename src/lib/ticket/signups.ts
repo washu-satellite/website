@@ -75,6 +75,9 @@ export class BlobSignupStore implements SignupStore {
         headers: {
           ...authHeaders(token),
           "content-type": "application/json",
+          // Required: the store is private, and an upload that does not say so is rejected as an
+          // attempt to make a public blob in it.
+          "x-access": "private",
           // The key already carries a timestamp and a random suffix; a second one from Blob would
           // only make the object harder to find again.
           "x-add-random-suffix": "0",
