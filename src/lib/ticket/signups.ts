@@ -1,5 +1,21 @@
-import { get, list, put } from "@vercel/blob";
 import type { SignupEntry } from "./signupSchema";
+
+/**
+ * @vercel/blob is loaded on demand rather than imported.
+ *
+ * Its token resolution falls back to reading the Vercel CLI's config, and that path calls require()
+ * from inside an ES module, which throws while the module graph initialises. In a built server that
+ * kills the whole route chunk before any handler runs, so a signup came back as an unhandled 500
+ * instead of saving. Importing it only when there is a token to use keeps that path unreachable.
+ */
+type BlobSdk = typeof import("@vercel/blob");
+
+let sdk: Promise<BlobSdk> | null = null;
+
+function blobSdk(): Promise<BlobSdk> {
+  if (!sdk) sdk = import("@vercel/blob");
+  return sdk;
+}
 
 export interface SignupStore {
   append(entry: SignupEntry): Promise<void>;
@@ -34,6 +50,7 @@ export class BlobSignupStore implements SignupStore {
     console.log("signups: writing blob", { key, name: entry.name });
 
     try {
+      const { put } = await blobSdk();
       await put(key, JSON.stringify(entry), {
         access: "private",
         contentType: "application/json",
@@ -51,6 +68,7 @@ export class BlobSignupStore implements SignupStore {
 
   async list(): Promise<SignupEntry[]> {
     let blobs;
+    const { get, list } = await blobSdk();
     try {
       ({ blobs } = await list({ prefix: PREFIX }));
     } catch (err) {
