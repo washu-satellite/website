@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SponsorsRouteImport } from './routes/sponsors'
+import { Route as SpaceRouteImport } from './routes/space'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as NotReadyRouteImport } from './routes/not-ready'
@@ -30,6 +31,11 @@ import { Route as TeamPeopleUser_slugRouteImport } from './routes/team/people/$u
 const SponsorsRoute = SponsorsRouteImport.update({
   id: '/sponsors',
   path: '/sponsors',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SpaceRoute = SpaceRouteImport.update({
+  id: '/space',
+  path: '/space',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShopRoute = ShopRouteImport.update({
@@ -123,6 +129,7 @@ export interface FileRoutesByFullPath {
   '/not-ready': typeof NotReadyRoute
   '/roadmap': typeof RoadmapRoute
   '/shop': typeof ShopRoute
+  '/space': typeof SpaceRoute
   '/sponsors': typeof SponsorsRoute
   '/api/ticket-signup': typeof ApiTicketSignupRoute
   '/disciplines/$discipline_slug': typeof DisciplinesDiscipline_slugRoute
@@ -142,6 +149,7 @@ export interface FileRoutesByTo {
   '/not-ready': typeof NotReadyRoute
   '/roadmap': typeof RoadmapRoute
   '/shop': typeof ShopRoute
+  '/space': typeof SpaceRoute
   '/sponsors': typeof SponsorsRoute
   '/api/ticket-signup': typeof ApiTicketSignupRoute
   '/disciplines/$discipline_slug': typeof DisciplinesDiscipline_slugRoute
@@ -162,6 +170,7 @@ export interface FileRoutesById {
   '/not-ready': typeof NotReadyRoute
   '/roadmap': typeof RoadmapRoute
   '/shop': typeof ShopRoute
+  '/space': typeof SpaceRoute
   '/sponsors': typeof SponsorsRoute
   '/api/ticket-signup': typeof ApiTicketSignupRoute
   '/disciplines/$discipline_slug': typeof DisciplinesDiscipline_slugRoute
@@ -183,6 +192,7 @@ export interface FileRouteTypes {
     | '/not-ready'
     | '/roadmap'
     | '/shop'
+    | '/space'
     | '/sponsors'
     | '/api/ticket-signup'
     | '/disciplines/$discipline_slug'
@@ -202,6 +212,7 @@ export interface FileRouteTypes {
     | '/not-ready'
     | '/roadmap'
     | '/shop'
+    | '/space'
     | '/sponsors'
     | '/api/ticket-signup'
     | '/disciplines/$discipline_slug'
@@ -221,6 +232,7 @@ export interface FileRouteTypes {
     | '/not-ready'
     | '/roadmap'
     | '/shop'
+    | '/space'
     | '/sponsors'
     | '/api/ticket-signup'
     | '/disciplines/$discipline_slug'
@@ -241,6 +253,7 @@ export interface RootRouteChildren {
   NotReadyRoute: typeof NotReadyRoute
   RoadmapRoute: typeof RoadmapRoute
   ShopRoute: typeof ShopRoute
+  SpaceRoute: typeof SpaceRoute
   SponsorsRoute: typeof SponsorsRoute
   ApiTicketSignupRoute: typeof ApiTicketSignupRoute
   DisciplinesDiscipline_slugRoute: typeof DisciplinesDiscipline_slugRoute
@@ -259,6 +272,13 @@ declare module '@tanstack/react-router' {
       path: '/sponsors'
       fullPath: '/sponsors'
       preLoaderRoute: typeof SponsorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/space': {
+      id: '/space'
+      path: '/space'
+      fullPath: '/space'
+      preLoaderRoute: typeof SpaceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shop': {
@@ -385,6 +405,7 @@ const rootRouteChildren: RootRouteChildren = {
   NotReadyRoute: NotReadyRoute,
   RoadmapRoute: RoadmapRoute,
   ShopRoute: ShopRoute,
+  SpaceRoute: SpaceRoute,
   SponsorsRoute: SponsorsRoute,
   ApiTicketSignupRoute: ApiTicketSignupRoute,
   DisciplinesDiscipline_slugRoute: DisciplinesDiscipline_slugRoute,

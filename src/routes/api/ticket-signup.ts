@@ -33,6 +33,9 @@ export async function handleSignup(
 
   const entry: SignupEntry = {
     name: parsed.data.name,
+    ...(parsed.data.email ? { email: parsed.data.email } : {}),
+    newsletter: parsed.data.newsletter ?? false,
+    source: parsed.data.source ?? "ticket",
     timestamp: new Date().toISOString(),
     userAgent: request.headers.get("user-agent") ?? "unknown",
   };
@@ -53,7 +56,13 @@ export async function handleSignup(
     );
   }
 
-  console.log("signup route: saved", { name: entry.name, at: entry.timestamp });
+  console.log("signup route: saved", {
+    name: entry.name,
+    source: entry.source,
+    hasEmail: entry.email !== undefined,
+    newsletter: entry.newsletter,
+    at: entry.timestamp,
+  });
   return json({ ok: true, name: entry.name }, 201);
 }
 

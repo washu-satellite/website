@@ -18,6 +18,7 @@ import { cn } from "@/lib/utils";
 import HorizontalTimeline from "@/components/HorizontalTimeline";
 import LaunchCountdown from "@/components/LaunchCountdown";
 import InstagramFeed from "@/components/InstagramFeed";
+import CampaignBanner from "@/components/space/CampaignBanner";
 import SocialLinks from "@/components/SocialLinks";
 
 export const Route = createFileRoute('/')({
@@ -170,6 +171,9 @@ function HomePage() {
               <div className="dots-vertical hidden dark:block absolute z-0 left-0 top-0 w-[10rem] opacity-60 h-full bg-repeat-y" />
               <div className="flex-1 flex flex-col">
                 <TeamIntro />
+
+                {/* Temporary: remove with the /space campaign. */}
+                <CampaignBanner />
 
                 <div id="launches" className="scroll-mt-24" />
                 <DividerHeading index={1}>
