@@ -120,6 +120,18 @@ export class MemorySignupStore implements SignupStore {
   }
 }
 
+/**
+ * True when we are running on Vercel with nowhere durable to write.
+ *
+ * The memory store is the right answer locally, where there is no Blob token and nobody expects a
+ * signup to survive a restart. In production it is the worst possible answer: serverless memory dies
+ * with the invocation, so every claim would return 201 and then be gone, and nothing would say so
+ * until someone went looking for the list and found it empty. Callers use this to refuse instead.
+ */
+export function storageUnavailable(): boolean {
+  return Boolean(process.env.VERCEL) && !process.env.BLOB_READ_WRITE_TOKEN;
+}
+
 let store: SignupStore | null = null;
 
 export function getSignupStore(): SignupStore {

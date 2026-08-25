@@ -3,7 +3,11 @@ import {
   signupRequestSchema,
   type SignupEntry,
 } from "@/lib/ticket/signupSchema";
-import { getSignupStore, type SignupStore } from "@/lib/ticket/signups";
+import {
+  getSignupStore,
+  storageUnavailable,
+  type SignupStore,
+} from "@/lib/ticket/signups";
 
 /** Injectable so tests can drive the handler against a stub without touching the store. */
 export async function handleSignup(
@@ -15,6 +19,19 @@ export async function handleSignup(
       status,
       headers: { "Content-Type": "application/json" },
     });
+
+  // Checked before the body is even read, so this costs nothing and, just as usefully, a malformed
+  // request can tell you whether storage is wired up without writing a row to find out.
+  if (storageUnavailable()) {
+    console.error("signup route: BLOB_READ_WRITE_TOKEN is not set; refusing to accept signups");
+    return json(
+      {
+        error:
+          "Signups are temporarily unavailable. Please try again later.",
+      },
+      503,
+    );
+  }
 
   let body: unknown;
   try {
