@@ -52,7 +52,12 @@ export default function GenericPage(props: React.PropsWithChildren<{
             )}
             <div className={cn(
                 `border-border border-t`,
-                props.backgroundImage ? "bg-transparent" : "bg-bg",
+                // Must test hasBackdrop, not backgroundImage. SCALAR supplies a
+                // scroll-scrubbed frame sequence and no static image, so keying
+                // off backgroundImage alone dropped an opaque panel over its
+                // canvas. AIRIS only looked right because it happens to define
+                // both, even though the image is not rendered when frames exist.
+                hasBackdrop ? "bg-transparent" : "bg-bg",
                 hasBackdrop ? "mt-[20rem]" : "mt-[13rem]",
                 "z-10 relative flex flex-col items-center justify-center gap-16 pb-[4rem] px-4"
             )}>
