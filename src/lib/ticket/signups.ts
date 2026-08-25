@@ -32,8 +32,8 @@ function keyFor(entry: SignupEntry): string {
 
 const BLOB_API = "https://blob.vercel-storage.com";
 
-/** The SDK pins this; the API rejects requests that omit it. */
-const API_VERSION = "7";
+/** Matches the version @vercel/blob itself sends. The API rejects requests that omit it. */
+const API_VERSION = "12";
 
 type BlobListItem = { pathname: string; url: string; downloadUrl?: string };
 
@@ -74,10 +74,10 @@ export class BlobSignupStore implements SignupStore {
         method: "PUT",
         headers: {
           ...authHeaders(token),
-          "content-type": "application/json",
+          "x-content-type": "application/json",
           // Required: the store is private, and an upload that does not say so is rejected as an
           // attempt to make a public blob in it.
-          "x-access": "private",
+          "x-vercel-blob-access": "private",
           // The key already carries a timestamp and a random suffix; a second one from Blob would
           // only make the object harder to find again.
           "x-add-random-suffix": "0",
