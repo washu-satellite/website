@@ -77,7 +77,8 @@ export async function handleExport(
     return json({ error: "Unauthorized." }, 401);
   }
 
-  if (new URL(request.url).searchParams.get("diagnose") === "1") {
+  const diagnose = new URL(request.url).searchParams.get("diagnose");
+  if (diagnose === "1" || diagnose === "write") {
     // Deliberately ahead of the store read. Reading is exactly what breaks when storage is
     // misconfigured, and a diagnostic that needs the broken call to succeed first tells you nothing.
     // Names only, never values.
@@ -86,6 +87,25 @@ export async function handleExport(
       readCheck = `ok, ${(await (await openStore()).list()).length} entries`;
     } catch (err) {
       readCheck = err instanceof Error ? err.message : String(err);
+    }
+
+    // ?diagnose=write additionally attempts a real append, because a store can be perfectly
+    // readable and still reject writes, and the visitor-facing error is deliberately vague.
+    let writeCheck: string | undefined;
+    if (new URL(request.url).searchParams.get("diagnose") === "write") {
+      try {
+        await (await openStore()).append({
+          name: "ZZ Storage Probe",
+          email: "storage-probe@washusatellite.com",
+          newsletter: false,
+          source: "space",
+          timestamp: new Date().toISOString(),
+          userAgent: "diagnostic",
+        });
+        writeCheck = "ok";
+      } catch (err) {
+        writeCheck = err instanceof Error ? err.message : String(err);
+      }
     }
 
     return json(
@@ -97,6 +117,7 @@ export async function handleExport(
           /BLOB|READ_WRITE_TOKEN/i.test(key),
         ),
         readCheck,
+        ...(writeCheck === undefined ? {} : { writeCheck }),
       },
       200,
     );
