@@ -60,16 +60,12 @@ export async function handleSignup(
   try {
     await store.append(entry);
   } catch (err) {
-    // The store already names the key and operation; surface that rather than a generic 500.
+    // Full detail to the logs, where it is diagnosable. The visitor gets the plain version: storage
+    // failures are our problem, and the underlying message is a bundler stack trace, not advice.
     console.error("signup route: could not persist signup", { entry, err });
     return json(
-      {
-        error:
-          err instanceof Error
-            ? `Could not save your name: ${err.message}`
-            : "Could not save your name.",
-      },
-      500,
+      { error: "Signups are temporarily unavailable. Please try again later." },
+      503,
     );
   }
 
