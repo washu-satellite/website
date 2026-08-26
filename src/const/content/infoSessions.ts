@@ -16,8 +16,6 @@ export type InfoSession = {
   label: string;
   team: string;
   instagram?: string;
-  /** Set on the entry that is ours, so the page can highlight it without special-casing a name. */
-  ours?: boolean;
   /** Breaks are not a team and are rendered differently. */
   break?: boolean;
 };
@@ -47,6 +45,5 @@ export const INFO_SESSIONS: InfoSession[] = [
     label: "5:00 – 6:00",
     team: "Satellite",
     instagram: "https://www.instagram.com/washusatellite/",
-    ours: true,
   },
 ];

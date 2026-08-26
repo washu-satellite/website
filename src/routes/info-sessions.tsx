@@ -75,16 +75,10 @@ function InfoSessionsPage() {
                   session.break
                     ? "border-dashed border-border bg-transparent"
                     : "border-border bg-background",
-                  session.ours && "border-accent-red",
                 )}
               >
                 <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
-                  <span
-                    className={cn(
-                      "font-mono text-sm uppercase tracking-wider tabular-nums",
-                      session.ours ? "text-accent-red" : "text-foreground/60",
-                    )}
-                  >
+                  <span className="font-mono text-sm uppercase tracking-wider tabular-nums text-foreground/60">
                     {session.label}
                   </span>
                   <span
