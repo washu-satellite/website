@@ -16,11 +16,10 @@ export type InfoSession = {
   label: string;
   team: string;
   instagram?: string;
-  /** Set on the entry that is ours, so the page can say so without special-casing a name. */
+  /** Set on the entry that is ours, so the page can highlight it without special-casing a name. */
   ours?: boolean;
   /** Breaks are not a team and are rendered differently. */
   break?: boolean;
-  note?: string;
 };
 
 export const SESSION_DATE = "Sunday, August 30";
@@ -35,7 +34,6 @@ export const INFO_SESSIONS: InfoSession[] = [
     label: "12:00 – 12:30",
     team: "Lunch break",
     break: true,
-    note: "Potentially catered",
   },
   { start: "12:30", end: "13:15", label: "12:30 – 1:15", team: "VTOL", instagram: "https://www.instagram.com/washu.vtol/" },
   { start: "13:15", end: "14:00", label: "1:15 – 2:00", team: "Ursaworks", instagram: "https://www.instagram.com/washu.ursaworks/" },

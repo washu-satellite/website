@@ -62,10 +62,6 @@ function InfoSessionsPage() {
               {SESSION_LOCATION}
             </span>
           </div>
-
-          <p className="text-center text-xs text-foreground/60">
-            The first day student groups are allowed to run programming.
-          </p>
         </div>
 
         <div className="relative w-full">
@@ -99,16 +95,6 @@ function InfoSessionsPage() {
                   >
                     {session.team}
                   </span>
-                  {session.note && (
-                    <span className="text-sm text-foreground/60">
-                      {session.note}
-                    </span>
-                  )}
-                  {session.ours && (
-                    <span className="font-mono text-xs uppercase tracking-wider text-accent-red">
-                      That's us
-                    </span>
-                  )}
                 </div>
 
                 {session.instagram && (
