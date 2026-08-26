@@ -14,6 +14,7 @@ import { Route as SpaceRouteImport } from './routes/space'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as NotReadyRouteImport } from './routes/not-ready'
+import { Route as InfoSessionsRouteImport } from './routes/info-sessions'
 import { Route as ErrorRouteImport } from './routes/error'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ApplyRouteImport } from './routes/apply'
@@ -52,6 +53,11 @@ const RoadmapRoute = RoadmapRouteImport.update({
 const NotReadyRoute = NotReadyRouteImport.update({
   id: '/not-ready',
   path: '/not-ready',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InfoSessionsRoute = InfoSessionsRouteImport.update({
+  id: '/info-sessions',
+  path: '/info-sessions',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ErrorRoute = ErrorRouteImport.update({
@@ -132,6 +138,7 @@ export interface FileRoutesByFullPath {
   '/apply': typeof ApplyRoute
   '/contact': typeof ContactRoute
   '/error': typeof ErrorRoute
+  '/info-sessions': typeof InfoSessionsRoute
   '/not-ready': typeof NotReadyRoute
   '/roadmap': typeof RoadmapRoute
   '/shop': typeof ShopRoute
@@ -153,6 +160,7 @@ export interface FileRoutesByTo {
   '/apply': typeof ApplyRoute
   '/contact': typeof ContactRoute
   '/error': typeof ErrorRoute
+  '/info-sessions': typeof InfoSessionsRoute
   '/not-ready': typeof NotReadyRoute
   '/roadmap': typeof RoadmapRoute
   '/shop': typeof ShopRoute
@@ -175,6 +183,7 @@ export interface FileRoutesById {
   '/apply': typeof ApplyRoute
   '/contact': typeof ContactRoute
   '/error': typeof ErrorRoute
+  '/info-sessions': typeof InfoSessionsRoute
   '/not-ready': typeof NotReadyRoute
   '/roadmap': typeof RoadmapRoute
   '/shop': typeof ShopRoute
@@ -198,6 +207,7 @@ export interface FileRouteTypes {
     | '/apply'
     | '/contact'
     | '/error'
+    | '/info-sessions'
     | '/not-ready'
     | '/roadmap'
     | '/shop'
@@ -219,6 +229,7 @@ export interface FileRouteTypes {
     | '/apply'
     | '/contact'
     | '/error'
+    | '/info-sessions'
     | '/not-ready'
     | '/roadmap'
     | '/shop'
@@ -240,6 +251,7 @@ export interface FileRouteTypes {
     | '/apply'
     | '/contact'
     | '/error'
+    | '/info-sessions'
     | '/not-ready'
     | '/roadmap'
     | '/shop'
@@ -262,6 +274,7 @@ export interface RootRouteChildren {
   ApplyRoute: typeof ApplyRoute
   ContactRoute: typeof ContactRoute
   ErrorRoute: typeof ErrorRoute
+  InfoSessionsRoute: typeof InfoSessionsRoute
   NotReadyRoute: typeof NotReadyRoute
   RoadmapRoute: typeof RoadmapRoute
   ShopRoute: typeof ShopRoute
@@ -313,6 +326,13 @@ declare module '@tanstack/react-router' {
       path: '/not-ready'
       fullPath: '/not-ready'
       preLoaderRoute: typeof NotReadyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/info-sessions': {
+      id: '/info-sessions'
+      path: '/info-sessions'
+      fullPath: '/info-sessions'
+      preLoaderRoute: typeof InfoSessionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/error': {
@@ -422,6 +442,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApplyRoute: ApplyRoute,
   ContactRoute: ContactRoute,
   ErrorRoute: ErrorRoute,
+  InfoSessionsRoute: InfoSessionsRoute,
   NotReadyRoute: NotReadyRoute,
   RoadmapRoute: RoadmapRoute,
   ShopRoute: ShopRoute,

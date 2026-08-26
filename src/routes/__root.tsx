@@ -51,7 +51,7 @@ const CHROMELESS = new Set(['/9njdxq3e'])
  * Pages that carry their own primary call to action. The recruitment popup would open on top of it
  * and ask for a different click, so these opt out of it while keeping the rest of the chrome.
  */
-const NO_POPUP = new Set(['/space'])
+const NO_POPUP = new Set(['/space', '/info-sessions'])
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   const _theme = bStore.use.theme();
