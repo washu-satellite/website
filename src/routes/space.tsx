@@ -19,7 +19,7 @@ export const Route = createFileRoute("/space")({
       {
         name: "description",
         content:
-          "WashU Satellite is sending SCALAR, a 1U CubeSat, to orbit in January 2027. Add your name and we will engrave it on the spacecraft. Free, open to anyone.",
+          "WashU Satellite is sending SCALAR, a 1U CubeSat, to orbit in early 2027. Add your name and we will engrave it on the spacecraft. Free, open to anyone.",
       },
       { property: "og:title", content: "Want to go to space?" },
       {

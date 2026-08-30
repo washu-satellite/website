@@ -18,7 +18,7 @@ import { MAX_NAME_LENGTH } from "@/lib/ticket/signupSchema";
  * site, which says "Early 2027" because the launch provider agreement bars naming a month. If that
  * becomes a problem this is the single string to widen, here and on the ticket.
  */
-export const LAUNCH_WINDOW = "January 2027";
+export const LAUNCH_WINDOW = "early 2027";
 
 /**
  * Survives a reload so someone returning to the page gets their pass back rather than an empty form
