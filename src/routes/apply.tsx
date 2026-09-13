@@ -1,9 +1,4 @@
 "use client";
-import { useEffect, useState } from "react";
-import { CalendarDays } from "lucide-react";
-
-import { upcomingRecruitmentEvents } from "@/components/RecruitmentPopup";
-import { bStore } from "@/hooks/useAppStore";
 import RedirectButton from "@/components/RedirectButton";
 import RedirectCard from "@/components/RedirectCard";
 import { createFileRoute } from "@tanstack/react-router";
@@ -14,14 +9,6 @@ export const Route = createFileRoute('/apply')({
 })
 
 function ApplyPage() {
-    const openRecruitmentPopup = bStore.use.openRecruitmentPopup();
-    // Checked after mount: the answer depends on the current time, and doing
-    // it during render would disagree with the server-rendered HTML.
-    const [hasDates, setHasDates] = useState(false);
-    useEffect(() => {
-        setHasDates(upcomingRecruitmentEvents().length > 0);
-    }, []);
-
     return (
         <div className="flex-1">
             <div className={`fixed top-0 w-full h-full bg-bg-blue`}/>
@@ -40,22 +27,6 @@ function ApplyPage() {
                             text="Apply"
                             href="https://docs.google.com/forms/d/e/1FAIpQLSdaCwk9SUnwtYgEE1-7FHxjRCvHi2kX4gHcxgV2dIsr3NfnwQ/viewform?usp=publish-editor"
                         />
-                        {hasDates && (
-                            <button
-                                type="button"
-                                onClick={openRecruitmentPopup}
-                                className={clsx(
-                                    "inline-flex items-center gap-2 rounded-md border border-border",
-                                    "px-4 py-2 font-mono text-sm uppercase tracking-wider font-semibold",
-                                    "text-foreground/80 hover:text-foreground hover:bg-bg-highlight",
-                                    "focus-visible:outline-2 focus-visible:outline-offset-2",
-                                    "focus-visible:outline-accent-red transition-colors duration-200",
-                                )}
-                            >
-                                <CalendarDays aria-hidden className="w-4 h-4" />
-                                Important dates
-                            </button>
-                        )}
                     </div>
                 </div>
                 <div className="flex flex-row flex-wrap items-center justify-center w-full gap-8">

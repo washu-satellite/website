@@ -13,6 +13,7 @@ import { Route as SponsorsRouteImport } from './routes/sponsors'
 import { Route as SpaceRouteImport } from './routes/space'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
+import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as NotReadyRouteImport } from './routes/not-ready'
 import { Route as InfoSessionsRouteImport } from './routes/info-sessions'
 import { Route as ErrorRouteImport } from './routes/error'
@@ -48,6 +49,11 @@ const ShopRoute = ShopRouteImport.update({
 const RoadmapRoute = RoadmapRouteImport.update({
   id: '/roadmap',
   path: '/roadmap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnersRoute = PartnersRouteImport.update({
+  id: '/partners',
+  path: '/partners',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NotReadyRoute = NotReadyRouteImport.update({
@@ -140,6 +146,7 @@ export interface FileRoutesByFullPath {
   '/error': typeof ErrorRoute
   '/info-sessions': typeof InfoSessionsRoute
   '/not-ready': typeof NotReadyRoute
+  '/partners': typeof PartnersRoute
   '/roadmap': typeof RoadmapRoute
   '/shop': typeof ShopRoute
   '/space': typeof SpaceRoute
@@ -162,6 +169,7 @@ export interface FileRoutesByTo {
   '/error': typeof ErrorRoute
   '/info-sessions': typeof InfoSessionsRoute
   '/not-ready': typeof NotReadyRoute
+  '/partners': typeof PartnersRoute
   '/roadmap': typeof RoadmapRoute
   '/shop': typeof ShopRoute
   '/space': typeof SpaceRoute
@@ -185,6 +193,7 @@ export interface FileRoutesById {
   '/error': typeof ErrorRoute
   '/info-sessions': typeof InfoSessionsRoute
   '/not-ready': typeof NotReadyRoute
+  '/partners': typeof PartnersRoute
   '/roadmap': typeof RoadmapRoute
   '/shop': typeof ShopRoute
   '/space': typeof SpaceRoute
@@ -209,6 +218,7 @@ export interface FileRouteTypes {
     | '/error'
     | '/info-sessions'
     | '/not-ready'
+    | '/partners'
     | '/roadmap'
     | '/shop'
     | '/space'
@@ -231,6 +241,7 @@ export interface FileRouteTypes {
     | '/error'
     | '/info-sessions'
     | '/not-ready'
+    | '/partners'
     | '/roadmap'
     | '/shop'
     | '/space'
@@ -253,6 +264,7 @@ export interface FileRouteTypes {
     | '/error'
     | '/info-sessions'
     | '/not-ready'
+    | '/partners'
     | '/roadmap'
     | '/shop'
     | '/space'
@@ -276,6 +288,7 @@ export interface RootRouteChildren {
   ErrorRoute: typeof ErrorRoute
   InfoSessionsRoute: typeof InfoSessionsRoute
   NotReadyRoute: typeof NotReadyRoute
+  PartnersRoute: typeof PartnersRoute
   RoadmapRoute: typeof RoadmapRoute
   ShopRoute: typeof ShopRoute
   SpaceRoute: typeof SpaceRoute
@@ -319,6 +332,13 @@ declare module '@tanstack/react-router' {
       path: '/roadmap'
       fullPath: '/roadmap'
       preLoaderRoute: typeof RoadmapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partners': {
+      id: '/partners'
+      path: '/partners'
+      fullPath: '/partners'
+      preLoaderRoute: typeof PartnersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/not-ready': {
@@ -444,6 +464,7 @@ const rootRouteChildren: RootRouteChildren = {
   ErrorRoute: ErrorRoute,
   InfoSessionsRoute: InfoSessionsRoute,
   NotReadyRoute: NotReadyRoute,
+  PartnersRoute: PartnersRoute,
   RoadmapRoute: RoadmapRoute,
   ShopRoute: ShopRoute,
   SpaceRoute: SpaceRoute,
