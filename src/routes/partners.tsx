@@ -127,9 +127,9 @@ function PartnersPage() {
             <LevelHeading
               level="LEVEL 01"
               title="Who funds the team"
-              body="The two schools at Washington University paying for the hardware. Between them they cover structures, avionics, machining and the faculty guidance behind every mission we fly."
+              body="The schools, centres and programmes paying for the hardware. Between them they cover structures, avionics, machining, launch and the faculty guidance behind every mission we fly."
             />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {primaryPartners.map((partner) => (
                 <a
                   key={partner.name}

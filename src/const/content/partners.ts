@@ -17,7 +17,7 @@ export type Partner = {
   blurb: string;
 };
 
-/** Washington University's two schools that fund the team directly. */
+/** The institutions and programmes funding the missions directly. */
 export const primaryPartners: Partner[] = [
   {
     name: "McKelvey School of Engineering",
@@ -32,6 +32,29 @@ export const primaryPartners: Partner[] = [
     logo: "/partners/washu-physics.png",
     blurb:
       "Backs the science side of the missions, including our work through the Air Force Research Laboratory's University Nanosatellite Program, and gives us the faculty guidance behind AIRIS and SCALAR.",
+  },
+  {
+    name: "University Nanosatellite Program",
+    href: "https://unp.kirtland.af.mil/",
+    logo: "/partners/unp.svg",
+    blurb:
+      "The Air Force Research Laboratory programme that funds university-built spacecraft. It backs the account our physics-side hardware runs through, and it is the path VECTOR is being developed toward.",
+  },
+  {
+    name: "McDonnell Center for the Space Sciences",
+    href: "https://mcss.wustl.edu/",
+    logo: "/partners/mcdonnell-center.png",
+    blurb:
+      "Washington University's centre for planetary science, astrophysics and fundamental physics, with a history in major space missions. Home to the faculty who advise our missions.",
+  },
+  {
+    // Distinct from the McDonnell Center above, despite both having been
+    // abbreviated MCSS in our own records. This is the NASA Space Grant
+    // affiliate; the McDonnell Center is an internal WashU centre.
+    name: "Missouri Space Grant Consortium",
+    href: "https://mosgc.mst.edu/",
+    blurb:
+      "A NASA Space Grant affiliate that funds student design teams. Washington University is an affiliate institution, and their support goes directly into mission hardware.",
   },
 ];
 
