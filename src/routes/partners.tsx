@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import GenericPage from "@/components/GenericPage";
 import RedirectButton from "@/components/RedirectButton";
 import { Button } from "@/components/ui/button";
-import { Mail, Rocket, Antenna, GraduationCap, FileCheck } from "lucide-react";
+import { Mail } from "lucide-react";
 import {
   inKindPartners,
   primaryPartners,
@@ -17,29 +17,6 @@ const PARTNER_EMAIL = "washusatellite@gmail.com";
 const MAILTO = `mailto:${PARTNER_EMAIL}?subject=${encodeURIComponent(
   "Partnership inquiry — WashU Satellite",
 )}`;
-
-const SUPPORTS = [
-  {
-    Icon: Rocket,
-    title: "Flight hardware",
-    body: "Structures, optics, avionics, and power systems for AIRIS and SCALAR: the parts that actually leave the ground.",
-  },
-  {
-    Icon: Antenna,
-    title: "Ground infrastructure",
-    body: "Antennas, radios, and the ground station that lets us command our spacecraft and receive their data.",
-  },
-  {
-    Icon: GraduationCap,
-    title: "Students",
-    body: "Machining certifications, design software, conference travel, and the training that turns members into engineers.",
-  },
-  {
-    Icon: FileCheck,
-    title: "Launch and licensing",
-    body: "Integration, launch services, and the FCC and NOAA licensing every mission needs before it can fly.",
-  },
-];
 
 /**
  * Partner artwork is full-colour and drawn for light backgrounds, and several
@@ -196,28 +173,6 @@ function PartnersPage() {
       </section>
 
       <div className="px-4 md:px-[4rem] py-12 flex flex-col gap-10">
-        <div className="flex flex-col gap-3">
-          <h2 className="font-mono uppercase text-xs tracking-wider text-foreground/60">
-            What your support funds
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {SUPPORTS.map(({ Icon, title, body }) => (
-              <div
-                key={title}
-                className="flex flex-row gap-4 items-start border border-border rounded-md bg-background p-4"
-              >
-                <div className="rounded-full p-2 border border-border text-foreground/70">
-                  <Icon className="w-4 h-4" />
-                </div>
-                <div className="flex flex-col gap-1 min-w-0">
-                  <h3 className="font-sans font-medium">{title}</h3>
-                  <p className="text-sm text-foreground/80">{body}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
         <div className="flex flex-col items-center gap-8 justify-center bg-secondary/30 border-border border p-8 rounded-md">
           <div className="flex flex-col items-center gap-2 text-center max-w-[34rem]">
             <h2 className="font-mono text-foreground font-medium text-xl">
