@@ -84,7 +84,7 @@ export default function Footer() {
                 <ThemedLink key={"about-us"} arrowLink href={"/#who"} className={clsx(`text-foreground/80`, "font-normal")}>About Us</ThemedLink>
                 <ThemedLink key={"disciplines"} arrowLink href={"/disciplines"} className={clsx(`text-foreground/80`, "font-normal")}>Disciplines</ThemedLink>
                 <ThemedLink key={"roadmap"} arrowLink href={"/roadmap"} className={clsx(`text-foreground/80`, "font-normal")}>Roadmap</ThemedLink>
-                <ThemedLink key={"sponsors"} arrowLink href={"/sponsors"} className={clsx(`text-foreground/80`, "font-normal")}>Sponsors</ThemedLink>
+                <ThemedLink key={"partners"} arrowLink href={"/partners"} className={clsx(`text-foreground/80`, "font-normal")}>Partners</ThemedLink>
             </div>
             <div className="flex-1 flex flex-col items-start gap-1 border-l-0 border-b-0 md:border-l md:border-b border-border p-4">
                 <h3 className="text-sm">Site theme</h3>

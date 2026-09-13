@@ -24,3 +24,5 @@ ca.crt.b64
 .archive/
 .vercel
 .env*
+
+.archive/
