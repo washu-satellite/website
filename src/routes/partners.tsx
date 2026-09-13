@@ -55,9 +55,13 @@ function PartnerLogo({
   partner: Partner;
   className?: string;
 }) {
+  // Placeholder for partners who have not sent artwork yet. Set on the same
+  // light tile at the same height as a real logo so the grid does not go ragged,
+  // and styled as a wordmark rather than an empty box, so a visitor reads it as
+  // deliberate rather than broken.
   if (!partner.logo) {
     return (
-      <span className="font-mono text-sm uppercase tracking-wider text-foreground/70">
+      <span className="font-mono text-center uppercase tracking-[0.12em] text-sm md:text-base font-medium text-neutral-800 leading-tight">
         {partner.name}
       </span>
     );
