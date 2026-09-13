@@ -129,7 +129,9 @@ function PartnersPage() {
               title="Who funds the team"
               body="The schools, centres and programmes paying for the hardware. Between them they cover structures, avionics, machining, launch and the faculty guidance behind every mission we fly."
             />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {/* Two across: four funders make a clean 2x2 rather than the 3+1
+                orphan a three-column grid would leave. */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
               {primaryPartners.map((partner) => (
                 <a
                   key={partner.name}
