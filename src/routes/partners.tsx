@@ -42,11 +42,10 @@ const SUPPORTS = [
 ];
 
 /**
- * Logos sit on a light tile rather than the page background. Several partners
- * forbid recolouring their mark, and most supplied only light-background
- * artwork, so a fixed light tile keeps every logo legible in dark mode without
- * us producing reverse versions they never approved. Falls back to the
- * partner's name when we have no file at all.
+ * Partner artwork is full-colour and drawn for light backgrounds, and several
+ * of them forbid recolouring. The whole partner section therefore sits on white
+ * rather than the site's dark ground, so every mark is shown exactly as its
+ * owner supplied it. Falls back to a wordmark when we have no file.
  */
 function PartnerLogo({
   partner,
@@ -55,13 +54,9 @@ function PartnerLogo({
   partner: Partner;
   className?: string;
 }) {
-  // Placeholder for partners who have not sent artwork yet. Set on the same
-  // light tile at the same height as a real logo so the grid does not go ragged,
-  // and styled as a wordmark rather than an empty box, so a visitor reads it as
-  // deliberate rather than broken.
   if (!partner.logo) {
     return (
-      <span className="font-mono text-center uppercase tracking-[0.12em] text-sm md:text-base font-medium text-neutral-800 leading-tight">
+      <span className="font-mono text-center uppercase tracking-[0.12em] text-base font-medium text-neutral-800">
         {partner.name}
       </span>
     );
@@ -73,6 +68,31 @@ function PartnerLogo({
       loading="lazy"
       className={className}
     />
+  );
+}
+
+function LevelHeading({
+  level,
+  title,
+  body,
+}: {
+  level: string;
+  title: string;
+  body: string;
+}) {
+  return (
+    <div className="flex flex-col gap-3 max-w-[46rem]">
+      <div className="flex items-center gap-3">
+        <span className="font-mono text-xs tracking-[0.25em] text-accent-red">
+          {level}
+        </span>
+        <span className="h-px flex-1 bg-neutral-300" />
+      </div>
+      <h2 className="font-mono text-2xl md:text-3xl font-semibold text-neutral-900">
+        {title}
+      </h2>
+      <p className="text-neutral-600 text-sm md:text-base">{body}</p>
+    </div>
   );
 }
 
@@ -96,68 +116,84 @@ function PartnersPage() {
         </div>
       }
     >
-      <div className="px-4 md:px-[4rem] py-8 flex flex-col gap-10">
-        <div className="flex flex-col gap-3">
-          <h2 className="font-mono uppercase text-xs tracking-wider text-foreground/60">
-            Who funds the team
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {primaryPartners.map((partner) => (
-              <a
-                key={partner.name}
-                href={partner.href}
-                target="_blank"
-                rel="noreferrer"
-                className="flex flex-col gap-4 border border-border rounded-md bg-background p-6 hover:bg-bg-highlight transition-colors duration-200"
-              >
-                <div className="flex items-center justify-center h-24 rounded-md bg-white px-5 py-4">
-                  <PartnerLogo
-                    partner={partner}
-                    className="max-h-full max-w-full w-auto object-contain"
-                  />
-                </div>
-                <div className="flex flex-col gap-1">
-                  <h3 className="font-sans font-medium">{partner.name}</h3>
-                  <p className="text-sm text-foreground/80">{partner.blurb}</p>
-                </div>
-              </a>
-            ))}
+      {/*
+        Full-bleed: GenericPage pads its children by 1rem a side, so pulling the
+        margins back by that much and growing the width to match lands the white
+        band exactly on the viewport edges without a horizontal scrollbar.
+      */}
+      <section className="-mx-4 w-[calc(100%+2rem)] bg-white py-16 md:py-24">
+        <div className="mx-auto max-w-[76rem] px-6 md:px-12 flex flex-col gap-16 md:gap-24">
+          <div className="flex flex-col gap-10">
+            <LevelHeading
+              level="LEVEL 01"
+              title="Who funds the team"
+              body="The two schools at Washington University paying for the hardware. Between them they cover structures, avionics, machining and the faculty guidance behind every mission we fly."
+            />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+              {primaryPartners.map((partner) => (
+                <a
+                  key={partner.name}
+                  href={partner.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group flex flex-col gap-6 rounded-lg border border-neutral-200 bg-white p-8 md:p-10 hover:border-neutral-400 hover:shadow-lg transition-all duration-200"
+                >
+                  <div className="flex items-center justify-center h-28 md:h-36">
+                    <PartnerLogo
+                      partner={partner}
+                      className="max-h-full max-w-full w-auto object-contain transition-transform duration-200 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <h3 className="font-sans font-semibold text-lg text-neutral-900">
+                      {partner.name}
+                    </h3>
+                    <p className="text-sm md:text-base text-neutral-600 leading-relaxed">
+                      {partner.blurb}
+                    </p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-10">
+            <LevelHeading
+              level="LEVEL 02"
+              title="In-kind partners"
+              body="Companies who give us parts, manufacturing and software instead of cash. Much of what flies was cut, machined, simulated or designed with something on this list."
+            />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {inKindPartners.map((partner) => (
+                <a
+                  key={partner.name}
+                  href={partner.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group flex flex-col gap-5 rounded-lg border border-neutral-200 bg-white p-6 hover:border-neutral-400 hover:shadow-md transition-all duration-200"
+                >
+                  <div className="flex items-center justify-center h-20 md:h-24">
+                    <PartnerLogo
+                      partner={partner}
+                      className="max-h-full max-w-full w-auto object-contain transition-transform duration-200 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2 min-w-0">
+                    <h3 className="font-sans font-semibold text-neutral-900">
+                      {partner.name}
+                    </h3>
+                    <p className="text-sm text-neutral-600 leading-relaxed">
+                      {partner.blurb}
+                    </p>
+                  </div>
+                </a>
+              ))}
+            </div>
           </div>
         </div>
+      </section>
 
-        <div className="flex flex-col gap-3">
-          <h2 className="font-mono uppercase text-xs tracking-wider text-foreground/60">
-            In-kind partners
-          </h2>
-          <p className="text-sm text-foreground/70 max-w-[46rem]">
-            Companies who give us parts, manufacturing and software instead of
-            cash. Much of what flies was cut, machined, simulated or designed
-            with something on this list.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {inKindPartners.map((partner) => (
-              <a
-                key={partner.name}
-                href={partner.href}
-                target="_blank"
-                rel="noreferrer"
-                className="flex flex-col gap-4 border border-border rounded-md bg-background p-4 hover:bg-bg-highlight transition-colors duration-200"
-              >
-                <div className="flex items-center justify-center h-20 rounded-md bg-white px-4 py-3">
-                  <PartnerLogo
-                    partner={partner}
-                    className="max-h-full max-w-full w-auto object-contain"
-                  />
-                </div>
-                <div className="flex flex-col gap-1 min-w-0">
-                  <h3 className="font-sans font-medium text-sm">{partner.name}</h3>
-                  <p className="text-sm text-foreground/80">{partner.blurb}</p>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-
+      <div className="px-4 md:px-[4rem] py-12 flex flex-col gap-10">
         <div className="flex flex-col gap-3">
           <h2 className="font-mono uppercase text-xs tracking-wider text-foreground/60">
             What your support funds

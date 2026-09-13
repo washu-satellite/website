@@ -29,6 +29,7 @@ export const primaryPartners: Partner[] = [
   {
     name: "Department of Physics",
     href: "https://physics.wustl.edu/",
+    logo: "/partners/washu-physics.png",
     blurb:
       "Backs the science side of the missions, including our work through the Air Force Research Laboratory's University Nanosatellite Program, and gives us the faculty guidance behind AIRIS and SCALAR.",
   },
@@ -63,12 +64,14 @@ export const inKindPartners: Partner[] = [
   {
     name: "SendCutSend",
     href: "https://sendcutsend.com/",
+    logo: "/partners/sendcutsend.png",
     blurb:
       "Laser cutting and sheet metal fabrication. Their parts are already flying on AIRIS, and they have backed the team across three separate sponsorship rounds.",
   },
   {
     name: "SolidWorks",
     href: "https://www.solidworks.com/",
+    logo: "/partners/solidworks.png",
     blurb:
       "CAD licences for every member of the team, plus certification exams that give students a credential to leave with.",
   },
