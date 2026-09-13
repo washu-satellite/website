@@ -268,9 +268,11 @@ export default function NavBar() {
 
         {/* The only filled control in the header, and the only one that stays
             visible below lg. It replaces the hero CTA, so it has to carry the
-            primary action on its own at every breakpoint. */}
+            primary action on its own at every breakpoint. Points at /space
+            rather than /apply now that Fall 2026 recruiting has closed: the
+            name-to-orbit campaign is the thing we actually want clicks on. */}
         <Link
-          to="/apply"
+          to="/space"
           className={cn(
             "group inline-flex items-center gap-2 rounded-md shrink-0",
             "px-3 sm:px-4 py-2 font-mono text-sm uppercase tracking-wider font-semibold",
@@ -280,7 +282,7 @@ export default function NavBar() {
             "focus-visible:outline-accent-red transition-all duration-300",
           )}
         >
-          Apply
+          Go to space
           <ArrowRight
             aria-hidden
             className="w-4 h-4 group-hover:translate-x-[3px] transition-transform duration-300"
