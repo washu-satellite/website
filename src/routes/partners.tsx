@@ -42,11 +42,19 @@ const SUPPORTS = [
 ];
 
 /**
- * Swaps to the reverse artwork in dark mode via CSS rather than the theme
- * store, so the correct logo is in the server-rendered HTML and never flashes
- * the wrong one on load. Falls back to the partner's name when we have no file.
+ * Logos sit on a light tile rather than the page background. Several partners
+ * forbid recolouring their mark, and most supplied only light-background
+ * artwork, so a fixed light tile keeps every logo legible in dark mode without
+ * us producing reverse versions they never approved. Falls back to the
+ * partner's name when we have no file at all.
  */
-function PartnerLogo({ partner, className }: { partner: Partner; className?: string }) {
+function PartnerLogo({
+  partner,
+  className,
+}: {
+  partner: Partner;
+  className?: string;
+}) {
   if (!partner.logo) {
     return (
       <span className="font-mono text-sm uppercase tracking-wider text-foreground/70">
@@ -54,22 +62,13 @@ function PartnerLogo({ partner, className }: { partner: Partner; className?: str
       </span>
     );
   }
-  const dark = partner.logoDark ?? partner.logo;
   return (
-    <>
-      <img
-        src={partner.logo}
-        alt={partner.name}
-        loading="lazy"
-        className={`${className} block dark:hidden`}
-      />
-      <img
-        src={dark}
-        alt={partner.name}
-        loading="lazy"
-        className={`${className} hidden dark:block`}
-      />
-    </>
+    <img
+      src={partner.logo}
+      alt={partner.name}
+      loading="lazy"
+      className={className}
+    />
   );
 }
 
@@ -107,8 +106,11 @@ function PartnersPage() {
                 rel="noreferrer"
                 className="flex flex-col gap-4 border border-border rounded-md bg-background p-6 hover:bg-bg-highlight transition-colors duration-200"
               >
-                <div className="flex items-center h-16">
-                  <PartnerLogo partner={partner} className="max-h-16 w-auto object-contain" />
+                <div className="flex items-center justify-center h-24 rounded-md bg-white px-5 py-4">
+                  <PartnerLogo
+                    partner={partner}
+                    className="max-h-full max-w-full w-auto object-contain"
+                  />
                 </div>
                 <div className="flex flex-col gap-1">
                   <h3 className="font-sans font-medium">{partner.name}</h3>
@@ -137,8 +139,11 @@ function PartnersPage() {
                 rel="noreferrer"
                 className="flex flex-col gap-4 border border-border rounded-md bg-background p-4 hover:bg-bg-highlight transition-colors duration-200"
               >
-                <div className="flex items-center h-10">
-                  <PartnerLogo partner={partner} className="max-h-10 w-auto object-contain" />
+                <div className="flex items-center justify-center h-20 rounded-md bg-white px-4 py-3">
+                  <PartnerLogo
+                    partner={partner}
+                    className="max-h-full max-w-full w-auto object-contain"
+                  />
                 </div>
                 <div className="flex flex-col gap-1 min-w-0">
                   <h3 className="font-sans font-medium text-sm">{partner.name}</h3>
