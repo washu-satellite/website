@@ -125,7 +125,7 @@ export default function TicketClaim() {
       const trimmedName = name.trim();
       const trimmedEmail = email.trim();
 
-      if (!trimmedName) return setError("Enter the name you want engraved.");
+      if (!trimmedName) return setError("Enter the name you want sent.");
       if (!trimmedEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
         return setError("Enter an email so we can reach you about the launch.");
       }
@@ -250,7 +250,7 @@ export default function TicketClaim() {
     <form onSubmit={submit} className="flex w-full flex-col gap-5" noValidate>
       <div className="flex flex-col gap-2">
         <label htmlFor="space-name" className={labelClass}>
-          Name to engrave
+          Name to send
         </label>
         <input
           id="space-name"
