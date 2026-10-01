@@ -32,7 +32,7 @@
   { "name": "Wilson Gao", "email": "gao.wilson@wustl.edu", "teams": ["Mechanical"], "isAdmin": false, "role": "Moving Frame — AIRIS", "headshot": "/headshots/Mechanical/Gao_Wilson.jpg" },
   { "name": "Julia Hannon", "email": "hannon.j@wustl.edu", "teams": ["Mechanical"], "isAdmin": false, "role": "Thermals — SCALAR" },
   { "name": "Becky Winkler", "email": "winklerr@wustl.edu", "teams": ["Mechanical"], "isAdmin": false, "role": "Structure — SCALAR", "headshot": "/headshots/Mechanical/Winkler_Becky.jpg" },
-  { "name": "Warren Schindler", "email": "schindler.w@wustl.edu", "teams": ["Mechanical"], "isAdmin": false, "role": "Structures Module RE — GS-2" },
+  { "name": "Warren Schindler", "email": "schindler.w@wustl.edu", "teams": ["Mechanical"], "isAdmin": false, "role": "Structures Module RE — GS-2", "headshot": "/headshots/Mechanical/Schindler_Warren.jpg" },
   { "name": "William Fang", "email": "fwilliam@wustl.edu", "teams": ["Mechanical"], "isAdmin": false },
   { "name": "Jackson Shurman", "email": "j.c.shurman@wustl.edu", "teams": ["Mechanical"], "isAdmin": false },
   { "name": "Paul Fleck", "email": "fleck@wustl.edu", "teams": ["Electrical"], "isAdmin": false, "headshot": "/headshots/Electrical/Paul%20Fleck.jpg" },

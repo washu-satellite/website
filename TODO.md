@@ -38,7 +38,7 @@ Still open:
 - Nothing on the site currently shows a Chief Electrical Engineer. Confirm who holds CEE, or
   whether the position is vacant.
 - Still missing headshots: Andrew Press, Aman Verma, Qihan Wang, Nick Jarmuz, Isaac Gutierrez,
-  Sophie Yokoo, Zachary Dang, Travis Kuo, Julia Hannon, Warren Schindler, William Fang,
+  Sophie Yokoo, Zachary Dang, Travis Kuo, Julia Hannon, William Fang,
   Jackson Shurman, Nickalus Bui, and others.
 - No member has `gradYear` or `linkedin` set, though both fields are supported and rendered.
 
