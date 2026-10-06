@@ -27,6 +27,9 @@ export const LAUNCH_WINDOW = "early 2027";
  */
 const CLAIMED_KEY = "wusat.space.claimed";
 
+/** The real SCALAR render, copied out of the exploded-view frame sequence at its assembled frame. */
+const CRAFT_SRC = "/ticket/scalar.webp";
+
 type Claimed = { name: string };
 
 type Status = "idle" | "sending" | "done";
@@ -90,6 +93,29 @@ export default function TicketClaim() {
   const [newsletter, setNewsletter] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [craft, setCraft] = useState<HTMLImageElement | null>(null);
+
+  // decode() before the image reaches the canvas, so the pass never exports a half-painted render.
+  // Until it resolves the draw falls back to the wireframe, so an early download is still complete.
+  useEffect(() => {
+    let cancelled = false;
+    const img = new Image();
+    img.src = CRAFT_SRC;
+    img
+      .decode()
+      .then(() => {
+        if (!cancelled) setCraft(img);
+      })
+      .catch((err) => {
+        console.error("TicketClaim: could not decode the spacecraft render", {
+          src: CRAFT_SRC,
+          err,
+        });
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   // localStorage does not exist during SSR, so a restored pass can only resolve after mount.
   useEffect(() => {
@@ -106,18 +132,18 @@ export default function TicketClaim() {
   useEffect(() => {
     if (!passenger || !canvasRef.current) return;
     try {
-      drawBoardingPass(canvasRef.current, {
-        passenger,
-        manifestId,
-        window: LAUNCH_WINDOW,
-      });
+      drawBoardingPass(
+        canvasRef.current,
+        { passenger, manifestId, window: LAUNCH_WINDOW },
+        craft,
+      );
     } catch (err) {
       console.error("TicketClaim: could not draw the boarding pass", {
         passenger,
         err,
       });
     }
-  }, [passenger, manifestId]);
+  }, [passenger, manifestId, craft]);
 
   const submit = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {

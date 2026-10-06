@@ -128,8 +128,9 @@ function field(
 }
 
 /**
- * A 1U cube in isometric wireframe, drawn rather than loaded. An <img> would have to finish
- * decoding before the export, which turns a synchronous draw into a race the download can lose.
+ * A 1U cube in isometric wireframe. Only the fallback now: it is generic where the real SCALAR
+ * render is the actual spacecraft, but it draws synchronously, so a download fired before the
+ * render decodes still produces a complete pass rather than a hole.
  */
 function cubeWireframe(
   ctx: CanvasRenderingContext2D,
@@ -210,6 +211,29 @@ function cubeWireframe(
   ctx.restore();
 }
 
+/**
+ * The spacecraft mark. Draws the SCALAR render once it has decoded, falling back to the wireframe
+ * until then. Width-fit rather than box-fit because the render is taller than it is wide and the
+ * gap between the headline and the perforation constrains height, not width.
+ */
+function craftMark(
+  ctx: CanvasRenderingContext2D,
+  craft: HTMLImageElement | null | undefined,
+  cx: number,
+  cy: number,
+  width: number,
+) {
+  if (!craft?.naturalWidth) {
+    cubeWireframe(ctx, cx, cy, 210);
+    return;
+  }
+  const h = (craft.naturalHeight / craft.naturalWidth) * width;
+  ctx.save();
+  ctx.globalAlpha = 0.92;
+  ctx.drawImage(craft, cx - width / 2, cy - h / 2, width, h);
+  ctx.restore();
+}
+
 function starfield(ctx: CanvasRenderingContext2D, seed: number) {
   ctx.save();
   let s = seed;
@@ -253,6 +277,8 @@ function barcode(
 export function drawBoardingPass(
   canvas: HTMLCanvasElement,
   { passenger, manifestId, window: launchWindow }: BoardingPass,
+  /** Decoded SCALAR render. Omitted or still loading falls back to the wireframe. */
+  craft?: HTMLImageElement | null,
 ): void {
   canvas.width = PASS_W;
   canvas.height = PASS_H;
@@ -275,9 +301,10 @@ export function drawBoardingPass(
 
   starfield(ctx, hash(manifestId));
 
-  // Centred in the gap between the headline and the perforation. The deployed panels make the
-  // drawing 2.56x its size argument wide, so it clears both edges by roughly 45px.
-  cubeWireframe(ctx, STUB_X - 315, PASS_H * 0.34, 210);
+  // Sits in the empty quadrant right of the headline. Width is capped by height, not width: the
+  // render must clear the hairline at y=148 above and the PASSENGER label at y=520 below, since a
+  // long name is shrunk to fit the full panel width and would otherwise run underneath it.
+  craftMark(ctx, craft, STUB_X - 315, PASS_H * 0.34, 290);
 
   // Crimson rail down the left edge, the same device the rest of our print material uses.
   ctx.fillStyle = CRIMSON;
