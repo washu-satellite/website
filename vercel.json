@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    {
+      "source": "/masquerade",
+      "destination": "https://partiful.com/e/7x5kaIeGWEOCEI9seANa?c=WYQnizsE",
+      "permanent": false
+    }
+  ],
   "headers": [
     {
       "source": "/(.*).mp4",
