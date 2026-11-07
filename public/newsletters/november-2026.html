@@ -1,0 +1,210 @@
+<style>
+  :root { color-scheme: light dark; --bg-page: #f8f8f8; --bg-card: #ffffff; --text-main: #333333; --text-muted: #666666; --text-soft: #bbbbbb; --text-subtle: #888888; --accent: #e13c3b; --border: oklch(92.2% 0 0); --summary-bg: #f8f8f8; --summary-title: #222222; --footer-link: #ffcccc; }
+  .dark { --bg-page: #101010; --bg-card: #171717; --text-main: #e3e3e3; --text-muted: #b5b5b5; --text-soft: #bbbbbb; --text-subtle: #8a8a8a; --accent: #e13c3b; --border: oklch(100% 0 0 / 0.15); --summary-bg: #1f1f1f; --summary-title: #f0f0f0; --footer-link: #ffcccc; }
+  .container { max-width: 768px; margin: 0 auto; background: var(--bg-card); border: 1px solid var(--border); box-sizing: border-box; border-radius: 8px; overflow: hidden; }
+  .header { background-color: #000000; text-align: center; padding: 20px 20px 10px 20px; color: #ffffff; }
+  .header img { display: block; max-height: 60px; margin: 5px auto; }
+  .issue-date { margin: 5px 0; font-size: 14px; color: var(--text-soft); }
+  .header-bar { height: 6px; background-color: var(--accent); }
+  .hero img { width: 100%; height: auto; display: block; border-radius: 0; margin: 0; }
+  .hero-caption { margin: 8px 20px 0 20px; font-size: 13px; color: var(--text-muted); font-style: italic; text-align: center; }
+  .content { padding: 20px; color: var(--text-main); line-height: 1.6; }
+  .section { margin-bottom: 40px; }
+  .section h2 { color: var(--accent); border-bottom: 2px solid var(--accent); padding-bottom: 5px; margin-bottom: 15px; }
+  .summary-box { background: var(--summary-bg); border: 1px solid var(--border); border-radius: 12px; padding: 12px 16px; margin: 14px 0; }
+  .summary-title { margin: 0 0 8px 0; font-weight: 700; color: var(--summary-title); }
+  .summary-box ul { margin: 0; padding-left: 20px; }
+  .summary-box li { margin: 4px 0; list-style-type: disc; }
+  .image-block { margin: 15px 0; }
+  .image-block img { width: 100%; border-radius: 8px; display: block; }
+  .image-caption { margin: 8px 0 0 0; font-size: 13px; color: var(--text-muted); font-style: italic; }
+  .footer { background-color: #000000; color: var(--text-soft); text-align: center; padding: 20px; font-size: 14px; }
+  .footer p { margin: 0 0 8px 0; }
+  .footer .copyright { margin: 0; }
+  .footer .address { margin: 10px 0 0 0; font-size: 12px; color: var(--text-subtle); line-height: 1.5; }
+  .footer a { color: var(--footer-link); text-decoration: none; margin: 0 5px; }
+</style>
+
+<div class="container">
+
+  <!-- HEADER WITH LOGO -->
+  <div class="header">
+    <img src="https://cad3n.com/satfiles/Satellite%20Logo.svg" alt="WashU Satellite Logo" title="WashU Satellite Logo" />
+    <p class="issue-date">Newsletter &bull; November 2026</p>
+  </div>
+  <div class="header-bar"></div>
+
+  <!-- MAIN FEATURE IMAGE -->
+  <div class="hero">
+    <img src="https://cad3n.com/satfiles/Header.jpg" alt="Large group of students standing on the steps in front of Brookings Hall" title="WashU Satellite Full Team" />
+    <p class="hero-caption">The full WashU Satellite team in Fall 2026, standing on the steps of Brookings Hall.</p>
+  </div>
+
+  <div class="content">
+
+    <!-- 🛰️ DEAR READER -->
+    <div class="section">
+      <h2>Dear Reader</h2>
+      <p>
+        Welcome to the second edition of the WashU Satellite newsletter! Whether you&rsquo;re new here or have been following along since our first edition, thank you for joining us. WashU Satellite is the university&rsquo;s only student-led space mission engineering team, and we are excited to continue sharing our journey with you.
+      </p>
+
+      <div class="summary-box">
+        <p class="summary-title">Newsletter Highlights</p>
+        <ul>
+          <li>SCALAR, our first CubeSat, is in final assembly and full-system testing ahead of its Spring 2027 launch, and you can now <a href="https://www.washusatellite.com/space" target="_blank" rel="noopener noreferrer">send your name to space</a> onboard it.</li>
+          <li>AIRIS, our near-space telescope, passed summer testing at NASA&rsquo;s balloon facility in Texas and has shipped to Antarctica, while members test firmware on a ground copy.</li>
+          <li>VECTOR has been handed off to the team, former members published its concept at the IEEE Aerospace Conference, and GS-2 is nearly ready for the Crow Hall roof.</li>
+          <li>The team recruited over 30 new members to reach more than 70, welcomed three new administrative team members, and bonded through subteam competitions and a social.</li>
+          <li>Ten members attended the 40th annual Small Satellite Conference in Salt Lake City, and team president Aavik Wadivkar gave the MSRAL keynote on AIRIS.</li>
+          <li>Dr. Carolyn Kierans, known for her work on NASA&rsquo;s COSI mission and the ComPair balloon instrument, spoke to the team, and Student Life featured us in an <a href="https://www.studlife.com/scene/2026/10/01/up-and-atom-washu-satellite-prepares-for-takeoff" target="_blank" rel="noopener noreferrer">article</a>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 🚀 PROJECT UPDATES -->
+    <div class="section">
+      <h2>Project Updates</h2>
+
+      <p>
+        Our first 1U CubeSat, SCALAR, has progressed greatly. Over the summer, members consistently submitted payload and integration deliverables to our launch partner, RIDE!. This semester, we are in full swing, dedicating our time to final assembly, software integration, and full system testing. Our electrical team is testing the flight boards, payload, radio, and power system. The structures team is preparing testing facilities and finalizing assembly procedures. Software teams are finalizing the flight software for sending data and controlling orbit modes, while ADCS develops 3-axis control algorithms utilizing our custom magnetorquers for on-orbit rotation. The team is gearing up for TVAC and vibration testing, and we are super excited for our 2027 launch. If you want to send your name to space onboard the CubeSat, get your boarding pass at <a href="https://www.washusatellite.com/space" target="_blank" rel="noopener noreferrer">washusatellite.com/space</a>.
+      </p>
+      <div class="image-block">
+        <img src="https://cad3n.com/satfiles/SCALAR.jpg" alt="Two members leaning over a small cube-shaped satellite on a lab bench" title="SCALAR Assembly" />
+        <p class="image-caption">Warren Schindler and Beck Winkler working on assembly for SCALAR, our 1U CubeSat.</p>
+      </div>
+
+      <p>
+        After successful rigorous summer testing at the NASA Columbia Scientific Balloon Facility, our near-space telescope, AIRIS, was shipped to Antarctica ahead of its winter launch. While it ships, WashU Satellite students are using a physical copy built from prototype parts of AIRIS to test firmware changes on the ground, minimizing the risk of uploading new algorithms in flight. Physics students have been working to generate accurate sample images, verify the burst detection pipeline, and model precise orientation. Software students are now implementing sun avoidance algorithms and finalizing the concept of operations pipeline, ensuring everything is perfectly ready for a successful mission this winter.
+      </p>
+      <div class="image-block">
+        <img src="https://cad3n.com/satfiles/Columbia.jpg" alt="Small telescope with gold tape and a Remove Before Flight tag, mounted on a metal test stand" title="AIRIS Testing" />
+        <p class="image-caption">AIRIS mounted for testing at the NASA Columbia Scientific Balloon Facility in Palestine, Texas.</p>
+      </div>
+
+      <p>
+        VECTOR is a future mission concept designed to validate the capacity for autonomous optical transient detection on-orbit. The mission concept originated as part of the University Nanosatellite Program&rsquo;s Mission Concept course, which we sent former members Sophie Fendler, Jack Galloway, and Krystal Carranza to in 2024. The mission concept has now been handed off to the team in preparation for submission in Fall 2027.
+      </p>
+      <div class="image-block">
+        <img src="https://cad3n.com/satfiles/VECTOR.jpg" alt="Team members seated at tables in a classroom, facing a presentation slide at the front of the room" title="VECTOR Kickoff" />
+        <p class="image-caption">Members at the VECTOR kickoff meeting, going over the mission&rsquo;s constraints and design factors.</p>
+      </div>
+
+      <p>
+        GS-2, a UHF helical antenna, is almost ready to be mounted on the roof of Crow Hall. This ground station will allow us to communicate with all of our future missions, including SCALAR and VECTOR. In order to communicate with satellites during the short time they pass over St. Louis, GS-2 must rotate to continuously point at them. The team had a chance to demonstrate this functionality during this year&rsquo;s McKelvey in Action, where student groups like ours were able to showcase their projects to the local community.
+      </p>
+      <div class="image-block">
+        <img src="https://cad3n.com/satfiles/GS2.png" alt="Member in a lab holding up a tall helical antenna mounted on a perforated metal plate" title="GS-2 Antenna" />
+        <p class="image-caption">Paul Fleck holding up the GS-2 helical antenna, soon to be mounted on Crow Hall.</p>
+      </div>
+    </div>
+
+    <!-- 📰 RECENT EVENTS -->
+    <div class="section">
+      <h2>Recent Events</h2>
+
+      <p>
+        In an exciting milestone for our VECTOR project, former members Sophie and Jack recently published a paper for the Institute of Electrical and Electronics Engineers (IEEE) Aerospace Conference. Their paper describes the VECTOR mission concept and introduces a novel approach to verifying transient detection in orbit. Sophie is now pursuing a PhD at Caltech while Jack is finishing his master&rsquo;s at WashU before starting a full-time position as a spacecraft engineer.
+      </p>
+
+      <p>
+        On October 7th, NASA Goddard Space Flight Center research astrophysicist Dr. Carolyn Kierans spoke with our team. Dr. Kierans studies gamma-ray astronomy, working on NASA&rsquo;s Compton Spectrometer and Imager (COSI) mission and leading the ComPair balloon instrument. We now have two projects focusing on advancing gamma-ray astronomy, so we are very grateful that she was able to share her relevant experience with our team.
+      </p>
+      <div class="image-block">
+        <img src="https://cad3n.com/satfiles/DrKierans.jpg" alt="Members seated in a classroom, watching a virtual presentation on a large screen" title="Dr. Kierans Talk" />
+        <p class="image-caption">Dr. Carolyn Kierans of NASA Goddard presenting to the team on gamma-ray astronomy.</p>
+      </div>
+
+      <p>
+        WashU Satellite was featured in an <a href="https://www.studlife.com/scene/2026/10/01/up-and-atom-washu-satellite-prepares-for-takeoff" target="_blank" rel="noopener noreferrer">article</a> by the WashU Student Life newspaper, which talked about the club&rsquo;s recent history and progress on our current projects. We are honored to have been featured in the newspaper, and you can hear directly from students who helped make SCALAR and AIRIS possible.
+      </p>
+    </div>
+
+    <!-- 👩‍🚀 PERSONNEL GROWTH -->
+    <div class="section">
+      <h2>Personnel Growth</h2>
+
+      <p>
+        This semester, we are proud to announce three new administrative team members. Assuming the role of Project Manager is Andrew Press, a third-year mechanical engineering major. Andrew loves backpacking, biking, and playing Kerbal Space Program. Julia Hannon is our new Mechanical Team Lead. Julia is a third-year chemical engineering major who enjoys upcycling, hiking, and mixed media art. Lastly, Vanya Agrawal, our new Mission Operations Team Lead, is a second-year astrophysics and systems engineering major who enjoys music composition, South Asian a cappella, and Indian classical dance.
+      </p>
+
+      <p>
+        Fall recruiting was very successful overall. We recruited over 30 new members, growing the team to more than 70 students across all of our subteams. The new members come from all of WashU&rsquo;s schools, although most are McKelvey or ArtSci, and range from first years to graduate students. We are excited to see what they will contribute.
+      </p>
+      <div class="image-block">
+        <img src="https://cad3n.com/satfiles/Recruiting.jpg" alt="Member holding a WashU Satellite sign on a grassy field, with an antenna on a pole behind him" title="Club Fair Recruiting" />
+        <p class="image-caption">Josh Smith holding a WashU Satellite sign in front of GS-2 at the Club Fair.</p>
+      </div>
+
+      <p>
+        With this many new members, we decided to host a competition in order to integrate everyone into the team and foster collaboration between subteams. At our first meeting with all the new members, we hosted a paper airplane competition, where the subteams competed to create the paper airplane that would fly the farthest. The following meeting, we held a rock paper scissors championship to see which subteam would come out on top.
+      </p>
+      <div class="image-block">
+        <img src="https://cad3n.com/satfiles/Airplane.jpg" alt="Member throwing a paper airplane across a lecture hall while others watch" title="Paper Airplane Competition" />
+        <p class="image-caption">Mechanical subteam members testing their paper airplanes shortly before the subteam competition.</p>
+      </div>
+
+      <p>
+        On October 10th, we had our first social event of the year, where the different subteams competed in various events throughout the night, including a bottle flipping contest, a relay race, and a human knot untying race.
+      </p>
+    </div>
+
+    <!-- 🌌 CONFERENCES -->
+    <div class="section">
+      <h2>Conferences</h2>
+
+      <p>
+        From August 23rd to 26th, WashU Satellite sent 10 members spanning all our discipline subteams to the Small Satellite Conference in Salt Lake City, Utah. The team was able to network with aerospace professionals and potential sponsors. They also presented a poster, heard from other student groups, and bonded together outside of the conference. The members were Josh Smith, Oliver Yeaman, Matt Dunn, Peter Essa, Cooper Rodriguez, Aidan Moriarty, Allen Maldonado, Andrew Press, Aavik Wadivkar, and Warren Schindler.
+      </p>
+      <div class="image-block">
+        <img src="https://cad3n.com/satfiles/SmallSat.jpg" alt="Ten team members standing in a row in front of large Small Sat letters" title="Small Satellite Conference" />
+        <p class="image-caption">WashU Satellite members at the 40th annual Small Satellite Conference in Salt Lake City.</p>
+      </div>
+
+      <p>
+        On September 24th, the WashU Center for Career Engagement partnered with Boeing to host a recruitment event for McKelvey School of Engineering students. The event featured a pizza session followed by informal tabling, allowing students to network with recruiters and industry representatives. It was also a great opportunity for WashU Satellite members to see how their skills can translate to real aerospace applications.
+      </p>
+      <div class="image-block">
+        <img src="https://cad3n.com/satfiles/Boeing.jpg" alt="Member standing beside a WashU Satellite table and poster, with a ground station antenna on a pole behind him" title="Boeing Recruitment Event" />
+        <p class="image-caption">Chief of Mission Operations Aidan Moriarty at our table during the Boeing recruitment event.</p>
+      </div>
+    </div>
+
+    <!-- ✨ CLOSING REMARKS -->
+    <div class="section">
+      <h2>Closing Remarks</h2>
+
+      <p>
+        To end this newsletter, we would like to share our video of the Mid-States Region of the Astronomical League (MSRAL) keynote speech, presented by team president Aavik Wadivkar, on AIRIS, our gamma-ray burst imaging system. You can click on the image below (or <a href="https://www.youtube.com/watch?v=7mrvKYO8bLk&amp;autoplay=1" target="_blank" rel="noopener noreferrer">here</a> if it is not working) to view it directly on YouTube.
+      </p>
+
+      <div class="image-block">
+        <a href="https://www.youtube.com/watch?v=7mrvKYO8bLk&amp;autoplay=1" target="_blank" rel="noopener noreferrer">
+          <img src="https://cad3n.com/satfiles/MSRAL.jpg" alt="Speaker on stage in front of a large slide showing a timeline of the team's projects" title="MSRAL Keynote YouTube Video" />
+        </a>
+        <p class="image-caption">Team president Aavik Wadivkar giving the keynote on AIRIS at the MSRAL meeting.</p>
+      </div>
+
+      <p>
+        WashU Satellite has accomplished a lot over the past few months, and we plan to keep going. Thank you for reading to the end, and stay tuned for the next edition of the WashU Satellite newsletter as we reach for the stars. If you have any questions or comments, please reach out to us.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p><strong>The WashU Satellite Team</strong></p>
+    <p>
+      Follow us:
+      <a href="https://www.instagram.com/washusatellite/" target="_blank" rel="noreferrer">Instagram</a> &bull;
+      <a href="https://www.linkedin.com/company/washu-satellite/" target="_blank" rel="noreferrer">LinkedIn</a> &bull;
+      <a href="https://www.youtube.com/@WashUSatellite" target="_blank" rel="noreferrer">YouTube</a>
+    </p>
+    <p class="copyright">&copy; 2026 WashU Satellite</p>
+    <p class="address">
+      1 Brookings Drive | St. Louis, MO 63130
+    </p>
+  </div>
+
+</div>

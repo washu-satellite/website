@@ -1,7 +1,14 @@
 [
   {
+    "slug": "november-2026",
+    "title": "Newsletter Second Edition: Ready for Launch",
+    "date": "2026-11-06",
+    "summary": "Inside: SCALAR in final testing, AIRIS shipped to Antarctica, GS-2 nearly on the roof, new team leads, and a fall full of conferences, speakers, and events.",
+    "file": "/newsletters/november-2026.html"
+  },
+  {
     "slug": "april-2026",
-    "title": "The First Edition of Our Newsletter",
+    "title": "Newsletter First Edition: Ignition Sequence Start",
     "date": "2026-04-21",
     "summary": "Inside: AIRIS heading to Antarctica, SCALAR on track for 2027, GS-2 nearing rooftop deployment, new exec members, and a spring full of conferences and events.",
     "file": "/newsletters/april-2026.html"
