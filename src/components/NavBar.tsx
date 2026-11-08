@@ -164,6 +164,7 @@ export default function NavBar() {
           <DropdownMenuGroup>
             <DropdownMenuLabel>Active Projects</DropdownMenuLabel>
             {Object.entries(ProjectPages)
+              .filter(([slug]) => slug !== "spinor")
               .filter(([, v]) => v.project.phase !== "success")
               .map(([slug, { project }]) => (
                 <DropdownMenuItem key={slug} asChild>
@@ -180,6 +181,7 @@ export default function NavBar() {
           <DropdownMenuGroup>
             <DropdownMenuLabel>Past Missions</DropdownMenuLabel>
             {Object.entries(ProjectPages)
+              .filter(([slug]) => slug !== "spinor")
               .filter(([, v]) => v.project.phase === "success")
               .map(([slug, { project }]) => (
                 <DropdownMenuItem key={slug} asChild>

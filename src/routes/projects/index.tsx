@@ -19,6 +19,8 @@ function phaseLabel(phase: ProjectData["phase"]) {
       return "Prototyping";
     case "proposal":
       return "Proposal";
+    case "deployment":
+      return "Deployment";
   }
 }
 

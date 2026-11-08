@@ -7,10 +7,12 @@
 
 - **Dark-only public site presentation:** The root document always applies the Tailwind `dark` class. The footer no longer shows the light/dark/system theme selector and always uses the dark logo. The navbar no longer selects a light logo or theme-dependent styling. The Zustand store still defines a theme setting, but the public site UI no longer offers the theme toggle.
 - **All Missions page:** Added `/projects`, with clickable cards populated from the project data. Each card shows the mission icon, title, summary, phase, and date. Added an **All Missions** entry to the **Missions** dropdown and generated the TanStack route-tree entry. SPINOR is excluded from this index; its individual page and other project data remain available.
+- **Missions navigation:** SPINOR is also hidden from the Missions dropdown; its project file and direct page remain available for later.
 - **Spreadshop appearance:** Added CSS scoped to Spreadshop links whose product URL contains `dark+banner`. It applies a light blue, star-speckled gradient to matching product image areas and a translucent background to matching product text areas. This changes presentation only; it does not change the sticker artwork or product catalog.
 - **Partners page:** Replaced the full-width white band and white cards with dark site surfaces, standard bordered cards, and theme-aware text. Partner logos remain on small light tiles to preserve their supplied brand colors and legibility.
 - **Team roster:** Removed Luis Garcia and Cole Smith from `src/const/content/members.json`; Josh Smith remains on the roster.
-- **SCALAR page:** Updated the expansion to “Stabilized CubeSat for Advanced Low-Earth Attitude Regulation,” changed the planned launch window to Spring 2027, removed the unsupported reprogrammable-laboratory/Mission Operations Framework claims, and removed the unverified 47-contributor and Design-phase labels. Replaced unconfirmed mission and technical descriptions with update placeholders.
+- **Mission metadata:** Removed contributor counts from mission data and displays. Standardized summary dates to semester labels: GS-1 Fall 2025, GS-2 Deploy Fall 2027, AIRIS Launch Fall 2026, SCALAR Launch Spring 2027, VECTOR Launch Fall 2029, SPINOR Fall 2025, and SB-1 Launch Spring 2024.
+- **SCALAR page:** Updated the expansion to “Stabilized CubeSat for Advanced Low-Earth Attitude Regulation,” changed the planned launch window to Spring 2027, marked its status as Deployment Phase, removed the unsupported reprogrammable-laboratory/Mission Operations Framework claims, and removed the unverified contributor label. Replaced unconfirmed mission and technical descriptions with update placeholders.
 - **README deployment note:** The existing README now says production deploys from `main`, and has a short summary of the dark theme, All Missions page, and shop background styling.
 
 ## Cross-check against `edits.rtf`
@@ -26,8 +28,8 @@
 - **Partnership page:** The visual style now uses the site's dark surfaces. The partnership copy itself was not changed; whether it sounds too AI-written is subjective and remains unreviewed.
 - **Team page:** The layout is unchanged. Luis Garcia and Cole Smith were removed from the roster, but whether any additional new members should be added is not verified against an authoritative roster.
 - **News:** No local edit adds newsletter content. The current main content already has April 2026 and November 2026 editions; any additional news content remains outstanding.
-- **Remove SPINOR from All Missions:** Done; the index filters out SPINOR without deleting its project page or data.
-- **SCALAR corrections:** Applied per the notes. You confirmed Spring 2027; unsupported payload/framework details were replaced with placeholders, and the unverified contributor and phase labels were omitted. The planned launch timing and placeholder text should still be confirmed against the mission team before publishing.
+- **Remove SPINOR from mission navigation:** Done; SPINOR is filtered out of the All Missions index and Missions dropdown without deleting its project page or data.
+- **SCALAR corrections:** Applied per the notes. You confirmed Spring 2027; unsupported payload/framework details were replaced with placeholders, and the unverified contributor label was removed. The planned launch timing and placeholder text should still be confirmed against the mission team before publishing.
 - **Member removals:** Luis Garcia and Cole Smith have been removed from the roster as requested. Josh Smith remains listed.
 
 ## Local files changed relative to `388d236`
