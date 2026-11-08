@@ -7,7 +7,6 @@ import appCss from '../styles.css?url'
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { bStore } from '@/hooks/useAppStore'
 import { cn } from '@/lib/utils'
 import { queryClient } from '@/queryClient'
 
@@ -47,7 +46,6 @@ export const Route = createRootRouteWithContext<{
 const CHROMELESS = new Set(['/9njdxq3e'])
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-  const _theme = bStore.use.theme();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const path = pathname.replace(/\/+$/, '') || '/';
   const bare = CHROMELESS.has(path);
@@ -63,9 +61,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
           className={cn(
             "bg-deep-background",
             !bare && "flex flex-col min-h-screen",
-            {
-              "dark": _theme !== "light"
-            }
+            "dark"
           )}
         >
           {!bare && <NavBar />}

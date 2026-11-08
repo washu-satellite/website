@@ -42,8 +42,6 @@
   { "name": "Tyler Zhang", "email": "t.j.zhang@wustl.edu", "teams": ["Electrical"], "isAdmin": false },
   { "name": "Allen Maldonado", "email": "a.maldonado@wustl.edu", "teams": ["Electrical"], "isAdmin": false },
   { "name": "Ananyaa Srivastan", "email": "a.srivatsan@wustl.edu", "teams": ["Electrical"], "isAdmin": false },
-  { "name": "Luis Garcia", "email": "garciarivera@wustl.edu", "teams": ["Mission Ops"], "isAdmin": false, "headshot": "/headshots/MOPS/Luis.jpg" },
-  { "name": "Cole Smith", "email": "colesmith@wustl.edu", "teams": ["Mission Ops"], "isAdmin": false, "headshot": "/headshots/MOPS/Cole.jpg" },
   { "name": "Vanya Agrawal", "email": "vanya@wustl.edu", "teams": ["Mission Ops"], "isAdmin": false, "role": "Communications RE — SCALAR", "headshot": "/headshots/MOPS/Vanya.jpg" },
   { "name": "Elias Dahl", "email": "d.elias@wustl.edu", "teams": ["Mission Ops"], "isAdmin": false, "role": "ADCS — SCALAR" },
   { "name": "Ruby Corzine", "email": "corzine.r@wustl.edu", "teams": ["Mission Ops"], "isAdmin": false },

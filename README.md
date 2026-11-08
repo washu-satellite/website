@@ -35,8 +35,15 @@ yarn dev
 
 ## Usage
 
+### Recent website changes
+
+- The public site now uses dark mode only; the footer theme selector has been removed.
+- The **Missions** menu links to an **All Missions** index at `/projects`, alongside the individual mission pages.
+- The Partners page uses the site's dark surfaces, with light logo tiles that preserve partner artwork.
+- Dark Banner products in the Spreadshop embed receive a light, space-inspired background to improve contrast with the artwork.
+
 ### Deployment
 
-Production buils are currently deployed to Vercel. This is done under a personal account, [github.com/nathanielhayman/ws-website](https://github.com/nathanielhayman/ws-website/tree/master), but can be later migrated to a commerical Vercel instance.
+Production builds are deployed to Vercel from the `main` branch. Preview deployments may use other branches; check the deployment's source details in Vercel to confirm which commit is serving a given URL.
 
 If your changes are not appearing on the production site, please contact the CSW (Samir Afsary).

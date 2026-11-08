@@ -22,6 +22,7 @@ import { Route as ApplyRouteImport } from './routes/apply'
 import { Route as R9njdxq3eRouteImport } from './routes/9njdxq3e'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TeamIndexRouteImport } from './routes/team/index'
+import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
 import { Route as NewslettersIndexRouteImport } from './routes/newsletters/index'
 import { Route as DisciplinesIndexRouteImport } from './routes/disciplines/index'
 import { Route as ProjectsProject_slugRouteImport } from './routes/projects/$project_slug'
@@ -96,6 +97,11 @@ const TeamIndexRoute = TeamIndexRouteImport.update({
   path: '/team/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
+  id: '/projects/',
+  path: '/projects/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NewslettersIndexRoute = NewslettersIndexRouteImport.update({
   id: '/newsletters/',
   path: '/newsletters/',
@@ -158,6 +164,7 @@ export interface FileRoutesByFullPath {
   '/projects/$project_slug': typeof ProjectsProject_slugRoute
   '/disciplines': typeof DisciplinesIndexRoute
   '/newsletters': typeof NewslettersIndexRoute
+  '/projects': typeof ProjectsIndexRoute
   '/team': typeof TeamIndexRoute
   '/team/people/$user_slug': typeof TeamPeopleUser_slugRoute
 }
@@ -181,6 +188,7 @@ export interface FileRoutesByTo {
   '/projects/$project_slug': typeof ProjectsProject_slugRoute
   '/disciplines': typeof DisciplinesIndexRoute
   '/newsletters': typeof NewslettersIndexRoute
+  '/projects': typeof ProjectsIndexRoute
   '/team': typeof TeamIndexRoute
   '/team/people/$user_slug': typeof TeamPeopleUser_slugRoute
 }
@@ -205,6 +213,7 @@ export interface FileRoutesById {
   '/projects/$project_slug': typeof ProjectsProject_slugRoute
   '/disciplines/': typeof DisciplinesIndexRoute
   '/newsletters/': typeof NewslettersIndexRoute
+  '/projects/': typeof ProjectsIndexRoute
   '/team/': typeof TeamIndexRoute
   '/team/people/$user_slug': typeof TeamPeopleUser_slugRoute
 }
@@ -230,6 +239,7 @@ export interface FileRouteTypes {
     | '/projects/$project_slug'
     | '/disciplines'
     | '/newsletters'
+    | '/projects'
     | '/team'
     | '/team/people/$user_slug'
   fileRoutesByTo: FileRoutesByTo
@@ -253,6 +263,7 @@ export interface FileRouteTypes {
     | '/projects/$project_slug'
     | '/disciplines'
     | '/newsletters'
+    | '/projects'
     | '/team'
     | '/team/people/$user_slug'
   id:
@@ -276,6 +287,7 @@ export interface FileRouteTypes {
     | '/projects/$project_slug'
     | '/disciplines/'
     | '/newsletters/'
+    | '/projects/'
     | '/team/'
     | '/team/people/$user_slug'
   fileRoutesById: FileRoutesById
@@ -300,6 +312,7 @@ export interface RootRouteChildren {
   ProjectsProject_slugRoute: typeof ProjectsProject_slugRoute
   DisciplinesIndexRoute: typeof DisciplinesIndexRoute
   NewslettersIndexRoute: typeof NewslettersIndexRoute
+  ProjectsIndexRoute: typeof ProjectsIndexRoute
   TeamIndexRoute: typeof TeamIndexRoute
   TeamPeopleUser_slugRoute: typeof TeamPeopleUser_slugRoute
 }
@@ -397,6 +410,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeamIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/projects/': {
+      id: '/projects/'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/newsletters/': {
       id: '/newsletters/'
       path: '/newsletters'
@@ -476,6 +496,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProjectsProject_slugRoute: ProjectsProject_slugRoute,
   DisciplinesIndexRoute: DisciplinesIndexRoute,
   NewslettersIndexRoute: NewslettersIndexRoute,
+  ProjectsIndexRoute: ProjectsIndexRoute,
   TeamIndexRoute: TeamIndexRoute,
   TeamPeopleUser_slugRoute: TeamPeopleUser_slugRoute,
 }

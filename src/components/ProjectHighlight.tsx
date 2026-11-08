@@ -15,6 +15,8 @@ const getPhase = (phase: ProjectData['phase']) => {
             return <span className={"text-accent-red"}>Prototyping Phase</span>;
         case 'proposal':
             return <span className={"text-accent-red"}>Proposal Phase</span>;
+        case 'deployment':
+            return <span className={"text-accent-red"}>Deployment Phase</span>;
         case 'success':
             return <span className={"text-[#4CB75A]"}>Mission Success</span>;
     }
@@ -79,8 +81,6 @@ export default function ProjectHighlight(props: ProjectData & { direction?: 'lef
                         <div className={clsx("font-mono flex flex-row text-sm", `text-[#777777] relative`)}>
                             <p>{props.date}</p>
                             <span className={`flex-1 self-stretch h-full mx-[0.6rem]`}>//</span>
-                            <p>{props.contributors} Contributors</p>
-                            <p className={`h-full mx-[0.6rem] tracking-wide`}>//</p>
                             <p className="underline underline-offset-3">{getPhase(props.phase)}</p>
                         </div>
                         <div 

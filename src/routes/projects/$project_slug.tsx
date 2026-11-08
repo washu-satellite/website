@@ -21,6 +21,8 @@ function phaseLabel(phase: ProjectData["phase"]) {
       return { text: "Prototyping Phase", tone: "text-accent-red" };
     case "proposal":
       return { text: "Proposal Phase", tone: "text-accent-red" };
+    case "deployment":
+      return { text: "Deployment Phase", tone: "text-accent-red" };
     case "success":
       return { text: "Mission Success", tone: "text-[#4CB75A]" };
     default:
@@ -56,6 +58,9 @@ function ProjectPage() {
 
   const p = page.project;
   const phase = phaseLabel(p.phase);
+  const metadata = [p.date, phase.text || undefined].filter(
+    (item): item is string => Boolean(item),
+  );
 
   return (
     <GenericPage
@@ -77,15 +82,12 @@ function ProjectPage() {
         <div className="w-full flex flex-col gap-4">
           <p className="text-foreground/80 text-lg">{p.title}</p>
           <div className="flex flex-row flex-wrap items-center gap-4 text-sm font-mono text-foreground/70">
-            {p.date && <span>{p.date}</span>}
-            <span>//</span>
-            <span>{p.contributors} Contributors</span>
-            {phase.text && (
-              <>
-                <span>//</span>
-                <span className={phase.tone}>{phase.text}</span>
-              </>
-            )}
+            {metadata.map((item, index) => (
+              <span key={item} className={item === phase.text ? phase.tone : undefined}>
+                {index > 0 && <span className="mr-4">// </span>}
+                {item}
+              </span>
+            ))}
           </div>
         </div>
       }
