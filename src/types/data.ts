@@ -2,9 +2,9 @@ import { CSSProperties, ReactNode } from "react";
 
 export type ProjectData = NavElement & {
     description: string,
-    contributors: number,
+    contributors?: number,
     date: string,
-    phase: 'success' | 'assembly' | 'design' | 'prototyping' | 'proposal',
+    phase?: 'success' | 'assembly' | 'design' | 'prototyping' | 'proposal',
     posterUrl?: string,
     image?: string,
     /**

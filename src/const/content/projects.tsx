@@ -216,51 +216,40 @@ export const ProjectPages: { [K in any]: ProjectPageType } = {
     scalar: {
         project: {
             id: "SCALAR",
-            title: "Secure Configurable Autonomous Laboratory for Algorithm Research",
+            title: "Stabilized CubeSat for Advanced Low-Earth Attitude Regulation",
             short: "1U CubeSat building WashU Satellite's orbital heritage",
-            description: "SCALAR is our first satellite. It's a 1U CubeSat, roughly a 10 cm cube, and its job is to prove we can design, build, test, license, and operate a spacecraft from start to finish. The payload is our Mission Operations Framework: instead of hard-coding one experiment before launch, we upload algorithms from the ground and run them on orbit, so a single small bus can host many experiments over its life.",
-            contributors: 47,
-            date: "Early 2027",
+            description: "SCALAR is our first satellite. It is a 1U CubeSat, roughly a 10 cm cube, built to establish WashU Satellite's experience designing, building, testing, licensing, and operating a spacecraft.",
+            date: "Spring 2027",
             icon: (<Satellite size={22} />),
-            phase: 'design',
             frameSequence: { dir: "/frames/scalar", count: 100, aspect: 1.0646, width: 988 },
             imagePosition: "right",
             imageSize: "60rem"
         },
-        tagline: "Our first satellite, and a laboratory you can reprogram from the ground.",
+        tagline: "Our first satellite.",
         factSheet: [
             { label: "Form Factor", value: "1U CubeSat" },
-            { label: "Planned Launch", value: "Early 2027" },
+            { label: "Planned Launch", value: "Spring 2027" },
             { label: "Heritage", value: "Open-source hardware and software (notably the PROVES Kit)" },
-            { label: "Demonstration", value: "Mission Operations Framework on orbit" },
         ],
         sections: [
             {
                 heading: "What is SCALAR?",
-                body: "SCALAR's primary mission is to prove WashU Satellite can design, build, and operate a satellite while running our own mission and ground station, earning the orbital heritage every future mission depends on. Its payload is the first orbital deployment of our Mission Operations Framework, making the spacecraft a reconfigurable laboratory for algorithms uploaded after launch. That is the operational foundation VECTOR depends on.",
-            },
-            {
-                heading: "Mission Operations Framework",
-                body: "Alongside the satellite itself, our software team is building a Mission Operations Framework: a software pipeline for uploading and controlling orbital experiments entirely from the ground. Building on technologies pioneered by the European Space Agency, the framework will let outside research groups and amateur teams operate their own experiments through an accessible interface on our flight hardware, at no cost.",
+                body: "SCALAR mission details are being updated.",
             },
         ],
         engineering: [
             {
-                title: "Reconfigurable Payload",
-                description: "Algorithms are uploaded and swapped across the mission rather than fixed at launch, letting a single 1U bus run many experiments over its lifetime.",
+                title: "SCALAR Details",
+                description: "Technical details are being updated.",
             },
             {
                 title: "Open-Source Heritage",
                 description: "Built on open-source CubeSat hardware and software, mainly the PROVES Kit. Borrowing a flight-proven baseline is what makes a first satellite on a student timeline realistic.",
             },
-            {
-                title: "Mission Operations Framework",
-                description: "Ground-based pipeline for uploading and running experiments on flight hardware, designed to host external user payloads as well as our own.",
-            },
         ],
         modules: ["Software", "Electrical", "Mechanical", "Mission Ops", "Systems"],
         schedule: [
-            { label: "Early 2027", value: "Planned launch" },
+            { label: "Spring 2027", value: "Planned launch" },
         ],
         overview: "",
         disciplineOverviews: []

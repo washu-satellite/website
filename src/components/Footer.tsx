@@ -2,62 +2,8 @@ import clsx from "clsx";
 
 import ThemedLink from "./ThemedLink";
 import SocialLinks from "./SocialLinks";
-import { Sun, Moon, Monitor } from "lucide-react";
-import { Button } from "./ui/button";
-import { bStore } from "@/hooks/useAppStore";
-import { cn } from "@/lib/utils";
-
-function ThemeToggle() {
-    const _theme = bStore.use.theme();
-
-    const _setTheme = bStore.use.setTheme();
-
-    return (
-        <div className="rounded-full bg-secondary border border-border flex flex-row items-center overflow-hidden">
-            <Button
-                variant='ghost'
-                className={cn(
-                    "rounded-sm bg-secondary hover:bg-foreground dark:hover:bg-foreground hover:text-background",
-                    {
-                        "bg-foreground text-background": _theme === 'light'
-                    }
-                )}
-                onClick={() => _setTheme('light')}
-            >
-                <Sun className="w-4 h-4"/>
-            </Button>
-            <Button
-                variant='ghost'
-                className={cn(
-                    "rounded-sm bg-secondary hover:bg-foreground dark:hover:bg-foreground hover:text-background",
-                    {
-                        "bg-foreground text-background": _theme === 'dark'
-                    }
-                )}
-                onClick={() => _setTheme('dark')}
-            >
-                <Moon className="w-4 h-4"/>
-            </Button>
-            <Button
-                variant='ghost'
-                className={cn(
-                    "rounded-sm bg-secondary hover:bg-foreground dark:hover:bg-foreground hover:text-background",
-                    {
-                        "bg-foreground text-background": _theme === 'system'
-                    }
-                )}
-                onClick={() => _setTheme('system')}
-            >
-                <Monitor className="w-4 h-4"/>
-            </Button>
-        </div>
-    );
-}
-
 
 export default function Footer() {
-    const _theme = bStore.use.theme();
-
     return (
         <div className={clsx(
             `border-t border-border`,
@@ -67,7 +13,7 @@ export default function Footer() {
                 <ThemedLink href={"/"} className={"font-bold text-lg"}>
                     <img
                         alt=""
-                        src={_theme === 'light' ? "/logo_light.svg" : "/logo.svg"}
+                        src="/logo.svg"
                         width={140}
                     />
                 </ThemedLink>
@@ -85,10 +31,6 @@ export default function Footer() {
                 <ThemedLink key={"disciplines"} arrowLink href={"/disciplines"} className={clsx(`text-foreground/80`, "font-normal")}>Disciplines</ThemedLink>
                 <ThemedLink key={"roadmap"} arrowLink href={"/roadmap"} className={clsx(`text-foreground/80`, "font-normal")}>Roadmap</ThemedLink>
                 <ThemedLink key={"partners"} arrowLink href={"/partners"} className={clsx(`text-foreground/80`, "font-normal")}>Partners</ThemedLink>
-            </div>
-            <div className="flex-1 flex flex-col items-start gap-1 border-l-0 border-b-0 md:border-l md:border-b border-border p-4">
-                <h3 className="text-sm">Site theme</h3>
-                <ThemeToggle />
             </div>
         </div>
     )

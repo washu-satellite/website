@@ -9,6 +9,13 @@ export const Route = createFileRoute("/shop")({
 const SHOP_NAME = "washu-satellite";
 const SHOP_URL = `https://${SHOP_NAME}.myspreadshop.com`;
 const SCRIPT_SRC = `${SHOP_URL}/shopfiles/shopclient/shopclient.nocache.js`;
+const DARK_BANNER_BACKGROUND = `
+  radial-gradient(circle at 20% 18%, rgba(255,255,255,0.95) 0 2px, transparent 2.5px),
+  radial-gradient(circle at 63% 32%, rgba(255,255,255,0.8) 0 2px, transparent 2.5px),
+  radial-gradient(circle at 80% 12%, rgba(255,255,255,0.7) 0 1.5px, transparent 2px),
+  radial-gradient(circle at 32% 60%, rgba(146, 196, 255, 0.8) 0, rgba(184, 218, 255, 0.32) 18%, rgba(15, 24, 48, 0.18) 58%, rgba(15, 24, 48, 0.72) 100%),
+  linear-gradient(180deg, #f9fbff 0%, #edf4ff 18%, #dce9ff 42%, #c6d5f2 100%)
+`;
 
 declare global {
   interface Window {
@@ -68,9 +75,33 @@ function SpreadShop({ onError }: { onError: () => void }) {
     });
     document.body.appendChild(script);
 
+    const style = document.createElement("style");
+    style.textContent = `
+      #myShop a[href*="dark+banner"] .sprd-startpage-preview-tiles__image,
+      #myShop a[href*="dark+banner"] .sprd-startpage-preview-tiles__image > div,
+      #myShop a[href*="dark+banner"] .sprd-product-card__image,
+      #myShop a[href*="dark+banner"] .sprd-product__image,
+      #myShop a[href*="dark+banner"] .sprd-product-detail__image {
+        background: ${DARK_BANNER_BACKGROUND} !important;
+        background-color: #edf4ff !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        background-size: cover !important;
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5) !important;
+      }
+
+      #myShop a[href*="dark+banner"] .sprd-startpage-preview-tiles__text,
+      #myShop a[href*="dark+banner"] .sprd-product-card__name,
+      #myShop a[href*="dark+banner"] .sprd-product__name {
+        background: rgba(255,255,255,0.2) !important;
+      }
+    `;
+    document.head.appendChild(style);
+
     const container = mount.current;
     return () => {
       script.remove();
+      style.remove();
       delete window.spread_shop_config;
       if (container) container.innerHTML = "";
       removeSpreadshopArtifacts();
