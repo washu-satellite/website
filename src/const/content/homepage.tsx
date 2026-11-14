@@ -5,8 +5,8 @@ export const HomepageContent = {
 
     /** Rendered as separate paragraphs under "Who are we?". */
     aboutUs: [
-        "We're 80 students across mechanical, electrical, software, systems, and physics, and SCALAR, our first satellite, is working through the last of its launch requirements.",
-        "Along the way we flew a payload on a balloon over Tisch Park, designed an optical telescope headed for a NASA flight over Antarctica, and built the ground station we'll use to talk to our own spacecraft. Students designed, machined, soldered, and coded all of it.",
-        "Almost nobody arrives knowing how to do any of this. You learn it here, next to people working out the same problems, and you graduate having built things most engineers don't touch until years into a career. We have a good time doing it, and we're always looking for people who want in.",
+        "WashU Satellite is a student-led aerospace team building spacecraft from scratch. Our 80+ members span mechanical, electrical, software, systems engineering, physics, and business, working together to turn ambitious ideas into real-world missions.",
+        "From flying experimental payloads over campus to developing a telescope for a NASA balloon flight over Antarctica, our projects extend far beyond the classroom. We're developing SCALAR, our first CubeSat, and building the groundwork needed to communicate with spacecraft in orbit.",
+        "You don't need prior aerospace experience to join. Students learn by doing: designing, machining, coding, testing, and solving problems alongside teammates who are learning, too. We give undergraduates the opportunity to take ownership of real engineering challenges and contribute to hardware designed to fly.",
     ],
 };

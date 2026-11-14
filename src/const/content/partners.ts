@@ -24,21 +24,21 @@ export const primaryPartners: Partner[] = [
     href: "https://engineering.washu.edu/",
     logo: "/partners/mckelvey.svg",
     blurb:
-      "Our home school, and the single largest source of funding behind the hardware. The Dean's Fund pays for structures, avionics and the machining that turns a design into a flight article.",
+      "McKelvey is our home school and the biggest reason we have hardware at all. The Dean's Fund covers our structures, avionics, and machining: everything it takes to get a design off the screen and into something that can actually fly.",
   },
   {
     name: "Department of Physics",
     href: "https://physics.wustl.edu/",
     logo: "/partners/washu-physics.png",
     blurb:
-      "Backs the science side of the missions, including our work through the Air Force Research Laboratory's University Nanosatellite Program, and gives us the faculty guidance behind AIRIS and SCALAR.",
+      "Physics supports the science behind our missions, including our work with the Air Force Research Laboratory's University Nanosatellite Program. Their faculty have also advised us on both AIRIS and SCALAR.",
   },
   {
     name: "University Nanosatellite Program",
     href: "https://unp.kirtland.af.mil/",
     logo: "/partners/unp.svg",
     blurb:
-      "The Air Force Research Laboratory programme that funds university-built spacecraft. It backs the account our physics-side hardware runs through, and it is the path VECTOR is being developed toward.",
+      "Run by the Air Force Research Laboratory, UNP funds spacecraft designed and built by university students. Our physics-side hardware is funded through it, and it's where we're aiming VECTOR.",
   },
   {
     // "MCSS" in our internal shorthand. Not the Missouri Space Grant
@@ -47,7 +47,7 @@ export const primaryPartners: Partner[] = [
     href: "https://mcss.wustl.edu/",
     logo: "/partners/mcdonnell-center.png",
     blurb:
-      "Washington University's centre for planetary science, astrophysics and fundamental physics, with a history in major space missions. They have funded our missions directly, and our faculty advisor is a research professor there.",
+      "The McDonnell Center is WashU's home for planetary science, astrophysics, and fundamental physics, with a real track record in major space missions. They've funded our missions directly, and our faculty advisor is a research professor there.",
   },
 ];
 
@@ -61,34 +61,34 @@ export const inKindPartners: Partner[] = [
     href: "https://www.ansys.com/",
     logo: "/partners/ansys.svg",
     blurb:
-      "Commercial-level simulation licences, unlimited in node and cell count, with training and support. We use it for structural, thermal and orbital analysis that the student edition could not run.",
+      "Ansys gives us full commercial simulation licenses with no limits on node or cell count, plus additional training and support. We use it for the structural, thermal, and orbital analysis that the student edition can't handle.",
   },
   {
     name: "MISUMI | fictiv",
     href: "https://us.misumi-ec.com/",
     logo: "/partners/misumi-fictiv.png",
     blurb:
-      "Mechanical components and custom parts. Aluminium extrusion, brackets, fasteners, shafts and bearings for the AIRIS gondola and the GS-2 ground station, plus Fictiv for machined one-offs.",
+      "MISUMI supplies the mechanical parts that hold our builds together: aluminum extrusion, brackets, fasteners, shafts, and bearings for the AIRIS gondola and the GS-2 ground station. When we just need a one-off machined part, Fictiv makes it for us.",
   },
   {
     name: "ProtoSpace Mfg",
     href: "https://www.protocase.com/",
     logo: "/partners/protospace-mfg.png",
     blurb:
-      "Custom enclosures, machined brackets and electro-mechanical assembly. Supporting the weatherproof rooftop enclosure and rack hardware for our second-generation ground station.",
+      "ProtoSpace handles custom enclosures, machined brackets, and electro-mechanical assembly. They're helping us build the weatherproof rooftop enclosure and rack hardware for our second-generation ground station.",
   },
   {
     name: "SendCutSend",
     href: "https://sendcutsend.com/",
     logo: "/partners/sendcutsend.png",
     blurb:
-      "Laser cutting and sheet metal fabrication. Their parts are already flying on AIRIS, and they have backed the team across three separate sponsorship rounds.",
+      "SendCutSend does our laser cutting and sheet metal work, and their parts are already flying on AIRIS. They have backed us through three separate sponsorship rounds.",
   },
   {
     name: "SolidWorks",
     href: "https://www.solidworks.com/",
     logo: "/partners/solidworks.png",
     blurb:
-      "CAD licences for every member of the team, plus certification exams that give students a credential to leave with.",
+      "SolidWorks gives every member of the team a CAD license, along with certification exams so students leave with a credential they can put on a resume.",
   },
 ];
