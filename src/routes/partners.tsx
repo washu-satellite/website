@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import GenericPage from "@/components/GenericPage";
 import RedirectButton from "@/components/RedirectButton";
 import { Button } from "@/components/ui/button";
-import { Mail } from "lucide-react";
+import { Download, Mail } from "lucide-react";
 import {
   inKindPartners,
   primaryPartners,
@@ -17,6 +17,19 @@ const PARTNER_EMAIL = "washusatellite@gmail.com";
 const MAILTO = `mailto:${PARTNER_EMAIL}?subject=${encodeURIComponent(
   "Partnership inquiry — WashU Satellite",
 )}`;
+// Year in the filename so a new packet gets a new URL and never serves a stale cached copy.
+const SPONSORSHIP_PACKET = "/washu-satellite-sponsorship-packet-2026-27.pdf";
+
+function PacketButton() {
+  return (
+    <Button asChild>
+      <a href={SPONSORSHIP_PACKET} target="_blank" rel="noreferrer">
+        <Download className="w-4 h-4 mr-2" />
+        Sponsorship packet (PDF)
+      </a>
+    </Button>
+  );
+}
 
 /** Partner artwork stays on a light tile to preserve the supplied brand colors. */
 function PartnerLogo({
@@ -79,12 +92,15 @@ function PartnersPage() {
             partners put our hardware in the air and our members in the
             industry.
           </p>
-          <Button asChild variant="outline">
-            <a href={MAILTO}>
-              <Mail className="w-4 h-4 mr-2" />
-              Become a partner
-            </a>
-          </Button>
+          <div className="flex flex-row flex-wrap items-center justify-center gap-4">
+            <PacketButton />
+            <Button asChild variant="outline">
+              <a href={MAILTO}>
+                <Mail className="w-4 h-4 mr-2" />
+                Become a partner
+              </a>
+            </Button>
+          </div>
         </div>
       }
     >
@@ -167,11 +183,13 @@ function PartnersPage() {
               Interested in partnering with us?
             </h2>
             <p className="text-sm text-foreground/80">
-              Email us and we&rsquo;ll send over our partnership packet, current
-              mission status, and what recognition looks like at each level.
+              Our sponsorship packet covers our missions and what we can offer
+              partners in return. Email us for current mission status or to set
+              up a call.
             </p>
           </div>
           <div className="flex flex-row flex-wrap items-center justify-center gap-4">
+            <PacketButton />
             <Button asChild variant="outline">
               <a href={MAILTO}>
                 <Mail className="w-4 h-4 mr-2" />
